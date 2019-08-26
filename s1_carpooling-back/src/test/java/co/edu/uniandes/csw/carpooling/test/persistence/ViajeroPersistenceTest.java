@@ -64,7 +64,7 @@ public class ViajeroPersistenceTest {
         Assert.assertEquals(viajero.getApellido(),entity.getApellido());
         Assert.assertEquals(viajero.getContrasenha(), entity.getContrasenha());
         Assert.assertEquals(viajero.getCorreo(), entity.getCorreo());
-        //Assert.assertEquals(viajero.getFechaDeNacimiento(), entity.getFechaDeNacimiento());
+        Assert.assertEquals(viajero.getFechaDeNacimiento(), entity.getFechaDeNacimiento());
         Assert.assertEquals(viajero.getNombre(), entity.getNombre());
         Assert.assertEquals(viajero.getNumDocumento(), entity.getNumDocumento());
         Assert.assertEquals(viajero.getTelefono(), entity.getTelefono());

@@ -5,11 +5,13 @@
  */
 package co.edu.uniandes.csw.carpooling.entities;
 
+import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -28,6 +30,7 @@ public class ViajeroEntity extends BaseEntity {
     private String nombre,telefono,apellido,correo,numDocumento,contrasenha;
     
     @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeNacimiento;
     
     private TIPO_DE_DOCUMENTO tipoDocumento;
