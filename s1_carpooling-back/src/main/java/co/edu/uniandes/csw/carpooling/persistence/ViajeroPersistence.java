@@ -24,8 +24,7 @@ public class ViajeroPersistence {
         
         // Hace persistir en la base de datos a la entidad viajero
         em.persist(viajero);
-        return viajero;
-        //codigo en caso de querer omitir este metodo en las pruebas-thrownewjava.lang.UnsupportedOperationException("Not supported yet.");
+        return viajero;        
     }
     
 }
