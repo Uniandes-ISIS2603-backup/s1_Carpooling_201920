@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.carpooling.entities;
 
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
@@ -19,25 +18,27 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class ViajeroEntity extends BaseEntity {
-    
-    public enum TIPO_DE_DOCUMENTO{
-    CEDULA_DE_CIUDADANA,
-    TARJETA_DE_IDENTIDAD,
-    PASAPORTE,
-    CEDULA_DE_EXTRANJERIA
+
+    public enum TIPO_DE_DOCUMENTO {
+        CEDULA_DE_CIUDADANA,
+        TARJETA_DE_IDENTIDAD,
+        PASAPORTE,
+        CEDULA_DE_EXTRANJERIA
     }
-    
-    private String nombre,telefono,apellido,correo,numDocumento,contrasenha;
-    
+
+    private String nombre;
+    private String telefono;
+    private String apellido;
+    private String correo;
+    private String numDocumento;
+    private String contrasenha;
+
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeNacimiento;
-    
+
     private TIPO_DE_DOCUMENTO tipoDocumento;
 
-    public ViajeroEntity (){
-     }
-    
     /**
      * @return the nombre
      */
@@ -149,5 +150,5 @@ public class ViajeroEntity extends BaseEntity {
     public void setTipoDocumento(TIPO_DE_DOCUMENTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
-    
+
 }
