@@ -12,14 +12,20 @@ import javax.persistence.Entity;
  * @author Santiago Ballesteros
  */
 @Entity
-public class PublicistaEntity extends BaseEntity{
-    
-    public enum TIPO_PUBLICISTA{
-    PERSONA_NATURAL_CON_EMPRESA,
-    EMPRESA
+public class PublicistaEntity extends BaseEntity {
+
+    public enum TIPO_PUBLICISTA {
+        PERSONA_NATURAL_CON_EMPRESA,
+        EMPRESA
     }
-    
-    private String nombre,apellido,telefono,correo,cedula,rut,nit;
+
+    private String nombre;
+    private String apellido;
+    private String telefono;
+    private String correo;
+    private String cedula;
+    private String rut;
+    private String nit;
     private TIPO_PUBLICISTA tipoPublicista;
 
     /**
@@ -133,5 +139,5 @@ public class PublicistaEntity extends BaseEntity{
     public void setTipoPublicista(TIPO_PUBLICISTA tipoPublicista) {
         this.tipoPublicista = tipoPublicista;
     }
-    
+
 }
