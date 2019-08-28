@@ -6,9 +6,11 @@
 package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,5 +28,15 @@ public class ViajeroPersistence {
         em.persist(viajero);
         return viajero;        
     }
+    
+    public ViajeroEntity find(Long viajeroId){
+        return em.find(ViajeroEntity.class,viajeroId);
+    }
+    
+    public List<ViajeroEntity> findAll(){
+        TypedQuery<ViajeroEntity> query = em.createQuery("select u from ViajeroEntity u",ViajeroEntity.class);
+        return query.getResultList();
+    }
+    
     
 }
