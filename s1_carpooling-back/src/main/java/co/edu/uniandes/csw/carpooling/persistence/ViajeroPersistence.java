@@ -38,5 +38,16 @@ public class ViajeroPersistence {
         return query.getResultList();
     }
     
+    public ViajeroEntity update(ViajeroEntity viajeroEntity) {
+//        LOGGER.log(Level.INFO, "Actualizando el viajero con id={0}", viajeroEntity.getId());
+        return em.merge(viajeroEntity);
+    }
+
+    public void delete(Long viajeroId) {
+ //       LOGGER.log(Level.INFO, "Borrando el viajero con id={0}", viajeroId);
+        ViajeroEntity viajeroEntity = em.find(ViajeroEntity.class, viajeroId);
+        em.remove(viajeroEntity);
+    }
+    
     
 }
