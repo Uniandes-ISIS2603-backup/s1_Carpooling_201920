@@ -10,7 +10,7 @@ import co.edu.uniandes.csw.carpooling.persistence.NotificacionPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import static org.glassfish.pfl.basic.tools.argparser.ElementParser.factory;
+//import static org.glassfish.pfl.basic.tools.argparser.ElementParser.factory;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -38,13 +38,13 @@ public class NotificacionPersistenceTest {
         .addClass(NotificacionEntity.class)
         .addClass(NotificacionPersistence.class)
         .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
-        .addAsManifestResource("META-INF/persistence.xml", "beans.xml");
+        .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
     @Inject
     NotificacionPersistence np;
     
-      @PersistenceContext(unitName = "CarpoolingPU")
+    @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
       
       @Test
