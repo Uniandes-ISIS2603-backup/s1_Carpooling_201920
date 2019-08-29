@@ -6,13 +6,14 @@
 package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+//import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.List;
 import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +22,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class NotificacionPersistence {
     
+    private static final Logger LOGGER = Logger.getLogger(NotificacionPersistence.class.getName());
     
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
