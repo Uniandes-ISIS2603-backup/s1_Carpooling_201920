@@ -5,9 +5,13 @@
  */
 package co.edu.uniandes.csw.carpooling.entities;
 
+import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -18,8 +22,13 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String destino;
     
+    
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
     
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeLlegada;
     
     private String puntoDeSalida;
@@ -31,6 +40,10 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     private String vehiculo;
     
     private String estadoViaje;
+    
+    public ViajeEntity(){
+        
+    }
 
     /**
      * @return the destino
