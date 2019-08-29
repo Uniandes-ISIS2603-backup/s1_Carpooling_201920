@@ -30,28 +30,35 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class PublicistaPersistenceTest {
-    
+
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
-    public static JavaArchive createDeployment(){
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class).
                 addClass(PublicistaEntity.class).
                 addClass(PublicistaPersistence.class).
-                addAsManifestResource("META-INF/persistence.xml","persistence.xml").     
-                addAsManifestResource("META-INF/beans.xml","beans.xml");
+                addAsManifestResource("META-INF/persistence.xml", "persistence.xml").
+                addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     @Inject
     PublicistaPersistence pp;
-    
-    @PersistenceContext 
+
+    @PersistenceContext
     EntityManager em;
-    
-     @Inject
+
+    @Inject
     UserTransaction utx;
 
     private List<PublicistaEntity> data = new ArrayList<PublicistaEntity>();
 
-    // Este metodo es el que ejecuta la accion de 
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void setUp() {
         try {
@@ -70,10 +77,17 @@ public class PublicistaPersistenceTest {
         }
     }
 
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
     private void clearData() {
         em.createQuery("delete from PublicistaEntity").executeUpdate();
     }
 
+    /**
+     * Este metodo inserta tres datos en la base de datos para poder ejecutar
+     * las transacciones RUD necesarias.
+     */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -83,29 +97,35 @@ public class PublicistaPersistenceTest {
             data.add(entity);
         }
     }
-    
+
+    /**
+     * Prueba para crear un Publicista.
+     */
     @Test
-    public void createTest(){
-    PodamFactory factory = new PodamFactoryImpl();
-    PublicistaEntity publicista = factory.manufacturePojo(PublicistaEntity.class);
-    PublicistaEntity result = pp.create(publicista);
-    
-    Assert.assertNotNull(result);
-    
-    PublicistaEntity entity = 
-            em.find(PublicistaEntity.class, result.getId());
-    
-    Assert.assertEquals(publicista.getApellido(),entity.getApellido());
-    Assert.assertEquals(publicista.getCedula(),entity.getCedula());
-    Assert.assertEquals(publicista.getCorreo(),entity.getCorreo());
-    Assert.assertEquals(publicista.getNit(),entity.getNit());
-    Assert.assertEquals(publicista.getNombre(),entity.getNombre());
-    Assert.assertEquals(publicista.getRut(),entity.getRut());
-    Assert.assertEquals(publicista.getTelefono(),entity.getTelefono());
-    Assert.assertEquals(publicista.getTipoPublicista(),entity.getTipoPublicista());
+    public void createTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        PublicistaEntity publicista = factory.manufacturePojo(PublicistaEntity.class);
+        PublicistaEntity result = pp.create(publicista);
+
+        Assert.assertNotNull(result);
+
+        PublicistaEntity entity
+                = em.find(PublicistaEntity.class, result.getId());
+
+        Assert.assertEquals(publicista.getApellido(), entity.getApellido());
+        Assert.assertEquals(publicista.getCedula(), entity.getCedula());
+        Assert.assertEquals(publicista.getCorreo(), entity.getCorreo());
+        Assert.assertEquals(publicista.getNit(), entity.getNit());
+        Assert.assertEquals(publicista.getNombre(), entity.getNombre());
+        Assert.assertEquals(publicista.getRut(), entity.getRut());
+        Assert.assertEquals(publicista.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(publicista.getTipoPublicista(), entity.getTipoPublicista());
     }
-    
-        @Test
+
+    /**
+     * Prueba para consultar la lista de Publicistas.
+     */
+    @Test
     public void getPublicistasTest() {
         List<PublicistaEntity> list = pp.findAll();
         Assert.assertEquals(data.size(), list.size());
@@ -120,6 +140,9 @@ public class PublicistaPersistenceTest {
         }
     }
 
+    /**
+     * Prueba para consultar un Publicista.
+     */
     @Test
     public void getPublicistaTest() {
         PublicistaEntity entity = data.get(0);
@@ -127,28 +150,34 @@ public class PublicistaPersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }
-    
+
+    /**
+     * Prueba para actualizar un Publicista.
+     */
     @Test
-public void updatePublicistaTest() {
-    PublicistaEntity entity = data.get(0);
-    PodamFactory factory = new PodamFactoryImpl();
-    PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+    public void updatePublicistaTest() {
+        PublicistaEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
 
-    newEntity.setId(entity.getId());
+        newEntity.setId(entity.getId());
 
-    pp.update(newEntity);
+        pp.update(newEntity);
 
-    PublicistaEntity resp = em.find(PublicistaEntity.class, entity.getId());
+        PublicistaEntity resp = em.find(PublicistaEntity.class, entity.getId());
 
-    Assert.assertEquals(newEntity.getId(), resp.getId());
-}
+        Assert.assertEquals(newEntity.getId(), resp.getId());
+    }
 
-@Test
-public void deletePublicistaTest() {
-    PublicistaEntity entity = data.get(0);
-    pp.delete(entity.getId());
-    PublicistaEntity deleted = em.find(PublicistaEntity.class, entity.getId());
-    Assert.assertNull(deleted);
-}
-    
+    /**
+     * Prueba para eliminar un Publicista.
+     */
+    @Test
+    public void deletePublicistaTest() {
+        PublicistaEntity entity = data.get(0);
+        pp.delete(entity.getId());
+        PublicistaEntity deleted = em.find(PublicistaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
 }

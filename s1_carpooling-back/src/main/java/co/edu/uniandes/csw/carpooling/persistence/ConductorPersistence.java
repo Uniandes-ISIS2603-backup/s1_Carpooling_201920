@@ -20,56 +20,53 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class ConductorPersistence {
-    
 
     private static final Logger LOGGER = Logger.getLogger(ConductorPersistence.class.getName());
-    
+
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
+
     public ConductorEntity create(ConductorEntity conductor) {
         em.persist(conductor);
         return conductor;
     }
-    
-    public ConductorEntity find(Long conductorId){
+
+    public ConductorEntity find(Long conductorId) {
         LOGGER.log(Level.INFO, "Consultando el conductor con id={0}", conductorId);
         return em.find(ConductorEntity.class, conductorId);
     }
-    
-    public List<ConductorEntity> findAll(){
+
+    public List<ConductorEntity> findAll() {
         TypedQuery<ConductorEntity> query = em.createQuery("select u from ConductorEntity u", ConductorEntity.class);
         return query.getResultList();
     }
-    
-    public ConductorEntity update(ConductorEntity conductorEntity){
-        LOGGER.log(Level.INFO,"Actualizando el conductor con id = {0}", conductorEntity.getId());
+
+    public ConductorEntity update(ConductorEntity conductorEntity) {
+        LOGGER.log(Level.INFO, "Actualizando el conductor con id = {0}", conductorEntity.getId());
         return em.merge(conductorEntity);
     }
-    
-    public void delete(Long conductorId){
-        LOGGER.log(Level.INFO, "Borrando el libro con id={0}",conductorId);
+
+    public void delete(Long conductorId) {
+        LOGGER.log(Level.INFO, "Borrando el libro con id={0}", conductorId);
         ConductorEntity conductorEntity = em.find(ConductorEntity.class, conductorId);
         em.remove(conductorEntity);
     }
-    
-    public ConductorEntity findByName(String nombre){
+
+    public ConductorEntity findByName(String nombre) {
         LOGGER.log(Level.INFO, "Consultando conductores por nombre", nombre);
         TypedQuery query = em.createQuery("Select e From ConductorEntity e where e.nombre = :nombre", ConductorEntity.class);
-        query = query.setParameter("nombre",nombre);
+        query = query.setParameter("nombre", nombre);
         List<ConductorEntity> mismoNombre = query.getResultList();
         ConductorEntity result;
-        if(mismoNombre == null){
+        if (mismoNombre == null) {
             result = null;
-        }
-        else if(mismoNombre.isEmpty()){
+        } else if (mismoNombre.isEmpty()) {
             result = null;
-        }
-        else{
+        } else {
             result = mismoNombre.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar conductores por nombre",nombre);
+        LOGGER.log(Level.INFO, "Saliendo de consultar conductores por nombre", nombre);
         return result;
     }
-    
+
 }
