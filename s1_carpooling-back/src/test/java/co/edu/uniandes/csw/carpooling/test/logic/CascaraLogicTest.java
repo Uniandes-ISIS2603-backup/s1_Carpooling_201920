@@ -29,5 +29,5 @@ package co.edu.uniandes.csw.carpooling.test.logic;
  * @author ISIS2603
  */
 public class CascaraLogicTest {
-    
+
 }
