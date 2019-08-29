@@ -117,4 +117,44 @@ public class ConductorPersistenceTest {
             Assert.assertTrue(found);
         }
     }
+    
+    @Test
+    public void updateTest(){
+        ConductorEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        ConductorEntity newEntity = factory.manufacturePojo(ConductorEntity.class);
+        
+        newEntity.setId(entity.getId());
+        
+        cp.update(newEntity);
+        
+        ConductorEntity resp = entMan.find(ConductorEntity.class, entity.getId());
+        
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getNumDocumento(),resp.getNumDocumento());
+        Assert.assertEquals(newEntity.getTipoDocumento(),resp.getTipoDocumento());
+        Assert.assertEquals(newEntity.getTelefono(),resp.getTelefono());
+        Assert.assertEquals(newEntity.getFechaDenNacimiento(),resp.getFechaDenNacimiento());
+        Assert.assertEquals(newEntity.getCorreo(),resp.getCorreo());
+        Assert.assertEquals(newEntity.getContrasenha(),resp.getContrasenha());
+    }
+    
+    @Test
+    public void deleteTest(){
+        ConductorEntity entity = data.get(0);
+        cp.delete(entity.getId());
+        ConductorEntity deleted = entMan.find(ConductorEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    @Test
+    public void findByNameTest(){
+        ConductorEntity entity = data.get(0);
+        ConductorEntity newEntity = cp.findByName(entity.getNombre());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        
+        newEntity = cp.findByName(null);
+        Assert.assertNull(newEntity);
+    }
 }

@@ -42,4 +42,34 @@ public class ConductorPersistence {
         return query.getResultList();
     }
     
+    public ConductorEntity update(ConductorEntity conductorEntity){
+        LOGGER.log(Level.INFO,"Actualizando el conductor con id = {0}", conductorEntity.getId());
+        return em.merge(conductorEntity);
+    }
+    
+    public void delete(Long conductorId){
+        LOGGER.log(Level.INFO, "Borrando el libro con id={0}",conductorId);
+        ConductorEntity conductorEntity = em.find(ConductorEntity.class, conductorId);
+        em.remove(conductorEntity);
+    }
+    
+    public ConductorEntity findByName(String nombre){
+        LOGGER.log(Level.INFO, "Consultando conductores por nombre", nombre);
+        TypedQuery query = em.createQuery("Select e From ConductorEntity e where e.nombre = :nombre", ConductorEntity.class);
+        query = query.setParameter("nombre",nombre);
+        List<ConductorEntity> mismoNombre = query.getResultList();
+        ConductorEntity result;
+        if(mismoNombre == null){
+            result = null;
+        }
+        else if(mismoNombre.isEmpty()){
+            result = null;
+        }
+        else{
+            result = mismoNombre.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar conductores por nombre",nombre);
+        return result;
+    }
+    
 }
