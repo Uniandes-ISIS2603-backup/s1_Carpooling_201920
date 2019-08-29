@@ -19,36 +19,34 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class ConductorEntity extends BaseEntity implements Serializable {
-   
+
     /*
         ATRIBUTOS
-    */
-    
-    
+     */
     private String nombre;
-    
+
     private String telefono;
-    
+
     private String correo;
-    
+
     private String numDocumento;
-    
+
     private String contrasenha;
-    
+
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDenNacimiento;
-    
+
     private String TipoDocumento;
 
     public ConductorEntity() {
-    
+
     }
+
     /*
         METODOS
-    */
-    
-    
+     */
+
     /**
      * @return the nombre
      */
@@ -146,5 +144,5 @@ public class ConductorEntity extends BaseEntity implements Serializable {
     public void setFechaDenNacimiento(Date fechaDenNacimiento) {
         this.fechaDenNacimiento = fechaDenNacimiento;
     }
-    
+
 }

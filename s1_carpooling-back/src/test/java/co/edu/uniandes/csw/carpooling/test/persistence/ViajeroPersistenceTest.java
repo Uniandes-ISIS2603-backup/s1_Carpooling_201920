@@ -31,6 +31,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ViajeroPersistenceTest {
 
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -51,7 +56,9 @@ public class ViajeroPersistenceTest {
 
     private List<ViajeroEntity> data = new ArrayList<ViajeroEntity>();
 
-    // Este metodo es el que ejecuta la accion de 
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void setUp() {
         try {
@@ -70,13 +77,17 @@ public class ViajeroPersistenceTest {
         }
     }
 
-    // Este metodo borra los datos que habitaban en la base de datos
+    /**
+     * Este metodo borra los datos que habitaban en la base de datos.
+     */
     private void clearData() {
         em.createQuery("delete from ViajeroEntity").executeUpdate();
     }
 
-    // Este metodo inserta tres datos en la base de datos para poder ejecutar las transacciones 
-    // RUD necesarias
+    /**
+     * Este metodo inserta tres datos en la base de datos para poder ejecutar
+     * las transacciones RUD necesarias.
+     */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -87,6 +98,9 @@ public class ViajeroPersistenceTest {
         }
     }
 
+    /**
+     * Prueba para crear un Viajero.
+     */
     @Test
     public void createTest() {
         // Se construye una fabrica de objetos
@@ -116,6 +130,9 @@ public class ViajeroPersistenceTest {
         Assert.assertEquals(viajero.getTipoDocumento(), entity.getTipoDocumento());
     }
 
+    /**
+     * Prueba para consultar la lista de Viajeros.
+     */
     @Test
     public void getViajerosTest() {
         List<ViajeroEntity> list = vp.findAll();
@@ -131,6 +148,9 @@ public class ViajeroPersistenceTest {
         }
     }
 
+    /**
+     * Prueba para consultar un Viajero.
+     */
     @Test
     public void getViajeroTest() {
         ViajeroEntity entity = data.get(0);
@@ -138,28 +158,34 @@ public class ViajeroPersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }
-    
+
+    /**
+     * Prueba para actualizar un Viajero.
+     */
     @Test
-public void updateViajeroTest() {
-    ViajeroEntity entity = data.get(0);
-    PodamFactory factory = new PodamFactoryImpl();
-    ViajeroEntity newEntity = factory.manufacturePojo(ViajeroEntity.class);
+    public void updateViajeroTest() {
+        ViajeroEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        ViajeroEntity newEntity = factory.manufacturePojo(ViajeroEntity.class);
 
-    newEntity.setId(entity.getId());
+        newEntity.setId(entity.getId());
 
-    vp.update(newEntity);
+        vp.update(newEntity);
 
-    ViajeroEntity resp = em.find(ViajeroEntity.class, entity.getId());
+        ViajeroEntity resp = em.find(ViajeroEntity.class, entity.getId());
 
-    Assert.assertEquals(newEntity.getId(), resp.getId());
-}
+        Assert.assertEquals(newEntity.getId(), resp.getId());
+    }
 
-@Test
-public void deleteViajeroTest() {
-    ViajeroEntity entity = data.get(0);
-    vp.delete(entity.getId());
-    ViajeroEntity deleted = em.find(ViajeroEntity.class, entity.getId());
-    Assert.assertNull(deleted);
-}
+    /**
+     * Prueba para eliminar un Viajero.
+     */
+    @Test
+    public void deleteViajeroTest() {
+        ViajeroEntity entity = data.get(0);
+        vp.delete(entity.getId());
+        ViajeroEntity deleted = em.find(ViajeroEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 
 }
