@@ -6,9 +6,11 @@
 package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,5 +28,26 @@ public class ViajeroPersistence {
         em.persist(viajero);
         return viajero;        
     }
+    
+    public ViajeroEntity find(Long viajeroId){
+        return em.find(ViajeroEntity.class,viajeroId);
+    }
+    
+    public List<ViajeroEntity> findAll(){
+        TypedQuery<ViajeroEntity> query = em.createQuery("select u from ViajeroEntity u",ViajeroEntity.class);
+        return query.getResultList();
+    }
+    
+    public ViajeroEntity update(ViajeroEntity viajeroEntity) {
+//        LOGGER.log(Level.INFO, "Actualizando el viajero con id={0}", viajeroEntity.getId());
+        return em.merge(viajeroEntity);
+    }
+
+    public void delete(Long viajeroId) {
+ //       LOGGER.log(Level.INFO, "Borrando el viajero con id={0}", viajeroId);
+        ViajeroEntity viajeroEntity = em.find(ViajeroEntity.class, viajeroId);
+        em.remove(viajeroEntity);
+    }
+    
     
 }
