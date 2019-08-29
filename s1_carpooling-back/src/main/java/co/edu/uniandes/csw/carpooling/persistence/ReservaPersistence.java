@@ -64,7 +64,7 @@ public class ReservaPersistence {
      * @return una reserva con los cambios aplicados.
      */
     public ReservaEntity update(ReservaEntity reservaEntity) {
-        LOGGER.log(Level.INFO, "Actualizando editorial con id = {0}", reservaEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando reserva con id = {0}", reservaEntity.getId());
         /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
         la editorial con los cambios, esto es similar a 
         "UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;" en SQL.
@@ -80,7 +80,7 @@ public class ReservaPersistence {
      * @param reservaId: id correspondiente a la reserva a borrar.
      */
     public void delete(Long reservaId) {
-        LOGGER.log(Level.INFO, "Borrando editorial con id = {0}", reservaId);
+        LOGGER.log(Level.INFO, "Borrando reserva con id = {0}", reservaId);
         // Se hace uso de mismo método que esta explicado en public EditorialEntity find(Long id) para obtener la editorial a borrar.
         ReservaEntity entity = em.find(ReservaEntity.class, reservaId);
         /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del

@@ -61,7 +61,7 @@ public class NotificacionPersistence {
      * @return una notificacion con los cambios aplicados.
      */
     public NotificacionEntity update(NotificacionEntity notificacionEntity) {
-        LOGGER.log(Level.INFO, "Actualizando editorial con id = {0}", notificacionEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando notificacion con id = {0}", notificacionEntity.getId());
         /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
         la editorial con los cambios, esto es similar a 
         "UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;" en SQL.
@@ -77,7 +77,7 @@ public class NotificacionPersistence {
      * @param notificacionId: id correspondiente a la notificacion a borrar.
      */
     public void delete(Long notificacionId) {
-        LOGGER.log(Level.INFO, "Borrando editorial con id = {0}", notificacionId);
+        LOGGER.log(Level.INFO, "Borrando notificacion con id = {0}", notificacionId);
         // Se hace uso de mismo método que esta explicado en public EditorialEntity find(Long id) para obtener la editorial a borrar.
         NotificacionEntity entity = em.find(NotificacionEntity.class, notificacionId);
         /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
