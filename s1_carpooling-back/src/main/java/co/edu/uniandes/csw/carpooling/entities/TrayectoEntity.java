@@ -21,11 +21,6 @@ public class TrayectoEntity extends BaseEntity implements Serializable{
     
     private Double costoCombustible;
     
-    
-    public TrayectoEntity()
-    {
-      
-    }
 
     /**
      * @return the numPeajes

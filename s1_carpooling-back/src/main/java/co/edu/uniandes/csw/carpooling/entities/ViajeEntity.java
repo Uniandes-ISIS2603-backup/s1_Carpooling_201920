@@ -41,9 +41,6 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String estadoViaje;
     
-    public ViajeEntity(){
-        
-    }
 
     /**
      * @return the destino
