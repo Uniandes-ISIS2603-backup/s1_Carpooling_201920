@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,7 +21,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class PublicistaPersistence {
 
-    private static final Logger LOGGER = Logger.getLogger(ViajeroPersistence.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PublicistaPersistence.class.getName());
     
     @PersistenceContext(unitName = "carpoolingPU")
     EntityManager em;
@@ -33,17 +34,20 @@ public class PublicistaPersistence {
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public PublicistaEntity create(PublicistaEntity publicistaEntity) {
+        LOGGER.log(Level.INFO, "Creando un publicista nuevo");
         em.persist(publicistaEntity);
+        LOGGER.log(Level.INFO, "Viajero creado");
         return publicistaEntity;
     }
 
     /**
-     * Busca si hay algun viaje con el id que se envía de argumento
+     * Busca si hay algun publicista con el id que se envía de argumento
      *
      * @param publicistaId: id correspondiente al publicista buscado.
      * @return un publicista.
      */
     public PublicistaEntity find(Long publicistaId) {
+        LOGGER.log(Level.INFO, "Consultando el publicista con id={0}", publicistaId);
         return em.find(PublicistaEntity.class, publicistaId);
     }
 
@@ -55,6 +59,7 @@ public class PublicistaPersistence {
      * PublicistaEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<PublicistaEntity> findAll() {
+        LOGGER.log(Level.INFO, "Consultando todos los publicistas");
         TypedQuery<PublicistaEntity> query = em.createQuery("select u from PublicistaEntity u", PublicistaEntity.class);
         return query.getResultList();
     }
@@ -68,7 +73,7 @@ public class PublicistaPersistence {
      * @return un publicista con los cambios aplicados.
      */
     public PublicistaEntity update(PublicistaEntity publicistaEntity) {
-//        LOGGER.log(Level.INFO, "Actualizando el publicista con id={0}", publicistaEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando el publicista con id={0}", publicistaEntity.getId());
         return em.merge(publicistaEntity);
     }
 
@@ -80,7 +85,7 @@ public class PublicistaPersistence {
      * @param publicistaId: id correspondiente al publicista a borrar.
      */
     public void delete(Long publicistaId) {
-        //       LOGGER.log(Level.INFO, "Borrando el publicista con id={0}", publicistaId);
+        LOGGER.log(Level.INFO, "Borrando el publicista con id={0}", publicistaId);
         PublicistaEntity publicistaEntity = em.find(PublicistaEntity.class, publicistaId);
         em.remove(publicistaEntity);
     }
