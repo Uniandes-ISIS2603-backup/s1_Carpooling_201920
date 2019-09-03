@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
 import java.util.List;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

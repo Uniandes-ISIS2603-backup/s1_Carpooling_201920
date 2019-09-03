@@ -45,7 +45,7 @@ public class CalificacionPersistanceTest {
     @Inject
     private CalificacionPersistence  cp;
 
-     @PersistenceContext(unitName= "carpoolingPU")
+     @PersistenceContext
      protected EntityManager em;
      
      @Inject
@@ -99,6 +99,7 @@ public class CalificacionPersistanceTest {
         
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         Assert.assertEquals(calificacion.getPuntuacion(), entity.getPuntuacion());
+        Assert.assertEquals(calificacion.getComentarios(), entity.getComentarios());
     }
     
      @Test

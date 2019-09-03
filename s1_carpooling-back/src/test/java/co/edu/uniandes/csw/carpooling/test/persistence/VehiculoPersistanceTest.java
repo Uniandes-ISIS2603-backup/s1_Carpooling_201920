@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
-import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.persistence.VehiculoPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +43,8 @@ public class VehiculoPersistanceTest {
     @Inject
     private VehiculoPersistence cp;
 
-    @PersistenceContext(unitName = "carpoolingPU")
-    protected EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
    
     @Inject
     UserTransaction utx;
@@ -95,6 +94,14 @@ public class VehiculoPersistanceTest {
 
         VehiculoEntity entity = em.find(VehiculoEntity.class, result.getId());
         Assert.assertEquals(vehiculo.getSoat(), entity.getSoat());
+        Assert.assertEquals(vehiculo.getAseguradora(), entity.getAseguradora());
+        Assert.assertEquals(vehiculo.getCedulaComprador(), entity.getCedulaComprador());
+        Assert.assertEquals(vehiculo.getNombreComprador(), entity.getNombreComprador());
+        Assert.assertEquals(vehiculo.getNumChasis(), entity.getNumChasis());
+        Assert.assertEquals(vehiculo.getNumMotor(), entity.getNumMotor());
+        Assert.assertEquals(vehiculo.getPlaca(), entity.getPlaca());
+        Assert.assertEquals(vehiculo.getSillas(), entity.getSillas());
+        Assert.assertEquals(vehiculo.getVigenciaSoat(), entity.getVigenciaSoat());
     }
     
      @Test
