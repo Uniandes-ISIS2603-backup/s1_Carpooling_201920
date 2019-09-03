@@ -37,10 +37,6 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
 
-    public PublicidadEntity() {
-
-    }
-
     /**
      * @return the nombre
      */
