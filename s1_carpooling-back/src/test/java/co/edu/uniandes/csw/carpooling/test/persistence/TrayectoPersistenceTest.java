@@ -90,7 +90,11 @@ public class TrayectoPersistenceTest {
         TrayectoEntity trayecto = factory.manufacturePojo(TrayectoEntity.class);
         TrayectoEntity result = tp.create(trayecto);
         Assert.assertNotNull(result);
-        Assert.assertEquals(result, trayecto);
+        Assert.assertEquals(result.getNumPeajes(), trayecto.getNumPeajes());
+        Assert.assertEquals(result.getDuracion(), trayecto.getDuracion());
+        Assert.assertEquals(result.getCostoCombustible(), trayecto.getCostoCombustible());
+        Assert.assertEquals(result.getOrigen(), trayecto.getOrigen());
+        Assert.assertEquals(result.getDestino(), trayecto.getDestino());
     }
     
     @Test
