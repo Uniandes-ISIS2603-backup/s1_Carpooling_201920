@@ -21,6 +21,10 @@ public class TrayectoEntity extends BaseEntity implements Serializable{
     
     private Double costoCombustible;
     
+    private String origen;
+    
+    private String destino;
+    
 
     /**
      * @return the numPeajes
@@ -62,6 +66,34 @@ public class TrayectoEntity extends BaseEntity implements Serializable{
      */
     public void setCostoCombustible(Double costoCombustible) {
         this.costoCombustible = costoCombustible;
+    }
+
+    /**
+     * @return the origen
+     */
+    public String getOrigen() {
+        return origen;
+    }
+
+    /**
+     * @param origen the origen to set
+     */
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    /**
+     * @return the destino
+     */
+    public String getDestino() {
+        return destino;
+    }
+
+    /**
+     * @param destino the destino to set
+     */
+    public void setDestino(String destino) {
+        this.destino = destino;
     }
     
 }
