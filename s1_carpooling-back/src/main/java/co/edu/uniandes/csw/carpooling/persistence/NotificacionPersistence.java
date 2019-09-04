@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
-//import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.List;
 import java.util.logging.Level;
 import javax.ejb.Stateless;
@@ -28,7 +27,6 @@ public class NotificacionPersistence {
     protected EntityManager em;
     
     public NotificacionEntity create(NotificacionEntity notificacion){
-        //throw new java.lang.UnsupportedOperationException("Not supported yet");
         em.persist(notificacion);
         
         return notificacion;
