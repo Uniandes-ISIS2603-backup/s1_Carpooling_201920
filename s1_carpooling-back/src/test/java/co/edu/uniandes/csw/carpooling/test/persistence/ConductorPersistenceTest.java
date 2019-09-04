@@ -134,7 +134,7 @@ public class ConductorPersistenceTest {
         Assert.assertEquals(newEntity.getNumDocumento(), resp.getNumDocumento());
         Assert.assertEquals(newEntity.getTipoDocumento(), resp.getTipoDocumento());
         Assert.assertEquals(newEntity.getTelefono(), resp.getTelefono());
-        Assert.assertEquals(newEntity.getFechaDenNacimiento(), resp.getFechaDenNacimiento());
+        Assert.assertEquals(newEntity.getFechaDeNacimiento(), resp.getFechaDeNacimiento());
         Assert.assertEquals(newEntity.getCorreo(), resp.getCorreo());
         Assert.assertEquals(newEntity.getContrasenha(), resp.getContrasenha());
     }

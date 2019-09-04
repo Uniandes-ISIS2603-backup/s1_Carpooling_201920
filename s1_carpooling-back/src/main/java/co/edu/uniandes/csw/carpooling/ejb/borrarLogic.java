@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.carpooling.entities;
-
-import javax.persistence.Entity;
+package co.edu.uniandes.csw.carpooling.ejb;
 
 /**
  *
- * @author Santiago Ballesteros
+ * @author Estudiante
  */
-@Entity
-public class ViajeroEntity extends UsuarioEntity {
-
+public class borrarLogic {
+    
 }

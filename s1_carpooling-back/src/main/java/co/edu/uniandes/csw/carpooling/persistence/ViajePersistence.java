@@ -25,7 +25,6 @@ public class ViajePersistence {
     public ViajeEntity  create(ViajeEntity viaje){
         em.persist(viaje);
         return viaje;
-        //throw new java.lang.UnsupportedOperationException("Not supported yet.");
     }
     
     public ViajeEntity find(Long viajesId)

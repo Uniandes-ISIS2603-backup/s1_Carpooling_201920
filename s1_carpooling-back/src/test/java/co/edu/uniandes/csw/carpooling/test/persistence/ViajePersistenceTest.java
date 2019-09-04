@@ -34,8 +34,8 @@ public class ViajePersistenceTest {
     @Inject
     private ViajePersistence vp;
     
-    @PersistenceContext(unitName = "carpoolingPU")
-    protected EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
     
     @Inject
     UserTransaction utx;
@@ -91,7 +91,14 @@ public class ViajePersistenceTest {
         ViajeEntity result = vp.create(viaje);
         Assert.assertNotNull(result);
         ViajeEntity entity = em.find(ViajeEntity.class, result.getId());
+        Assert.assertEquals(viaje.getCostoViaje(), entity.getCostoViaje());
+        Assert.assertEquals(viaje.getCupos(), entity.getCupos());
         Assert.assertEquals(viaje.getDestino(), entity.getDestino());
+        Assert.assertEquals(viaje.getEstadoViaje(), entity.getEstadoViaje());
+        Assert.assertEquals(viaje.getFechaDeLlegada(), entity.getFechaDeLlegada());
+        Assert.assertEquals(viaje.getFechaDeSalida(), entity.getFechaDeSalida());
+        Assert.assertEquals(viaje.getPuntoDeSalida(), entity.getPuntoDeSalida());
+        Assert.assertEquals(viaje.getVehiculo(), entity.getVehiculo());
     } 
     
     @Test
