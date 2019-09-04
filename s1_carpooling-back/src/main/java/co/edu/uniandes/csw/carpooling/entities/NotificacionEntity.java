@@ -26,9 +26,13 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
+    //Sonar dice que esto es un codesmell pero tengo la duda
     //@Temporal(TemporalType.HOUR)
-//    private Date hora;
+    //    private Date hora;
     
+    public NotificacionEntity(){
+    
+}
     //preg si el id va aqui
     /**
      * @return the mensaje
