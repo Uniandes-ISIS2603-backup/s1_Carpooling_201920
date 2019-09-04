@@ -18,23 +18,46 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class PublicidadPersistence {
-    
-    
+
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
-    public PublicidadEntity create(PublicidadEntity publicidadEntity){
+
+    public PublicidadEntity create(PublicidadEntity publicidadEntity) {
         em.persist(publicidadEntity);
         return publicidadEntity;
     }
-    
-    public PublicidadEntity find(Long publicidadId){
+
+    public PublicidadEntity find(Long publicidadId) {
         return em.find((PublicidadEntity.class), publicidadId);
     }
-    
-    public List<PublicidadEntity> findALl(){
+
+    public List<PublicidadEntity> findAll() {
         TypedQuery<PublicidadEntity> query = em.createQuery("select u from PublicidadEntity u", PublicidadEntity.class);
         return query.getResultList();
     }
-    
+
+    public PublicidadEntity update(PublicidadEntity publicidadEntity) {
+        return em.merge(publicidadEntity);
+    }
+
+    public void delete(Long publicidadId) {
+        PublicidadEntity publicidadEntity = em.find(PublicidadEntity.class, publicidadId);
+        em.remove(publicidadEntity);
+    }
+
+    public PublicidadEntity findByName(String nombre) {
+        TypedQuery query = em.createQuery("Select e From PublicidadEntity e where e.nombre = :nombre", PublicidadEntity.class);
+        query = query.setParameter("nombre", nombre);
+        List<PublicidadEntity> mismoNombre = query.getResultList();
+        PublicidadEntity result;
+        if (mismoNombre == null) {
+            result = null;
+        } else if (mismoNombre.isEmpty()) {
+            result = null;
+        } else {
+            result = mismoNombre.get(0);
+        }
+        return result;
+    }
+
 }

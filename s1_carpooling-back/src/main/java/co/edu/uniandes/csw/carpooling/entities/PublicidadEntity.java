@@ -19,28 +19,23 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class PublicidadEntity extends BaseEntity implements Serializable {
-    
+
     /*
         ATRIBUTOS
-    */
-    
+     */
     private String nombre;
-    
+
     private String mensaje;
-    
+
     private double costo;
-    
+
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeInicio;
-    
+
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
-    
-    public PublicidadEntity(){
-        
-    }
 
     /**
      * @return the nombre
@@ -111,6 +106,5 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     public void setFechaDeSalida(Date fechaDeSalida) {
         this.fechaDeSalida = fechaDeSalida;
     }
-    
-    
+
 }
