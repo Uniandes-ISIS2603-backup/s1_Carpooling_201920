@@ -23,11 +23,19 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.carpooling.test.logic;
 
+import junit.framework.Assert;
+import org.junit.Test;
+
 /**
  * Pruebas de logica para la cascara.
  *
  * @author ISIS2603
  */
 public class CascaraLogicTest {
-    
+   
+    @Test
+    public void moHacerNada(){
+    String nada = "Nada";
+    Assert.assertEquals("Nada", nada);
+    }
 }

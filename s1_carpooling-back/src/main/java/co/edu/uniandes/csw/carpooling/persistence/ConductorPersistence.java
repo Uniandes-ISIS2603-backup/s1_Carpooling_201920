@@ -53,7 +53,6 @@ public class ConductorPersistence {
     }
 
     public ConductorEntity findByName(String nombre) {
-        LOGGER.log(Level.INFO, "Consultando conductores por nombre", nombre);
         TypedQuery<ConductorEntity> query = em.createQuery("Select e From ConductorEntity e where e.nombre = :nombre", ConductorEntity.class);
         query = query.setParameter("nombre", nombre);
         List<ConductorEntity> mismoNombre = query.getResultList();
@@ -61,7 +60,6 @@ public class ConductorPersistence {
          if (!(mismoNombre == null || mismoNombre.isEmpty())) {
             result = mismoNombre.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar conductores por nombre", nombre);
         return result;
     }
 

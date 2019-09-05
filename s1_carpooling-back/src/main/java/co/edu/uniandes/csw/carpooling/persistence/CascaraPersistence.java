@@ -37,8 +37,6 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CascaraPersistence {
 
-    private static final Logger LOGGER = Logger.getLogger(CascaraPersistence.class.getName());
-
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
 }
