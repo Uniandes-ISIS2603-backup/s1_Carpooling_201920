@@ -32,7 +32,6 @@ public abstract class UsuarioEntity extends BaseEntity{
     */
     private String nombre;
     private String telefono;
-    private String apellido;
     private String correo;
     private String numDocumento;
     private String contrasenha;
@@ -69,20 +68,6 @@ public abstract class UsuarioEntity extends BaseEntity{
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    /**
-     * @return the apellido
-     */
-    public String getApellido() {
-        return apellido;
-    }
-
-    /**
-     * @param apellido the apellido to set
-     */
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     /**

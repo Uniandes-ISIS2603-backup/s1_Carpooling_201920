@@ -112,7 +112,6 @@ public class PublicistaPersistenceTest {
         PublicistaEntity entity
                 = em.find(PublicistaEntity.class, result.getId());
 
-        Assert.assertEquals(publicista.getApellido(), entity.getApellido());
         Assert.assertEquals(publicista.getCedula(), entity.getCedula());
         Assert.assertEquals(publicista.getCorreo(), entity.getCorreo());
         Assert.assertEquals(publicista.getNit(), entity.getNit());

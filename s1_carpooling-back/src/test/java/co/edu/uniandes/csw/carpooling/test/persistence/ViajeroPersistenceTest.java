@@ -120,7 +120,6 @@ public class ViajeroPersistenceTest {
 
         // Verifico que para cada entidad creada por podam,
         // en la base de datos se reflejen esos mismos datos
-        Assert.assertEquals(viajero.getApellido(), entity.getApellido());
         Assert.assertEquals(viajero.getContrasenha(), entity.getContrasenha());
         Assert.assertEquals(viajero.getCorreo(), entity.getCorreo());
         Assert.assertEquals(viajero.getFechaDeNacimiento(), entity.getFechaDeNacimiento());

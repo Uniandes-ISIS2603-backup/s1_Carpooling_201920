@@ -49,12 +49,8 @@ public class PublicidadPersistence {
         TypedQuery query = em.createQuery("Select e From PublicidadEntity e where e.nombre = :nombre", PublicidadEntity.class);
         query = query.setParameter("nombre", nombre);
         List<PublicidadEntity> mismoNombre = query.getResultList();
-        PublicidadEntity result;
-        if (mismoNombre == null) {
-            result = null;
-        } else if (mismoNombre.isEmpty()) {
-            result = null;
-        } else {
+        PublicidadEntity result = null;
+        if (!(mismoNombre == null || mismoNombre.isEmpty())) {
             result = mismoNombre.get(0);
         }
         return result;
