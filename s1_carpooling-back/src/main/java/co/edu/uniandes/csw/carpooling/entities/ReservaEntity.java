@@ -22,6 +22,7 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
     
     private String numeroDeReserva;
     private String confirmacion;
+    
     @Temporal(TemporalType.TIMESTAMP)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;

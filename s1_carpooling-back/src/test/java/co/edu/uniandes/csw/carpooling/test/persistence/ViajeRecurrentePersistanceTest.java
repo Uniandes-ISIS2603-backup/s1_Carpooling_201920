@@ -101,11 +101,8 @@ public class ViajeRecurrentePersistanceTest {
         
         ViajeRecurrenteEntity entity = em.find(ViajeRecurrenteEntity.class, result.getId());
         Assert.assertEquals(viajeRecurrente.getFrecuencia(), entity.getFrecuencia());
-        Assert.assertEquals(viajeRecurrente.getCosto(), entity.getCosto());
-        Assert.assertEquals(viajeRecurrente.getDestino(), entity.getDestino());
         Assert.assertEquals(viajeRecurrente.getFechaFin(), entity.getFechaFin());
         Assert.assertEquals(viajeRecurrente.getFechaInicio(), entity.getFechaInicio());
-        Assert.assertEquals(viajeRecurrente.getHorario(), entity.getHorario());
     }
     
          @Test

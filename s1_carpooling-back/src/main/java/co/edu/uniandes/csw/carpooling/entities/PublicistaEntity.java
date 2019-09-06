@@ -41,7 +41,7 @@ public class PublicistaEntity extends BaseEntity {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     /**
      * @return the apellido
      */
@@ -139,5 +139,6 @@ public class PublicistaEntity extends BaseEntity {
     public void setTipoPublicista(TIPO_PUBLICISTA tipoPublicista) {
         this.tipoPublicista = tipoPublicista;
     }
+
 
 }
