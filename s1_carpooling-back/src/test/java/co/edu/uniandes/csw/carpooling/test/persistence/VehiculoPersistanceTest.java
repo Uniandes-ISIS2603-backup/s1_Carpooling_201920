@@ -95,10 +95,7 @@ public class VehiculoPersistanceTest {
         VehiculoEntity entity = em.find(VehiculoEntity.class, result.getId());
         Assert.assertEquals(vehiculo.getSoat(), entity.getSoat());
         Assert.assertEquals(vehiculo.getAseguradora(), entity.getAseguradora());
-        Assert.assertEquals(vehiculo.getCedulaComprador(), entity.getCedulaComprador());
-        Assert.assertEquals(vehiculo.getNombreComprador(), entity.getNombreComprador());
-        Assert.assertEquals(vehiculo.getNumChasis(), entity.getNumChasis());
-        Assert.assertEquals(vehiculo.getNumMotor(), entity.getNumMotor());
+        Assert.assertEquals(vehiculo.getModelo(), entity.getModelo());
         Assert.assertEquals(vehiculo.getPlaca(), entity.getPlaca());
         Assert.assertEquals(vehiculo.getSillas(), entity.getSillas());
         Assert.assertEquals(vehiculo.getVigenciaSoat(), entity.getVigenciaSoat());
