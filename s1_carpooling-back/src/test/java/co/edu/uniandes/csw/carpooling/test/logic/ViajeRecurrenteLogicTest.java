@@ -101,7 +101,7 @@ public class ViajeRecurrenteLogicTest {
         
         ViajeRecurrenteEntity entity = em.find(ViajeRecurrenteEntity.class, result.getId());
         Assert.assertEquals(entity.getFechaInicio(), result.getFechaInicio());
-        Assert.assertEquals(entity.getFechaInicio(), result.getFechaFin());
+        Assert.assertEquals(entity.getFechaFin(), result.getFechaFin());
         Assert.assertEquals(entity.getFrecuencia(), result.getFrecuencia());
         
     }
