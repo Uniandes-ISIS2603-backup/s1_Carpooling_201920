@@ -19,7 +19,7 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     private String placa;
     private String aseguradora;
     private String vigenciaSoat;
-    protected String modelo;
+    private String modelo;
     private Integer sillas;
 
     /**

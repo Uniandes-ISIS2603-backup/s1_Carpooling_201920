@@ -91,8 +91,7 @@ public class CalificacionPersistanceTest {
     {
         
         PodamFactory factory = new PodamFactoryImpl();
-       
-        
+          
         CalificacionEntity calificacion = factory.manufacturePojo(CalificacionEntity.class);
         CalificacionEntity result = cp.create(calificacion);
         Assert.assertNotNull(result);
@@ -102,7 +101,7 @@ public class CalificacionPersistanceTest {
         Assert.assertEquals(calificacion.getComentarios(), entity.getComentarios());
     }
     
-     @Test
+    @Test
     public void getCalificacionesTest() {
         List<CalificacionEntity> list = cp.findAll();
         Assert.assertEquals(data.size(), list.size());
