@@ -31,7 +31,7 @@ public class ViajeRecurrentePersistence {
        return viajeRecurrente;
     }
     
-         public ViajeRecurrenteEntity find(Long viajeroId) {
+     public ViajeRecurrenteEntity find(Long viajeroId) {
  
         return em.find(ViajeRecurrenteEntity.class, viajeroId);
     }
