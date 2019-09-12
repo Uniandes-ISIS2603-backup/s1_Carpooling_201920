@@ -8,7 +8,7 @@ package co.edu.uniandes.csw.carpooling.test.logic;
 import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
-import co.uniandes.csw.carpooling.ejb.ConductorLogic;
+import co.edu.uniandes.csw.carpooling.ejb.ConductorLogic;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
