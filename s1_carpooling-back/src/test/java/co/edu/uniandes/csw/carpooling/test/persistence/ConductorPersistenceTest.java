@@ -148,13 +148,15 @@ public class ConductorPersistenceTest {
     }
 
     @Test
-    public void findByNameTest() {
+    public void findByCorreoTest() {
         ConductorEntity entity = data.get(0);
-        ConductorEntity newEntity = cp.findByName(entity.getNombre());
+        ConductorEntity newEntity = cp.findByCorreo(entity.getCorreo());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
 
-        newEntity = cp.findByName(null);
+        newEntity = cp.findByCorreo(null);
         Assert.assertNull(newEntity);
     }
+    
+   
 }
