@@ -23,12 +23,11 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaInicio;
+    
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaFin;
-    private String horario;
-    private String destino;
-    private String costo;
+    
     private String frecuencia;
 
     /**
@@ -57,48 +56,6 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
      */
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    /**
-     * @return the horario
-     */
-    public String getHorario() {
-        return horario;
-    }
-
-    /**
-     * @param horario the horario to set
-     */
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    /**
-     * @return the destino
-     */
-    public String getDestino() {
-        return destino;
-    }
-
-    /**
-     * @param destino the destino to set
-     */
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
-    /**
-     * @return the costo
-     */
-    public String getCosto() {
-        return costo;
-    }
-
-    /**
-     * @param costo the costo to set
-     */
-    public void setCosto(String costo) {
-        this.costo = costo;
     }
 
     /**
