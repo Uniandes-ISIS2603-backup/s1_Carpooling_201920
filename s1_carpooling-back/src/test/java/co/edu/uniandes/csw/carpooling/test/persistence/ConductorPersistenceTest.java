@@ -91,7 +91,13 @@ public class ConductorPersistenceTest {
 
         ConductorEntity entity = entMan.find(ConductorEntity.class, result.getId());
 
+        Assert.assertEquals(conductor.getContrasenha(), entity.getContrasenha());
+        Assert.assertEquals(conductor.getCorreo(), entity.getCorreo());
+        Assert.assertEquals(conductor.getFechaDeNacimiento(), entity.getFechaDeNacimiento());
         Assert.assertEquals(conductor.getNombre(), entity.getNombre());
+        Assert.assertEquals(conductor.getNumDocumento(), entity.getNumDocumento());
+        Assert.assertEquals(conductor.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(conductor.getTipoDocumento(), entity.getTipoDocumento());
     }
 
     @Test

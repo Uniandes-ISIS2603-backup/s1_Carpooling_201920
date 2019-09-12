@@ -93,7 +93,6 @@ public class ConductorLogicTest {
         ConductorEntity result = conductorLogic.crearConductor(newEntity);
         Assert.assertNotNull(result);
         ConductorEntity entity = em.find(ConductorEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getApellido(),entity.getApellido());
         Assert.assertEquals(newEntity.getContrasenha(),entity.getContrasenha());
         Assert.assertEquals(newEntity.getCorreo(),entity.getCorreo());
         Assert.assertEquals(newEntity.getFechaDeNacimiento(),entity.getFechaDeNacimiento());
@@ -131,7 +130,6 @@ public class ConductorLogicTest {
         ConductorEntity entity = data.get(0);
         ConductorEntity resultEntity = conductorLogic.getConductor(entity.getId());
         Assert.assertNotNull(resultEntity);
-        Assert.assertEquals(resultEntity.getApellido(),entity.getApellido());
         Assert.assertEquals(resultEntity.getContrasenha(),entity.getContrasenha());
         Assert.assertEquals(resultEntity.getCorreo(),entity.getCorreo());
         Assert.assertEquals(resultEntity.getFechaDeNacimiento(),entity.getFechaDeNacimiento());
@@ -149,7 +147,6 @@ public class ConductorLogicTest {
         pojoEntity.setId(entity.getId());
         conductorLogic.actualizarConductor(pojoEntity);
         ConductorEntity resp = em.find(ConductorEntity.class,entity.getId());
-        Assert.assertEquals(pojoEntity.getApellido(),resp.getApellido());
         Assert.assertEquals(pojoEntity.getContrasenha(),resp.getContrasenha());
         Assert.assertEquals(pojoEntity.getCorreo(),resp.getCorreo());
         Assert.assertEquals(pojoEntity.getFechaDeNacimiento(),resp.getFechaDeNacimiento());
