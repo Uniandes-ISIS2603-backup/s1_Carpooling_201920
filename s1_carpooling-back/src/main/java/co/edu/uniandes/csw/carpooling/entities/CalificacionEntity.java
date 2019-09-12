@@ -12,6 +12,7 @@ import javax.persistence.Entity;
  *
  * @author Juan David Alarcón
  */
+//La anotación le indica a JPA que esta clase corresponderá a una tabla
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable {
     
