@@ -52,7 +52,6 @@ public class ConductorPersistence {
         em.remove(conductorEntity);
     }
 
-<<<<<<< HEAD
     public ConductorEntity findByCorreo(String correo) {
         TypedQuery query = em.createQuery("Select e From ConductorEntity e where e.correo = :correo", ConductorEntity.class);
         query = query.setParameter("correo", correo);
@@ -64,7 +63,9 @@ public class ConductorPersistence {
             result = null;
         } else {
             result = mismoCorreo.get(0);
-=======
+        }
+        return result;
+    }
     public ConductorEntity findByName(String nombre) {
         TypedQuery<ConductorEntity> query = em.createQuery("Select e From ConductorEntity e where e.nombre = :nombre", ConductorEntity.class);
         query = query.setParameter("nombre", nombre);
@@ -72,7 +73,6 @@ public class ConductorPersistence {
         ConductorEntity result = null;
          if (!(mismoNombre == null || mismoNombre.isEmpty())) {
             result = mismoNombre.get(0);
->>>>>>> develop
         }
         return result;
     }
