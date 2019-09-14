@@ -16,11 +16,13 @@ import javax.persistence.TypedQuery;
  *
  * @author Juan David Alarcón
  */
-
+//Stateless le informa a JPA (EJB)que se trata cada peticion como transacción independiente (sin relacion con solicitudes anteriores)
 @Stateless
 public class CalificacionPersistence {
     
+    //La anotacion permite asociar el em con la unidad de persistencia 
     @PersistenceContext(unitName= "carpoolingPU")
+    //El em es que permite las operaciones sobre la base de datos
     protected EntityManager em;
     
     
@@ -41,7 +43,7 @@ public class CalificacionPersistence {
          return em.merge(calificacionEntity);
      }
      
-         public void delete(Long calificacionId) {
+     public void delete(Long calificacionId) {
         
         CalificacionEntity viajeroEntity = em.find(CalificacionEntity.class, calificacionId);
         em.remove(viajeroEntity);
@@ -51,5 +53,4 @@ public class CalificacionPersistence {
         TypedQuery<CalificacionEntity> query = em.createQuery("select u from CalificacionEntity u", CalificacionEntity.class);
         return query.getResultList();
     }
-    
 }
