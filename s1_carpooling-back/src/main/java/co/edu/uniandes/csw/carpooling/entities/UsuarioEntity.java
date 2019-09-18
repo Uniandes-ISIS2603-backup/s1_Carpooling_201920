@@ -10,7 +10,11 @@ import java.util.Date;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
 import uk.co.jemos.podam.common.PodamStrategyValue;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -34,6 +38,8 @@ public abstract class UsuarioEntity extends BaseEntity{
     private String telefono;
     private String correo;
     private String numDocumento;
+       
+    @Size(min = 5)
     private String contrasenha;
 
     @Temporal(TemporalType.DATE)

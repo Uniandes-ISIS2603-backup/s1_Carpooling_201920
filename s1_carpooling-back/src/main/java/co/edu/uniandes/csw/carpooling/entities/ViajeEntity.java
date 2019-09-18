@@ -8,9 +8,14 @@ package co.edu.uniandes.csw.carpooling.entities;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -33,7 +38,8 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String puntoDeSalida;
     
-    private Integer cupos;
+    @PodamIntValue()
+    private int cupos;
     
     private Float costoViaje;
     
@@ -41,6 +47,22 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String estadoViaje;
     
+   // @PodamExclude
+  //  @ManyToOne
+    //private ConductorEntity conductor; 
+    
+  //  @PodamExclude
+   // @OneToMany
+   // private List<CalificacionEntity> calificaciones;
+    
+    //@PodamExclude
+    //@ManyToOne
+    //private ViajeRecurrenteEntity viajesRecurrentes;
+    
+    // (Aun no listo)@PodamExclude
+    // (Aun no Listo)@OneToOne
+    // (Aun no Listo)private VehiculoEntity vehiculo;
+   
 
     /**
      * @return the destino
@@ -153,4 +175,41 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setEstadoViaje(String estadoViaje) {
         this.estadoViaje = estadoViaje;
     }
+/*
+    /**
+     * @return the conductor
+     
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    /**
+     * @param conductor the conductor to set
+     
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
+    }*/
+    
+    /**
+    public List<CalificacionEntity> getCalificaciones()
+    {
+        return calificaciones;
+    }
+    public void setCalificaciones(List<CalificacionEntity> calificaciones)
+    {
+        this.calificaciones = calificaciones;
+    }
+    */
+    
+    /**
+    public ViajeRecurrenteEntity getViajesRecurrentes()
+    {
+        return viajesRecurrentes;
+    }
+    
+    public void setViajesRecurrentes(ViajeRecurrenteEntity viajesRecurrentes)
+    {
+        this.viajesRecurrentes = viajesRecurrentes;
+    }
+    */
 }
