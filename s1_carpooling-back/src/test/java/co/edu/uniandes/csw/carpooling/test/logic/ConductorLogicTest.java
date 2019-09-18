@@ -90,7 +90,7 @@ public class ConductorLogicTest {
     @Test
     public void crearConductorTest()throws BusinessLogicException{
         ConductorEntity newEntity = factory.manufacturePojo(ConductorEntity.class);
-        ConductorEntity result = conductorLogic.crearConductor(newEntity);
+        ConductorEntity result = conductorLogic.createConductor(newEntity);
         Assert.assertNotNull(result);
         ConductorEntity entity = em.find(ConductorEntity.class, result.getId());
         Assert.assertEquals(newEntity.getContrasenha(),entity.getContrasenha());
@@ -107,7 +107,7 @@ public class ConductorLogicTest {
     public void crearConductorConCorreoExistente()throws BusinessLogicException{
      ConductorEntity newEntity = factory.manufacturePojo(ConductorEntity.class);
      newEntity.setCorreo(data.get(0).getCorreo());
-     conductorLogic.crearConductor(newEntity);
+     conductorLogic.createConductor(newEntity);
     }
     
     @Test

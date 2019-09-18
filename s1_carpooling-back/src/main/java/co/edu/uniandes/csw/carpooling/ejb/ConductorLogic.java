@@ -22,7 +22,7 @@ public class ConductorLogic {
     @Inject
     private ConductorPersistence persistence;
     
-    public ConductorEntity crearConductor(ConductorEntity conductor) throws BusinessLogicException{
+    public ConductorEntity createConductor(ConductorEntity conductor) throws BusinessLogicException{
         if(!validarCorreo(conductor.getCorreo()))
             throw new BusinessLogicException("El nombre del conductor está vacío");
         else if(persistence.findByCorreo(conductor.getCorreo()) != null){
