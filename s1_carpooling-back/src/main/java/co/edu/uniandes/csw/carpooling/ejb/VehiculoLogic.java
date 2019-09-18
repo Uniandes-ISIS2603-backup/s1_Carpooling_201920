@@ -29,7 +29,7 @@ public class VehiculoLogic {
         
         String[] placa =  vehiculo.getPlaca().split(" ");
         
-        if(placa[0].matches("[0-9]+") || !placa[1].matches("[0-9]+"))
+        if(!placa[0].matches("[A-Z]+") || !placa[1].matches("[0-9]+"))
             throw new BusinessLogicException("La placa tiene que tener el formato 'XXX 123' ");        
         
         if(vehiculo.getSillas() < 1 || vehiculo.getSillas() > 10)

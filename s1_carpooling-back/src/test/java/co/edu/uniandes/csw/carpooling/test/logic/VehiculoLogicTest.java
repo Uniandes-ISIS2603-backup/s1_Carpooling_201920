@@ -122,10 +122,19 @@ public class VehiculoLogicTest {
         VehiculoEntity newEntity = factory.manufacturePojo(VehiculoEntity.class);
         
         newEntity.setSillas(4);
-        newEntity.setPlaca("A1C 1B3");
+        newEntity.setPlaca("A12 123");
         VehiculoEntity result = vehiculoLogic.createVehiculo(newEntity); 
     }
     
+        @Test (expected = BusinessLogicException.class)
+    public void createVehiculoTestPlacaInvalida3() throws BusinessLogicException
+    {
+        VehiculoEntity newEntity = factory.manufacturePojo(VehiculoEntity.class);
+        
+        newEntity.setSillas(4);
+        newEntity.setPlaca("ABC 1AB");
+        VehiculoEntity result = vehiculoLogic.createVehiculo(newEntity); 
+    }
     
      @Test
     public void createVehiculoTestPlacaValida() throws BusinessLogicException
@@ -147,6 +156,17 @@ public class VehiculoLogicTest {
         
         newEntity.setPlaca("ABC 123");
         newEntity.setSillas(0);
+        
+        VehiculoEntity result = vehiculoLogic.createVehiculo(newEntity); 
+    }
+    
+        public void createVehiculoTestSillasInvalida2() throws BusinessLogicException
+    {
+        VehiculoEntity newEntity = factory.manufacturePojo(VehiculoEntity.class);
+        
+        
+        newEntity.setPlaca("ABC 123");
+        newEntity.setSillas(11);
         
         VehiculoEntity result = vehiculoLogic.createVehiculo(newEntity); 
     }
