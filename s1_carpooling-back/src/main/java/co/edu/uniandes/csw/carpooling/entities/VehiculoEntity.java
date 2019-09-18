@@ -7,7 +7,11 @@
 package co.edu.uniandes.csw.carpooling.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -19,11 +23,16 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     private String placa;
     private String aseguradora;
     private String vigenciaSoat;
-    private String nombreComprador;
-    private String cedulaComprador;
-    private String numMotor;
-    private String numChasis;
+    private String modelo;
     private Integer sillas;
+    
+   // @PodamExclude
+   // @ManyToMany(mappedBy = "vehiculos")
+   // private List<ConductorEntity> conductores;
+    
+    @PodamExclude
+    @OneToOne
+    private ViajeEntity viaje;
 
     /**
      * @return the soat
@@ -82,62 +91,6 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     }
 
     /**
-     * @return the nombreComprador
-     */
-    public String getNombreComprador() {
-        return nombreComprador;
-    }
-
-    /**
-     * @param nombreComprador the nombreComprador to set
-     */
-    public void setNombreComprador(String nombreComprador) {
-        this.nombreComprador = nombreComprador;
-    }
-
-    /**
-     * @return the cedulaComprador
-     */
-    public String getCedulaComprador() {
-        return cedulaComprador;
-    }
-
-    /**
-     * @param cedulaComprador the cedulaComprador to set
-     */
-    public void setCedulaComprador(String cedulaComprador) {
-        this.cedulaComprador = cedulaComprador;
-    }
-
-    /**
-     * @return the numMotor
-     */
-    public String getNumMotor() {
-        return numMotor;
-    }
-
-    /**
-     * @param numMotor the numMotor to set
-     */
-    public void setNumMotor(String numMotor) {
-        this.numMotor = numMotor;
-    }
-
-    /**
-     * @return the numChasis
-     */
-    public String getNumChasis() {
-        return numChasis;
-    }
-
-    /**
-     * @param numChasis the numChasis to set
-     */
-    public void setNumChasis(String numChasis) {
-        this.numChasis = numChasis;
-    }
-
-    /**
      * @return the sillas
      */
     public Integer getSillas() {
@@ -150,5 +103,33 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     public void setSillas(Integer sillas) {
         this.sillas = sillas;
     }
+
+    /**
+     * @return the modelo
+     */
+    public String getModelo() {
+        return modelo;
+    }
+
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    /**
+     * @return the conductores
+     
+    public List<ConductorEntity> getConductores() {
+        return conductores;
+    }
+
+    /**
+     * @param conductores the conductores to set
+     
+    public void setConductores(List<ConductorEntity> conductores) {
+        this.conductores = conductores;
+    }*/
     
 }

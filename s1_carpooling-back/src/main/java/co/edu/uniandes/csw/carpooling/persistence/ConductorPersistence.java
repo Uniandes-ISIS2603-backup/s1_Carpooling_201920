@@ -52,20 +52,28 @@ public class ConductorPersistence {
         em.remove(conductorEntity);
     }
 
-    public ConductorEntity findByName(String nombre) {
-        LOGGER.log(Level.INFO, "Consultando conductores por nombre", nombre);
-        TypedQuery query = em.createQuery("Select e From ConductorEntity e where e.nombre = :nombre", ConductorEntity.class);
-        query = query.setParameter("nombre", nombre);
-        List<ConductorEntity> mismoNombre = query.getResultList();
+    public ConductorEntity findByCorreo(String correo) {
+        TypedQuery query = em.createQuery("Select e From ConductorEntity e where e.correo = :correo", ConductorEntity.class);
+        query = query.setParameter("correo", correo);
+        List<ConductorEntity> mismoCorreo = query.getResultList();
         ConductorEntity result;
-        if (mismoNombre == null) {
+        if (mismoCorreo == null) {
             result = null;
-        } else if (mismoNombre.isEmpty()) {
+        } else if (mismoCorreo.isEmpty()) {
             result = null;
         } else {
+            result = mismoCorreo.get(0);
+        }
+        return result;
+    }
+    public ConductorEntity findByName(String nombre) {
+        TypedQuery<ConductorEntity> query = em.createQuery("Select e From ConductorEntity e where e.nombre = :nombre", ConductorEntity.class);
+        query = query.setParameter("nombre", nombre);
+        List<ConductorEntity> mismoNombre = query.getResultList();
+        ConductorEntity result = null;
+         if (!(mismoNombre == null || mismoNombre.isEmpty())) {
             result = mismoNombre.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar conductores por nombre", nombre);
         return result;
     }
 

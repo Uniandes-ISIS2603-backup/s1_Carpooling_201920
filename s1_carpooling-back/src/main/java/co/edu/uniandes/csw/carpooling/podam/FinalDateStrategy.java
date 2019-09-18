@@ -23,6 +23,7 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.carpooling.podam;
 
+import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -34,16 +35,17 @@ import uk.co.jemos.podam.common.AttributeStrategy;
  *
  * @author af.esguerra10
  */
-public class DateStrategy implements AttributeStrategy<Date> {
+public class FinalDateStrategy implements AttributeStrategy<Date> {
 
     Random r = new Random();
     
     @Override
     public Date getValue() {
         Calendar c = Calendar.getInstance();
-        int maxYear = 9999;
-        c.set(Calendar.YEAR, r.nextInt(maxYear - c.getActualMinimum(Calendar.YEAR) + 1)
-                + c.getActualMinimum(Calendar.YEAR));
+        int maxYear = 100;
+        int thisYear = Year.now().getValue();
+        c.set(Calendar.YEAR, r.nextInt(100) + 6
+                + thisYear);
         c.set(Calendar.DAY_OF_YEAR, r.nextInt(
                 c.getActualMaximum(Calendar.DAY_OF_YEAR) - c.getActualMinimum(Calendar.DAY_OF_YEAR) + 1)
                 + c.getActualMinimum(Calendar.DAY_OF_YEAR));

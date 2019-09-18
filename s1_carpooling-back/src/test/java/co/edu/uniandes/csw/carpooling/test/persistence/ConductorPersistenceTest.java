@@ -91,7 +91,13 @@ public class ConductorPersistenceTest {
 
         ConductorEntity entity = entMan.find(ConductorEntity.class, result.getId());
 
+        Assert.assertEquals(conductor.getContrasenha(), entity.getContrasenha());
+        Assert.assertEquals(conductor.getCorreo(), entity.getCorreo());
+        Assert.assertEquals(conductor.getFechaDeNacimiento(), entity.getFechaDeNacimiento());
         Assert.assertEquals(conductor.getNombre(), entity.getNombre());
+        Assert.assertEquals(conductor.getNumDocumento(), entity.getNumDocumento());
+        Assert.assertEquals(conductor.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(conductor.getTipoDocumento(), entity.getTipoDocumento());
     }
 
     @Test
@@ -134,7 +140,7 @@ public class ConductorPersistenceTest {
         Assert.assertEquals(newEntity.getNumDocumento(), resp.getNumDocumento());
         Assert.assertEquals(newEntity.getTipoDocumento(), resp.getTipoDocumento());
         Assert.assertEquals(newEntity.getTelefono(), resp.getTelefono());
-        Assert.assertEquals(newEntity.getFechaDenNacimiento(), resp.getFechaDenNacimiento());
+        Assert.assertEquals(newEntity.getFechaDeNacimiento(), resp.getFechaDeNacimiento());
         Assert.assertEquals(newEntity.getCorreo(), resp.getCorreo());
         Assert.assertEquals(newEntity.getContrasenha(), resp.getContrasenha());
     }
@@ -148,13 +154,15 @@ public class ConductorPersistenceTest {
     }
 
     @Test
-    public void findByNameTest() {
+    public void findByCorreoTest() {
         ConductorEntity entity = data.get(0);
-        ConductorEntity newEntity = cp.findByName(entity.getNombre());
+        ConductorEntity newEntity = cp.findByCorreo(entity.getCorreo());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
 
-        newEntity = cp.findByName(null);
+        newEntity = cp.findByCorreo(null);
         Assert.assertNull(newEntity);
     }
+    
+   
 }
