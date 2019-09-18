@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.carpooling.entities;
 
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
+import co.edu.uniandes.csw.carpooling.podam.FinalDateStrategy;
+import co.edu.uniandes.csw.carpooling.podam.InitialDateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -20,12 +22,12 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
    
-    @Temporal(TemporalType.DATE)
-    @PodamStrategyValue(DateStrategy.class)
+    @Temporal(TemporalType.TIMESTAMP)
+    @PodamStrategyValue(InitialDateStrategy.class)
     private Date fechaInicio;
     
-    @Temporal(TemporalType.DATE)
-    @PodamStrategyValue(DateStrategy.class)
+    @Temporal(TemporalType.TIMESTAMP)
+    @PodamStrategyValue(FinalDateStrategy.class)
     private Date fechaFin;
     
     private String frecuencia;
