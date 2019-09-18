@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.carpooling.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -19,6 +22,9 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
     private Integer puntuacion;
     private String comentarios;
 
+    @PodamExclude
+    @ManyToOne
+    private ViajeEntity viaje;
     /**
      * @return the puntuacion
      */

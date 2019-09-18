@@ -144,6 +144,20 @@ public class CalificacionLogicTest {
         
         CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);  
     }
+    
+     @Test (expected = BusinessLogicException.class)
+    public void createCalificacionTestPuntuacionInValida2() throws BusinessLogicException
+    {
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        
+        int puntuacion = -1;
+            
+        newEntity.setPuntuacion(puntuacion);
+        
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);  
+    }
+    
+    
     @Test
     public void createCalificacionTestPuntuacionValida() throws BusinessLogicException
     {
