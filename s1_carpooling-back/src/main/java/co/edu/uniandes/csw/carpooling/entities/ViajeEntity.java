@@ -9,8 +9,10 @@ import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -40,6 +42,10 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     private String vehiculo;
     
     private String estadoViaje;
+    
+    @PodamExclude
+    @ManyToOne
+    private ConductorEntity conductor; 
     
 
     /**
@@ -152,5 +158,19 @@ public class ViajeEntity extends BaseEntity implements Serializable {
      */
     public void setEstadoViaje(String estadoViaje) {
         this.estadoViaje = estadoViaje;
+    }
+
+    /**
+     * @return the conductor
+     */
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    /**
+     * @param conductor the conductor to set
+     */
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
     }
 }

@@ -7,7 +7,10 @@
 package co.edu.uniandes.csw.carpooling.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -21,6 +24,10 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     private String vigenciaSoat;
     private String modelo;
     private Integer sillas;
+    
+    @PodamExclude
+    @ManyToMany(mappedBy = "vehiculos")
+    private List<ConductorEntity> conductores;
 
     /**
      * @return the soat
@@ -104,6 +111,20 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
      */
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    /**
+     * @return the conductores
+     */
+    public List<ConductorEntity> getConductores() {
+        return conductores;
+    }
+
+    /**
+     * @param conductores the conductores to set
+     */
+    public void setConductores(List<ConductorEntity> conductores) {
+        this.conductores = conductores;
     }
     
 }
