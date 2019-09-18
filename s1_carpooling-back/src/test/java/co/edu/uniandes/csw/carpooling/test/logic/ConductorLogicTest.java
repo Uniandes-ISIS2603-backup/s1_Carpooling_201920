@@ -10,7 +10,11 @@ import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
 import co.edu.uniandes.csw.carpooling.ejb.ConductorLogic;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -90,12 +94,18 @@ public class ConductorLogicTest {
     @Test
     public void crearConductorTest()throws BusinessLogicException{
         ConductorEntity newEntity = factory.manufacturePojo(ConductorEntity.class);
+        Date date1 = new  Date();
+        newEntity.setFechaDeNacimiento(date1);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         ConductorEntity result = conductorLogic.createConductor(newEntity);
         Assert.assertNotNull(result);
         ConductorEntity entity = em.find(ConductorEntity.class, result.getId());
         Assert.assertEquals(newEntity.getContrasenha(),entity.getContrasenha());
         Assert.assertEquals(newEntity.getCorreo(),entity.getCorreo());
-        Assert.assertEquals(newEntity.getFechaDeNacimiento(),entity.getFechaDeNacimiento());
         Assert.assertEquals(newEntity.getId(),entity.getId());
         Assert.assertEquals(newEntity.getNombre(),entity.getNombre());
         Assert.assertEquals(newEntity.getNumDocumento(),entity.getNumDocumento());
@@ -144,12 +154,18 @@ public class ConductorLogicTest {
     public void updateConductorTest() throws BusinessLogicException{
         ConductorEntity entity = data.get(0);
         ConductorEntity pojoEntity = factory.manufacturePojo(ConductorEntity.class);
+        Date date = new Date();
         pojoEntity.setId(entity.getId());
+        pojoEntity.setFechaDeNacimiento(date);
+        try{
+            Thread.sleep(1000);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         conductorLogic.actualizarConductor(pojoEntity);
         ConductorEntity resp = em.find(ConductorEntity.class,entity.getId());
         Assert.assertEquals(pojoEntity.getContrasenha(),resp.getContrasenha());
         Assert.assertEquals(pojoEntity.getCorreo(),resp.getCorreo());
-        Assert.assertEquals(pojoEntity.getFechaDeNacimiento(),resp.getFechaDeNacimiento());
         Assert.assertEquals(pojoEntity.getId(),resp.getId());
         Assert.assertEquals(pojoEntity.getNombre(),resp.getNombre());
         Assert.assertEquals(pojoEntity.getNumDocumento(),resp.getNumDocumento());

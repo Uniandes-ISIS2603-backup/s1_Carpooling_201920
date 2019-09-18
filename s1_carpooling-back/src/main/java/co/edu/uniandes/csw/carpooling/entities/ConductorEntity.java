@@ -23,11 +23,11 @@ public class ConductorEntity extends UsuarioEntity {
     private List<VehiculoEntity> vehiculos;
     
     @PodamExclude
-    @OneToMany
+    @OneToMany(mappedBy = "conductor")
     private List<ViajeRecurrenteEntity> viajesRecurrentes;
     
     @PodamExclude
-    @OneToMany
+    @OneToMany(mappedBy = "conductor")
     private List<ViajeEntity> viajes;
 
     /**
