@@ -41,6 +41,10 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String estadoViaje;
     
+    @PodamExclude
+    @ManyToOne(mappedBy = "historialViajes")
+    private ConductorEntity 
+    
 
     /**
      * @return the destino
