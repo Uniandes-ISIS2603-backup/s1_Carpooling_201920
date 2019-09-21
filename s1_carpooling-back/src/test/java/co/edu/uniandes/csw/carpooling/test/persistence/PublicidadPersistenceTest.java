@@ -43,8 +43,8 @@ public class PublicidadPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(PublicidadEntity.class)
-                .addClass(PublicidadPersistence.class)
+                .addPackage(PublicidadEntity.class.getPackage())
+                .addPackage(PublicidadPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }

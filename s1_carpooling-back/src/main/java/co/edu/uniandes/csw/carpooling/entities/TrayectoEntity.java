@@ -34,7 +34,7 @@ public class TrayectoEntity extends BaseEntity implements Serializable{
     
     @PodamExclude
     @ManyToOne//cascade = CascadeType.PERSIST)
-    private ViajeEntity viajeTrayecto;
+    private ViajeEntity viaje;
     
 
     /**
@@ -110,15 +110,15 @@ public class TrayectoEntity extends BaseEntity implements Serializable{
     /**
      * @return the viaje
      */
-    //public ViajeEntity getViaje() {
-    //    return viaje;
-    //}
+    public ViajeEntity getViaje() {
+        return viaje;
+    }
 
     /**
      * @param viaje the viaje to set
      */
-    //public void setViaje(ViajeEntity viaje) {
-    //    this.viaje = viaje;
-    //}
+    public void setViaje(ViajeEntity viaje) {
+        this.viaje = viaje;
+    }
     
 }
