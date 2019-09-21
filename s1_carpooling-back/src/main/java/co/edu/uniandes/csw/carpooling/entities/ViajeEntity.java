@@ -70,8 +70,8 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     
     @PodamExclude
-    @OneToMany(mappedBy = "viajeTrayecto", fetch = FetchType.LAZY)
-    private List<TrayectoEntity> trayectos = new ArrayList<>();
+    @OneToMany(mappedBy = "viaje", fetch = FetchType.LAZY)
+    private List<TrayectoEntity> trayectos = new ArrayList<TrayectoEntity>();
 
     /**
      * @return the destino
