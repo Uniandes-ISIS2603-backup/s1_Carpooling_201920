@@ -5,7 +5,12 @@
  */
 package co.edu.uniandes.csw.carpooling.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -27,6 +32,10 @@ public class PublicistaEntity extends BaseEntity {
     private String rut;
     private String nit;
     private TIPO_PUBLICISTA tipoPublicista;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "publicista", fetch = FetchType.LAZY)
+    private List<PublicidadEntity> publicidades = new ArrayList<PublicidadEntity>();
 
     /**
      * @return the nombre
@@ -138,6 +147,20 @@ public class PublicistaEntity extends BaseEntity {
      */
     public void setTipoPublicista(TIPO_PUBLICISTA tipoPublicista) {
         this.tipoPublicista = tipoPublicista;
+    }
+
+    /**
+     * @return the publicidades
+     */
+    public List<PublicidadEntity> getPublicidades() {
+        return publicidades;
+    }
+
+    /**
+     * @param publicidades the publicidades to set
+     */
+    public void setPublicidades(List<PublicidadEntity> publicidades) {
+        this.publicidades = publicidades;
     }
 
 

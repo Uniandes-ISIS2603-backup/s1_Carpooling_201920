@@ -9,8 +9,10 @@ import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -36,6 +38,10 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
+    
+    @PodamExclude
+    @ManyToOne
+    private PublicistaEntity publicista;
 
     /**
      * @return the nombre
@@ -105,6 +111,20 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
      */
     public void setFechaDeSalida(Date fechaDeSalida) {
         this.fechaDeSalida = fechaDeSalida;
+    }
+
+    /**
+     * @return the publicista
+     */
+    public PublicistaEntity getPublicista() {
+        return publicista;
+    }
+
+    /**
+     * @param publicista the publicista to set
+     */
+    public void setPublicista(PublicistaEntity publicista) {
+        this.publicista = publicista;
     }
 
 }
