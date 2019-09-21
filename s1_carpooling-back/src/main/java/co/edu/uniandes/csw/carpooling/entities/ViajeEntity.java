@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +20,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamFloatValue;
 import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamStrategyValue;
+
 
 /**
  *
@@ -65,15 +67,11 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     // (Aun no listo)@PodamExclude
     // (Aun no Listo)@OneToOne
     // (Aun no Listo)private VehiculoEntity vehiculo;
-   
-    @PodamExclude
-    @OneToMany(
-        mappedBy = "viaje", 
-        fetch = javax.persistence.FetchType.LAZY,
-        cascade = CascadeType.PERSIST,
-        orphanRemoval = true)
-    private List<TrayectoEntity> trayectos = new ArrayList<TrayectoEntity>();
     
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "viajeTrayecto", fetch = FetchType.LAZY)
+    private List<TrayectoEntity> trayectos = new ArrayList<>();
 
     /**
      * @return the destino
@@ -211,21 +209,21 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     }
     */
 
-
+    
     /**
      * @return the trayectos
-     */
+    */
     public List<TrayectoEntity> getTrayectos() {
         return trayectos;
     }
-
+    
     /**
      * @param trayectos the trayectos to set
-     */
+    */
     public void setTrayectos(List<TrayectoEntity> trayectos) {
         this.trayectos = trayectos;
     }
-
+    
     /**
      * @return the origen
      */
