@@ -29,7 +29,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author SantiagoBallesteros
+ * @author Santiago Ballesteros
  */
 @RunWith(Arquillian.class)
 public class PublicistaLogicTest {
