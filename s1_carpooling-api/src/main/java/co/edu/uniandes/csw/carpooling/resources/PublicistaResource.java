@@ -6,8 +6,11 @@
 package co.edu.uniandes.csw.carpooling.resources;
 
 import co.edu.uniandes.csw.carpooling.dtos.PublicistaDTO;
+import co.edu.uniandes.csw.carpooling.ejb.PublicistaLogic;
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -25,9 +28,16 @@ import javax.ws.rs.core.MediaType;
 public class PublicistaResource {
    
         private static final Logger LOGGER = Logger.getLogger(PublicistaResource.class.getName());
-
+        
+        @Inject
+        private PublicistaLogic logica;
+        
         @POST
         public PublicistaDTO createPublicista(PublicistaDTO publicista){
-        return publicista;
+            
+            PublicistaEntity publicistaEntity = publicista.toEntity();
+            publicistaEntity = logica.createPublicista(publicistaEntity);
+            return new PublicistaDTO(publicistaEntity);
+        
         }
 }

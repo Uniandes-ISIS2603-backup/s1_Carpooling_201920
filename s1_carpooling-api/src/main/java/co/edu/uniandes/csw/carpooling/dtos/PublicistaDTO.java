@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import java.io.Serializable;
 
 /**
@@ -28,6 +29,19 @@ public class PublicistaDTO implements Serializable{
     protected String nit;
     protected TIPO_PUBLICISTA tipoPublicista;
 
+    public PublicistaEntity toEntity(){
+        PublicistaEntity entidad = new PublicistaEntity();
+        entidad.setId(this.getId());
+        entidad.setApellido(this.getApellido());
+        entidad.setCorreo(this.getCorreo());
+        entidad.setNit(this.getNit());
+        entidad.setNombre(this.getNombre());
+        entidad.setTelefono(this.getTelefono());
+        entidad.setRut(this.getRut());
+        entidad.setTipoPublicista(this.getTipoPublicista());
+        entidad.setCedula(this.getCedula());
+        
+    }
     /**
      * @return the id
      */
