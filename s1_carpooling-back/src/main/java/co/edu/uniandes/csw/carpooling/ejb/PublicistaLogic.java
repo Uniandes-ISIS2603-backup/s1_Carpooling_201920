@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author SantiagoBallesteros
+ * @author Santiago Ballesteros
  */
 @Stateless
 public class PublicistaLogic {

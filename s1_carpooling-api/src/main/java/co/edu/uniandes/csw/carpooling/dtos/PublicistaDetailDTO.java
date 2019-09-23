@@ -11,8 +11,23 @@ import java.util.List;
  *
  * @author Santiago Ballesteros
  */
-public class PublicistaDetailDTO {
+public class PublicistaDetailDTO extends PublicistaDTO {
     
-    private List<PublicistaDTO> publicistas;
+    protected List<PublicidadDTO> publicidades;
+
+    /**
+     * @return the publicidades
+     */
+    public List<PublicidadDTO> getPublicidades() {
+        return publicidades;
+    }
+
+    /**
+     * @param publicidades the publicidades to set
+     */
+    public void setPublicidades(List<PublicidadDTO> publicidades) {
+        this.publicidades = publicidades;
+    }
+    
     
 }
