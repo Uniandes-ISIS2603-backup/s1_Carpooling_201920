@@ -38,7 +38,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String puntoDeSalida;
     
-    @PodamIntValue()
+//    @PodamIntValue()
     private int cupos;
     
     private Float costoViaje;
