@@ -31,7 +31,7 @@ public class PublicistaLogic {
         if(publicista.getTipoPublicista() == null){
             throw new BusinessLogicException("El tipoPublicista del publicista esta vacio");
         }
-        if((publicista.getTipoPublicista()!=(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA))||(publicista.getTipoPublicista()!=(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA))){
+        if((publicista.getTipoPublicista().equals(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA))==false||(publicista.getTipoPublicista()!=(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA))==false){
             throw new BusinessLogicException("El tipo de Publicista ingresado es inconsistente");
         }
         if(publicista.getNombre() == null ){
