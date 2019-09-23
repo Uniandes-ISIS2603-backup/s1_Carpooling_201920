@@ -6,17 +6,22 @@
 package co.edu.uniandes.csw.carpooling.test.logic;
 
 import co.edu.uniandes.csw.carpooling.ejb.PublicistaLogic;
+import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
 import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.PublicistaPersistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -24,7 +29,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author SantiagoBallesteros
+ * @author Santiago Ballesteros
  */
 @RunWith(Arquillian.class)
 public class PublicistaLogicTest {
@@ -36,6 +41,11 @@ public class PublicistaLogicTest {
     
      @PersistenceContext
     private EntityManager em;
+     
+    @Inject
+    private UserTransaction utx;
+    
+    private List<PublicistaEntity> data = new ArrayList<PublicistaEntity>();
     
     @Deployment
     public static JavaArchive createDeployment(){
@@ -47,8 +57,52 @@ public class PublicistaLogicTest {
             .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
     
+     /**
+     * Configuración inicial de la prueba.
+     */
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() {
+        em.createQuery("delete from PublicidadEntity").executeUpdate();
+        em.createQuery("delete from PublicistaEntity").executeUpdate();
+    }
+
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            PublicistaEntity entity = factory.manufacturePojo(PublicistaEntity.class);
+            em.persist(entity);
+            data.add(entity);
+        }
+        PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
+        publicidad.setPublicista(data.get(1));
+//        em.persist(publicista);
+ //       data.get(1).getPrizes().add(publicista);
+    }
+    
     @Test
-    public void createPublicista() throws BusinessLogicException{
+    public void createPublicistaTest() throws BusinessLogicException{
     
         PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
         PublicistaEntity result = publicistaLogic.createPublicista(newEntity);
@@ -66,10 +120,98 @@ public class PublicistaLogicTest {
     }
     
     @Test(expected = BusinessLogicException.class)
-    public void createPublicistaNombreNull() throws BusinessLogicException{
+    public void createPublicistaTipoPublicistaNullTest() throws BusinessLogicException{
+    
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        newEntity.setTipoPublicista(null);
+        PublicistaEntity result = publicistaLogic.createPublicista(newEntity);  
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createPublicistaNombreNullTest() throws BusinessLogicException{
     
         PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
         newEntity.setNombre(null);
         PublicistaEntity result = publicistaLogic.createPublicista(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createPublicistaApellidoNullTest() throws BusinessLogicException{
+    
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        if(newEntity.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA)==0){
+        newEntity.setApellido(null);
+        PublicistaEntity result = publicistaLogic.createPublicista(newEntity);
+        }
+        else{
+            throw new BusinessLogicException("El publicista " + newEntity.getTipoPublicista()+ " no debe arrojar excepcion");
+        }
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createPublicistaCorreoNullTest() throws BusinessLogicException{
+    
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        newEntity.setCorreo(null);
+        PublicistaEntity result = publicistaLogic.createPublicista(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createPublicistaNitNullTest() throws BusinessLogicException{
+    
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        if(newEntity.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA)!=0){
+           newEntity.setNit(null);
+           PublicistaEntity result = publicistaLogic.createPublicista(newEntity);
+        }
+        else{
+         throw new BusinessLogicException();
+        }
+    }
+    
+    /**
+     * Prueba para crear un Publicista.
+     *
+     * @throws co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException .
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createPublicistaConCorreoRepetidoTest() throws BusinessLogicException {
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        newEntity.setCorreo(data.get(0).getCorreo());
+        publicistaLogic.createPublicista(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un Publicista.
+     *
+     * @throws co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException .
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createPublicistaConRutRepetidoTest() throws BusinessLogicException {
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        if(newEntity.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA)!=0){
+           newEntity.setRut(data.get(0).getRut());
+           publicistaLogic.createPublicista(newEntity);
+        }
+        else{
+           throw new BusinessLogicException();
+        }
+    }
+    
+    /**
+     * Prueba para crear un Publicista.
+     *
+     * @throws co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException .
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createPublicistaConNitRepetidoTest() throws BusinessLogicException {
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        if(newEntity.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA)!=0){
+           newEntity.setNit(data.get(0).getNit());
+           publicistaLogic.createPublicista(newEntity);
+        }
+        else{
+           throw new BusinessLogicException();
+        }
     }
 }
