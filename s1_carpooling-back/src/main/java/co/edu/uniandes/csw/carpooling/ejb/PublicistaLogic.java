@@ -31,9 +31,6 @@ public class PublicistaLogic {
         if(publicista.getTipoPublicista() == null){
             throw new BusinessLogicException("El tipoPublicista del publicista esta vacio");
         }
-        if((publicista.getTipoPublicista().equals(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA))==false||(publicista.getTipoPublicista()!=(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA))==false){
-            throw new BusinessLogicException("El tipo de Publicista ingresado es inconsistente");
-        }
         if(publicista.getNombre() == null ){
             throw new BusinessLogicException("El nombre del publicista esta vacio");
         }
@@ -43,8 +40,14 @@ public class PublicistaLogic {
         if(publicista.getCorreo()==null){
             throw new BusinessLogicException("El correo del publicista esta vacio");
         }
+        if(pp.findByCorreo(publicista.getCorreo()) != null){
+            throw new BusinessLogicException("Ya existe un publicista con con el correo: "+publicista.getCorreo());
+        }
         if(publicista.getNit()==null && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA)!=0){
             throw new BusinessLogicException("El nit del publicista esta vacio");
+        }
+        if((pp.findByNit(publicista.getNit())!=null) && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA)!=0){
+            throw new BusinessLogicException("Ya existe un publicista con con el Nit: "+publicista.getNit());
         }
         if(publicista.getTelefono()==null){
             throw new BusinessLogicException("El telefono del publicista esta vacio");
@@ -52,7 +55,9 @@ public class PublicistaLogic {
         if(publicista.getRut()==null && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA)!=0){
             throw new BusinessLogicException("El rut del publicista esta vacio");
         }
-        
+        if((pp.findByRut(publicista.getRut())!=null) && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA)!=0){
+            throw new BusinessLogicException("Ya existe un publicista con con el Rut: "+publicista.getRut());
+        }
         publicista = pp.create(publicista);
         return publicista;
     }
