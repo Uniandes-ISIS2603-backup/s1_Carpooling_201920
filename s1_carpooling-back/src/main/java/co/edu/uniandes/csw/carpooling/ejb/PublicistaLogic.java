@@ -41,13 +41,13 @@ public class PublicistaLogic {
             throw new BusinessLogicException("El correo del publicista esta vacio");
         }
         if(pp.findByCorreo(publicista.getCorreo()) != null){
-            throw new BusinessLogicException("Ya existe un publicista con con el correo: "+publicista.getCorreo());
+            throw new BusinessLogicException("Ya existe un publicista con el correo: "+publicista.getCorreo());
         }
         if(publicista.getNit()==null && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA)!=0){
             throw new BusinessLogicException("El nit del publicista esta vacio");
         }
         if((pp.findByNit(publicista.getNit())!=null) && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.PERSONA_NATURAL_CON_EMPRESA)!=0){
-            throw new BusinessLogicException("Ya existe un publicista con con el Nit: "+publicista.getNit());
+            throw new BusinessLogicException("Ya existe un publicista con el Nit: "+publicista.getNit());
         }
         if(publicista.getTelefono()==null){
             throw new BusinessLogicException("El telefono del publicista esta vacio");
@@ -56,7 +56,7 @@ public class PublicistaLogic {
             throw new BusinessLogicException("El rut del publicista esta vacio");
         }
         if((pp.findByRut(publicista.getRut())!=null) && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA)!=0){
-            throw new BusinessLogicException("Ya existe un publicista con con el Rut: "+publicista.getRut());
+            throw new BusinessLogicException("Ya existe un publicista con el Rut: "+publicista.getRut());
         }
         publicista = pp.create(publicista);
         return publicista;
