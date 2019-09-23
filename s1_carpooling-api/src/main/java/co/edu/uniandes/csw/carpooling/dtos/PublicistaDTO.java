@@ -9,11 +9,11 @@ import java.io.Serializable;
 
 /**
  *
- * @author SantiagoBallesteros
+ * @author Santiago Ballesteros
  */
 public class PublicistaDTO implements Serializable{
     
-    protected Long id;
+    private Long id;
     public enum TIPO_PUBLICISTA {
         PERSONA_NATURAL_CON_EMPRESA,
         EMPRESA
