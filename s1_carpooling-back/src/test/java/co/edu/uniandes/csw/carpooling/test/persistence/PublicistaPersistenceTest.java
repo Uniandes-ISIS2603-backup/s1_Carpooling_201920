@@ -39,8 +39,8 @@ public class PublicistaPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class).
-                addClass(PublicistaEntity.class).
-                addClass(PublicistaPersistence.class).
+                addPackage(PublicistaEntity.class.getPackage()).
+                addPackage(PublicistaPersistence.class.getPackage()).
                 addAsManifestResource("META-INF/persistence.xml", "persistence.xml").
                 addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -115,6 +115,7 @@ public class PublicistaPersistenceTest {
         Assert.assertEquals(publicista.getApellido(), entity.getApellido());
         Assert.assertEquals(publicista.getCedula(), entity.getCedula());
         Assert.assertEquals(publicista.getCorreo(), entity.getCorreo());
+        Assert.assertEquals(publicista.getContrasenha(), entity.getContrasenha());
         Assert.assertEquals(publicista.getNit(), entity.getNit());
         Assert.assertEquals(publicista.getNombre(), entity.getNombre());
         Assert.assertEquals(publicista.getRut(), entity.getRut());
@@ -179,5 +180,46 @@ public class PublicistaPersistenceTest {
         PublicistaEntity deleted = em.find(PublicistaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+    
+    /**
+     * Prueba para consultar una Publicista por correo.
+     */
+    @Test
+    public void findPublicistaByCorreoTest() {
+        PublicistaEntity entity = data.get(0);
+        PublicistaEntity newEntity = pp.findByCorreo(entity.getCorreo());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
 
+        newEntity = pp.findByCorreo(null);
+        Assert.assertNull(newEntity);
+    }
+    
+    /**
+     * Prueba para consultar una Publicista por Rut.
+     */
+    @Test
+    public void findPublicistaByRutTest() {
+        PublicistaEntity entity = data.get(0);
+        PublicistaEntity newEntity = pp.findByRut(entity.getRut());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getRut(), newEntity.getRut());
+
+        newEntity = pp.findByRut(null);
+        Assert.assertNull(newEntity);
+    }
+    
+    /**
+     * Prueba para consultar una Publicista por Nit.
+     */
+    @Test
+    public void findPublicistaByNitTest() {
+        PublicistaEntity entity = data.get(0);
+        PublicistaEntity newEntity = pp.findByNit(entity.getNit());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNit(), newEntity.getNit());
+
+        newEntity = pp.findByNit(null);
+        Assert.assertNull(newEntity);
+    }
 }
