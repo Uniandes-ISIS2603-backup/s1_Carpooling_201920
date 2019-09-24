@@ -37,6 +37,9 @@ public class PublicistaLogic {
         if(publicista.getApellido()==null && publicista.getTipoPublicista().compareTo(PublicistaEntity.TIPO_PUBLICISTA.EMPRESA)!=0){
             throw new BusinessLogicException("El apellido del publicista esta vacio");
         }
+        if(publicista.getContrasenha()== null ){
+            throw new BusinessLogicException("La contraseña del publicista esta vacia");
+        }
         if(publicista.getCorreo()==null){
             throw new BusinessLogicException("El correo del publicista esta vacio");
         }
