@@ -26,6 +26,7 @@ public class PublicistaEntity extends BaseEntity {
 
     private String nombre;
     private String apellido;
+    private String contrasenha;
     private String telefono;
     private String correo;
     private String cedula;
@@ -161,6 +162,20 @@ public class PublicistaEntity extends BaseEntity {
      */
     public void setPublicidades(List<PublicidadEntity> publicidades) {
         this.publicidades = publicidades;
+    }
+
+    /**
+     * @return the contrasenha
+     */
+    public String getContrasenha() {
+        return contrasenha;
+    }
+
+    /**
+     * @param contrasenha the contrasenha to set
+     */
+    public void setContrasenha(String contrasenha) {
+        this.contrasenha = contrasenha;
     }
 
 
