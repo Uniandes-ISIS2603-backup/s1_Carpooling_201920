@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
+import co.edu.uniandes.csw.carpooling.entities.UsuarioEntity;
+import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import co.edu.uniandes.csw.carpooling.persistence.CalificacionPersistence;
+import co.edu.uniandes.csw.carpooling.persistence.ViajePersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
