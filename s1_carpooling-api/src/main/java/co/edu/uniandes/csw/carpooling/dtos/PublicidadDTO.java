@@ -6,34 +6,59 @@
 package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
-import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
+import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
+import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
  * @author Nicolas Fajardo
  */
-public class PublicidadDTO {
+public class PublicidadDTO implements Serializable{
     
     /*
         ATRIBUTOS
      */
-    protected String nombre;
+    protected Long id;
+    
+    private String nombre;
 
-    protected String mensaje;
+    private String mensaje;
 
-    protected double costo;
+    private double costo;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
-    protected Date fechaDeInicio;
+    private Date fechaDeInicio;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
-    protected Date fechaDeSalida;
+    private Date fechaDeSalida;
 
+    public PublicidadDTO(){
+    
+    }
+    
+        public PublicidadDTO(PublicidadEntity entidad){
+        setId(entidad.getId());
+        setNombre(entidad.getNombre());
+        setMensaje(entidad.getMensaje());
+        setCosto(entidad.getCosto());
+        setFechaDeInicio(entidad.getFechaDeInicio());
+        setFechaDeSalida(entidad.getFechaDeSalida());
+    
+    }
+    
+    public PublicidadEntity toEntity(){
+        PublicidadEntity entidad = new PublicidadEntity();
+        entidad.setId(this.getId());
+        entidad.setNombre(this.getNombre());
+        entidad.setMensaje(this.getMensaje());
+        entidad.setCosto(this.getCosto());
+        entidad.setFechaDeInicio(this.getFechaDeInicio());
+        entidad.setFechaDeSalida(this.getFechaDeSalida());
+        return entidad;
+    }
+    
     /**
      * @return the nombre
      */
@@ -102,6 +127,20 @@ public class PublicidadDTO {
      */
     public void setFechaDeSalida(Date fechaDeSalida) {
         this.fechaDeSalida = fechaDeSalida;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

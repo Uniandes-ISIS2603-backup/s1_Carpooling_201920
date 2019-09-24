@@ -148,6 +148,15 @@ public class PublicistaLogicTest {
         }
     }
     
+        @Test(expected = BusinessLogicException.class)
+    public void createPublicistaContrasenhaNullTest() throws BusinessLogicException{
+    
+        PublicistaEntity newEntity = factory.manufacturePojo(PublicistaEntity.class);
+        newEntity.setContrasenha(null);
+        PublicistaEntity result = publicistaLogic.createPublicista(newEntity);
+
+    }
+    
     @Test(expected = BusinessLogicException.class)
     public void createPublicistaCorreoNullTest() throws BusinessLogicException{
     

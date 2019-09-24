@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,8 +16,50 @@ import java.util.List;
  */
 public class PublicistaDetailDTO extends PublicistaDTO {
     
-    protected List<PublicidadDTO> publicidades;
+    private List<PublicidadDTO> publicidades;
 
+     /**
+     * Constructor vacio que llama a super
+     */
+    public PublicistaDetailDTO(){
+        super();
+    }
+    
+    /**
+     * Constructor para transformar un Entity a un DTO
+     *
+     * @param editorialEntity La entidad del Publicista para transformar a DTO.
+     */
+    public PublicistaDetailDTO(PublicistaEntity publicistaEntity){
+        super(publicistaEntity);
+        if(publicistaEntity != null){
+            if(publicistaEntity.getPublicidades()!=null){
+                publicidades = new ArrayList<>();
+                for (PublicidadEntity entityPublicidad : publicistaEntity.getPublicidades()){
+                    publicidades.add(new PublicidadDTO(entityPublicidad));
+                }
+            }
+        }
+    }
+    
+        /**
+     * Transformar un DTO a un Entity
+     *
+     * @return El DTO de la editorial para transformar a Entity
+     */
+    @Override
+    public PublicistaEntity toEntity() {
+        PublicistaEntity publicistaEntity = super.toEntity();
+        if (publicidades != null) {
+            List<PublicidadEntity> publicidadEntity = new ArrayList<>();
+            for (PublicidadDTO dtoPublicidad : publicidades) {
+                publicidadEntity.add(dtoPublicidad.toEntity());
+            }
+            publicistaEntity.setPublicidades(publicidadEntity);
+        }
+        return publicistaEntity;
+    }
+    
     /**
      * @return the publicidades
      */
