@@ -186,5 +186,17 @@ public class ViajeroPersistenceTest {
         ViajeroEntity deleted = em.find(ViajeroEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+    /**
+     * Prueba para consultar una Publicista por correo.
+     */
+    @Test
+    public void findViajeroByCorreoTest() {
+        ViajeroEntity entity = data.get(0);
+        ViajeroEntity newEntity = vp.findByCorreo(entity.getCorreo());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
 
+        newEntity = vp.findByCorreo(null);
+        Assert.assertNull(newEntity);
+    }
 }

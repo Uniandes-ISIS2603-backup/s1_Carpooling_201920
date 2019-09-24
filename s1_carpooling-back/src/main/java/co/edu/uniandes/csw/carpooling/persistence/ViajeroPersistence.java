@@ -90,5 +90,15 @@ public class ViajeroPersistence {
         ViajeroEntity viajeroEntity = em.find(ViajeroEntity.class, viajeroId);
         em.remove(viajeroEntity);
     }
-
+    
+    public ViajeroEntity findByCorreo(String correo) {
+        TypedQuery<ViajeroEntity> query = em.createQuery("Select e From ViajeroEntity e where e.correo = :correo", ViajeroEntity.class);
+        query = query.setParameter("correo", correo);
+        List<ViajeroEntity> mismoCorreo = query.getResultList();
+        ViajeroEntity result = null;
+         if (!(mismoCorreo == null || mismoCorreo.isEmpty())) {
+            result = mismoCorreo.get(0);
+        }
+        return result;
+    }
 }
