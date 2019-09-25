@@ -34,9 +34,7 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
     
     private String frecuencia;
     
-    @PodamExclude
-    @ManyToOne
-    private ConductorEntity conductor;
+
 
     /**
      * @return the fechaInicio
@@ -79,5 +77,7 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
     public void setFrecuencia(String frecuencia) {
         this.frecuencia = frecuencia;
     }
+
+   
     
 }

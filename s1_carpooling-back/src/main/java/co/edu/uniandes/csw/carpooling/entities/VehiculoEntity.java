@@ -25,10 +25,6 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     private String modelo;
     private Integer sillas;
     
-   // @PodamExclude
-   // @ManyToMany(mappedBy = "vehiculos")
-   // private List<ConductorEntity> conductores;
-
     /**
      * @return the soat
      */
@@ -113,18 +109,5 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
         this.modelo = modelo;
     }
 
-    /**
-     * @return the conductores
-     
-    public List<ConductorEntity> getConductores() {
-        return conductores;
-    }
-
-    /**
-     * @param conductores the conductores to set
-     
-    public void setConductores(List<ConductorEntity> conductores) {
-        this.conductores = conductores;
-    }*/
     
 }

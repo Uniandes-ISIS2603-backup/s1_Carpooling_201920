@@ -43,9 +43,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String estadoViaje;
     
-   // @PodamExclude
-  //  @ManyToOne
-    //private ConductorEntity conductor; 
+  
     
 
     /**
@@ -159,18 +157,6 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setEstadoViaje(String estadoViaje) {
         this.estadoViaje = estadoViaje;
     }
-/*
-    /**
-     * @return the conductor
-     
-    public ConductorEntity getConductor() {
-        return conductor;
-    }
 
-    /**
-     * @param conductor the conductor to set
-     
-    public void setConductor(ConductorEntity conductor) {
-        this.conductor = conductor;
-    }*/
+    
 }
