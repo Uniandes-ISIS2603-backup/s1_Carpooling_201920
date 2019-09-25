@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -25,6 +26,7 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     private String modelo;
     private Integer sillas;
     
+  
     /**
      * @return the soat
      */

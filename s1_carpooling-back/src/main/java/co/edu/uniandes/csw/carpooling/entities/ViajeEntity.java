@@ -7,13 +7,20 @@ package co.edu.uniandes.csw.carpooling.entities;
 
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamFloatValue;
+import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamStrategyValue;
+
 
 /**
  *
@@ -22,7 +29,18 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class ViajeEntity extends BaseEntity implements Serializable {
     
+    public enum ESTADO_DE_VIAJE{
+        PUBLICADO, 
+        EN_CURSO,
+        FINALIZADO,
+        CANCELADO,
+        CANCELADO_CON_SANCION
+    }
+    
+    
     private String destino;
+    
+    private String origen;
     
     
     @Temporal(TemporalType.DATE)
@@ -33,18 +51,36 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeLlegada;
     
-    private String puntoDeSalida;
-    
+    @PodamIntValue(minValue = 1)
     private Integer cupos;
     
+    @PodamFloatValue(minValue = (float) .0001)
     private Float costoViaje;
     
     private String vehiculo;
     
-    private String estadoViaje;
+    private ESTADO_DE_VIAJE estadoViaje;
     
-  
+   // @PodamExclude
+  //  @ManyToOne
+    //private ConductorEntity conductor; 
     
+  //  @PodamExclude
+   // @OneToMany
+   // private List<CalificacionEntity> calificaciones;
+    
+    //@PodamExclude
+    //@ManyToOne
+    //private ViajeRecurrenteEntity viajesRecurrentes;
+    
+    // (Aun no listo)@PodamExclude
+    // (Aun no Listo)@OneToOne
+    // (Aun no Listo)private VehiculoEntity vehiculo;
+    
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "viaje", fetch = FetchType.LAZY)
+    private List<TrayectoEntity> trayectos = new ArrayList<TrayectoEntity>();
 
     /**
      * @return the destino
@@ -86,20 +122,6 @@ public class ViajeEntity extends BaseEntity implements Serializable {
      */
     public void setFechaDeLlegada(Date fechaDeLlegada) {
         this.fechaDeLlegada = fechaDeLlegada;
-    }
-
-    /**
-     * @return the puntoDeSalida
-     */
-    public String getPuntoDeSalida() {
-        return puntoDeSalida;
-    }
-
-    /**
-     * @param puntoDeSalida the puntoDeSalida to set
-     */
-    public void setPuntoDeSalida(String puntoDeSalida) {
-        this.puntoDeSalida = puntoDeSalida;
     }
 
     /**
@@ -147,16 +169,81 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     /**
      * @return the estadoViaje
      */
-    public String getEstadoViaje() {
+    public ESTADO_DE_VIAJE getEstadoViaje() {
         return estadoViaje;
     }
 
     /**
      * @param estadoViaje the estadoViaje to set
      */
-    public void setEstadoViaje(String estadoViaje) {
+    public void setEstadoViaje(ESTADO_DE_VIAJE estadoViaje) {
         this.estadoViaje = estadoViaje;
     }
 
+/*
+    /**
+     * @return the conductor
+     
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    /**
+     * @param conductor the conductor to set
+     
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
+    }*/
     
+    /**
+    public List<CalificacionEntity> getCalificaciones()
+    {
+        return calificaciones;
+    }
+    public void setCalificaciones(List<CalificacionEntity> calificaciones)
+    {
+        this.calificaciones = calificaciones;
+    }
+    */
+    
+    /**
+    public ViajeRecurrenteEntity getViajesRecurrentes()
+    {
+        return viajesRecurrentes;
+    }
+    
+    public void setViajesRecurrentes(ViajeRecurrenteEntity viajesRecurrentes)
+    {
+        this.viajesRecurrentes = viajesRecurrentes;
+    }
+    */
+
+    
+    /**
+     * @return the trayectos
+    */
+    public List<TrayectoEntity> getTrayectos() {
+        return trayectos;
+    }
+    
+    /**
+     * @param trayectos the trayectos to set
+    */
+    public void setTrayectos(List<TrayectoEntity> trayectos) {
+        this.trayectos = trayectos;
+    }
+    
+    /**
+     * @return the origen
+     */
+    public String getOrigen() {
+        return origen;
+    }
+
+    /**
+     * @param origen the origen to set
+     */
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
 }

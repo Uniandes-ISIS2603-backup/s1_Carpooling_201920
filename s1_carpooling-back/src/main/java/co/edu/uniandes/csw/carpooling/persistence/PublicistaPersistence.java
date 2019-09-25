@@ -89,5 +89,37 @@ public class PublicistaPersistence {
         PublicistaEntity publicistaEntity = em.find(PublicistaEntity.class, publicistaId);
         em.remove(publicistaEntity);
     }
-
+    
+    public PublicistaEntity findByCorreo(String correo) {
+        TypedQuery<PublicistaEntity> query = em.createQuery("Select e From PublicistaEntity e where e.correo = :correo", PublicistaEntity.class);
+        query = query.setParameter("correo", correo);
+        List<PublicistaEntity> mismoCorreo = query.getResultList();
+        PublicistaEntity result = null;
+         if (!(mismoCorreo == null || mismoCorreo.isEmpty())) {
+            result = mismoCorreo.get(0);
+        }
+        return result;
+    }
+    
+    public PublicistaEntity findByRut(String rut) {
+        TypedQuery<PublicistaEntity> query = em.createQuery("Select e From PublicistaEntity e where e.rut = :rut", PublicistaEntity.class);
+        query = query.setParameter("rut", rut);
+        List<PublicistaEntity> mismoRut = query.getResultList();
+        PublicistaEntity result = null;
+         if (!(mismoRut == null || mismoRut.isEmpty())) {
+            result = mismoRut.get(0);
+        }
+        return result;
+    }
+    
+    public PublicistaEntity findByNit(String nit) {
+        TypedQuery<PublicistaEntity> query = em.createQuery("Select e From PublicistaEntity e where e.nit = :nit", PublicistaEntity.class);
+        query = query.setParameter("nit", nit);
+        List<PublicistaEntity> mismoNit = query.getResultList();
+        PublicistaEntity result = null;
+         if (!(mismoNit == null || mismoNit.isEmpty())) {
+            result = mismoNit.get(0);
+        }
+        return result;
+    }
 }

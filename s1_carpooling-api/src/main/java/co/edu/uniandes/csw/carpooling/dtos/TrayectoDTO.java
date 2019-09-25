@@ -3,39 +3,71 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.carpooling.entities;
+package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.TrayectoEntity;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import uk.co.jemos.podam.common.PodamDoubleValue;
-import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamIntValue;
+import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author Juan David Serrano
+ * @author Estudiante
  */
-@Entity
-public class TrayectoEntity extends BaseEntity implements Serializable{
-    @PodamIntValue(minValue = 0)
-    private Integer numPeajes;
+public class TrayectoDTO implements Serializable{
     
-    @PodamIntValue(minValue = 1)
+    private Long id;
+    
+    private Integer numPeajes;
+   
     private Integer duracion;
     
-    @PodamDoubleValue(minValue = 0)
     private Double costoCombustible;
     
     private String origen;
     
     private String destino;
     
-    @PodamExclude
-    @ManyToOne//cascade = CascadeType.PERSIST)
-    private ViajeEntity viaje;
+    public TrayectoDTO(){
+        
+    }
     
+    public TrayectoDTO(TrayectoEntity trayecto){
+        if(trayecto != null){
+            this.id = trayecto.getId();
+            this.numPeajes = trayecto.getNumPeajes();
+            this.duracion = trayecto.getDuracion();
+            this.costoCombustible = trayecto.getCostoCombustible();
+            this.origen = trayecto.getOrigen();
+            this.destino = trayecto.getDestino();
+        }  
+    }
+    
+    public TrayectoEntity toEntity(){
+        TrayectoEntity entity = new TrayectoEntity();
+        entity.setId(this.id);
+        entity.setNumPeajes(this.numPeajes);
+        entity.setDuracion(this.duracion);
+        entity.setCostoCombustible(this.costoCombustible);
+        entity.setOrigen(this.origen);
+        entity.setDestino(this.destino);
+        return entity;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * @return the numPeajes
@@ -106,19 +138,6 @@ public class TrayectoEntity extends BaseEntity implements Serializable{
     public void setDestino(String destino) {
         this.destino = destino;
     }
-
-    /**
-     * @return the viaje
-     */
-    public ViajeEntity getViaje() {
-        return viaje;
-    }
-
-    /**
-     * @param viaje the viaje to set
-     */
-    public void setViaje(ViajeEntity viaje) {
-        this.viaje = viaje;
-    }
+    
     
 }
