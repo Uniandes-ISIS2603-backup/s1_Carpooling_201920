@@ -96,9 +96,9 @@ public class ViajeLogic {
         return (vehiculo != null && !vehiculo.isEmpty());
     }
             
-    private boolean validateEstadoViaje(String estadoViaje)
+    private boolean validateEstadoViaje(ViajeEntity.ESTADO_DE_VIAJE estadoViaje)
     {
-        return estadoViaje != null && !estadoViaje.isEmpty();
+        return estadoViaje != null;
     }
     
     
