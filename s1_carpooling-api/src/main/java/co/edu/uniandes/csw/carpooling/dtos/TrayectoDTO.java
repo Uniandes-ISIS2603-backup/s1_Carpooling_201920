@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.TrayectoEntity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Temporal;
@@ -19,9 +20,8 @@ public class TrayectoDTO implements Serializable{
     private Long id;
     
     private Integer numPeajes;
-    
-    @Temporal(TemporalType.DATE)
-    private Date duracion;
+   
+    private Integer duracion;
     
     private Double costoCombustible;
     
@@ -31,6 +31,28 @@ public class TrayectoDTO implements Serializable{
     
     public TrayectoDTO(){
         
+    }
+    
+    public TrayectoDTO(TrayectoEntity trayecto){
+        if(trayecto != null){
+            this.id = trayecto.getId();
+            this.numPeajes = trayecto.getNumPeajes();
+            this.duracion = trayecto.getDuracion();
+            this.costoCombustible = trayecto.getCostoCombustible();
+            this.origen = trayecto.getOrigen();
+            this.destino = trayecto.getDestino();
+        }  
+    }
+    
+    public TrayectoEntity toEntity(){
+        TrayectoEntity entity = new TrayectoEntity();
+        entity.setId(this.id);
+        entity.setNumPeajes(this.numPeajes);
+        entity.setDuracion(this.duracion);
+        entity.setCostoCombustible(this.costoCombustible);
+        entity.setOrigen(this.origen);
+        entity.setDestino(this.destino);
+        return entity;
     }
 
     /**
@@ -64,14 +86,14 @@ public class TrayectoDTO implements Serializable{
     /**
      * @return the duracion
      */
-    public Date getDuracion() {
+    public Integer getDuracion() {
         return duracion;
     }
 
     /**
      * @param duracion the duracion to set
      */
-    public void setDuracion(Date duracion) {
+    public void setDuracion(Integer duracion) {
         this.duracion = duracion;
     }
 

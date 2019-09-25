@@ -5,25 +5,29 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
+import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
+import co.edu.uniandes.csw.carpooling.entities.ViajeEntity.ESTADO_DE_VIAJE;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 
 /**
  *
  * @author Estudiante
  */
 public class ViajeDTO implements Serializable{
+    private Long id;
+    
     private String destino;
     
     private String origen;
     
-    
-    @Temporal(TemporalType.DATE)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeSalida;
     
-    @Temporal(TemporalType.DATE)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeLlegada;
     
     private Integer cupos;
@@ -32,10 +36,40 @@ public class ViajeDTO implements Serializable{
     
     private String vehiculo;
     
-    private String estadoViaje;
+    private ESTADO_DE_VIAJE estadoViaje;
     
     public ViajeDTO(){
         
+    }
+    
+    
+     public ViajeDTO(ViajeEntity viaje){
+        if(viaje != null){
+            this.id = viaje.getId();
+            this.destino = viaje.getDestino();
+            this.origen = viaje.getOrigen();
+            this.fechaDeSalida = viaje.getFechaDeSalida();
+            this.fechaDeLlegada = viaje.getFechaDeLlegada();
+            this.cupos = viaje.getCupos();
+            this.costoViaje = viaje.getCostoViaje();
+            this.vehiculo = viaje.getVehiculo();
+            this.estadoViaje = viaje.getEstadoViaje();
+        }  
+    }
+    
+    
+    public ViajeEntity toEntity(){
+        ViajeEntity entity = new ViajeEntity();
+        entity.setId(this.id);
+        entity.setDestino(this.destino);
+        entity.setOrigen(this.origen);
+        entity.setFechaDeSalida(this.fechaDeSalida);
+        entity.setFechaDeLlegada(this.fechaDeLlegada);
+        entity.setCupos(this.cupos);
+        entity.setCostoViaje(this.costoViaje);
+        entity.setVehiculo(this.vehiculo);
+        entity.setEstadoViaje(this.estadoViaje);
+        return entity;
     }
 
     /**
@@ -139,14 +173,14 @@ public class ViajeDTO implements Serializable{
     /**
      * @return the estadoViaje
      */
-    public String getEstadoViaje() {
+    public ESTADO_DE_VIAJE getEstadoViaje() {
         return estadoViaje;
     }
 
     /**
      * @param estadoViaje the estadoViaje to set
      */
-    public void setEstadoViaje(String estadoViaje) {
+    public void setEstadoViaje(ESTADO_DE_VIAJE estadoViaje) {
         this.estadoViaje = estadoViaje;
     }
 }
