@@ -52,9 +52,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String estadoViaje;
     
-   // @PodamExclude
-  //  @ManyToOne
-    //private ConductorEntity conductor; 
+  
     
   //  @PodamExclude
    // @OneToMany
@@ -171,70 +169,4 @@ public class ViajeEntity extends BaseEntity implements Serializable {
         this.estadoViaje = estadoViaje;
     }
 
-/*
-    /**
-     * @return the conductor
-     
-    public ConductorEntity getConductor() {
-        return conductor;
-    }
-
-    /**
-     * @param conductor the conductor to set
-     
-    public void setConductor(ConductorEntity conductor) {
-        this.conductor = conductor;
-    }*/
-    
-    /**
-    public List<CalificacionEntity> getCalificaciones()
-    {
-        return calificaciones;
-    }
-    public void setCalificaciones(List<CalificacionEntity> calificaciones)
-    {
-        this.calificaciones = calificaciones;
-    }
-    */
-    
-    /**
-    public ViajeRecurrenteEntity getViajesRecurrentes()
-    {
-        return viajesRecurrentes;
-    }
-    
-    public void setViajesRecurrentes(ViajeRecurrenteEntity viajesRecurrentes)
-    {
-        this.viajesRecurrentes = viajesRecurrentes;
-    }
-    */
-
-    
-    /**
-     * @return the trayectos
-    */
-    public List<TrayectoEntity> getTrayectos() {
-        return trayectos;
-    }
-    
-    /**
-     * @param trayectos the trayectos to set
-    */
-    public void setTrayectos(List<TrayectoEntity> trayectos) {
-        this.trayectos = trayectos;
-    }
-    
-    /**
-     * @return the origen
-     */
-    public String getOrigen() {
-        return origen;
-    }
-
-    /**
-     * @param origen the origen to set
-     */
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
 }

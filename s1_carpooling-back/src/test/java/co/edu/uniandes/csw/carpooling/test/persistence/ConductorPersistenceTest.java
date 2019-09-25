@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
+import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,8 @@ public class ConductorPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(ConductorEntity.class)
-                .addClass(ConductorPersistence.class)
+                .addPackage(ConductorEntity.class.getPackage())
+                .addPackage(ConductorPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -76,7 +77,7 @@ public class ConductorPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
-
+            
             entMan.persist(entity);
             data.add(entity);
         }
@@ -86,6 +87,7 @@ public class ConductorPersistenceTest {
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
         ConductorEntity conductor = factory.manufacturePojo(ConductorEntity.class);
+       
         ConductorEntity result = cp.create(conductor);
         Assert.assertNotNull(result);
 
