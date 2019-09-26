@@ -5,10 +5,14 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import java.io.Serializable;
+
 /**
  *
- * @author Estudiante
+ * @author Nicolás Fajardo Ramírez
  */
-public class UsuarioDetailDTO {
+public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
+    
+    
     
 }

@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
+import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Nicolás Fajardo
  */
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable{
     public enum TipoDocumento{
         CEDULA_CIUDADANIA,
         TARJETA_DE_IDENTIDAD,
@@ -29,6 +30,10 @@ public class UsuarioDTO {
     private Date fechaDeNacimiento;
     private TipoDocumento tipoDocumento;
 
+    
+    public UsuarioDTO(){
+        
+    }
     /**
      * @return the nombre
      */
