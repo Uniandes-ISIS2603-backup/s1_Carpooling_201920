@@ -13,7 +13,22 @@ import java.io.Serializable;
  */
 public class ConductorDTO implements Serializable {
     
+    private String hola;
     public ConductorDTO(){
         
+    }
+
+    /**
+     * @return the hola
+     */
+    public String getHola() {
+        return hola;
+    }
+
+    /**
+     * @param hola the hola to set
+     */
+    public void setHola(String hola) {
+        this.hola = hola;
     }
 }
