@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
 import co.edu.uniandes.csw.carpooling.ejb.ConductorLogic;
+import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,8 +85,10 @@ public class ConductorLogicTest {
     }
     
     private void insertData(){
+        
         for(int i =0;i<3;i++){
             ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
+            
             em.persist(entity);
             data.add(entity);
         }
@@ -101,6 +104,7 @@ public class ConductorLogicTest {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
+        
         ConductorEntity result = conductorLogic.createConductor(newEntity);
         Assert.assertNotNull(result);
         ConductorEntity entity = em.find(ConductorEntity.class, result.getId());
