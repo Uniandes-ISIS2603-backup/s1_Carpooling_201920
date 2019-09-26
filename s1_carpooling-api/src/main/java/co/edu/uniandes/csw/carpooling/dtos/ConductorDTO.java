@@ -15,7 +15,7 @@ public class ConductorDTO implements Serializable {
     
     private String hola;
     public ConductorDTO(){
-        
+        super();
     }
 
     /**

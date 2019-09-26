@@ -21,14 +21,15 @@ public class UsuarioDTO implements Serializable{
         PASAPORTE,
         CEDULA_EXTRANJERA
     }
-    private String nombre;
-    private String telefono;
-    private String correo;
-    private String numDocumento;
-    private String contrasenha;
+    protected Long id;
+    protected String nombre;
+    protected String telefono;
+    protected String correo;
+    protected String numDocumento;
+    protected String contrasenha;
     @XmlJavaTypeAdapter(DateAdapter.class)
-    private Date fechaDeNacimiento;
-    private TipoDocumento tipoDocumento;
+    protected Date fechaDeNacimiento;
+    protected TipoDocumento tipoDocumento;
 
     
     public UsuarioDTO(){
