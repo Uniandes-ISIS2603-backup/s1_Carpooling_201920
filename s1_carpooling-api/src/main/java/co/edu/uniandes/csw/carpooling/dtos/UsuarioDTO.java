@@ -21,7 +21,7 @@ public class UsuarioDTO implements Serializable{
         PASAPORTE,
         CEDULA_EXTRANJERA
     }
-    protected Long id;
+    private Long id;
     protected String nombre;
     protected String telefono;
     protected String correo;
@@ -131,6 +131,20 @@ public class UsuarioDTO implements Serializable{
      */
     public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
+    }
+
+    /**
+     * @return the id
+     */
+    protected Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
     
