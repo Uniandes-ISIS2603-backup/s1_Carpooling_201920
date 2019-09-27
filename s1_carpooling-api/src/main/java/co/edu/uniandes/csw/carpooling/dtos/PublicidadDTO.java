@@ -3,67 +3,62 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.carpooling.entities;
+package co.edu.uniandes.csw.carpooling.dtos;
 
-import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
+import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
+import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamStrategyValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
  * @author Nicolas Fajardo
  */
-@Entity
-public class PublicidadEntity extends BaseEntity implements Serializable {
-
-    /**
-     * @return the publicista
-     */
-    public PublicistaEntity getPublicista() {
-        return publicista;
-    }
-
-    /**
-     * @param publicista the publicista to set
-     */
-    public void setPublicista(PublicistaEntity publicista) {
-        this.publicista = publicista;
-    }
-
+public class PublicidadDTO implements Serializable{
     
-    public enum DISPONIBILIDAD {
-        UNA_SEMANA,
-        TRES_SEMANAS
-    }
     /*
         ATRIBUTOS
      */
+    protected Long id;
+    
     private String nombre;
 
     private String mensaje;
 
     private double costo;
-    
-    private DISPONIBILIDAD disponibilidadPublicidad;
 
-    @Temporal(TemporalType.DATE)
-    @PodamStrategyValue(DateStrategy.class)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeInicio;
 
-    @Temporal(TemporalType.DATE)
-    @PodamStrategyValue(DateStrategy.class)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeSalida;
-    
-    @PodamExclude
-    @ManyToOne
-    private PublicistaEntity publicista;
 
+    public PublicidadDTO(){
+    
+    }
+    
+        public PublicidadDTO(PublicidadEntity entidad){
+        setId(entidad.getId());
+        setNombre(entidad.getNombre());
+        setMensaje(entidad.getMensaje());
+        setCosto(entidad.getCosto());
+        setFechaDeInicio(entidad.getFechaDeInicio());
+        setFechaDeSalida(entidad.getFechaDeSalida());
+    
+    }
+    
+    public PublicidadEntity toEntity(){
+        PublicidadEntity entidad = new PublicidadEntity();
+        entidad.setId(this.getId());
+        entidad.setNombre(this.getNombre());
+        entidad.setMensaje(this.getMensaje());
+        entidad.setCosto(this.getCosto());
+        entidad.setFechaDeInicio(this.getFechaDeInicio());
+        entidad.setFechaDeSalida(this.getFechaDeSalida());
+        return entidad;
+    }
+    
     /**
      * @return the nombre
      */
@@ -135,16 +130,18 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the disponibilidadPublicidad
+     * @return the id
      */
-    public DISPONIBILIDAD getDisponibilidadPublicidad() {
-        return disponibilidadPublicidad;
+    public Long getId() {
+        return id;
     }
 
     /**
-     * @param disponibilidadPublicidad the disponibilidadPublicidad to set
+     * @param id the id to set
      */
-    public void setDisponibilidadPublicidad(DISPONIBILIDAD disponibilidadPublicidad) {
-        this.disponibilidadPublicidad = disponibilidadPublicidad;
+    public void setId(Long id) {
+        this.id = id;
     }
+
+
 }
