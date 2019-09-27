@@ -41,6 +41,32 @@ public class ReservaLogic {
         return persistence.findAll();
        }
        
+    public ReservaEntity deleteReserva(ReservaEntity reserva){        
+        persistence.delete(reserva.getId());
+        return reserva;
+        
+    }
+    
+    public ReservaEntity updateReserva(ReservaEntity reserva) throws BusinessLogicException{
+        if(persistence.find(reserva.getId()).equals(null)){
+            throw new BusinessLogicException("La reserva no existe");
+        }
+        if(reserva.getFecha().compareTo(Calendar.getInstance().getTime())<0){
+            throw new BusinessLogicException("La reserva tiene una fecha menor a la actual");
+        }
+        // preguntar si existe el viaje (not null) no se como hacerlo, se debe hacer la relacion, manyToOne en el entity con la referencia a viajes?
+        reserva = persistence.update(reserva);
+        return reserva;
+    }
+        
+    public ReservaEntity findReserva(Long reservaId)throws BusinessLogicException{
+        ReservaEntity reservaEntity = persistence.find(reservaId);
+        if (reservaEntity == null) {
+            throw new BusinessLogicException("La reserva no existe");
+        }
+        return reservaEntity;
+    }
+       
 //       public List<ReservaEntity> getReservas(){
 //        return persistence.findAll();
 //       }
