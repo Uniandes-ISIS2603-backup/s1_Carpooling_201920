@@ -27,7 +27,7 @@ public class ReservaLogic {
         }
         // preguntar si existe el viaje (not null) no se como hacerlo, se debe hacer la relacion, manyToOne en el entity con la referencia a viajes?
         
-        if(reserva.getEstado().equals(null)){
+        if(reserva.getEstado()==(null)){
             throw new BusinessLogicException("La reserva no tiene estado");
         }
         if(persistence.find(reserva.getId())!=null){
@@ -48,7 +48,7 @@ public class ReservaLogic {
     }
     
     public ReservaEntity updateReserva(ReservaEntity reserva) throws BusinessLogicException{
-        if(persistence.find(reserva.getId()).equals(null)){
+        if(persistence.find(reserva.getId())==(null)){
             throw new BusinessLogicException("La reserva no existe");
         }
         if(reserva.getFecha().compareTo(Calendar.getInstance().getTime())<0){
