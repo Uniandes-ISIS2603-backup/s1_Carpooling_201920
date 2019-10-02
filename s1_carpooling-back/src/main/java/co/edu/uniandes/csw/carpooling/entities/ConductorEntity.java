@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -16,7 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Nicolas Fajardo
  */
 @Entity
-public class ConductorEntity extends UsuarioEntity {
+public class ConductorEntity extends UsuarioEntity implements Serializable{
     
   
   
