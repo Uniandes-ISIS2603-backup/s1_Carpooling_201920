@@ -9,6 +9,9 @@ import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.NotificacionPersistence;
 import java.util.Calendar;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -19,6 +22,7 @@ import javax.inject.Inject;
 @Stateless
 public class NotificacionLogic {
     
+    private static final Logger LOGGER = Logger.getLogger(NotificacionLogic.class.getName());
     
     @Inject
      private NotificacionPersistence persistence;
@@ -64,5 +68,17 @@ public class NotificacionLogic {
             throw new BusinessLogicException("La notificacion no existe");
         }
         return notificacionEntity;
+    }
+    
+       /**
+     * Devuelve todos los libros que hay en la base de datos.
+     *
+     * @return Lista de entidades de tipo libro.
+     */
+    public List<NotificacionEntity> findNotificacions() {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los libros");
+        List<NotificacionEntity> notificacions = persistence.findAll();
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos los libros");
+        return notificacions;
     }
 }
