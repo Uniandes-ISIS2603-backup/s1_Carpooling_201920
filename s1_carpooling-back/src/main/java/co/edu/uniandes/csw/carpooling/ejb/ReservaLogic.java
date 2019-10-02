@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ReservaPersistence;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 /**
@@ -17,6 +19,8 @@ import javax.inject.Inject;
  */
 @Stateless
 public class ReservaLogic {
+    
+    private static final Logger LOGGER = Logger.getLogger(ReservaLogic.class.getName());
     
     @Inject
     private ReservaPersistence persistence;
@@ -70,4 +74,10 @@ public class ReservaLogic {
 //       public List<ReservaEntity> getReservas(){
 //        return persistence.findAll();
 //       }
+        public List<ReservaEntity> findReservas() {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los libros");
+        List<ReservaEntity> reservas = persistence.findAll();
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos los libros");
+        return reservas;
+    }
 }
