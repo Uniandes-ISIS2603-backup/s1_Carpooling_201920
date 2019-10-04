@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.carpooling.entities;
+package co.edu.uniandes.csw.carpooling.dtos;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 
 /**
  *
  * @author Santiago Ballesteros
  */
-@Entity
-public class ViajeroEntity extends UsuarioEntity implements Serializable {
-
+public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
+    
 }
