@@ -36,8 +36,13 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
     
     private String frecuencia;
     
- 
+    @PodamExclude
+    @ManyToOne
+    private ConductorEntity conductor;
 
+    @PodamExclude
+    @OneToMany
+    private List<ViajeEntity> viajes;
 
     /**
      * @return the fechaInicio
