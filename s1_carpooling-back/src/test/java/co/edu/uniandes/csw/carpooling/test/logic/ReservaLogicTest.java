@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.carpooling.dtos;
-
-import java.io.Serializable;
+package co.edu.uniandes.csw.carpooling.test.logic;
 
 /**
  *
- * @author Santiago Ballesteros
+ * @author le.perezl
  */
-public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
+public class ReservaLogicTest {
     
 }

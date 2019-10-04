@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.entities;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 
 /**
@@ -12,6 +13,6 @@ import javax.persistence.Entity;
  * @author Santiago Ballesteros
  */
 @Entity
-public class ViajeroEntity extends UsuarioEntity {
+public class ViajeroEntity extends UsuarioEntity implements Serializable {
 
 }
