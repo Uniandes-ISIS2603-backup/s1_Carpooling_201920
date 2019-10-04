@@ -99,8 +99,8 @@ public class VehiculoDTO implements Serializable{
         vehiculoEntity.setModelo(this.modelo);
         vehiculoEntity.setSillas(this.sillas);
        
-        if(conductor != null)
-            vehiculoEntity.setConductor(conductor.toEntity());
+       // if(conductor != null)
+         //   vehiculoEntity.setConductor(conductor.toEntity());
         
         return vehiculoEntity;
     }
