@@ -80,11 +80,12 @@ public class VehiculoDTO implements Serializable{
             this.aseguradora = vehiculoEntity.getAseguradora();
             this.modelo = vehiculoEntity.getModelo();
             this.sillas = vehiculoEntity.getSillas();
-            
+            /*
             if(vehiculoEntity.getConductor() != null)
                 this.conductor = new ConductorDTO(vehiculoEntity.getConductor());
             else
                 vehiculoEntity.setConductor(null);
+*/
         }
     }
     
@@ -98,8 +99,8 @@ public class VehiculoDTO implements Serializable{
         vehiculoEntity.setModelo(this.modelo);
         vehiculoEntity.setSillas(this.sillas);
        
-        if(conductor != null)
-            vehiculoEntity.setConductor(conductor.toEntity());
+       // if(conductor != null)
+         //   vehiculoEntity.setConductor(conductor.toEntity());
         
         return vehiculoEntity;
     }

@@ -39,7 +39,7 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
     @PodamExclude
     @ManyToOne
     private ConductorEntity conductor;
-    
+
     @PodamExclude
     @OneToMany
     private List<ViajeEntity> viajes;

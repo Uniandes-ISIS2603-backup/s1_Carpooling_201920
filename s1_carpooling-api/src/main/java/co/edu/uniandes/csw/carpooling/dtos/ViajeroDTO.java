@@ -5,10 +5,20 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import java.io.Serializable;
+
 /**
  *
- * @author Estudiante
+ * @author Santiago Ballesteros
  */
-public class ViajeroDTO {
+public class ViajeroDTO extends UsuarioDTO implements Serializable {
     
+    
+    public ViajeroDTO(){
+        super();
+    }
+    //public ViajeroEntity toEntity(){
+     //   ViajeroEntity entidad = new ViajeroEntity();
+       //// entidad.setId(this.getId());
+   // }
 }

@@ -9,8 +9,10 @@ import java.io.Serializable;
 
 /**
  *
- * @author Santiago Ballesteros
+ * @author Nicolás Fajardo Ramírez
  */
-public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
+public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
+    
+    
     
 }

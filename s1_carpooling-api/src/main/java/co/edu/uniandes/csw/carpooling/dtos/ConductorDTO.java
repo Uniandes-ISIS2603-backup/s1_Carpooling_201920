@@ -6,28 +6,22 @@
 package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
+import java.io.Serializable;
 
 /**
  *
- * @author Estudiante
+ * @author Nicolás Fajardo
  */
-public class ConductorDTO {
-  
-        //Creada solo para no generar error
-    public ConductorDTO()
-    {
-        
-    }
+public class ConductorDTO extends UsuarioDTO implements Serializable {
     
-    public ConductorDTO(ConductorEntity conductorEntity)
-    {
-        
-    }
     
-    public ConductorEntity toEntity()
-    {
-      return null;  
+    public ConductorDTO(){
+        super();
     }
+    //public ConductorEntity toEntity(){
+     //   ConductorEntity entidad = new ConductorEntity();
+       //// entidad.setId(this.getId());
+   // }
+    
     
 }
-

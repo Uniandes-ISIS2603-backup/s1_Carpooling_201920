@@ -275,7 +275,7 @@ public class ViajeLogicTest {
     public void updateViajeEstadoViajeIncorrecto() throws BusinessLogicException{
         ViajeEntity entity1 = data.get(0);
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
-        entity2.setEstadoViaje("");
+        entity2.setEstadoViaje(null);
         entity2.setId(entity1.getId());
         viajeLogic.updateViaje(entity1.getId(), entity2);
     }

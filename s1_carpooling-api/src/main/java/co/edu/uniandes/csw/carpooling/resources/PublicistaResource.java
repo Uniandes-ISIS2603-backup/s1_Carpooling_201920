@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Santiago Ballesteros
  */
-@Path("/publicista")
+@Path("/publicistas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped

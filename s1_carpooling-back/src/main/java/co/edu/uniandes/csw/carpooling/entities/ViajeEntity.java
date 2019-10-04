@@ -29,6 +29,15 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class ViajeEntity extends BaseEntity implements Serializable {
     
+    public enum ESTADO_DE_VIAJE{
+        PUBLICADO, 
+        EN_CURSO,
+        FINALIZADO,
+        CANCELADO,
+        CANCELADO_CON_SANCION
+    }
+    
+    
     private String destino;
     
     private String origen;
@@ -50,7 +59,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     private String vehiculo;
     
-    private String estadoViaje;
+    private ESTADO_DE_VIAJE estadoViaje;
     
    // @PodamExclude
   //  @ManyToOne
@@ -160,14 +169,14 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     /**
      * @return the estadoViaje
      */
-    public String getEstadoViaje() {
+    public ESTADO_DE_VIAJE getEstadoViaje() {
         return estadoViaje;
     }
 
     /**
      * @param estadoViaje the estadoViaje to set
      */
-    public void setEstadoViaje(String estadoViaje) {
+    public void setEstadoViaje(ESTADO_DE_VIAJE estadoViaje) {
         this.estadoViaje = estadoViaje;
     }
 
