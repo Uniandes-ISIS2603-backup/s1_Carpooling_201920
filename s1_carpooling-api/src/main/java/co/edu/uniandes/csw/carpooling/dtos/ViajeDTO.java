@@ -11,11 +11,46 @@ import co.edu.uniandes.csw.carpooling.entities.ViajeEntity.ESTADO_DE_VIAJE;
 import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * ViajeDTO Objeto de transferencia de datos de Viajes. Los DTO contienen las
+ * representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
  *
- * @author Estudiante
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": Long,
+ *      "destino": String,
+ *      "origen": String,
+ *      "fechaDeSalida": Date,
+ *      "fechaDeLlegada": Date,
+ *      "cupos": Integer,
+ *      "costoViaje": Double,
+ *      "vehiculo": String,
+ *      "estadoViaje: ESTADO_DE_VIAJE
+ *   }
+ * </pre> Por ejemplo un viaje se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id":1,
+ *      "destino": "Bucaramanga",
+ *      "origen": "Bogota",
+ *      "fechaDeSalida": "2019-11-03",
+ *      "fechaDeLlegada": "2019-11-03",
+ *      "cupos": 2,
+ *      "costoViaje": 30000.0,
+ *      "vehiculo":"DBS594",
+ *      "estadoViaje": "PUBLICADO"          
+ *   }
+ *
+ * </pre>
+ *
+ * @author Juan David Serrano
  */
 public class ViajeDTO implements Serializable{
     private Long id;
@@ -60,7 +95,7 @@ public class ViajeDTO implements Serializable{
     
     public ViajeEntity toEntity(){
         ViajeEntity entity = new ViajeEntity();
-        entity.setId(this.id);
+        entity.setId(this.getId());
         entity.setDestino(this.destino);
         entity.setOrigen(this.origen);
         entity.setFechaDeSalida(this.fechaDeSalida);
@@ -182,5 +217,24 @@ public class ViajeDTO implements Serializable{
      */
     public void setEstadoViaje(ESTADO_DE_VIAJE estadoViaje) {
         this.estadoViaje = estadoViaje;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

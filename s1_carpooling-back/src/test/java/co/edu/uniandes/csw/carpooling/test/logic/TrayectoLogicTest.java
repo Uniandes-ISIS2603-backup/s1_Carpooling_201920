@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.carpooling.test.logic;
 
 import co.edu.uniandes.csw.carpooling.ejb.TrayectoLogic;
 import co.edu.uniandes.csw.carpooling.entities.TrayectoEntity;
+import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.TrayectoPersistence;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class TrayectoLogicTest {
     
     private List<TrayectoEntity> data = new ArrayList<TrayectoEntity>();
     
+    private List<ViajeEntity> viajeData = new ArrayList<ViajeEntity>();
+    
     @Before
     public void configTest() {
         try {
@@ -65,14 +68,24 @@ public class TrayectoLogicTest {
     
     private void clearData() {
         em.createQuery("delete from TrayectoEntity").executeUpdate();
+        em.createQuery("delete from ViajeEntity").executeUpdate();
     }
     
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            TrayectoEntity viajeEntity = factory.manufacturePojo(TrayectoEntity.class);
+            ViajeEntity viajeEntity = factory.manufacturePojo(ViajeEntity.class);
             em.persist(viajeEntity);
-            data.add(viajeEntity);
+            viajeData.add(viajeEntity);
         }
+        
+        for (int i = 0; i < 3; i++) {
+            TrayectoEntity trayectoEntity = factory.manufacturePojo(TrayectoEntity.class);
+            trayectoEntity.setViaje(viajeData.get(1));
+            em.persist(trayectoEntity);
+            data.add(trayectoEntity);
+        }
+        
+        
     }
     
     @Deployment
@@ -88,7 +101,8 @@ public class TrayectoLogicTest {
     @Test
     public void createTrayecto() throws BusinessLogicException{
         TrayectoEntity aleatorio = factory.manufacturePojo(TrayectoEntity.class);
-        TrayectoEntity resultAleatorio = trayectoLogic.createTrayecto(aleatorio);
+        aleatorio.setViaje(viajeData.get(0));
+        TrayectoEntity resultAleatorio = trayectoLogic.createTrayecto(viajeData.get(0).getId(), aleatorio);
         TrayectoEntity buscado = em.find(TrayectoEntity.class, resultAleatorio.getId());
         Assert.assertNotNull(resultAleatorio);
         Assert.assertEquals(aleatorio.getDestino(), buscado.getDestino());
@@ -102,40 +116,40 @@ public class TrayectoLogicTest {
     public void createTrayectoNumPeajesIncorrecto() throws BusinessLogicException{
         TrayectoEntity  trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
         trayectoAleatorio.setNumPeajes(-1);
-        trayectoLogic.createTrayecto(trayectoAleatorio);
+        trayectoLogic.createTrayecto(viajeData.get(0).getId(),trayectoAleatorio);
     }
     
     @Test (expected = BusinessLogicException.class)
     public void createTrayectoDuracionIncorrecto() throws BusinessLogicException{
         TrayectoEntity  trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
         trayectoAleatorio.setDuracion(0);
-        trayectoLogic.createTrayecto(trayectoAleatorio);
+        trayectoLogic.createTrayecto(viajeData.get(0).getId(),trayectoAleatorio);
     }
     
     @Test (expected = BusinessLogicException.class)
     public void createTrayectoCostoCombustibleIncorrecto() throws BusinessLogicException{
         TrayectoEntity  trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
         trayectoAleatorio.setCostoCombustible(-1.0);
-        trayectoLogic.createTrayecto(trayectoAleatorio);
+        trayectoLogic.createTrayecto(viajeData.get(0).getId(),trayectoAleatorio);
     }
     
     @Test (expected = BusinessLogicException.class)
     public void createTrayectoOrigenIncorrecto() throws BusinessLogicException{
         TrayectoEntity  trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
         trayectoAleatorio.setOrigen("");
-        trayectoLogic.createTrayecto(trayectoAleatorio);
+        trayectoLogic.createTrayecto(viajeData.get(0).getId(),trayectoAleatorio);
     }
     
     @Test (expected = BusinessLogicException.class)
     public void createTrayectoDestinoIncorrecto() throws BusinessLogicException{
         TrayectoEntity  trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
         trayectoAleatorio.setDestino("");
-        trayectoLogic.createTrayecto(trayectoAleatorio);
+        trayectoLogic.createTrayecto(viajeData.get(0).getId(),trayectoAleatorio);
     }
     
     @Test
-    public void getViajesTest(){
-        List<TrayectoEntity> lista = trayectoLogic.getTrayectos();
+    public void getTrayectosTest(){
+        List<TrayectoEntity> lista = trayectoLogic.getTrayectos(viajeData.get(1).getId());
         Assert.assertEquals(lista.size(), data.size());
         for(TrayectoEntity entity1: lista){
             boolean encontrado = false;
@@ -148,9 +162,9 @@ public class TrayectoLogicTest {
     }
     
     @Test 
-    public void getViajeTest(){
+    public void getTrayectoTest(){
         TrayectoEntity entity1 = data.get(0);
-        TrayectoEntity entity2 = trayectoLogic.getTrayecto(entity1.getId());
+        TrayectoEntity entity2 = trayectoLogic.getTrayecto(entity1.getId(), viajeData.get(1).getId());
         Assert.assertNotNull(entity2);
         Assert.assertEquals(entity1.getCostoCombustible(), entity2.getCostoCombustible());
         Assert.assertEquals(entity1.getDestino(), entity2.getDestino());
@@ -164,7 +178,7 @@ public class TrayectoLogicTest {
         TrayectoEntity entity0 = data.get(0);
         TrayectoEntity entity2 = factory.manufacturePojo(TrayectoEntity.class);
         entity2.setId(entity0.getId());
-        trayectoLogic.updateTrayecto(entity0.getId(), entity2);
+        trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
         TrayectoEntity entity1 = em.find(TrayectoEntity.class, entity0.getId());
         Assert.assertNotNull(entity2);
         Assert.assertEquals(entity1.getCostoCombustible(), entity2.getCostoCombustible());
@@ -180,7 +194,7 @@ public class TrayectoLogicTest {
         TrayectoEntity entity2 = factory.manufacturePojo(TrayectoEntity.class);
         entity2.setDestino("");
         entity2.setId(entity1.getId());
-        trayectoLogic.updateTrayecto(entity1.getId(), entity2);
+        trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -189,7 +203,7 @@ public class TrayectoLogicTest {
         TrayectoEntity entity2 = factory.manufacturePojo(TrayectoEntity.class);
         entity2.setDestino("");
         entity2.setId(entity1.getId());
-        trayectoLogic.updateTrayecto(entity1.getId(), entity2);
+        trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
     
     
@@ -199,7 +213,7 @@ public class TrayectoLogicTest {
         TrayectoEntity entity2 = factory.manufacturePojo(TrayectoEntity.class);
         entity2.setNumPeajes(-1);
         entity2.setId(entity1.getId());
-        trayectoLogic.updateTrayecto(entity1.getId(), entity2);
+        trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -208,7 +222,7 @@ public class TrayectoLogicTest {
         TrayectoEntity entity2 = factory.manufacturePojo(TrayectoEntity.class);
         entity2.setDuracion(0);
         entity2.setId(entity1.getId());
-        trayectoLogic.updateTrayecto(entity1.getId(), entity2);
+        trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -217,13 +231,13 @@ public class TrayectoLogicTest {
         TrayectoEntity entity2 = factory.manufacturePojo(TrayectoEntity.class);
         entity2.setCostoCombustible(-1.0);
         entity2.setId(entity1.getId());
-        trayectoLogic.updateTrayecto(entity1.getId(), entity2);
+        trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
     
     @Test
     public void deleteViajeTest() throws BusinessLogicException {
         TrayectoEntity entity = data.get(0);
-        trayectoLogic.deleteTrayecto(entity.getId());
+        trayectoLogic.deleteTrayecto(entity.getId(), viajeData.get(1).getId());
         TrayectoEntity deleted = em.find(TrayectoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
