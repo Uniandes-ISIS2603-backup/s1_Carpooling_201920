@@ -11,9 +11,55 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
+ * Clase que extiende de {@link ViajeDTO} para manejar las relaciones entre
+ * los Viaje JSON y otros DTOs. Para conocer el contenido de un
+ * Viaje vaya a la documentacion de {@link ViajeDTO}
  *
- * @author Estudiante
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": Long,
+ *      "origen": String,
+ *      "destino": String,
+ *      "fechaDeSalida": Date,
+ *      "fechaDeLlegada": Date,
+ *      "cupos": Integer,
+ *      "costoViaje": Double,
+ *      "vehiculo": String,
+ *      "estadoViaje: ESTADO_DE_VIAJE,
+ *      "trayectos": [{@link TrayectoDTO}]
+ *   }
+ * </pre> Por ejemplo una editorial se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id":1,
+ *      "destino": "Bucaramanga",
+ *      "origen": "Bogota",
+ *      "fechaDeSalida": "2019-11-03",
+ *      "fechaDeLlegada": "2019-11-03",
+ *      "cupos": 2,
+ *      "costoViaje": 30000.0,
+ *      "vehiculo":"DBS594",
+ *      "estadoViaje": "PUBLICADO",
+ *      "trayectos" : [
+ *          {
+ *              "id" : 1,
+ *              "numPeajes" :3,
+ *              "duracion": 120,
+ *              "costoCombustible" : 50000,
+ *              "origen" : "Calle 113 #40-25",
+ *              "destino" : "Transversal 67 #170-15"
+ *          }
+ *      ]
+ *   }
+ *
+ * </pre>
+ *
+ * @author Juan David Serrano
  */
 public class ViajeDetailDTO extends ViajeDTO implements Serializable{
     
