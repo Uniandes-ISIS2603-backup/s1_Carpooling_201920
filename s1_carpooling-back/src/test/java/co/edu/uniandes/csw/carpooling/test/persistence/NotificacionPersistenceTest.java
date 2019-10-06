@@ -51,8 +51,8 @@ public class NotificacionPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
-        .addClass(NotificacionEntity.class)
-        .addClass(NotificacionPersistence.class)
+        .addPackage(NotificacionEntity.class.getPackage())
+        .addPackage(NotificacionPersistence.class.getPackage())
         .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
         .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }

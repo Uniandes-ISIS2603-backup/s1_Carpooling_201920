@@ -32,7 +32,7 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     private ConductorEntity conductor;
     
     @PodamExclude
-    @OneToMany
+    @OneToMany(mappedBy = "vehiculo")
     private List<ViajeEntity> viajes;
     
     /**
