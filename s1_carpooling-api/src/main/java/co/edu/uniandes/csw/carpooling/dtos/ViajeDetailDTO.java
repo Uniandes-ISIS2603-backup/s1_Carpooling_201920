@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
+import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.entities.TrayectoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import java.io.Serializable;
@@ -66,6 +68,10 @@ public class ViajeDetailDTO extends ViajeDTO implements Serializable{
     
     private List<TrayectoDTO> trayectos;
     
+    private List<CalificacionDTO> calificaciones;
+    
+    private List<ReservaDTO> reservas;
+    
     
     public ViajeDetailDTO(){
         super();
@@ -80,6 +86,20 @@ public class ViajeDetailDTO extends ViajeDTO implements Serializable{
                     trayectos.add(new TrayectoDTO(trayectoEntity));
                 }
             }
+            
+            if(viajeEntity.getCalificaciones()!=null){
+                calificaciones = new ArrayList<CalificacionDTO>();
+                for(CalificacionEntity calificacionEntity: viajeEntity.getCalificaciones()){
+                    calificaciones.add(new CalificacionDTO(calificacionEntity));
+                }
+            }
+            
+            if(viajeEntity.getReservas()!=null){
+                reservas = new ArrayList<ReservaDTO>();
+                for(ReservaEntity reservaEntity: viajeEntity.getReservas()){
+                    reservas.add(new ReservaDTO(reservaEntity));
+                }
+            }
         }
     }
     
@@ -91,6 +111,20 @@ public class ViajeDetailDTO extends ViajeDTO implements Serializable{
                 trayectosEntity.add(trayectoDTO.toEntity());
             }
             entidad.setTrayectos(trayectosEntity);
+        }
+        if(calificaciones != null){
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
+            for(CalificacionDTO calificacionDTO: calificaciones){
+                calificacionesEntity.add(calificacionDTO.toEntity());
+            }
+            entidad.setCalificaciones(calificacionesEntity);
+        }
+        if(reservas != null){
+            List<ReservaEntity> reservasEntity = new ArrayList<ReservaEntity>();
+            for(ReservaDTO reservaDTO: reservas){
+                reservasEntity.add(reservaDTO.toEntity());
+            }
+            entidad.setReservas(reservasEntity);
         }
         return entidad;
     }
@@ -109,6 +143,34 @@ public class ViajeDetailDTO extends ViajeDTO implements Serializable{
      */
     public void setTrayectos(List<TrayectoDTO> trayectos) {
         this.trayectos = trayectos;
+    }
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionDTO> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionDTO> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the reservas
+     */
+    public List<ReservaDTO> getReservas() {
+        return reservas;
+    }
+
+    /**
+     * @param reservas the reservas to set
+     */
+    public void setReservas(List<ReservaDTO> reservas) {
+        this.reservas = reservas;
     }
     
     

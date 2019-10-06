@@ -69,7 +69,7 @@ public class ViajeDTO implements Serializable{
     
     private Float costoViaje;
     
-    private String vehiculo;
+    private VehiculoDTO vehiculo;
     
     private ESTADO_DE_VIAJE estadoViaje;
     
@@ -87,7 +87,7 @@ public class ViajeDTO implements Serializable{
             this.fechaDeLlegada = viaje.getFechaDeLlegada();
             this.cupos = viaje.getCupos();
             this.costoViaje = viaje.getCostoViaje();
-            this.vehiculo = viaje.getVehiculo();
+            this.vehiculo = new VehiculoDTO(viaje.getVehiculo());
             this.estadoViaje = viaje.getEstadoViaje();
         }  
     }
@@ -102,7 +102,7 @@ public class ViajeDTO implements Serializable{
         entity.setFechaDeLlegada(this.fechaDeLlegada);
         entity.setCupos(this.cupos);
         entity.setCostoViaje(this.costoViaje);
-        entity.setVehiculo(this.vehiculo);
+        entity.setVehiculo(this.vehiculo.toEntity());
         entity.setEstadoViaje(this.estadoViaje);
         return entity;
     }
@@ -194,14 +194,14 @@ public class ViajeDTO implements Serializable{
     /**
      * @return the vehiculo
      */
-    public String getVehiculo() {
+    public VehiculoDTO getVehiculo() {
         return vehiculo;
     }
 
     /**
      * @param vehiculo the vehiculo to set
      */
-    public void setVehiculo(String vehiculo) {
+    public void setVehiculo(VehiculoDTO vehiculo) {
         this.vehiculo = vehiculo;
     }
 
