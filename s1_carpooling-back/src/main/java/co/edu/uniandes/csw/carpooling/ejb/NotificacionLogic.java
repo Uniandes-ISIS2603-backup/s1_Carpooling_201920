@@ -37,6 +37,9 @@ public class NotificacionLogic {
         if(notificacion.getMensaje()==(null)){
             throw new BusinessLogicException("La notificacion no tiene un mensaje");
         }
+         if(notificacion.getTitulo()==(null)){
+            throw new BusinessLogicException("La notificacion no tiene un mensaje");
+        }
       notificacion = persistence.create(notificacion);
         return notificacion;
 }
@@ -56,6 +59,9 @@ public class NotificacionLogic {
             throw new BusinessLogicException("La notificacion tiene una fecha menor a la actual");
         }
         if(notificacion.getMensaje()==(null)){
+            throw new BusinessLogicException("La notificacion no tiene un mensaje");
+        }
+        if(notificacion.getTitulo()==(null)){
             throw new BusinessLogicException("La notificacion no tiene un mensaje");
         }
         notificacion = persistence.update(notificacion);

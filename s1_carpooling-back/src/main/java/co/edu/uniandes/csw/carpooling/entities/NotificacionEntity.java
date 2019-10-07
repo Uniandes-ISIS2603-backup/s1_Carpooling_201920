@@ -20,9 +20,10 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
 
 
 
+
     
     private String mensaje;
-    
+    private String titulo;
     @Temporal(TemporalType.TIMESTAMP)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
@@ -40,6 +41,21 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+    
+        /**
+     * @return the titulo
+     */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * @param titulo the titulo to set
+     */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
         /**
      * @return the fecha
      */
