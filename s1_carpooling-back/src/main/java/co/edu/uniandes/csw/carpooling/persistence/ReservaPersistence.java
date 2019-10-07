@@ -91,5 +91,32 @@ public class ReservaPersistence {
         em.remove(entity);
         LOGGER.log(Level.INFO, "Saliendo de borrar la reserva con id = {0}", reservaId);
     }
+    
+       /**
+     * Busca si hay alguna editorial con el nombre que se envía de argumento
+     *
+     * @param name: Nombre de la editorial que se está buscando
+     * @return null si no existe ninguna editorial con el nombre del argumento.
+     * Si existe alguna devuelve la primera.
+     */
+//    public ReservaEntity findByNumeroDeReserva(String num) {
+//        LOGGER.log(Level.INFO, "Consultando editorial por nombre ", num);
+//        // Se crea un query para buscar editoriales con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
+//        TypedQuery query = em.createQuery("Select e From EditorialEntity e where e.numeroDeReserva = :num", ReservaEntity.class);
+//        // Se remplaza el placeholder ":name" con el valor del argumento 
+//        query = query.setParameter("num", num);
+//        // Se invoca el query se obtiene la lista resultado
+//        List<ReservaEntity> sameNum = query.getResultList();
+//        ReservaEntity result;
+//        if (sameNum == null) {
+//            result = null;
+//        } else if (sameNum.isEmpty()) {
+//            result = null;
+//        } else {
+//            result = sameNum.get(0);
+//        }
+//        LOGGER.log(Level.INFO, "Saliendo de consultar reserva por numero ", num);
+//        return result;
+//    }
    
 }

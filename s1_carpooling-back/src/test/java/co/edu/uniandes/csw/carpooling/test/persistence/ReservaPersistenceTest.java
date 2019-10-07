@@ -200,4 +200,18 @@ public class ReservaPersistenceTest {
          Assert.assertEquals(newEntity.getConfirmacion(), resp.getConfirmacion());
     }
     
+      /**
+     * Prueba para consultar una Editorial por nombre.
+     */
+//    @Test
+//    public void findReservaByNumeroDeReserva() {
+//        ReservaEntity entity = data.get(0);
+//        ReservaEntity newEntity = rp.findByNumeroDeReserva(entity.getNumeroDeReserva());
+//        Assert.assertNotNull(newEntity);
+//        Assert.assertEquals(entity.getNumeroDeReserva(), newEntity.getNumeroDeReserva());
+//
+//        newEntity = rp.findByNumeroDeReserva(null);
+//        Assert.assertNull(newEntity);
+//    }
+    
 }
