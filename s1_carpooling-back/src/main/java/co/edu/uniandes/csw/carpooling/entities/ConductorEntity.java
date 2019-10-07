@@ -23,6 +23,19 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     private List<ViajeEntity> viajesPlaneados;
     
     @PodamExclude
+    @OneToMany(mappedBy = "conductor")
+    
+    private List<VehiculoEntity> vehiculos;
+
+    public List<VehiculoEntity> getVehiculos() {
+        return vehiculos;
+    }
+
+    public void setVehiculos(List<VehiculoEntity> vehiculos) {
+        this.vehiculos = vehiculos;
+    }
+    
+    @PodamExclude
     @OneToMany(mappedBy = "conductorHistorial")
     private List<ViajeEntity> historialViajes;
 
