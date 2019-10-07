@@ -27,8 +27,10 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
             fetch = FetchType.LAZY, 
             cascade = CascadeType.PERSIST)
     private List<ViajeEntity> viajes;
-    @OneToMany(mappedBy = "conductor")
     
+    @OneToMany(mappedBy = "conductor",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
     private List<VehiculoEntity> vehiculos;
 
     public List<VehiculoEntity> getVehiculos() {
