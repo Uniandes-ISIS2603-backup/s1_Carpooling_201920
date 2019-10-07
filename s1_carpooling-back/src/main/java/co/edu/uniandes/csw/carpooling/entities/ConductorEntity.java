@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.carpooling.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -18,41 +20,33 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class ConductorEntity extends UsuarioEntity implements Serializable{
-    @PodamExclude
-    @OneToMany(mappedBy = "conductorPlanes")
-    private List<ViajeEntity> viajesPlaneados;
     
     @PodamExclude
-    @OneToMany(mappedBy = "conductorHistorial")
-    private List<ViajeEntity> historialViajes;
+    @OneToMany(
+            mappedBy = "conductor",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
+    private List<ViajeEntity> viajes;
 
     /**
-     * @return the viajesPlaneados
+     * @return the viajes
      */
-    public List<ViajeEntity> getViajesPlaneados() {
-        return viajesPlaneados;
+    public List<ViajeEntity> getViajes() {
+        return viajes;
     }
 
     /**
-     * @param viajesPlaneados the viajesPlaneados to set
+     * @param viajes the viajes to set
      */
-    public void setViajesPlaneados(List<ViajeEntity> viajesPlaneados) {
-        this.viajesPlaneados = viajesPlaneados;
+    public void setViajes(List<ViajeEntity> viajes) {
+        this.viajes = viajes;
     }
+    
+    
+    
+    
 
-    /**
-     * @return the historialViajes
-     */
-    public List<ViajeEntity> getHistorialViajes() {
-        return historialViajes;
-    }
-
-    /**
-     * @param historialViajes the historialViajes to set
-     */
-    public void setHistorialViajes(List<ViajeEntity> historialViajes) {
-        this.historialViajes = historialViajes;
-    }
+    
     
     
   
