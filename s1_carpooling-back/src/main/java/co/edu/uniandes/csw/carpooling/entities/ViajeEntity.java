@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -61,7 +62,9 @@ public class ViajeEntity extends BaseEntity implements Serializable {
    
     
     @PodamExclude
-    @OneToMany(mappedBy = "viaje")
+    @OneToMany(mappedBy = "viaje",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
     private List<CalificacionEntity> calificaciones;
     
     @PodamExclude
@@ -69,7 +72,9 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     private ViajeRecurrenteEntity viajeRecurrente;
     
     @PodamExclude
-    @OneToMany(mappedBy = "viaje")
+    @OneToMany(mappedBy = "viaje",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
     private List<ReservaEntity> reservas;
     
     @PodamExclude
@@ -78,11 +83,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     
     @PodamExclude
     @ManyToOne
-    private ConductorEntity conductorPlanes;
-    
-    @PodamExclude
-    @ManyToOne
-    private ConductorEntity conductorHistorial;
+    private ConductorEntity conductor;
     
     @PodamExclude
     @OneToMany(mappedBy = "viaje", fetch = FetchType.LAZY)
@@ -259,30 +260,17 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the conductorPlanes
+     * @return the conductor
      */
-    public ConductorEntity getConductorPlanes() {
-        return conductorPlanes;
+    public ConductorEntity getConductor() {
+        return conductor;
     }
 
     /**
-     * @param conductorPlanes the conductorPlanes to set
+     * @param conductor the conductor to set
      */
-    public void setConductorPlanes(ConductorEntity conductorPlanes) {
-        this.conductorPlanes = conductorPlanes;
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
     }
 
-    /**
-     * @return the conductorHistorial
-     */
-    public ConductorEntity getConductorHistorial() {
-        return conductorHistorial;
-    }
-
-    /**
-     * @param conductorHistorial the conductorHistorial to set
-     */
-    public void setConductorHistorial(ConductorEntity conductorHistorial) {
-        this.conductorHistorial = conductorHistorial;
-    }
 }

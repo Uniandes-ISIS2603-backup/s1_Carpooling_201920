@@ -18,10 +18,24 @@ public class ConductorDTO extends UsuarioDTO implements Serializable {
     public ConductorDTO(){
         super();
     }
-    //public ConductorEntity toEntity(){
-     //   ConductorEntity entidad = new ConductorEntity();
-       //// entidad.setId(this.getId());
-   // }
+   
+    public ConductorDTO(ConductorEntity entity){
+        super(entity);  
+    }
+    
+    
+    public ConductorEntity toEntity(){
+        ConductorEntity entity = new ConductorEntity();
+        entity.setId(super.getId());
+        entity.setNombre(super.getNombre());
+        entity.setTelefono(super.getTelefono());
+        entity.setCorreo(super.correo);
+        entity.setNumDocumento(super.getNumDocumento());
+        entity.setContrasenha(super.getContrasenha());
+        entity.setFechaDeNacimiento(super.getFechaDeNacimiento());
+        entity.setTipoDocumento(super.getTipoDocumento());
+        return entity;
+    }
     
     
 }

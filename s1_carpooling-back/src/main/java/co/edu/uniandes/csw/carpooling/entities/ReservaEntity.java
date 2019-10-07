@@ -113,6 +113,6 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
     public void setViaje(ViajeEntity viaje) {
         this.viaje = viaje;
     }
-    
+
 
 }
