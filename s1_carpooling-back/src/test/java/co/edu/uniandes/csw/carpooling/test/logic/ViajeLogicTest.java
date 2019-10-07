@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.carpooling.test.logic;
 
 import co.edu.uniandes.csw.carpooling.ejb.ViajeLogic;
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
+import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ViajePersistence;
@@ -46,6 +48,10 @@ public class ViajeLogicTest {
     
     private List<ViajeEntity> data = new ArrayList<ViajeEntity>();
     
+    private VehiculoEntity vehiculo;
+    
+    private ConductorEntity conductor;
+    
     @Before
     public void configTest() {
         try {
@@ -66,12 +72,20 @@ public class ViajeLogicTest {
     
     private void clearData() {
         em.createQuery("delete from ViajeEntity").executeUpdate();
+        em.createQuery("delete from VehiculoEntity").executeUpdate();
+        em.createQuery("delete from ConductorEntity").executeUpdate();
     }
     
     
     private void insertData() {
+        conductor = factory.manufacturePojo(ConductorEntity.class);
+        em.persist(conductor);
+        vehiculo = factory.manufacturePojo(VehiculoEntity.class);
+        em.persist(vehiculo);
         for (int i = 0; i < 3; i++) {
             ViajeEntity viajeEntity = factory.manufacturePojo(ViajeEntity.class);
+            viajeEntity.setConductorPlanes(conductor);
+            viajeEntity.setVehiculo(vehiculo);
             em.persist(viajeEntity);
             data.add(viajeEntity);
         }
@@ -91,6 +105,8 @@ public class ViajeLogicTest {
     @Test
     public void createViaje() throws BusinessLogicException{
         ViajeEntity  aleatorio = factory.manufacturePojo(ViajeEntity.class);
+        aleatorio.setConductorPlanes(conductor);
+        aleatorio.setVehiculo(vehiculo);
         ViajeEntity resultAleatorio = viajeLogic.createViaje(aleatorio);
         ViajeEntity buscado = em.find(ViajeEntity.class, resultAleatorio.getId());
         Assert.assertNotNull(resultAleatorio);
@@ -100,7 +116,6 @@ public class ViajeLogicTest {
         Assert.assertEquals(aleatorio.getFechaDeSalida(), buscado.getFechaDeSalida());
         Assert.assertEquals(aleatorio.getFechaDeLlegada(), buscado.getFechaDeLlegada());
         Assert.assertEquals(aleatorio.getCupos(), buscado.getCupos());
-        Assert.assertEquals(aleatorio.getVehiculo(), buscado.getVehiculo());
         Assert.assertEquals(aleatorio.getEstadoViaje(), buscado.getEstadoViaje());
     }
     
@@ -147,18 +162,29 @@ public class ViajeLogicTest {
     }
     
     @Test (expected = BusinessLogicException.class)
-    public void createViajeVehiculoIncorrecto() throws BusinessLogicException{
-        ViajeEntity  viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
-        viajeAleatorio.setVehiculo(null);
-        viajeLogic.createViaje(viajeAleatorio);
-    }
-    
-    @Test (expected = BusinessLogicException.class)
     public void createViajeEstadoViajeIncorrecto() throws BusinessLogicException{
         ViajeEntity  viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
         viajeAleatorio.setOrigen("");
         viajeLogic.createViaje(viajeAleatorio);
     }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void createViajeVehiculoInexistene() throws BusinessLogicException{
+        ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
+        viajeAleatorio.setVehiculo(factory.manufacturePojo(VehiculoEntity.class));
+        viajeAleatorio.setConductorPlanes(conductor);
+        viajeLogic.createViaje(viajeAleatorio);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void createViajeCondcutorInexistene() throws BusinessLogicException{
+        ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
+        viajeAleatorio.setConductorPlanes(factory.manufacturePojo(ConductorEntity.class));
+        viajeAleatorio.setVehiculo(vehiculo);
+        viajeLogic.createViaje(viajeAleatorio);
+    }
+    
+    
     
     @Test
     public void getViajesTest(){
@@ -185,7 +211,6 @@ public class ViajeLogicTest {
         Assert.assertEquals(entity1.getFechaDeSalida(), entity2.getFechaDeSalida());
         Assert.assertEquals(entity1.getFechaDeLlegada(), entity2.getFechaDeLlegada());
         Assert.assertEquals(entity1.getCupos(), entity2.getCupos());
-        Assert.assertEquals(entity1.getVehiculo(), entity2.getVehiculo());
         Assert.assertEquals(entity1.getEstadoViaje(), entity2.getEstadoViaje());
     }
     
@@ -194,6 +219,8 @@ public class ViajeLogicTest {
         ViajeEntity entity0 = data.get(0);
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setId(entity0.getId());
+        entity2.setConductorPlanes(conductor);
+        entity2.setVehiculo(vehiculo);
         viajeLogic.updateViaje(entity0.getId(), entity2);
         ViajeEntity entity1 = em.find(ViajeEntity.class, entity0.getId());
         Assert.assertNotNull(entity2);
@@ -203,7 +230,6 @@ public class ViajeLogicTest {
         Assert.assertEquals(entity1.getFechaDeSalida(), entity2.getFechaDeSalida());
         Assert.assertEquals(entity1.getFechaDeLlegada(), entity2.getFechaDeLlegada());
         Assert.assertEquals(entity1.getCupos(), entity2.getCupos());
-        Assert.assertEquals(entity1.getVehiculo(), entity2.getVehiculo());
         Assert.assertEquals(entity1.getEstadoViaje(), entity2.getEstadoViaje());
     }
     
@@ -263,20 +289,31 @@ public class ViajeLogicTest {
     
     
     @Test (expected = BusinessLogicException.class)
-    public void updateViajeVehiculoIncorrecto() throws BusinessLogicException{
-        ViajeEntity entity1 = data.get(0);
-        ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
-        entity2.setVehiculo("");
-        entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
-    }
-    
-    @Test (expected = BusinessLogicException.class)
     public void updateViajeEstadoViajeIncorrecto() throws BusinessLogicException{
         ViajeEntity entity1 = data.get(0);
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setEstadoViaje(null);
         entity2.setId(entity1.getId());
+        viajeLogic.updateViaje(entity1.getId(), entity2);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateViajeVehiculoInexistente() throws BusinessLogicException{
+        ViajeEntity entity1 = data.get(0);
+        ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
+        entity2.setId(entity1.getId());
+        entity2.setConductorPlanes(conductor);
+        entity2.setVehiculo(null);
+        viajeLogic.updateViaje(entity1.getId(), entity2);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateViajeConductorInexistente() throws BusinessLogicException{
+        ViajeEntity entity1 = data.get(0);
+        ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
+        entity2.setId(entity1.getId());
+        entity2.setConductorPlanes(null);
+        entity2.setVehiculo(vehiculo);
         viajeLogic.updateViaje(entity1.getId(), entity2);
     }
     

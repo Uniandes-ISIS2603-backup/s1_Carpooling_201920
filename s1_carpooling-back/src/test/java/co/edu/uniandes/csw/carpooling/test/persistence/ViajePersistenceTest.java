@@ -98,7 +98,6 @@ public class ViajePersistenceTest {
         Assert.assertEquals(viaje.getFechaDeLlegada(), entity.getFechaDeLlegada());
         Assert.assertEquals(viaje.getFechaDeSalida(), entity.getFechaDeSalida());
         Assert.assertEquals(viaje.getOrigen(), entity.getOrigen());
-        Assert.assertEquals(viaje.getVehiculo(), entity.getVehiculo());
     } 
     
     @Test

@@ -10,7 +10,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -26,7 +27,14 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
     private String modelo;
     private Integer sillas;
     
-  
+    @PodamExclude
+    @ManyToOne
+    private ConductorEntity conductor;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "vehiculo")
+    private List<ViajeEntity> viajes;
+    
     /**
      * @return the soat
      */
@@ -111,5 +119,20 @@ public class VehiculoEntity extends BaseEntity implements Serializable{
         this.modelo = modelo;
     }
 
-    
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
+    }
+
+    public List<ViajeEntity> getViajes() {
+        return viajes;
+    }
+
+    public void setViajes(List<ViajeEntity> viajes) {
+        this.viajes = viajes;
+    }
+
 }
