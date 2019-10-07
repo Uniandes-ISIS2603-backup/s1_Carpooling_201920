@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
+import co.edu.uniandes.csw.carpooling.entities.UsuarioEntity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -15,13 +16,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Nicolás Fajardo
  */
 public class UsuarioDTO implements Serializable{
-    public enum TipoDocumento{
-        CEDULA_CIUDADANIA,
-        TARJETA_DE_IDENTIDAD,
-        PASAPORTE,
-        CEDULA_EXTRANJERA
-    }
-    private Long id;
+  
+    protected Long id;
     protected String nombre;
     protected String telefono;
     protected String correo;
@@ -29,12 +25,27 @@ public class UsuarioDTO implements Serializable{
     protected String contrasenha;
     @XmlJavaTypeAdapter(DateAdapter.class)
     protected Date fechaDeNacimiento;
-    protected TipoDocumento tipoDocumento;
+    protected UsuarioEntity.TIPO_DE_DOCUMENTO tipoDocumento;
 
     
     public UsuarioDTO(){
         
     }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     /**
      * @return the nombre
      */
@@ -122,30 +133,16 @@ public class UsuarioDTO implements Serializable{
     /**
      * @return the tipoDocumento
      */
-    public TipoDocumento getTipoDocumento() {
+    public UsuarioEntity.TIPO_DE_DOCUMENTO getTipoDocumento() {
         return tipoDocumento;
     }
 
     /**
      * @param tipoDocumento the tipoDocumento to set
      */
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+    public void setTipoDocumento(UsuarioEntity.TIPO_DE_DOCUMENTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 
-    /**
-     * @return the id
-     */
-    protected Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
     
 }

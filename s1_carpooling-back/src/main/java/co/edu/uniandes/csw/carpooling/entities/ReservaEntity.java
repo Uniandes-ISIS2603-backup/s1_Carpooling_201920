@@ -44,6 +44,10 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
     @ManyToOne
     private ViajeEntity viaje;
     
+    @PodamExclude
+    @ManyToOne
+    private ViajeroEntity viajero;
+    
     /**
      * @return the numeroDeReserva
      */
