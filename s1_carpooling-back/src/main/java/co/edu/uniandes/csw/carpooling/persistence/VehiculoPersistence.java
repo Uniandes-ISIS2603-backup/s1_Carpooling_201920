@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,5 +50,23 @@ public class VehiculoPersistence {
      public List<VehiculoEntity> findAll() {
         TypedQuery<VehiculoEntity> query = em.createQuery("select u from VehiculoEntity u", VehiculoEntity.class);
         return query.getResultList();
+    }
+     
+      public VehiculoEntity find(Long conductoresId, Long vehiculosId) {
+
+        TypedQuery<VehiculoEntity> q = em.createQuery("select p from VehiculoEntity p where (p.conductor.id = :conductorid) and (p.id = :vehiculosId)", VehiculoEntity.class);
+        q.setParameter("conductorid", conductoresId);
+        q.setParameter("vehiculosId", vehiculosId);
+        List<VehiculoEntity> results = q.getResultList();
+        VehiculoEntity vehiculo = null;
+        if (results == null) {
+            vehiculo = null;
+        } else if (results.isEmpty()) {
+            vehiculo = null;
+        } else if (results.size() >= 1) {
+            vehiculo = results.get(0);
+        }
+
+        return vehiculo;
     }
 }
