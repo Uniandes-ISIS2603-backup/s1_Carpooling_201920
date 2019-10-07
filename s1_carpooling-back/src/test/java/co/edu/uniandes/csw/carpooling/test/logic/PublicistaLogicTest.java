@@ -40,7 +40,7 @@ public class PublicistaLogicTest {
     @Inject
     private PublicistaLogic publicistaLogic;
     
-     @PersistenceContext
+    @PersistenceContext
     private EntityManager em;
      
     @Inject
