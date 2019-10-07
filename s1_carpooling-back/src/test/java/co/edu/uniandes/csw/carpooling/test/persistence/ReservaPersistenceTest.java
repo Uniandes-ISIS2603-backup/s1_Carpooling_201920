@@ -60,8 +60,8 @@ public class ReservaPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(ReservaEntity.class)
-                .addClass(ReservaPersistence.class)
+                .addPackage(ReservaEntity.class.getPackage())
+                .addPackage(ReservaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -199,5 +199,19 @@ public class ReservaPersistenceTest {
         Assert.assertEquals(newEntity.getEstado(), resp.getEstado());
          Assert.assertEquals(newEntity.getConfirmacion(), resp.getConfirmacion());
     }
+    
+      /**
+     * Prueba para consultar una Editorial por nombre.
+     */
+//    @Test
+//    public void findReservaByNumeroDeReserva() {
+//        ReservaEntity entity = data.get(0);
+//        ReservaEntity newEntity = rp.findByNumeroDeReserva(entity.getNumeroDeReserva());
+//        Assert.assertNotNull(newEntity);
+//        Assert.assertEquals(entity.getNumeroDeReserva(), newEntity.getNumeroDeReserva());
+//
+//        newEntity = rp.findByNumeroDeReserva(null);
+//        Assert.assertNull(newEntity);
+//    }
     
 }

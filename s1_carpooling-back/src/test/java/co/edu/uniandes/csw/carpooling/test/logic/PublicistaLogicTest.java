@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.PublicistaPersistence;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -39,7 +40,7 @@ public class PublicistaLogicTest {
     @Inject
     private PublicistaLogic publicistaLogic;
     
-     @PersistenceContext
+    @PersistenceContext
     private EntityManager em;
      
     @Inject
@@ -113,6 +114,7 @@ public class PublicistaLogicTest {
         Assert.assertEquals(result.getApellido(), entity.getApellido());
         Assert.assertEquals(result.getCedula(), entity.getCedula());
         Assert.assertEquals(result.getCorreo(), entity.getCorreo());
+        Assert.assertEquals(result.getContrasenha(),entity.getContrasenha());
         Assert.assertEquals(result.getNit(), entity.getNit());
         Assert.assertEquals(result.getRut(), entity.getRut());
         Assert.assertEquals(result.getTelefono(), entity.getTelefono());
@@ -222,5 +224,63 @@ public class PublicistaLogicTest {
         else{
            throw new BusinessLogicException();
         }
+    }
+    
+    @Test
+    public void getPublicistasTest(){
+        List<PublicistaEntity> list = publicistaLogic.getPublicistas();
+        Assert.assertEquals(data.size(),list.size());
+        for(PublicistaEntity entity : list){
+            boolean found = false;
+            for(PublicistaEntity storedEntity : data){
+                if(entity.getId().equals(storedEntity.getId())){
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    @Test
+    public void getPublicistaTest(){
+        PublicistaEntity entity = data.get(0);
+        PublicistaEntity result = publicistaLogic.getPublicista(entity.getId());
+        Assert.assertNotNull(result);
+        Assert.assertEquals(entity.getNombre(), result.getNombre());
+        Assert.assertEquals(result.getApellido(), entity.getApellido());
+        Assert.assertEquals(result.getCedula(), entity.getCedula());
+        Assert.assertEquals(result.getContrasenha(),entity.getContrasenha());
+        Assert.assertEquals(result.getCorreo(), entity.getCorreo());
+        Assert.assertEquals(result.getNit(), entity.getNit());
+        Assert.assertEquals(result.getRut(), entity.getRut());
+        Assert.assertEquals(result.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(result.getTipoPublicista(), entity.getTipoPublicista());
+    }
+    
+    @Test
+    public void updatePublicistaTest() throws BusinessLogicException{
+        PublicistaEntity entity = data.get(0);
+        PublicistaEntity pojoEntity = factory.manufacturePojo(PublicistaEntity.class);
+        Date date = new Date();
+        pojoEntity.setId(entity.getId());
+        publicistaLogic.updatePublicista(entity.getId(),pojoEntity);
+        PublicistaEntity resp = em.find(PublicistaEntity.class,entity.getId());
+        Assert.assertEquals(pojoEntity.getContrasenha(),resp.getContrasenha());
+        Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(pojoEntity.getApellido(), resp.getApellido());
+        Assert.assertEquals(pojoEntity.getCedula(), resp.getCedula());
+        Assert.assertEquals(pojoEntity.getCorreo(), resp.getCorreo());
+        Assert.assertEquals(pojoEntity.getNit(), resp.getNit());
+        Assert.assertEquals(pojoEntity.getRut(), resp.getRut());
+        Assert.assertEquals(pojoEntity.getTelefono(), resp.getTelefono());
+        Assert.assertEquals(pojoEntity.getTipoPublicista(), resp.getTipoPublicista());
+    }
+    
+    @Test
+    public void deletePublicistaTest() throws BusinessLogicException{
+        PublicistaEntity entity = data.get(0);
+        publicistaLogic.deletePublicista(entity.getId());
+        PublicistaEntity deleted = em.find(PublicistaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 }

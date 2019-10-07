@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ViajeroPersistence;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -184,6 +185,67 @@ public class ViajeroLogicTest {
         ViajeroEntity newEntity = factory.manufacturePojo(ViajeroEntity.class);
         newEntity.setCorreo(data.get(0).getCorreo());
         viajeroLogic.createViajero(newEntity);
+    }
+    
+    @Test
+    public void getViajerosTest(){
+        List<ViajeroEntity> list = viajeroLogic.getViajeros();
+        Assert.assertEquals(data.size(),list.size());
+        for(ViajeroEntity entity : list){
+            boolean found = false;
+            for(ViajeroEntity storedEntity : data){
+                if(entity.getId().equals(storedEntity.getId())){
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    @Test
+    public void getViajeroTest(){
+        ViajeroEntity entity = data.get(0);
+        ViajeroEntity resultEntity = viajeroLogic.getViajero(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(resultEntity.getContrasenha(),entity.getContrasenha());
+        Assert.assertEquals(resultEntity.getCorreo(),entity.getCorreo());
+        Assert.assertEquals(resultEntity.getFechaDeNacimiento(),entity.getFechaDeNacimiento());
+        Assert.assertEquals(resultEntity.getId(),entity.getId());
+        Assert.assertEquals(resultEntity.getNombre(),entity.getNombre());
+        Assert.assertEquals(resultEntity.getNumDocumento(),entity.getNumDocumento());
+        Assert.assertEquals(resultEntity.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(resultEntity.getTipoDocumento(),entity.getTipoDocumento());
+    }
+    
+    @Test
+    public void updateViajeroTest() throws BusinessLogicException{
+        ViajeroEntity entity = data.get(0);
+        ViajeroEntity pojoEntity = factory.manufacturePojo(ViajeroEntity.class);
+        Date date = new Date();
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setFechaDeNacimiento(date);
+        try{
+            Thread.sleep(1000);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        viajeroLogic.updateViajero(entity.getId(),pojoEntity);
+        ViajeroEntity resp = em.find(ViajeroEntity.class,entity.getId());
+        Assert.assertEquals(pojoEntity.getContrasenha(),resp.getContrasenha());
+        Assert.assertEquals(pojoEntity.getCorreo(),resp.getCorreo());
+        Assert.assertEquals(pojoEntity.getId(),resp.getId());
+        Assert.assertEquals(pojoEntity.getNombre(),resp.getNombre());
+        Assert.assertEquals(pojoEntity.getNumDocumento(),resp.getNumDocumento());
+        Assert.assertEquals(pojoEntity.getTelefono(), resp.getTelefono());
+        Assert.assertEquals(pojoEntity.getTipoDocumento(),resp.getTipoDocumento());
+    }
+    
+    @Test
+    public void deleteViajeroTest() throws BusinessLogicException{
+        ViajeroEntity entity = data.get(0);
+        viajeroLogic.deleteViajero(entity.getId());
+        ViajeroEntity deleted = em.find(ViajeroEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
 }

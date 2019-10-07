@@ -9,8 +9,10 @@ import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -20,6 +22,16 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class ReservaEntity  extends BaseEntity implements Serializable {
     
+    /**
+     * Enumeraciones
+     */
+    public static final Integer POR_CONFIRMAR=0;
+    public static final Integer TERMINADA=1;
+    public static final Integer CONFIRMADA=2;
+    public static final Integer DENEGADA=3;
+    public static final Integer CANCELADA=4;
+    public static final Integer CANCELADA_CON_SANCION=5;
+    
     private String numeroDeReserva;
     private String confirmacion;
     
@@ -27,6 +39,10 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     private String estado;
+    
+    @PodamExclude
+    @ManyToOne
+    private ViajeEntity viaje;
     
     /**
      * @return the numeroDeReserva
@@ -82,6 +98,20 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
      */
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the viaje
+     */
+    public ViajeEntity getViaje() {
+        return viaje;
+    }
+
+    /**
+     * @param viaje the viaje to set
+     */
+    public void setViaje(ViajeEntity viaje) {
+        this.viaje = viaje;
     }
     
 

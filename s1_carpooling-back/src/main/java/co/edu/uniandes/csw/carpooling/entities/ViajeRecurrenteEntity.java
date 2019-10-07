@@ -36,8 +36,13 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
     
     private String frecuencia;
     
- 
+    @PodamExclude
+    @ManyToOne
+    private ConductorEntity conductor;
 
+    @PodamExclude
+    @OneToMany(mappedBy="viajeRecurrente")
+    private List<ViajeEntity> viajes;
 
     /**
      * @return the fechaInicio
@@ -81,6 +86,21 @@ public class ViajeRecurrenteEntity extends BaseEntity  implements Serializable{
         this.frecuencia = frecuencia;
     }
 
-   
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
+    }
+
+    public List<ViajeEntity> getViajes() {
+        return viajes;
+    }
+
+    public void setViajes(List<ViajeEntity> viajes) {
+        this.viajes = viajes;
+    }
+    
     
 }
