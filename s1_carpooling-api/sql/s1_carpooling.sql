@@ -1,4 +1,5 @@
 delete from PublicistaEntity;
+delete from ConductorEntity;
 delete from ViajeEntity;
 delete from TrayectoEntity;
 delete from ConductorEntity;

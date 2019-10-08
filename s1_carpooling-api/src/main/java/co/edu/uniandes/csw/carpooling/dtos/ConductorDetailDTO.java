@@ -15,9 +15,12 @@ import java.util.List;
 
 /**
  *
- * @author Nicolas Fajardo Ramirez
+ * @author Nicolas Fajardo
  */
-public class ConductorDetailDTO extends ConductorDTO implements Serializable{
+public class ConductorDetailDTO extends ConductorDTO{
+    private List<ViajeDTO> viajes;
+    private List<VehiculoDTO> vehiculos;
+    private List<ViajeRecurrenteDTO> viajesRecurrentes;
     
     private List<ViajeDTO> viajes;
     

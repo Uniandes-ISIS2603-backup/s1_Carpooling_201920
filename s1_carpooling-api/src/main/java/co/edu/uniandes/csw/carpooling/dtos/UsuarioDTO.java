@@ -115,17 +115,17 @@ public class UsuarioDTO implements Serializable{
 
     /**
      * @return the fechaDeNacimiento
-     */
+     
     public Date getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
     /**
      * @param fechaDeNacimiento the fechaDeNacimiento to set
-     */
+     
     public void setFechaDeNacimiento(Date fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
-    }
+    }*/
 
     /**
      * @return the tipoDocumento

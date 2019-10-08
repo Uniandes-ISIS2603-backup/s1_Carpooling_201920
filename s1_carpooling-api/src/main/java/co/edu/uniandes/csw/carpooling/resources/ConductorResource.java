@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Nicolás Fajardo Ramirez
+ * @author Nicolas Fajardo
  */
 
 @Path("/conductores")
