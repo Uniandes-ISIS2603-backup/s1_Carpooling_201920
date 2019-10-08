@@ -29,7 +29,7 @@ public class ConductorDTO extends UsuarioDTO implements Serializable {
         entity.setId(super.getId());
         entity.setNombre(super.getNombre());
         entity.setTelefono(super.getTelefono());
-        entity.setCorreo(super.correo);
+        entity.setCorreo(super.getCorreo());
         entity.setNumDocumento(super.getNumDocumento());
         entity.setContrasenha(super.getContrasenha());
         entity.setFechaDeNacimiento(super.getFechaDeNacimiento());

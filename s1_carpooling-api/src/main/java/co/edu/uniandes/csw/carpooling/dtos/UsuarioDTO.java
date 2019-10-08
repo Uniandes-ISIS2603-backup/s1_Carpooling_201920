@@ -144,7 +144,7 @@ public class UsuarioDTO implements Serializable{
     /**
      * @return the id
      */
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
 
