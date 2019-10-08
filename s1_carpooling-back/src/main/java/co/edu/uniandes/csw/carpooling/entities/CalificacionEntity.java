@@ -28,7 +28,12 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
 
     @PodamExclude
     @ManyToOne
-    private UsuarioEntity usuario;
+    private ConductorEntity conductor;
+    
+    @PodamExclude
+    @ManyToOne
+    private ViajeroEntity viajero;
+    
     
     public ViajeEntity getViaje() {
         return viaje;
@@ -38,14 +43,21 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
         this.viaje = viaje;
     }
 
-    public UsuarioEntity getUsuario() {
-        return usuario;
+    public ConductorEntity getConductor() {
+        return conductor;
     }
 
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuario = usuario;
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
     }
-   
+
+    public ViajeroEntity getViajero() {
+        return viajero;
+    }
+
+    public void setViajero(ViajeroEntity viajero) {
+        this.viajero = viajero;
+    }
     
     /**
      * @return the puntuacion
