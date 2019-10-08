@@ -7,15 +7,20 @@ package co.edu.uniandes.csw.carpooling.entities;
 
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 import uk.co.jemos.podam.common.PodamStringValue;
 
@@ -49,6 +54,25 @@ public abstract class UsuarioEntity extends BaseEntity{
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeNacimiento;
+    
+    
+    @PodamExclude
+    @OneToMany(
+            mappedBy = "usuario",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST
+            )
+    private List<CalificacionEntity> calificaciones;
+    
+    @PodamExclude
+    @OneToMany(
+            mappedBy = "usuario",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST
+            )
+    private List<NotificacionEntity> notificaciones;
+    
+    
 
     private TIPO_DE_DOCUMENTO tipoDocumento;
 
@@ -149,4 +173,33 @@ public abstract class UsuarioEntity extends BaseEntity{
     public void setTipoDocumento(TIPO_DE_DOCUMENTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the notificacion
+     */
+    public List<NotificacionEntity> getNotificaciones() {
+        return notificaciones;
+    }
+
+    /**
+     * @param notificacion the notificacion to set
+     */
+    public void setNotificaciones(List<NotificacionEntity> notificacion) {
+        this.notificaciones = notificacion;
+    }
+
 }

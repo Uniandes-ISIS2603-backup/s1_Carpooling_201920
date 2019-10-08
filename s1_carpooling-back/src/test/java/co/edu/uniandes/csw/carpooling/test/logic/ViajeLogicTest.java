@@ -84,7 +84,7 @@ public class ViajeLogicTest {
         em.persist(vehiculo);
         for (int i = 0; i < 3; i++) {
             ViajeEntity viajeEntity = factory.manufacturePojo(ViajeEntity.class);
-            viajeEntity.setConductorPlanes(conductor);
+            viajeEntity.setConductor(conductor);
             viajeEntity.setVehiculo(vehiculo);
             em.persist(viajeEntity);
             data.add(viajeEntity);
@@ -105,7 +105,7 @@ public class ViajeLogicTest {
     @Test
     public void createViaje() throws BusinessLogicException{
         ViajeEntity  aleatorio = factory.manufacturePojo(ViajeEntity.class);
-        aleatorio.setConductorPlanes(conductor);
+        aleatorio.setConductor(conductor);
         aleatorio.setVehiculo(vehiculo);
         ViajeEntity resultAleatorio = viajeLogic.createViaje(aleatorio);
         ViajeEntity buscado = em.find(ViajeEntity.class, resultAleatorio.getId());
@@ -172,14 +172,14 @@ public class ViajeLogicTest {
     public void createViajeVehiculoInexistene() throws BusinessLogicException{
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
         viajeAleatorio.setVehiculo(factory.manufacturePojo(VehiculoEntity.class));
-        viajeAleatorio.setConductorPlanes(conductor);
+        viajeAleatorio.setConductor(conductor);
         viajeLogic.createViaje(viajeAleatorio);
     }
     
     @Test (expected = BusinessLogicException.class)
     public void createViajeCondcutorInexistene() throws BusinessLogicException{
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
-        viajeAleatorio.setConductorPlanes(factory.manufacturePojo(ConductorEntity.class));
+        viajeAleatorio.setConductor(factory.manufacturePojo(ConductorEntity.class));
         viajeAleatorio.setVehiculo(vehiculo);
         viajeLogic.createViaje(viajeAleatorio);
     }
@@ -219,7 +219,7 @@ public class ViajeLogicTest {
         ViajeEntity entity0 = data.get(0);
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setId(entity0.getId());
-        entity2.setConductorPlanes(conductor);
+        entity2.setConductor(conductor);
         entity2.setVehiculo(vehiculo);
         viajeLogic.updateViaje(entity0.getId(), entity2);
         ViajeEntity entity1 = em.find(ViajeEntity.class, entity0.getId());
@@ -302,7 +302,7 @@ public class ViajeLogicTest {
         ViajeEntity entity1 = data.get(0);
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setId(entity1.getId());
-        entity2.setConductorPlanes(conductor);
+        entity2.setConductor(conductor);
         entity2.setVehiculo(null);
         viajeLogic.updateViaje(entity1.getId(), entity2);
     }
@@ -312,7 +312,7 @@ public class ViajeLogicTest {
         ViajeEntity entity1 = data.get(0);
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setId(entity1.getId());
-        entity2.setConductorPlanes(null);
+        entity2.setConductor(null);
         entity2.setVehiculo(vehiculo);
         viajeLogic.updateViaje(entity1.getId(), entity2);
     }

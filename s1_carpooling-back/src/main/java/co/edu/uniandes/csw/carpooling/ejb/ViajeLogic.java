@@ -47,7 +47,7 @@ public class ViajeLogic {
             throw new BusinessLogicException("El estado del viaje no es correcto");
         else if(!validateVehiculo(viaje.getVehiculo()))
             throw new BusinessLogicException("El vehiculo asignado a este viaje no existe");
-        else if(!validateConductor(viaje.getConductorHistorial(), viaje.getConductorPlanes()))
+        else if(!validateConductor(viaje.getConductor()))
             throw new BusinessLogicException("El Viaje no tiene conductor asignado");
         viaje = persistence. create(viaje);
         return viaje;
@@ -74,7 +74,7 @@ public class ViajeLogic {
             throw new BusinessLogicException("El estado del viaje no es correcto");
         else if(!validateVehiculo(viaje.getVehiculo()))
             throw new BusinessLogicException("El vehiculo asignado a este viaje no existe");
-        else if(!validateConductor(viaje.getConductorHistorial(), viaje.getConductorPlanes()))
+        else if(!validateConductor(viaje.getConductor()))
             throw new BusinessLogicException("El Viaje no tiene conductor asignado");
          return persistence.update(viaje);
     }
@@ -118,14 +118,9 @@ public class ViajeLogic {
         return origen != null && !origen.isEmpty();
     }
     
-    public boolean validateConductor(ConductorEntity conductorHistorial, ConductorEntity conductorPlan){
-        boolean condHistorialExiste = false;
-        boolean condPlanExiste = false;
-        if(conductorHistorial != null && persistenceConductor.find(conductorHistorial.getId()) != null)
-            condHistorialExiste = true;
-        if(conductorPlan != null && persistenceConductor.find(conductorPlan.getId()) != null)
-            condPlanExiste = true;
-        return condPlanExiste || condHistorialExiste;
+    public boolean validateConductor(ConductorEntity conductor){
+        return conductor != null && persistenceConductor.find(conductor.getId()) != null;
+            
     }
 
     
