@@ -5,8 +5,12 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
 import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
+import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
+import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,19 +29,53 @@ public class ConductorDetailDTO extends ConductorDTO implements Serializable{
         super();
     }
     
-    private ConductorDetailDTO(ConductorEntity conductor){
+    public ConductorDetailDTO(ConductorEntity conductor){
         super(conductor);
         if(conductor.getViajes() != null){
-            
+            viajes = new ArrayList<ViajeDTO>();
+            for(ViajeEntity entity: conductor.getViajes()){
+                viajes.add(new ViajeDTO(entity));
+            }
         }
-        
         if(conductor.getCalificaciones() != null){
-            
-        }
-        
+            calificaciones = new ArrayList<CalificacionDTO>();
+            for(CalificacionEntity entity: conductor.getCalificaciones()){
+                calificaciones.add(new CalificacionDTO(entity));
+            }
+        } 
         if(conductor.getNotificaciones() != null){
-            
+            notificaciones = new ArrayList<NotificacionDTO>();
+            for(NotificacionEntity entity: conductor.getNotificaciones()){
+                notificaciones.add(new NotificacionDTO(entity));
+            }
         }
+    }
+    
+    
+    public ConductorEntity toEntity(){
+        ConductorEntity entity = super.toEntity();
+        if(viajes!=null){
+            List<ViajeEntity> viajesEntity = new ArrayList<ViajeEntity>();
+            for(ViajeDTO viajeDTO: viajes){
+                viajesEntity.add(viajeDTO.toEntity());
+            }
+            entity.setViajes(viajesEntity);
+        }
+        if(calificaciones!=null){
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
+            for(CalificacionDTO calificacionDTO: calificaciones){
+                calificacionesEntity.add(calificacionDTO.toEntity());
+            }
+            entity.setCalificaciones(calificacionesEntity);
+        }
+        if(notificaciones!=null){
+            List<NotificacionEntity> notificacionesEntity = new ArrayList<NotificacionEntity>();
+            for(NotificacionDTO notificacionDTO: notificaciones){
+                notificacionesEntity.add(notificacionDTO.toEntity());
+            }
+            entity.setNotificaciones(notificacionesEntity);
+        }
+        return entity;
     }
 
     /**

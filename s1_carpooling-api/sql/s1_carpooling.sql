@@ -1,6 +1,7 @@
 delete from PublicistaEntity;
 delete from ViajeEntity;
 delete from TrayectoEntity;
+delete from ConductorEntity;
 
 insert into ViajeEntity (id, destino, origen, 
 fechaDeSalida, fechaDeLlegada, cupos, costoViaje, vehiculo,
