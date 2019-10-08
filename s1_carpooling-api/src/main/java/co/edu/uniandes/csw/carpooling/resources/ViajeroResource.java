@@ -145,13 +145,13 @@ public class ViajeroResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la viajero.
     */
-    @Path("{viajerosId: \\d+}/reservas")
-    public Class<ViajeroReservaResource> getViajeroReservaResource(@PathParam("viajerosId") Long viajerosId) {
-        if (logica.getViajero(viajerosId) == null) {
-            throw new WebApplicationException("El recurso /viajeros/" + viajerosId + " no existe.", 404);
-        }
-        return ViajeroReservaResource.class;
-    }
+   /// @Path("{viajerosId: \\d+}/reservas")
+   // public Class<ViajeroReservaResource> getViajeroReservaResource(@PathParam("viajerosId") Long viajerosId) {
+    //    if (logica.getViajero(viajerosId) == null) {
+     //       throw new WebApplicationException("El recurso /viajeros/" + viajerosId + " no existe.", 404);
+      //  }
+     //   return ViajeroReservaResource.class;
+  //  }
 
     /**
      * Convierte una lista de entidades a DTO.

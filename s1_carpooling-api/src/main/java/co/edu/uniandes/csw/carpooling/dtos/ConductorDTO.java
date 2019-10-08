@@ -18,6 +18,10 @@ public class ConductorDTO extends UsuarioDTO implements Serializable {
     public ConductorDTO(){
         super();
     }
+   
+    public ConductorDTO(ConductorEntity entity){
+        super(entity);  
+    }
     
         public ConductorDTO(ConductorEntity entidad){
         if(entidad!=null){
@@ -33,17 +37,17 @@ public class ConductorDTO extends UsuarioDTO implements Serializable {
     }
     
     public ConductorEntity toEntity(){
-     ConductorEntity entidad = new ConductorEntity();
-       entidad.setId(this.getId());
-       entidad.setContrasenha(this.getContrasenha());
-       entidad.setCorreo(this.getCorreo());
-       entidad.setFechaDeNacimiento(this.getFechaDeNacimiento());
-       entidad.setNombre(this.getCorreo());
-       entidad.setNumDocumento(this.getNumDocumento());
-       entidad.setTelefono(this.getTelefono());
-       entidad.setTipoDocumento(this.getTipoDocumento());
-       return entidad;
-   }
+        ConductorEntity entity = new ConductorEntity();
+        entity.setId(super.getId());
+        entity.setNombre(super.getNombre());
+        entity.setTelefono(super.getTelefono());
+        entity.setCorreo(super.getCorreo());
+        entity.setNumDocumento(super.getNumDocumento());
+        entity.setContrasenha(super.getContrasenha());
+        entity.setFechaDeNacimiento(super.getFechaDeNacimiento());
+        entity.setTipoDocumento(super.getTipoDocumento());
+        return entity;
+    }
     
     
 }

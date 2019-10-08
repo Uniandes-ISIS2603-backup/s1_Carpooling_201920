@@ -21,7 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class ViajeroEntity extends UsuarioEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "viajeros", fetch = FetchType.LAZY)
-    protected List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
+    private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
 
     /**
      * @return the reservas
@@ -36,6 +36,5 @@ public class ViajeroEntity extends UsuarioEntity implements Serializable {
     public void setReservas(List<ReservaEntity> reservas) {
         this.reservas = reservas;
     }
-    
-    
+
 }

@@ -44,6 +44,7 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
     @ManyToOne
     private ViajeEntity viaje;
     
+        
     @PodamExclude
     @ManyToOne
     private ViajeroEntity viajero;
@@ -117,6 +118,20 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
     public void setViaje(ViajeEntity viaje) {
         this.viaje = viaje;
     }
-    
+
+    /**
+     * @return the viajero
+     */
+    public ViajeroEntity getViajero() {
+        return viajero;
+    }
+
+    /**
+     * @param viajero the viajero to set
+     */
+    public void setViajero(ViajeroEntity viajero) {
+        this.viajero = viajero;
+    }
+
 
 }
