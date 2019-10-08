@@ -70,17 +70,18 @@ public class PublicistaDTO implements Serializable{
     }
     
     public PublicistaDTO(PublicistaEntity entidad){
-        setId(entidad.getId());
-        setApellido(entidad.getApellido());
-        setCedula(entidad.getCedula());
-        setCorreo(entidad.getCorreo());
-        setContrasenha(entidad.getContrasenha());
-        setNit(entidad.getNit());
-        setNombre(entidad.getNombre());
-        setRut(entidad.getRut());
-        setTelefono(entidad.getTelefono());
-        setTipoPublicista(entidad.getTipoPublicista());
-    
+        if(entidad!=null){
+        this.id = entidad.getId();
+        this.apellido = entidad.getApellido();
+        this.cedula = entidad.getCedula();
+        this.correo = entidad.getCorreo();
+        this.contrasenha = entidad.getContrasenha();
+        this.nit = entidad.getNit();
+        this.nombre = entidad.getNombre();
+        this.rut = entidad.getRut();
+        this.telefono = entidad.getTelefono();
+        this.tipoPublicista = entidad.getTipoPublicista();
+        }
     }
     
     public PublicistaEntity toEntity(){

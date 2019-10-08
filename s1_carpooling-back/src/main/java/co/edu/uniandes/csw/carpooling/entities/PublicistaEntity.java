@@ -39,6 +39,13 @@ public class PublicistaEntity extends BaseEntity {
     private List<PublicidadEntity> publicidades = new ArrayList<PublicidadEntity>();
 
     /**
+     * Constructor vacio
+     */
+    public PublicistaEntity(){
+    
+    }
+    
+    /**
      * @return the nombre
      */
     public String getNombre() {
