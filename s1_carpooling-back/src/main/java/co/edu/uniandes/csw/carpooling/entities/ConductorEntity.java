@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.carpooling.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -19,7 +21,48 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ConductorEntity extends UsuarioEntity implements Serializable{
     
-  
+    @PodamExclude
+    @OneToMany(
+            mappedBy = "conductor",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
+    private List<ViajeEntity> viajes;
+    
+    @OneToMany(mappedBy = "conductor",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
+    private List<VehiculoEntity> vehiculos;
+
+    public List<VehiculoEntity> getVehiculos() {
+        return vehiculos;
+    }
+
+    public void setVehiculos(List<VehiculoEntity> vehiculos) {
+        this.vehiculos = vehiculos;
+    }
+    
+
+    /**
+     * @return the viajes
+     */
+    public List<ViajeEntity> getViajes() {
+        return viajes;
+    }
+
+    /**
+     * @param viajes the viajes to set
+     */
+    public void setViajes(List<ViajeEntity> viajes) {
+        this.viajes = viajes;
+    }
+    
+    
+    
+    
+
+    
+    
+    
   
     
 }

@@ -75,16 +75,12 @@ public class CalificacionDTO implements Serializable{
             this.puntuacion = calificacionEntity.getPuntuacion();
             this.comentarios= calificacionEntity.getComentarios();
 
-            /** 
-            if(calificacionEntity.getUsuario() != null)
-                this.usuario = new UsuarioDTO(calificacionEntity.getUsuario());
-            else
-                calificacionEntity.setUsuario(null);
-            */
+
+            //if(calificacionEntity.getUsuario() != null)
+                //this.usuario = new UsuarioDTO(calificacionEntity.getUsuario());
+            
             if(calificacionEntity.getViaje() != null)
                 this.viaje = new ViajeDTO(calificacionEntity.getViaje());
-            else
-                calificacionEntity.setUsuario(null);
                 
         }
     }
@@ -95,9 +91,8 @@ public class CalificacionDTO implements Serializable{
         calificacionEntity.setId(this.id);
         calificacionEntity.setPuntuacion(this.puntuacion);
         calificacionEntity.setComentarios(this.comentarios);
-
-//        if(usuario != null)
-  //          calificacionEntity.setUsuario(usuario.toEntity());
+        //if(usuario != null)
+            //calificacionEntity.setUsuario(usuario.toEntity());
         if(viaje != null)
             calificacionEntity.setViaje(viaje.toEntity());
         

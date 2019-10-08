@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.TrayectoEntity;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +22,8 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class TrayectoPersistence {
     
+    private static final Logger LOGGER = Logger.getLogger(TrayectoPersistence.class.getName());
+    
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
     
@@ -32,6 +36,20 @@ public class TrayectoPersistence {
     public TrayectoEntity find(Long trayectosId)
     {
         return em.find(TrayectoEntity.class, trayectosId);
+    }
+    
+    public TrayectoEntity find(Long trayectosId, Long viajesId)
+    {
+        LOGGER.log(Level.INFO, "Consultando el trayecto con id = {0} del viaje con id = "+viajesId, trayectosId);
+        TypedQuery<TrayectoEntity> q = em.createQuery("select p from TrayectoEntity p where (p.viaje.id = :viajesid) and (p.id = :trayectosid)", TrayectoEntity.class);
+        q.setParameter("viajesid", viajesId);
+        q.setParameter("trayectosid", trayectosId);
+        List<TrayectoEntity> resultados = q.getResultList();
+        TrayectoEntity trayecto = null;
+        if(resultados != null && !resultados.isEmpty()){
+            trayecto = resultados.get(0);
+        }
+        return trayecto;
     }
     
     

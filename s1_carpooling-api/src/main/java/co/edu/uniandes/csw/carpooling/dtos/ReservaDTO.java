@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,11 +14,40 @@ import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
+ * ReservaDTO Objeto de transferencia de datos de Reservas. Los DTO contienen las
+ * representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": Long,
+ *      "numeroReserva": String,
+ *      "confirmacion": String,
+ *      "fecha": Date,
+ *      "estado": String
+ *   }
+ * </pre> Por ejemplo un viaje se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id":1,
+ *      "numeroReserva": "a1b2",
+ *      "confirmacion": "listo",
+ *      "fecha": "2019-11-03",
+ *      "estado": "CONFIRMADA",          
+ *   }
+ *
+ * </pre>
  *
  * @author le.perezl
  */
 public class ReservaDTO implements Serializable{
 
+ 
+    
+    private Long id;
     private String numeroDeReserva;
     private String confirmacion;
     
@@ -25,6 +55,45 @@ public class ReservaDTO implements Serializable{
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     private String estado;
+    
+    public ReservaDTO(){
+        
+    }
+     
+     public ReservaDTO(ReservaEntity reserva){
+        if(reserva != null){
+            this.id = reserva.getId();
+            this.numeroDeReserva = reserva.getNumeroDeReserva();
+            this.confirmacion = reserva.getConfirmacion();
+            this.fecha = reserva.getFecha();
+            this.estado = reserva.getEstado();
+        }  
+    }
+     
+    public ReservaEntity toEntity(){
+        ReservaEntity entity = new ReservaEntity();
+        entity.setId(this.getId());
+        entity.setNumeroDeReserva(this.numeroDeReserva);
+        entity.setConfirmacion(this.confirmacion);
+        entity.setFecha(this.fecha);
+        entity.setEstado(this.estado);
+        return entity;
+    }
+     
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     /**
      * @return the numeroDeReserva
      */
@@ -81,8 +150,5 @@ public class ReservaDTO implements Serializable{
         this.estado = estado;
     }
     
-   public ReservaDTO (){
-       
-   }
    
 }

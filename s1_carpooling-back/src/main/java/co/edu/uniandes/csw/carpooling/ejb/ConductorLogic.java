@@ -107,6 +107,7 @@ public class ConductorLogic {
     }
     
     private boolean validarCorreo(String correo){
+        
         return !(correo == null || correo.isEmpty());
     }
 }

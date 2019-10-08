@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
+import co.edu.uniandes.csw.carpooling.entities.UsuarioEntity;
+import co.edu.uniandes.csw.carpooling.entities.UsuarioEntity.TIPO_DE_DOCUMENTO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -15,12 +17,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Nicolás Fajardo
  */
 public class UsuarioDTO implements Serializable{
-    public enum TipoDocumento{
-        CEDULA_CIUDADANIA,
-        TARJETA_DE_IDENTIDAD,
-        PASAPORTE,
-        CEDULA_EXTRANJERA
-    }
     private Long id;
     protected String nombre;
     protected String telefono;
@@ -29,14 +25,26 @@ public class UsuarioDTO implements Serializable{
     protected String contrasenha;
     @XmlJavaTypeAdapter(DateAdapter.class)
     protected Date fechaDeNacimiento;
-    protected TipoDocumento tipoDocumento;
+    protected TIPO_DE_DOCUMENTO tipoDocumento;
 
     
     public UsuarioDTO(){
         
     }
+    
+    public UsuarioDTO(UsuarioEntity entity){
+        this.id = entity.getId();
+        this.nombre = entity.getNombre();
+        this.telefono = entity.getTelefono();
+        this.correo = entity.getCorreo();
+        this.numDocumento = entity.getNumDocumento();
+        this.contrasenha = entity.getContrasenha();
+        this.fechaDeNacimiento = entity.getFechaDeNacimiento();
+        this.tipoDocumento = entity.getTipoDocumento();
+    }
+    
     /**
-     * @return the nombre
+     TIPO_DE_DOCUMENTO* @return the nombre
      */
     public String getNombre() {
         return nombre;
@@ -122,21 +130,21 @@ public class UsuarioDTO implements Serializable{
     /**
      * @return the tipoDocumento
      */
-    public TipoDocumento getTipoDocumento() {
+    public TIPO_DE_DOCUMENTO getTipoDocumento() {
         return tipoDocumento;
     }
 
     /**
      * @param tipoDocumento the tipoDocumento to set
      */
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+    public void setTipoDocumento(TIPO_DE_DOCUMENTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 
     /**
      * @return the id
      */
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
 

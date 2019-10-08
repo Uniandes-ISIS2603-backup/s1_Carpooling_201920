@@ -5,8 +5,12 @@
  */
 package co.edu.uniandes.csw.carpooling.ejb;
 
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
+import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
+import co.edu.uniandes.csw.carpooling.persistence.VehiculoPersistence;
 import co.edu.uniandes.csw.carpooling.persistence.ViajePersistence;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +27,12 @@ public class ViajeLogic {
     @Inject
     private ViajePersistence persistence;
     
+    @Inject
+    private VehiculoPersistence persistenceVehiculo;
+    
+    @Inject
+    private ConductorPersistence persistenceConductor;
+    
     
     public ViajeEntity createViaje(ViajeEntity viaje) throws BusinessLogicException{
         if ( !validateDestino(viaje.getDestino()) || !validateOrigen(viaje.getOrigen()))// || viaje.getDestino().equals(viaje.getOrigen()))
@@ -33,10 +43,12 @@ public class ViajeLogic {
             throw new BusinessLogicException("La fecha de salida o llegada no es correcta");
         else if (!validateCostoViaje(viaje.getCostoViaje()))
             throw new BusinessLogicException("La costo del viaje no es correcto");
-        else if (!validateVehiculo(viaje.getVehiculo()))
-            throw new BusinessLogicException("El vehiculo no es correcto");
         else if (!validateEstadoViaje(viaje.getEstadoViaje()))
             throw new BusinessLogicException("El estado del viaje no es correcto");
+        else if(!validateVehiculo(viaje.getVehiculo()))
+            throw new BusinessLogicException("El vehiculo asignado a este viaje no existe");
+        else if(!validateConductor(viaje.getConductor()))
+            throw new BusinessLogicException("El Viaje no tiene conductor asignado");
         viaje = persistence. create(viaje);
         return viaje;
     }
@@ -50,7 +62,7 @@ public class ViajeLogic {
     }
     
     public ViajeEntity updateViaje(Long viajeId, ViajeEntity viaje) throws BusinessLogicException{
-         if ( !validateDestino(viaje.getDestino()) || !validateOrigen(viaje.getOrigen()))// || viaje.getDestino().equals(viaje.getOrigen()))
+        if ( !validateDestino(viaje.getDestino()) || !validateOrigen(viaje.getOrigen()))// || viaje.getDestino().equals(viaje.getOrigen()))
             throw new BusinessLogicException("El destino u origen son incorrectos");
         else if (!validateCupos(viaje.getCupos()))
             throw new BusinessLogicException("El numero de cupos incorrecto");
@@ -58,10 +70,12 @@ public class ViajeLogic {
             throw new BusinessLogicException("La fecha de salida o llegada no es correcta");
         else if (!validateCostoViaje(viaje.getCostoViaje()))
             throw new BusinessLogicException("La costo del viaje no es correcto");
-        else if (!validateVehiculo(viaje.getVehiculo()))
-            throw new BusinessLogicException("El vehiculo no es correcto");
         else if (!validateEstadoViaje(viaje.getEstadoViaje()))
             throw new BusinessLogicException("El estado del viaje no es correcto");
+        else if(!validateVehiculo(viaje.getVehiculo()))
+            throw new BusinessLogicException("El vehiculo asignado a este viaje no existe");
+        else if(!validateConductor(viaje.getConductor()))
+            throw new BusinessLogicException("El Viaje no tiene conductor asignado");
          return persistence.update(viaje);
     }
     
@@ -82,8 +96,6 @@ public class ViajeLogic {
         return (fechaDeLlegada != null); // && fechaDeLlegada.compareTo(new Date())>=0);
     }
     
-    
-    
     private boolean validateCupos(Integer cupos){
         return (cupos != null && cupos>=0);
     }
@@ -92,8 +104,8 @@ public class ViajeLogic {
         return (costoViaje != null && costoViaje > 0);
     }
     
-    private boolean validateVehiculo(String vehiculo){
-        return (vehiculo != null && !vehiculo.isEmpty());
+    private boolean validateVehiculo(VehiculoEntity vehiculo){
+        return (vehiculo != null && persistenceVehiculo.find(vehiculo.getId()) != null);
     }
             
     private boolean validateEstadoViaje(ViajeEntity.ESTADO_DE_VIAJE estadoViaje)
@@ -104,6 +116,11 @@ public class ViajeLogic {
     
     private boolean validateOrigen(String origen){
         return origen != null && !origen.isEmpty();
+    }
+    
+    public boolean validateConductor(ConductorEntity conductor){
+        return conductor != null && persistenceConductor.find(conductor.getId()) != null;
+            
     }
 
     

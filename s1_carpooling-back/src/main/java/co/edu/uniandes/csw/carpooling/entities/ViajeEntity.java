@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,26 +58,32 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     @PodamFloatValue(minValue = (float) .0001)
     private Float costoViaje;
     
-    private String vehiculo;
-    
     private ESTADO_DE_VIAJE estadoViaje;
+   
     
-   // @PodamExclude
-  //  @ManyToOne
-    //private ConductorEntity conductor; 
+    @PodamExclude
+    @OneToMany(mappedBy = "viaje",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
+    private List<CalificacionEntity> calificaciones;
     
-  //  @PodamExclude
-   // @OneToMany
-   // private List<CalificacionEntity> calificaciones;
+    @PodamExclude
+    @ManyToOne
+    private ViajeRecurrenteEntity viajeRecurrente;
     
-    //@PodamExclude
-    //@ManyToOne
-    //private ViajeRecurrenteEntity viajesRecurrentes;
+    @PodamExclude
+    @OneToMany(mappedBy = "viaje",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
+    private List<ReservaEntity> reservas;
     
-    // (Aun no listo)@PodamExclude
-    // (Aun no Listo)@OneToOne
-    // (Aun no Listo)private VehiculoEntity vehiculo;
+    @PodamExclude
+    @ManyToOne
+    private VehiculoEntity vehiculo;
     
+    @PodamExclude
+    @ManyToOne
+    private ConductorEntity conductor;
     
     @PodamExclude
     @OneToMany(mappedBy = "viaje", fetch = FetchType.LAZY)
@@ -151,20 +158,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setCostoViaje(Float costoViaje) {
         this.costoViaje = costoViaje;
     }
-
-    /**
-     * @return the vehiculo
-     */
-    public String getVehiculo() {
-        return vehiculo;
-    }
-
-    /**
-     * @param vehiculo the vehiculo to set
-     */
-    public void setVehiculo(String vehiculo) {
-        this.vehiculo = vehiculo;
-    }
+    
 
     /**
      * @return the estadoViaje
@@ -179,44 +173,6 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setEstadoViaje(ESTADO_DE_VIAJE estadoViaje) {
         this.estadoViaje = estadoViaje;
     }
-
-/*
-    /**
-     * @return the conductor
-     
-    public ConductorEntity getConductor() {
-        return conductor;
-    }
-
-    /**
-     * @param conductor the conductor to set
-     
-    public void setConductor(ConductorEntity conductor) {
-        this.conductor = conductor;
-    }*/
-    
-    /**
-    public List<CalificacionEntity> getCalificaciones()
-    {
-        return calificaciones;
-    }
-    public void setCalificaciones(List<CalificacionEntity> calificaciones)
-    {
-        this.calificaciones = calificaciones;
-    }
-    */
-    
-    /**
-    public ViajeRecurrenteEntity getViajesRecurrentes()
-    {
-        return viajesRecurrentes;
-    }
-    
-    public void setViajesRecurrentes(ViajeRecurrenteEntity viajesRecurrentes)
-    {
-        this.viajesRecurrentes = viajesRecurrentes;
-    }
-    */
 
     
     /**
@@ -246,4 +202,75 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setOrigen(String origen) {
         this.origen = origen;
     }
+    
+    /**
+     * @return the vehiculo
+    */
+    public VehiculoEntity getVehiculo() {
+        return vehiculo;
+    }
+
+    /**
+     * @param vehiculo the vehiculo to set
+    */
+    public void setVehiculo(VehiculoEntity vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    /**
+     * @return the reservas
+    */
+    public List<ReservaEntity> getReservas() {
+        return reservas;
+    }
+
+    /**
+     * @param reservas the reservas to set
+    */
+    public void setReservas(List<ReservaEntity> reservas) {
+        this.reservas = reservas;
+    }
+
+    /**
+     * @return the viajeRecurrente
+    */
+    public ViajeRecurrenteEntity getViajeRecurrente() {
+        return viajeRecurrente;
+    }
+
+    /**
+     * @param viajeRecurrente the viajeRecurrente to set
+    */
+    public void setViajeRecurrente(ViajeRecurrenteEntity viajeRecurrente) {
+        this.viajeRecurrente = viajeRecurrente;
+    }
+
+    /**
+     * @return the calificaciones
+    */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the conductor
+     */
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    /**
+     * @param conductor the conductor to set
+     */
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
+    }
+
 }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.carpooling.test.logic;
+package co.edu.uniandes.csw.carpooling.resources;
 
 /**
  *
- * @author le.perezl
+ * @author Estudiante
  */
-public class ReservaLogicTest {
+public class PublicistaPublicidadResource {
     
 }
