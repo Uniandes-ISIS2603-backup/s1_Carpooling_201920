@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "7df8fd1f-cc8f-4560-9551-53735bab1cc8",
-		"name": "Viaje Tests",
+		"_postman_id": "3f1cd72b-6874-4e3d-a319-b2cf352b7e5f",
+		"name": "Vehiculo Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_conductor\",data.id);",
@@ -28,8 +28,8 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
@@ -42,7 +42,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -51,7 +51,8 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"conductores"
+						"conductores",
+						""
 					]
 				}
 			},
@@ -66,7 +67,7 @@
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_vehiculo\",data.id);",
+							"postman.setGlobalVariable(\"new_id_vehiculo1\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -112,25 +113,15 @@
 			"response": []
 		},
 		{
-			"name": "Crear un viaje",
+			"name": "Crear un vehiculo 2",
 			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "877c0454-28cc-4419-9ffd-a05abbb27893",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
 				{
 					"listen": "test",
 					"script": {
-						"id": "843db071-9bea-42cb-9dfd-4a74cdc6b799",
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_viaje\",data.id);",
+							"postman.setGlobalVariable(\"new_id_vehiculo2\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -144,13 +135,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"soat\": \"AANFJ143779837\",\n\t\"placa\": \"FFO 006\",\n\t\"aseguradora\": \"MAPHRE\",\n\t\"vigenciaSoat\": \"20/09/2020\",\n\t\"modelo\": \"Chevrolet Aveo\",\n\t\"sillas\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -158,7 +149,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/vehiculos/{{new_id_vehiculo}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -169,43 +160,126 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"viajes",
-						"vehiculos",
-						"{{new_id_vehiculo}}"
+						"vehiculos"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un viaje 2",
+			"name": "Crear un vehiculo con placa invalida",
 			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "877c0454-28cc-4419-9ffd-a05abbb27893",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
 				{
 					"listen": "test",
 					"script": {
-						"id": "843db071-9bea-42cb-9dfd-4a74cdc6b799",
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
+							"tests[\"No crea con placa invalidad\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La placa tiene que tener 7 caracteres (incluyendo el espacio en la mitad\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"MDS\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener vehiculos de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"vehiculos count\"] = data.length > 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un vehiculo de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id2_viaje\",data.id);",
-							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -214,17 +288,8 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/vehiculos/{{new_id_vehiculo}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -235,50 +300,40 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"viajes",
 						"vehiculos",
-						"{{new_id_vehiculo}}"
+						"{{new_id_vehiculo1}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un viaje con origen vacio",
+			"name": "Obtener un vehiculo de un conductor inexistente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "074ef74d-36aa-424c-92b2-78468e5c7389",
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
 						"exec": [
-							"tests[\"El origen no puede ser vacio\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El destino u origen son incorrectos\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/0/vehiculos/{{new_id_vehiculo1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -287,20 +342,66 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes"
+						"conductores",
+						"0",
+						"vehiculos",
+						"{{new_id_vehiculo1}}"
 					]
-				},
-				"description": "Crea un viaje no valido\n"
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "Editar un viaje",
+			"name": "Obtener un vehiculo inexistente de un conductor",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "075f9be1-a7d6-4e80-bb08-7ae58a6e4c7e",
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un vehiculo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5ce2f2f-b592-4c8e-ae7e-8ba30d8230d3",
 						"exec": [
 							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
@@ -322,7 +423,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"id\":\"{{new_id_vehiculo2}}\",\n\t\"soat\": \"AANFJ143779837\",\n\t\"placa\": \"FFO 006\",\n\t\"aseguradora\": \"SERRANOSEGUROS\",\n\t\"vigenciaSoat\": \"20/09/2020\",\n\t\"modelo\": \"Chevrolet Aveo\",\n\t\"sillas\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -330,7 +431,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id2_viaje}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo2}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -339,23 +440,25 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes",
-						"{{new_id2_viaje}}"
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos",
+						"{{new_id_vehiculo2}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Editar un viaje que no existe",
+			"name": "Editar un vehiculo inexistente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "3ab60547-3c2c-4623-b309-cb199dbf1ed8",
+						"id": "c5ce2f2f-b592-4c8e-ae7e-8ba30d8230d3",
 						"exec": [
-							"tests[\"Consulta con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -367,13 +470,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"id\":0,\n\t\"soat\": \"AANFJ143779837\",\n\t\"placa\": \"FFO 006\",\n\t\"aseguradora\": \"SERRANOSEGUROS\",\n\t\"vigenciaSoat\": \"20/09/2020\",\n\t\"modelo\": \"Chevrolet Aveo\",\n\t\"sillas\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -381,7 +484,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -390,7 +493,9 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos",
 						"0"
 					]
 				}
@@ -398,104 +503,12 @@
 			"response": []
 		},
 		{
-			"name": "Obtener todos los viajes",
+			"name": "Borrar un vehiculo",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "c6f19c79-ffe4-407a-97e4-d49c472297fc",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
-							"tests[\"viajes count\"] = data.length >= 2;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un viaje",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"{{new_id_viaje}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener una viaje que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "024b21fd-5fba-4206-8536-5870ec20a551",
-						"exec": [
-							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar un viaje",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f10913bc-ea93-4749-9d28-60e197a0db11",
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
 						"exec": [
 							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
 						],
@@ -507,7 +520,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -516,20 +529,22 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes",
-						"{{new_id_viaje}}"
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos",
+						"{{new_id_vehiculo1}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar un viaje 2",
+			"name": "Borrar un vehiculo 2",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "10162458-3996-49fa-8255-f5ea62b0c862",
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
 						"exec": [
 							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
 						],
@@ -541,7 +556,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id2_viaje}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo2}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -550,23 +565,25 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes",
-						"{{new_id2_viaje}}"
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos",
+						"{{new_id_vehiculo2}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar un viaje que no existe",
+			"name": "Borrar un vehiculo inexistente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "3c5526a9-3b80-4bba-9c00-cbca0819c3ed",
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
 						"exec": [
-							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -576,7 +593,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -585,8 +602,44 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos",
 						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}"
 					]
 				}
 			},

@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Nicolás Fajardo Ramirez
+ * @author Nicolas Fajardo
  */
 
 @Path("/conductores")
@@ -96,6 +96,23 @@ public class ConductorResource {
         }
         logica.deleteConductor(conductoresId);
         LOGGER.info("ConductorResource deleteConductor: output: void");
+    }
+    
+    
+    @Path("{conductoresId: \\d+}/viajes")
+    public Class<ConductorViajesResource> getConductorViajesResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductores/" + conductoresId + " no existe.", 404);
+        }
+        return ConductorViajesResource.class;
+    }
+    
+    @Path("{conductoresId: \\d+}/vehiculos")
+    public Class<VehiculoResource> getVehiculosResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductores/" + conductoresId + " no existe.", 404);
+        }
+        return VehiculoResource.class;
     }
     
     

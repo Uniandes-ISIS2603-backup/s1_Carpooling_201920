@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
 import java.io.Serializable;
 
 /**
@@ -13,12 +14,24 @@ import java.io.Serializable;
  */
 public class ViajeroDTO extends UsuarioDTO implements Serializable {
     
-    
     public ViajeroDTO(){
         super();
     }
-    //public ViajeroEntity toEntity(){
-     //   ViajeroEntity entidad = new ViajeroEntity();
-       //// entidad.setId(this.getId());
-   // }
+   
+    public ViajeroDTO(ViajeroEntity entity){
+        super(entity);  
+    }
+    
+    public ViajeroEntity toEntity(){
+        ViajeroEntity entity = new ViajeroEntity();
+        entity.setId(super.getId());
+        entity.setNombre(super.getNombre());
+        entity.setTelefono(super.getTelefono());
+        entity.setCorreo(super.getCorreo());
+        entity.setNumDocumento(super.getNumDocumento());
+        entity.setContrasenha(super.getContrasenha());
+        entity.setFechaDeNacimiento(super.getFechaDeNacimiento());
+        entity.setTipoDocumento(super.getTipoDocumento());
+        return entity;
+    }
 }
