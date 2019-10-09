@@ -29,7 +29,8 @@ import uk.co.jemos.podam.common.PodamStringValue;
  * @author Santiago Ballesteros
  * @author Nicolas Fajardo
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class UsuarioEntity extends BaseEntity{
     
     public enum TIPO_DE_DOCUMENTO {
@@ -55,6 +56,17 @@ public abstract class UsuarioEntity extends BaseEntity{
     private Date fechaDeNacimiento;
     
 
+    @PodamExclude
+    @OneToMany(mappedBy = "usuario",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
+    private List<NotificacionEntity> notificaciones;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "usuario",
+            fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
+    private List<CalificacionEntity> calificaciones;
     
     
 
@@ -156,6 +168,34 @@ public abstract class UsuarioEntity extends BaseEntity{
      */
     public void setTipoDocumento(TIPO_DE_DOCUMENTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
+    }
+
+    /**
+     * @return the notificaciones
+     */
+    public List<NotificacionEntity> getNotificaciones() {
+        return notificaciones;
+    }
+
+    /**
+     * @param notificaciones the notificaciones to set
+     */
+    public void setNotificaciones(List<NotificacionEntity> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
     }
 
 }

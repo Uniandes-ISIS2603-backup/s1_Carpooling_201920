@@ -30,6 +30,10 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
+    
     
     /**
      * @return the mensaje
@@ -71,6 +75,20 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
     }
 
 

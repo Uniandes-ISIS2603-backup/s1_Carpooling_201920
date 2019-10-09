@@ -25,6 +25,10 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne
     private ViajeEntity viaje;
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
 
     @PodamExclude
     @ManyToOne
@@ -88,6 +92,20 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
      */
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
     }
     
     
