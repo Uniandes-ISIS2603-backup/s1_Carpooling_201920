@@ -23,6 +23,20 @@ public class ViajeroEntity extends UsuarioEntity implements Serializable {
     @OneToMany(mappedBy = "viajero", fetch = FetchType.LAZY)
     private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
 
+    @PodamExclude
+    @OneToMany(mappedBy = "viajero", fetch = FetchType.LAZY)
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+    
+    
+    
     /**
      * @return the reservas
      */
