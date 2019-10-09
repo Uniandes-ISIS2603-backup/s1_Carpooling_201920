@@ -95,9 +95,6 @@ public class ConductorDetailDTO extends ConductorDTO{
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    
-    
-    
-    
+  
     
 }
