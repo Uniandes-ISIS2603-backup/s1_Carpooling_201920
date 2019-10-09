@@ -72,7 +72,7 @@ public class VehiculoResource {
     @Path("{vehiculosId: \\d+}")
     public VehiculoDTO updateVehiculo(@PathParam("conductoresId") Long conductoresId, @PathParam("vehiculosId") Long vehiculosId, VehiculoDTO vehiculo) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "VehiculoResource updateVehiculo: input: conductoresId: {0} , vehiculosId: {1} , vehiculo:{2}", new Object[]{conductoresId, vehiculosId, vehiculo});
-        if (vehiculosId.equals(vehiculo.getId())) {
+        if (!vehiculosId.equals(vehiculo.getId())) {
             throw new BusinessLogicException("Los ids del Vehiculo no coinciden.");
         }
         VehiculoEntity entity = vehiculoLogic.getVehiculo(conductoresId, vehiculosId);
