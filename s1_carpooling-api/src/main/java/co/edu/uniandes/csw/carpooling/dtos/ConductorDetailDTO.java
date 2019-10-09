@@ -53,6 +53,13 @@ public class ConductorDetailDTO extends ConductorDTO{
                 notificaciones.add(new NotificacionDTO(entity));
             }
         }
+        
+        if(conductor.getVehiculos() != null){
+            vehiculos = new ArrayList<VehiculoDTO>();
+            for(VehiculoEntity entity: conductor.getVehiculos()){
+                vehiculos.add(new VehiculoDTO(entity));
+            }
+        }
     }
     
     
@@ -79,6 +86,14 @@ public class ConductorDetailDTO extends ConductorDTO{
                 notificacionesEntity.add(notificacionDTO.toEntity());
             }
             entity.setNotificaciones(notificacionesEntity);
+        }
+        
+        if(vehiculos !=null){
+            List<VehiculoEntity> vehiculosEntity = new ArrayList<VehiculoEntity>();
+            for(VehiculoDTO vehiculoDTO:vehiculos){
+                vehiculosEntity.add(vehiculoDTO.toEntity());
+            }
+            entity.setVehiculos(vehiculosEntity);
         }
         return entity;
     }
