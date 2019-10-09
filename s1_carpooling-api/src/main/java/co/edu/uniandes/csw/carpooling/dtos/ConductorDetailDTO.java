@@ -20,14 +20,14 @@ import java.util.List;
  */
 public class ConductorDetailDTO extends ConductorDTO{
     private List<ViajeDTO> viajes;
+    
     private List<VehiculoDTO> vehiculos;
+    
     private List<ViajeRecurrenteDTO> viajesRecurrentes;
     
     private List<NotificacionDTO> notificaciones;
     
     private List<CalificacionDTO> calificaciones;
-    
-    private List<VehiculoDTO> vehiculos;
     
     private ConductorDetailDTO(){
         super();
@@ -123,6 +123,34 @@ public class ConductorDetailDTO extends ConductorDTO{
      */
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the vehiculos
+     */
+    public List<VehiculoDTO> getVehiculos() {
+        return vehiculos;
+    }
+
+    /**
+     * @param vehiculos the vehiculos to set
+     */
+    public void setVehiculos(List<VehiculoDTO> vehiculos) {
+        this.vehiculos = vehiculos;
+    }
+
+    /**
+     * @return the viajesRecurrentes
+     */
+    public List<ViajeRecurrenteDTO> getViajesRecurrentes() {
+        return viajesRecurrentes;
+    }
+
+    /**
+     * @param viajesRecurrentes the viajesRecurrentes to set
+     */
+    public void setViajesRecurrentes(List<ViajeRecurrenteDTO> viajesRecurrentes) {
+        this.viajesRecurrentes = viajesRecurrentes;
     }
     
 }
