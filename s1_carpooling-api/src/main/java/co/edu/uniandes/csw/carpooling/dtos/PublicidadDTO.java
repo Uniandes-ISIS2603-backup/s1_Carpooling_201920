@@ -20,9 +20,11 @@ public class PublicidadDTO implements Serializable{
     /*
         ATRIBUTOS
      */
-    protected Long id;
+    private Long id;
     
     private String nombre;
+    
+    private PublicistaDTO publicista;
 
     private String mensaje;
 
