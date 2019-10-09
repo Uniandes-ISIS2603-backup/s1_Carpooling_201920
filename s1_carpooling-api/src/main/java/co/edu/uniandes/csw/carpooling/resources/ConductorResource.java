@@ -99,6 +99,23 @@ public class ConductorResource {
     }
     
     
+    @Path("{conductoresId: \\d+}/viajes")
+    public Class<ConductorViajesResource> getConductorViajesResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductores/" + conductoresId + " no existe.", 404);
+        }
+        return ConductorViajesResource.class;
+    }
+    
+    @Path("{conductoresId: \\d+}/vehiculos")
+    public Class<VehiculoResource> getVehiculosResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductores/" + conductoresId + " no existe.", 404);
+        }
+        return VehiculoResource.class;
+    }
+    
+    
     private List<ConductorDetailDTO> listEntity2DetailDTO(List<ConductorEntity> entities){
         List<ConductorDetailDTO> list = new ArrayList<ConductorDetailDTO> ();
         for(ConductorEntity entity: entities){
