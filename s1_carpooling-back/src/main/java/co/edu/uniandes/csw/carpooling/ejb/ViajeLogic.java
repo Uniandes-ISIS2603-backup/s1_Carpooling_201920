@@ -61,6 +61,16 @@ public class ViajeLogic {
         return persistence.find(viajeId);
     }
     
+    public ViajeEntity getViaje(Long conductorId ,Long viajeId){
+        return persistence.find(conductorId, viajeId);
+    }
+    
+    
+    
+    public List<ViajeEntity> getViajes(Long conductorId){
+        return persistence.findAll(conductorId);
+    }
+    
     public ViajeEntity updateViaje(Long viajeId, ViajeEntity viaje) throws BusinessLogicException{
         if ( !validateDestino(viaje.getDestino()) || !validateOrigen(viaje.getOrigen()))// || viaje.getDestino().equals(viaje.getOrigen()))
             throw new BusinessLogicException("El destino u origen son incorrectos");

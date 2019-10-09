@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.carpooling.dtos;
 import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
 import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
+import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class ConductorDetailDTO extends ConductorDTO{
     
     private List<CalificacionDTO> calificaciones;
     
+    private List<VehiculoDTO> vehiculos;
+    
     private ConductorDetailDTO(){
         super();
     }
@@ -36,6 +39,18 @@ public class ConductorDetailDTO extends ConductorDTO{
             viajes = new ArrayList<ViajeDTO>();
             for(ViajeEntity entity: conductor.getViajes()){
                 viajes.add(new ViajeDTO(entity));
+            }
+        }
+        if(conductor.getCalificaciones() != null){
+            calificaciones = new ArrayList<CalificacionDTO>();
+            for(CalificacionEntity entity: conductor.getCalificaciones()){
+                calificaciones.add(new CalificacionDTO(entity));
+            }
+        } 
+        if(conductor.getNotificaciones() != null){
+            notificaciones = new ArrayList<NotificacionDTO>();
+            for(NotificacionEntity entity: conductor.getNotificaciones()){
+                notificaciones.add(new NotificacionDTO(entity));
             }
         }
     }
@@ -50,6 +65,20 @@ public class ConductorDetailDTO extends ConductorDTO{
             }
             entity.setViajes(viajesEntity);
         
+        }
+        if(calificaciones!=null){
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
+            for(CalificacionDTO calificacionDTO: calificaciones){
+                calificacionesEntity.add(calificacionDTO.toEntity());
+            }
+            entity.setCalificaciones(calificacionesEntity);
+        }
+        if(notificaciones!=null){
+            List<NotificacionEntity> notificacionesEntity = new ArrayList<NotificacionEntity>();
+            for(NotificacionDTO notificacionDTO: notificaciones){
+                notificacionesEntity.add(notificacionDTO.toEntity());
+            }
+            entity.setNotificaciones(notificacionesEntity);
         }
         return entity;
     }
@@ -95,6 +124,5 @@ public class ConductorDetailDTO extends ConductorDTO{
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
-  
     
 }
