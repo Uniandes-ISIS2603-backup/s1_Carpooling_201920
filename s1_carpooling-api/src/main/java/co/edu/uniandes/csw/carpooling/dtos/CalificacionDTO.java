@@ -65,7 +65,7 @@ public class CalificacionDTO implements Serializable{
             
     public CalificacionDTO()
     {
-        //Vacio
+        //V
     }
    
     public CalificacionDTO(CalificacionEntity calificacionEntity)
@@ -77,8 +77,8 @@ public class CalificacionDTO implements Serializable{
             this.comentarios= calificacionEntity.getComentarios();
 
 
-            //if(calificacionEntity.getViajero() != null)
-              //  this.viajero = new ViajeroDTO(calificacionEntity.getViajero());
+            if(calificacionEntity.getViajero() != null)
+               this.viajero = new ViajeroDTO(calificacionEntity.getViajero());
             
              if(calificacionEntity.getConductor() != null)
                 this.conductor = new ConductorDTO(calificacionEntity.getConductor());
@@ -98,8 +98,8 @@ public class CalificacionDTO implements Serializable{
     
         
         
-        //if(calificacionEntity.getViajero() != null)
-           //  this.viajero = new ViajeroDTO(calificacionEntity.getViajero());
+        if(calificacionEntity.getViajero() != null)
+             this.viajero = new ViajeroDTO(calificacionEntity.getViajero());
             
         if(calificacionEntity.getConductor() != null)
            this.conductor = new ConductorDTO(calificacionEntity.getConductor());
