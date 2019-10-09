@@ -51,7 +51,7 @@ public class ReservaLogic {
         
     }
     
-    public ReservaEntity updateReserva(ReservaEntity reserva) throws BusinessLogicException{
+    public ReservaEntity updateReserva(Long reservaId, ReservaEntity reserva) throws BusinessLogicException{
         if(persistence.find(reserva.getId())==(null)){
             throw new BusinessLogicException("La reserva no existe");
         }
