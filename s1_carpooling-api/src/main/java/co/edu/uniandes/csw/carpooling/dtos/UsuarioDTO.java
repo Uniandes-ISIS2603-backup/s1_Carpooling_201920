@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Nicolás Fajardo
  */
 public abstract class UsuarioDTO implements Serializable{
-    private Long id;
+    protected Long id;
     protected String nombre;
     protected String telefono;
     protected String correo;
@@ -42,9 +42,23 @@ public abstract class UsuarioDTO implements Serializable{
         this.fechaDeNacimiento = entity.getFechaDeNacimiento();
         this.tipoDocumento = entity.getTipoDocumento();
     }
-    
+
     /**
-     TIPO_DE_DOCUMENTO* @return the nombre
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the nombre
      */
     public String getNombre() {
         return nombre;
@@ -115,17 +129,17 @@ public abstract class UsuarioDTO implements Serializable{
 
     /**
      * @return the fechaDeNacimiento
-     
+     */
     public Date getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
     /**
      * @param fechaDeNacimiento the fechaDeNacimiento to set
-     
+     */
     public void setFechaDeNacimiento(Date fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
-    }*/
+    }
 
     /**
      * @return the tipoDocumento
@@ -140,19 +154,6 @@ public abstract class UsuarioDTO implements Serializable{
     public void setTipoDocumento(TIPO_DE_DOCUMENTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    
     
 }
