@@ -34,6 +34,7 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     @ManyToOne
     private UsuarioEntity usuario;
     
+    
     /**
      * @return the mensaje
      */
@@ -89,5 +90,7 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
+
+
 
 }

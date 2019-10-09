@@ -6,23 +6,25 @@
 package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
+import co.edu.uniandes.csw.carpooling.entities.UsuarioEntity;
 import java.io.Serializable;
+import java.util.Date;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
 
 /**
  *
- * @author Nicolás Fajardo
+ * @author Nicolas Fajardo
  */
-public class ConductorDTO extends UsuarioDTO implements Serializable {
-    
+public class ConductorDTO extends UsuarioDTO implements Serializable{
     
     public ConductorDTO(){
-        super();
+        
     }
    
     public ConductorDTO(ConductorEntity entity){
         super(entity);  
     }
-    
     
     public ConductorEntity toEntity(){
         ConductorEntity entity = new ConductorEntity();
