@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Nicolás Fajardo
  */
-public class UsuarioDTO implements Serializable{
+public abstract class UsuarioDTO implements Serializable{
     private Long id;
     protected String nombre;
     protected String telefono;
@@ -154,6 +154,5 @@ public class UsuarioDTO implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-    
     
 }
