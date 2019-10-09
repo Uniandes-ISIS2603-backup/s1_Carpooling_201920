@@ -26,7 +26,31 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
     @ManyToOne
     private ViajeEntity viaje;
 
+    @PodamExclude
+    @ManyToOne
+    private ViajeroEntity viajero;
+    
+    @PodamExclude
+    @ManyToOne 
+    private ConductorEntity conductor;
 
+    public ViajeroEntity getViajero() {
+        return viajero;
+    }
+
+    public void setViajero(ViajeroEntity viajero) {
+        this.viajero = viajero;
+    }
+
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
+    }
+    
+    
     
     public ViajeEntity getViaje() {
         return viaje;
