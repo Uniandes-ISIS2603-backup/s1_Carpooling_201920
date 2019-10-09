@@ -22,8 +22,6 @@ public class ConductorDetailDTO extends ConductorDTO{
     private List<VehiculoDTO> vehiculos;
     private List<ViajeRecurrenteDTO> viajesRecurrentes;
     
-    private List<ViajeDTO> viajes;
-    
     private List<NotificacionDTO> notificaciones;
     
     private List<CalificacionDTO> calificaciones;
@@ -122,9 +120,6 @@ public class ConductorDetailDTO extends ConductorDTO{
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    
-    
-    
-    
+  
     
 }
