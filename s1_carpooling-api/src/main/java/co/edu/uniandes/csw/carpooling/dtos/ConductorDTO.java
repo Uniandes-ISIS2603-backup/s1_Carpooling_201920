@@ -16,19 +16,7 @@ import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
  *
  * @author Nicolas Fajardo
  */
-public class ConductorDTO implements Serializable{
-    
-    private Long id;
-    private String nombre;
-    private String telefono;
-    private String correo;
-    private String numDocumento;
-    private String contrasenha;
-    
-    @XmlJavaTypeAdapter(DateAdapter.class)
-    protected Date fechaDeNacimiento;
-    
-    private UsuarioEntity.TIPO_DE_DOCUMENTO tipoDocumento;
+public class ConductorDTO extends UsuarioDTO implements Serializable{
     
     public ConductorDTO(){
         
