@@ -15,11 +15,12 @@ import java.util.List;
 
 /**
  *
- * @author Nicolas Fajardo Ramirez
+ * @author Nicolas Fajardo
  */
-public class ConductorDetailDTO extends ConductorDTO implements Serializable{
-    
+public class ConductorDetailDTO extends ConductorDTO{
     private List<ViajeDTO> viajes;
+    private List<VehiculoDTO> vehiculos;
+    private List<ViajeRecurrenteDTO> viajesRecurrentes;
     
     private List<NotificacionDTO> notificaciones;
     
@@ -37,18 +38,6 @@ public class ConductorDetailDTO extends ConductorDTO implements Serializable{
                 viajes.add(new ViajeDTO(entity));
             }
         }
-        if(conductor.getCalificaciones() != null){
-            calificaciones = new ArrayList<CalificacionDTO>();
-            for(CalificacionEntity entity: conductor.getCalificaciones()){
-                calificaciones.add(new CalificacionDTO(entity));
-            }
-        } 
-        if(conductor.getNotificaciones() != null){
-            notificaciones = new ArrayList<NotificacionDTO>();
-            for(NotificacionEntity entity: conductor.getNotificaciones()){
-                notificaciones.add(new NotificacionDTO(entity));
-            }
-        }
     }
     
     
@@ -60,20 +49,7 @@ public class ConductorDetailDTO extends ConductorDTO implements Serializable{
                 viajesEntity.add(viajeDTO.toEntity());
             }
             entity.setViajes(viajesEntity);
-        }
-        if(calificaciones!=null){
-            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
-            for(CalificacionDTO calificacionDTO: calificaciones){
-                calificacionesEntity.add(calificacionDTO.toEntity());
-            }
-            entity.setCalificaciones(calificacionesEntity);
-        }
-        if(notificaciones!=null){
-            List<NotificacionEntity> notificacionesEntity = new ArrayList<NotificacionEntity>();
-            for(NotificacionDTO notificacionDTO: notificaciones){
-                notificacionesEntity.add(notificacionDTO.toEntity());
-            }
-            entity.setNotificaciones(notificacionesEntity);
+        
         }
         return entity;
     }
