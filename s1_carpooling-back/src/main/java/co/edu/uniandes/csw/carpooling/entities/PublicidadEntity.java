@@ -21,22 +21,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class PublicidadEntity extends BaseEntity implements Serializable {
-
-    /**
-     * @return the publicista
-     */
-    public PublicistaEntity getPublicista() {
-        return publicista;
-    }
-
-    /**
-     * @param publicista the publicista to set
-     */
-    public void setPublicista(PublicistaEntity publicista) {
-        this.publicista = publicista;
-    }
-
-    
+   
     public enum DISPONIBILIDAD {
         UNA_SEMANA,
         TRES_SEMANAS
@@ -147,4 +132,19 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     public void setDisponibilidadPublicidad(DISPONIBILIDAD disponibilidadPublicidad) {
         this.disponibilidadPublicidad = disponibilidadPublicidad;
     }
+    
+        /**
+     * @return the publicista
+     */
+    public PublicistaEntity getPublicista() {
+        return publicista;
+    }
+
+    /**
+     * @param publicista the publicista to set
+     */
+    public void setPublicista(PublicistaEntity publicista) {
+        this.publicista = publicista;
+    }
+
 }

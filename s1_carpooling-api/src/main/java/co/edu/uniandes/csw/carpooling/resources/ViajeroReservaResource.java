@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.carpooling.dtos;
-
-import java.io.Serializable;
+package co.edu.uniandes.csw.carpooling.resources;
 
 /**
  *
- * @author Nicolás Fajardo Ramírez
+ * @author Estudiante
  */
-public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
-    
-    
+public class ViajeroReservaResource {
     
 }
