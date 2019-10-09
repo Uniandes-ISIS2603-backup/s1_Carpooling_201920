@@ -26,9 +26,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
     @ManyToOne
     private ViajeEntity viaje;
 
-    @PodamExclude
-    @ManyToOne
-    private UsuarioEntity usuario;
+
     
     public ViajeEntity getViaje() {
         return viaje;
@@ -38,13 +36,6 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
         this.viaje = viaje;
     }
 
-    public UsuarioEntity getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuario = usuario;
-    }
    
     
     /**
