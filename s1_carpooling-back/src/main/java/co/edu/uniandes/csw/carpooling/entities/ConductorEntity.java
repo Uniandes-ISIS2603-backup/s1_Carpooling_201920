@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.carpooling.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,6 +34,18 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
             cascade = CascadeType.PERSIST)
     private List<VehiculoEntity> vehiculos;
 
+    @PodamExclude
+    @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY)
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+    
     public List<VehiculoEntity> getVehiculos() {
         return vehiculos;
     }

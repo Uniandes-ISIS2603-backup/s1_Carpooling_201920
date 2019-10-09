@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.carpooling.test.logic;
 
 import co.edu.uniandes.csw.carpooling.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
+import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.CalificacionPersistence;
 import java.util.ArrayList;
@@ -45,7 +47,8 @@ public class CalificacionLogicTest {
     private UserTransaction utx;
     
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
-    
+    private List<ViajeroEntity> dataViajero = new ArrayList<ViajeroEntity>();
+    private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
     @Deployment
     public static JavaArchive createDeployment()
     {

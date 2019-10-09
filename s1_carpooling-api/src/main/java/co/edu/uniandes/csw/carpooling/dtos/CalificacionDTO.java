@@ -59,7 +59,8 @@ public class CalificacionDTO implements Serializable{
     private Integer puntuacion;
     private String comentarios;
    
-    private UsuarioDTO usuario;
+    private ViajeroDTO viajero;
+    private ConductorDTO conductor;
     private ViajeDTO viaje;
             
     public CalificacionDTO()
@@ -76,8 +77,11 @@ public class CalificacionDTO implements Serializable{
             this.comentarios= calificacionEntity.getComentarios();
 
 
-            //if(calificacionEntity.getUsuario() != null)
-                //this.usuario = new UsuarioDTO(calificacionEntity.getUsuario());
+            //if(calificacionEntity.getViajero() != null)
+              //  this.viajero = new ViajeroDTO(calificacionEntity.getViajero());
+            
+             if(calificacionEntity.getConductor() != null)
+                this.conductor = new ConductorDTO(calificacionEntity.getConductor());
             
             if(calificacionEntity.getViaje() != null)
                 this.viaje = new ViajeDTO(calificacionEntity.getViaje());
@@ -91,8 +95,14 @@ public class CalificacionDTO implements Serializable{
         calificacionEntity.setId(this.id);
         calificacionEntity.setPuntuacion(this.puntuacion);
         calificacionEntity.setComentarios(this.comentarios);
-        //if(usuario != null)
-            //calificacionEntity.setUsuario(usuario.toEntity());
+    
+        
+        
+        //if(calificacionEntity.getViajero() != null)
+           //  this.viajero = new ViajeroDTO(calificacionEntity.getViajero());
+            
+        if(calificacionEntity.getConductor() != null)
+           this.conductor = new ConductorDTO(calificacionEntity.getConductor());
         if(viaje != null)
             calificacionEntity.setViaje(viaje.toEntity());
         
@@ -123,13 +133,24 @@ public class CalificacionDTO implements Serializable{
         this.comentarios = comentarios;
     }
 
-    public UsuarioDTO getUsuario() {
-        return usuario;
+    public ViajeroDTO getViajero() {
+        return viajero;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
+    public void setViajero(ViajeroDTO viajero) {
+        this.viajero = viajero;
     }
+
+    public ConductorDTO getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(ConductorDTO conductor) {
+        this.conductor = conductor;
+    }
+
+
+    
 
     public ViajeDTO getViaje() {
         return viaje;
