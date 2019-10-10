@@ -39,7 +39,7 @@ public class ViajePersistence {
         query.setParameter("conductorId", conductorId);
         List<ViajeEntity> resultados = query.getResultList();
         ViajeEntity viaje = null;
-        if(viaje != null && !resultados.isEmpty()){
+        if(resultados != null && !resultados.isEmpty()){
             viaje = resultados.get(0);
         }
         return viaje;
