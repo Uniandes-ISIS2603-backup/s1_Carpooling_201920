@@ -13,6 +13,7 @@ import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import com.sun.istack.internal.logging.Logger;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,10 +58,10 @@ public class ReservaResource {
    
 //    @GET
 //    public List<ReservaDTO> getReservas(){
-//        LOGGER.info("rESERVAResource getReservas: input: void");
+//        LOGGER.info("ReservaResource getReservas: input: void");
 //        List<ReservaDTO> reserva = listViajesEntityToDTO(logic.findReservas());
-//        LOGGER.log(Level.INFO, "ViajeResource getViajes: output: {0}", viajes);
-//        return RESERVA;
+//        LOGGER.log(Level.INFO, "ReservaResource getReservas: output: {0}", reserva);
+//        return reserva;
 //    } 
    
     @GET
@@ -99,22 +100,23 @@ public class ReservaResource {
         logic.deleteReserva(logic.findReserva(reservasId));
         LOGGER.info("ReservaResource deleteReserva: output: void");
     }
-//       /**
-//     * Convierte una lista de entidades a DTO.
-//     *
-//     * Este método convierte una lista de objetos BookEntity a una lista de
-//     * objetos BookDetailDTO (json)
-//     *
-//     * @param entityList corresponde a la lista de libros de tipo Entity que
-//     * vamos a convertir a DTO.
-//     * @return la lista de libros en forma DTO (json)
-//     */
-//    private List<BookDetailDTO> listEntity2DetailDTO(List<BookEntity> entityList) {
-//        List<BookDetailDTO> list = new ArrayList<>();
-//        for (BookEntity entity : entityList) {
-//            list.add(new BookDetailDTO(entity));
+       /**
+     * Convierte una lista de entidades a DTO.
+     *
+     * Este método convierte una lista de objetos BookEntity a una lista de
+     * objetos BookDetailDTO (json)
+     *
+     * @param entityList corresponde a la lista de libros de tipo Entity que
+     * vamos a convertir a DTO.
+     * @return la lista de libros en forma DTO (json)
+     */
+//    private List<ReservaDTO> listEntity2DetailDTO(List<ReservaDTO> entityList) {
+//        List<ReservaDTO> list = new ArrayList<ReservaDTO>();
+//        for (ReservaEntity reserva : entityList) {
+//            list.add(new ReservaDTO(reserva));
 //        }
 //        return list;
-//    }
+//        
+//    }   
     
 }

@@ -37,6 +37,9 @@ public class ReservaLogic {
         if(persistence.find(reserva.getId())!=null){
             throw new BusinessLogicException("La reserva ya existe");
         }
+        if(reserva.getViaje().getCupos()<=0){
+            throw new BusinessLogicException("La reserva ya existe");
+        }
         reserva = persistence.create(reserva);
         return reserva;
     }
