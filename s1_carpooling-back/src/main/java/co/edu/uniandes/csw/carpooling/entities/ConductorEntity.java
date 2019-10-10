@@ -37,6 +37,20 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     @PodamExclude
     @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY)
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY)
+    private List<ViajeRecurrenteEntity> viajesRecurrentes = new ArrayList<ViajeRecurrenteEntity>();
+
+    public List<ViajeRecurrenteEntity> getViajesRecurrentes() {
+        return viajesRecurrentes;
+    }
+
+    public void setViajesRecurrentes(List<ViajeRecurrenteEntity> viajesRecurrentes) {
+        this.viajesRecurrentes = viajesRecurrentes;
+    }
+    
+    
 
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
