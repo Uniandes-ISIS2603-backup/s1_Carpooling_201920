@@ -130,6 +130,13 @@ public class ViajeroResource {
         logica.deleteViajero(viajerosId);
         LOGGER.info("ViajeroResource deleteViajero: output: void");
     }
+    @Path("{conductoresId: \\d+}/calificaciones")
+    public Class<ViajeroCalificacionResource> getCalificacionesResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getViajero(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductor/" + conductoresId + " no existe.", 404);
+        }
+        return ViajeroCalificacionResource.class;
+    }
 
     /**
      * Conexión con el servicio de libros para una viajero.

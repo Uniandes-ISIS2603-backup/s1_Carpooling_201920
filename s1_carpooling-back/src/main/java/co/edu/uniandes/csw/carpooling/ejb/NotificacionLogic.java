@@ -51,7 +51,7 @@ public class NotificacionLogic {
         
     }
     
-    public NotificacionEntity updateNotificacion(NotificacionEntity notificacion) throws BusinessLogicException{
+    public NotificacionEntity updateNotificacion(Long notificacioId, NotificacionEntity notificacion) throws BusinessLogicException{
         if(notificacion.getFecha()==(null)){
             throw new BusinessLogicException("La notificacion no tiene una fecha");
         }
