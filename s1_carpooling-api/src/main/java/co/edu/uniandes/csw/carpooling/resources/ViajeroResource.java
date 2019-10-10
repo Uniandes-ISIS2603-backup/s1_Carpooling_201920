@@ -130,6 +130,13 @@ public class ViajeroResource {
         logica.deleteViajero(viajerosId);
         LOGGER.info("ViajeroResource deleteViajero: output: void");
     }
+    @Path("{viajerosId: \\d+}/calificaciones")
+    public Class<ViajeroCalificacionResource> getCalificacionesResource(@PathParam("viajerosId") Long viajerosId) {
+        if (logica.getViajero(viajerosId) == null) {
+            throw new WebApplicationException("El recurso /conductor/" + viajerosId + " no existe.", 404);
+        }
+        return ViajeroCalificacionResource.class;
+    }
 
     /**
      * Conexión con el servicio de libros para una viajero.
@@ -153,6 +160,13 @@ public class ViajeroResource {
      //   return ViajeroReservaResource.class;
   //  }
 
+     @Path("{viajerosId: \\d+}/notificaciones")
+    public Class<ViajeroNotificacionResource> getNotificacionesResource(@PathParam("viajerosId") Long viajerosId) {
+        if (logica.getViajero(viajerosId) == null) {
+            throw new WebApplicationException("El recurso /viajero/" + viajerosId + " no existe.", 404);
+        }
+        return ViajeroNotificacionResource.class;
+    }
     /**
      * Convierte una lista de entidades a DTO.
      *

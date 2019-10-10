@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.carpooling.dtos;
 import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
 import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
+import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ import java.util.List;
  */
 public class ConductorDetailDTO extends ConductorDTO{
     private List<ViajeDTO> viajes;
+    
     private List<VehiculoDTO> vehiculos;
+    
     private List<ViajeRecurrenteDTO> viajesRecurrentes;
     
     private List<NotificacionDTO> notificaciones;
@@ -38,6 +41,25 @@ public class ConductorDetailDTO extends ConductorDTO{
                 viajes.add(new ViajeDTO(entity));
             }
         }
+        if(conductor.getCalificaciones() != null){
+            calificaciones = new ArrayList<CalificacionDTO>();
+            for(CalificacionEntity entity: conductor.getCalificaciones()){
+                calificaciones.add(new CalificacionDTO(entity));
+            }
+        } 
+        if(conductor.getNotificaciones() != null){
+            notificaciones = new ArrayList<NotificacionDTO>();
+            for(NotificacionEntity entity: conductor.getNotificaciones()){
+                notificaciones.add(new NotificacionDTO(entity));
+            }
+        }
+        
+        if(conductor.getVehiculos() != null){
+            vehiculos = new ArrayList<VehiculoDTO>();
+            for(VehiculoEntity entity: conductor.getVehiculos()){
+                vehiculos.add(new VehiculoDTO(entity));
+            }
+        }
     }
     
     
@@ -50,6 +72,28 @@ public class ConductorDetailDTO extends ConductorDTO{
             }
             entity.setViajes(viajesEntity);
         
+        }
+        if(calificaciones!=null){
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
+            for(CalificacionDTO calificacionDTO: calificaciones){
+                calificacionesEntity.add(calificacionDTO.toEntity());
+            }
+            entity.setCalificaciones(calificacionesEntity);
+        }
+        if(notificaciones!=null){
+            List<NotificacionEntity> notificacionesEntity = new ArrayList<NotificacionEntity>();
+            for(NotificacionDTO notificacionDTO: notificaciones){
+                notificacionesEntity.add(notificacionDTO.toEntity());
+            }
+            entity.setNotificaciones(notificacionesEntity);
+        }
+        
+        if(vehiculos !=null){
+            List<VehiculoEntity> vehiculosEntity = new ArrayList<VehiculoEntity>();
+            for(VehiculoDTO vehiculoDTO:vehiculos){
+                vehiculosEntity.add(vehiculoDTO.toEntity());
+            }
+            entity.setVehiculos(vehiculosEntity);
         }
         return entity;
     }
@@ -95,9 +139,33 @@ public class ConductorDetailDTO extends ConductorDTO{
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    
-    
-    
-    
+
+    /**
+     * @return the vehiculos
+     */
+    public List<VehiculoDTO> getVehiculos() {
+        return vehiculos;
+    }
+
+    /**
+     * @param vehiculos the vehiculos to set
+     */
+    public void setVehiculos(List<VehiculoDTO> vehiculos) {
+        this.vehiculos = vehiculos;
+    }
+
+    /**
+     * @return the viajesRecurrentes
+     */
+    public List<ViajeRecurrenteDTO> getViajesRecurrentes() {
+        return viajesRecurrentes;
+    }
+
+    /**
+     * @param viajesRecurrentes the viajesRecurrentes to set
+     */
+    public void setViajesRecurrentes(List<ViajeRecurrenteDTO> viajesRecurrentes) {
+        this.viajesRecurrentes = viajesRecurrentes;
+    }
     
 }

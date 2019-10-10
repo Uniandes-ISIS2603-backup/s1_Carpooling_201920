@@ -36,25 +36,28 @@ public class CalificacionPersistence {
     }
 
     public List<CalificacionEntity> findAllByViajero(Long viajeroId) {
-        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntityEntity p where (p.viajero.id = :viajeroid)", CalificacionEntity.class);
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.viajero.id = :viajeroid)", CalificacionEntity.class);
         q.setParameter("viajeroid", viajeroId);
         List<CalificacionEntity> results = q.getResultList();
         return results;
     }
 
     public List<CalificacionEntity> findAllByConductor(Long conductorId) {
-        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntityEntity p where (p.conductor.id = :conductorid)", CalificacionEntity.class);
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.conductor.id = :conductorid)", CalificacionEntity.class);
         q.setParameter("conductorid", conductorId);
         List<CalificacionEntity> results = q.getResultList();
         return results;
     }
 
     public CalificacionEntity findByConductor(Long conductorId, Long calificacionId) {
-        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntityEntity p where (p.conductor.id = :conductorid) and (p.id = :calificacionId)", CalificacionEntity.class);
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.conductor.id = :conductorid) and (p.id = :calificacionId)", CalificacionEntity.class);
+
         q.setParameter("conductorid", conductorId);
+  
         q.setParameter("calificacionId", calificacionId);
-        List<CalificacionEntity> results = q.getResultList();
+
         
+        List<CalificacionEntity> results = q.getResultList();
         CalificacionEntity calificacion = null;
         if (results == null) {
             calificacion = null;
@@ -68,8 +71,8 @@ public class CalificacionPersistence {
     }
 
     public CalificacionEntity findByViajero(Long viajeroId, Long calificacionId) {
-        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntityEntity p where (p.viajero.id = :viajeroid) and (p.id = :calificacionId)", CalificacionEntity.class);
-        q.setParameter("conductorid", viajeroId);
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.viajero.id = :viajeroid) and (p.id = :calificacionId)", CalificacionEntity.class);
+        q.setParameter("viajeroid", viajeroId);
         q.setParameter("calificacionId", calificacionId);
         List<CalificacionEntity> results = q.getResultList();
         CalificacionEntity calificacion = null;

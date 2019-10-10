@@ -32,7 +32,7 @@ public class VehiculoPersistence {
        return vehiculo;
     }
     
-         public VehiculoEntity find(Long viajeroId) {
+    public VehiculoEntity find(Long viajeroId) {
  
         return em.find(VehiculoEntity.class, viajeroId);
     }

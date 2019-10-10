@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.persistence.VehiculoPersistence;
 import java.util.ArrayList;
@@ -50,7 +51,8 @@ public class VehiculoPersistanceTest {
     UserTransaction utx;
   
     private List<VehiculoEntity> data = new ArrayList<VehiculoEntity>();
-
+    private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
+    
     @Before
     public void setUp() {
         try {
@@ -71,13 +73,24 @@ public class VehiculoPersistanceTest {
 
     private void clearData() {
         em.createQuery("delete from VehiculoEntity").executeUpdate();
+        em.createQuery("delete from ConductorEntity").executeUpdate();
     }
 
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
+       
+        for (int i = 0; i < 3; i++) {
+            ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
+            em.persist(entity);
+            dataConductor.add(entity);
+        }
+         em.createQuery("delete from VehiculoEntity").executeUpdate();
         for (int i = 0; i < 3; i++) {
             VehiculoEntity entity = factory.manufacturePojo(VehiculoEntity.class);
-
+            if(i==0)
+            {
+                entity.setConductor(dataConductor.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
@@ -122,6 +135,23 @@ public class VehiculoPersistanceTest {
         VehiculoEntity newEntity = cp.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
+    }
+    
+    @Test
+    public void getVehiculoByConductorTest() {
+        VehiculoEntity entity = data.get(0);
+        Long idCalificacion = entity.getId();
+        ConductorEntity conductor = dataConductor.get(0);
+        Long idConductor = conductor.getId();
+        VehiculoEntity newEntity = cp.find(idConductor, idCalificacion );
+        Assert.assertNotNull(newEntity);
+        
+         Assert.assertEquals(entity.getSoat(), newEntity.getSoat());
+        Assert.assertEquals(entity.getAseguradora(), newEntity.getAseguradora());
+        Assert.assertEquals(entity.getModelo(), newEntity.getModelo());
+        Assert.assertEquals(entity.getPlaca(), newEntity.getPlaca());
+        Assert.assertEquals(entity.getSillas(), newEntity.getSillas());
+        Assert.assertEquals(entity.getVigenciaSoat(), newEntity.getVigenciaSoat());
     }
     
      @Test

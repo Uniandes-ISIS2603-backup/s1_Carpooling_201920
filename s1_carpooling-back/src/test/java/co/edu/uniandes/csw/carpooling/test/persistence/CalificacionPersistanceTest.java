@@ -100,11 +100,6 @@ public class CalificacionPersistanceTest {
         }
         
         for (int i = 0; i < 3; i++) {
-            ViajeroEntity entity = factory.manufacturePojo(ViajeroEntity.class);
-            em.persist(entity);
-            dataViajero.add(entity);
-        }
-        for (int i = 0; i < 3; i++) {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
             if(i==0)
             {
@@ -154,7 +149,7 @@ public class CalificacionPersistanceTest {
     
     @Test
     public void getCalificacionesByViajeroTest() {
-        List<CalificacionEntity> list = cp.findAllByViajero(data.get(0).getViajero().getId());
+        List<CalificacionEntity> list = cp.findAllByViajero(data.get(1).getViajero().getId());
         for (CalificacionEntity ent : list) {
             boolean found = false;
             for (CalificacionEntity entity : data) {
@@ -168,7 +163,7 @@ public class CalificacionPersistanceTest {
     
     @Test
     public void getCalificacionesByConductorTest() {
-        List<CalificacionEntity> list = cp.findAllByConductor(data.get(1).getViajero().getId());
+        List<CalificacionEntity> list = cp.findAllByConductor(data.get(0).getConductor().getId());
         for (CalificacionEntity ent : list) {
             boolean found = false;
             for (CalificacionEntity entity : data) {
@@ -183,7 +178,7 @@ public class CalificacionPersistanceTest {
     
     @Test
     public void getCalificacionByViajeroTest() {
-        CalificacionEntity entity = data.get(0);
+        CalificacionEntity entity = data.get(1);
         CalificacionEntity newEntity = cp.findByViajero(dataViajero.get(0).getId(), entity.getId());
         Assert.assertNotNull(newEntity);
         
@@ -193,8 +188,12 @@ public class CalificacionPersistanceTest {
     
     @Test
     public void getCalificacionByConductorTest() {
-        CalificacionEntity entity = data.get(1);
-        CalificacionEntity newEntity = cp.findByConductor(dataConductor.get(0).getId(), entity.getId());
+        CalificacionEntity entity = data.get(0);
+        Long idCalificacion = entity.getId();
+        ConductorEntity conductor = dataConductor.get(0);
+        Long idConductor = conductor.getId();
+        System.out.println("llego 1");
+        CalificacionEntity newEntity = cp.findByConductor(idConductor, idCalificacion );
         Assert.assertNotNull(newEntity);
         
         Assert.assertEquals(entity.getPuntuacion(), newEntity.getPuntuacion());

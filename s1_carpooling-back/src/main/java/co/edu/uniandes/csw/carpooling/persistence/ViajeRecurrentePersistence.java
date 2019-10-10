@@ -31,9 +31,9 @@ public class ViajeRecurrentePersistence {
        return viajeRecurrente;
     }
     
-     public ViajeRecurrenteEntity find(Long viajeroId) {
+     public ViajeRecurrenteEntity find(Long conductorId) {
  
-        return em.find(ViajeRecurrenteEntity.class, viajeroId);
+        return em.find(ViajeRecurrenteEntity.class, conductorId);
     }
      
      public ViajeRecurrenteEntity update(ViajeRecurrenteEntity viajeRecurrenteEntity)
@@ -49,5 +49,23 @@ public class ViajeRecurrentePersistence {
         public List<ViajeRecurrenteEntity> findAll() {
         TypedQuery<ViajeRecurrenteEntity> query = em.createQuery("select u from ViajeRecurrenteEntity u", ViajeRecurrenteEntity.class);
         return query.getResultList();
+    }
+        
+        public ViajeRecurrenteEntity find(Long conductoresId, Long viajesRecurrentesId) {
+
+        TypedQuery<ViajeRecurrenteEntity> q = em.createQuery("select p from ViajeRecurrenteEntity p where (p.conductor.id = :conductorid) and (p.id = :viajesRecurrentesId)", ViajeRecurrenteEntity.class);
+        q.setParameter("conductorid", conductoresId);
+        q.setParameter("viajesRecurrentesId", viajesRecurrentesId);
+        List<ViajeRecurrenteEntity> results = q.getResultList();
+        ViajeRecurrenteEntity viajeRecurrente = null;
+        if (results == null) {
+            viajeRecurrente = null;
+        } else if (results.isEmpty()) {
+            viajeRecurrente = null;
+        } else if (results.size() >= 1) {
+            viajeRecurrente = results.get(0);
+        }
+
+        return viajeRecurrente;
     }
 }

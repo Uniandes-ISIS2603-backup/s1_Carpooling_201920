@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.carpooling.test.logic;
 
 import co.edu.uniandes.csw.carpooling.ejb.ViajeRecurrenteLogic;
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeRecurrenteEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ViajeRecurrentePersistence;
@@ -46,6 +47,7 @@ public class ViajeRecurrenteLogicTest {
     private UserTransaction utx;
     
     private List<ViajeRecurrenteEntity> data = new ArrayList<ViajeRecurrenteEntity>();
+     private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
     
     @Deployment
     public static JavaArchive createDeployment()
@@ -82,12 +84,23 @@ public class ViajeRecurrenteLogicTest {
     
         private void clearData() {
         em.createQuery("delete from ViajeRecurrenteEntity").executeUpdate();
+         em.createQuery("delete from ConductorEntity").executeUpdate();
     }
 
     private void insertData() {
+        
+        for (int i = 0; i < 3; i++) {
+            ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
+            em.persist(entity);
+            dataConductor.add(entity);
+        }
+        
         for (int i = 0; i < 3; i++) {
             ViajeRecurrenteEntity entity = factory.manufacturePojo(ViajeRecurrenteEntity.class);
-        
+             if(i==0)
+            {
+                entity.setConductor(dataConductor.get(0));
+            }
          
             em.persist(entity);
             data.add(entity);
@@ -112,6 +125,68 @@ public class ViajeRecurrenteLogicTest {
         Assert.assertEquals(entity.getFechaFin(), result.getFechaFin());
         Assert.assertEquals(entity.getFrecuencia(), result.getFrecuencia());
         
+    }
+    
+    @Test
+    public void createViajeRecurrenteForConductorTest() throws BusinessLogicException {
+        ViajeRecurrenteEntity newEntity = factory.manufacturePojo(ViajeRecurrenteEntity.class);
+        newEntity.setConductor(dataConductor.get(0));
+        ViajeRecurrenteEntity result = viajeRecurrenteLogic.createViajeRecurrente(dataConductor.get(0).getId(), newEntity);
+        Assert.assertNotNull(result);
+        ViajeRecurrenteEntity entity = em.find(ViajeRecurrenteEntity.class, result.getId());
+              
+        Assert.assertEquals(entity.getFechaInicio(), result.getFechaInicio());
+        Assert.assertEquals(entity.getFechaFin(), result.getFechaFin());
+        Assert.assertEquals(entity.getFrecuencia(), result.getFrecuencia());
+    }
+    
+    @Test
+    public void getViajesRecurrentesByConductorTest() throws BusinessLogicException {
+        List<ViajeRecurrenteEntity> list = viajeRecurrenteLogic.getViajesRecurrentes(dataConductor.get(0).getId());
+        for (ViajeRecurrenteEntity entity : list) {
+            boolean found = false;
+            for (ViajeRecurrenteEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    @Test
+    public void getViajeRecurrenteByConductorTest() {
+        ViajeRecurrenteEntity entity = data.get(0);
+        ViajeRecurrenteEntity resultEntity = viajeRecurrenteLogic.getViajeRecurrente(dataConductor.get(0).getId(), entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        
+        Assert.assertEquals(entity.getFechaInicio(), resultEntity.getFechaInicio());
+        Assert.assertEquals(entity.getFechaFin(), resultEntity.getFechaFin());
+        Assert.assertEquals(entity.getFrecuencia(), resultEntity.getFrecuencia());
+    }
+    
+    public void updateViajeRecurrenteByConductorTest() {
+        ViajeRecurrenteEntity entity = data.get(0);
+        ViajeRecurrenteEntity pojoEntity = factory.manufacturePojo(ViajeRecurrenteEntity.class);
+
+        pojoEntity.setId(entity.getId());
+
+        viajeRecurrenteLogic.updateViajeRecurrente(dataConductor.get(0).getId(), pojoEntity);
+
+        ViajeRecurrenteEntity resp = em.find(ViajeRecurrenteEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());        
+        Assert.assertEquals(pojoEntity.getFechaInicio(), resp.getFechaInicio());
+        Assert.assertEquals(pojoEntity.getFechaFin(), resp.getFechaFin());
+        Assert.assertEquals(pojoEntity.getFrecuencia(), resp.getFrecuencia());
+    }
+    @Test
+    public void deleteViajeRecurrenteByConductorTest() throws BusinessLogicException {
+        ViajeRecurrenteEntity entity = data.get(0);
+        viajeRecurrenteLogic.deleteViajeRecurrente(dataConductor.get(0).getId(), entity.getId());
+        ViajeRecurrenteEntity deleted = em.find(ViajeRecurrenteEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
     @Test (expected = BusinessLogicException.class)

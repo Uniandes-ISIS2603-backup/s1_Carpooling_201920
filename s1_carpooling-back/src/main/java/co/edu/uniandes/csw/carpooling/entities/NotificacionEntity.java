@@ -20,6 +20,8 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class NotificacionEntity extends BaseEntity implements Serializable {
 
+  
+
 
 
 
@@ -29,6 +31,18 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity viajero;
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity conductor;
     
     
     /**
@@ -73,6 +87,46 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
         this.fecha = fecha;
     }
 
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
 
 
+  /**
+     * @return the viajero
+     */
+    public UsuarioEntity getViajero() {
+        return viajero;
+    }
+
+    /**
+     * @param viajero the viajero to set
+     */
+    public void setViajero(UsuarioEntity viajero) {
+        this.viajero = viajero;
+    }
+
+    /**
+     * @return the conductor
+     */
+    public UsuarioEntity getConductor() {
+        return conductor;
+    }
+
+    /**
+     * @param conductor the conductor to set
+     */
+    public void setConductor(UsuarioEntity conductor) {
+        this.conductor = conductor;
+    }
 }

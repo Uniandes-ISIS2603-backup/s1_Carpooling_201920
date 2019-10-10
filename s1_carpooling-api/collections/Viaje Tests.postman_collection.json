@@ -6,6 +6,112 @@
 	},
 	"item": [
 		{
+			"name": "Crear un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_conductor\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un vehiculo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_vehiculo\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"MDS 546\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear un viaje",
 			"event": [
 				{
@@ -52,7 +158,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/vehiculos/{{new_id_vehiculo}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -61,7 +167,11 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes"
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"vehiculos",
+						"{{new_id_vehiculo}}"
 					]
 				}
 			},
@@ -114,7 +224,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/vehiculos/{{new_id_vehiculo}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -123,7 +233,11 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes"
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"vehiculos",
+						"{{new_id_vehiculo}}"
 					]
 				}
 			},
@@ -285,6 +399,20 @@
 		},
 		{
 			"name": "Obtener todos los viajes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c6f19c79-ffe4-407a-97e4-d49c472297fc",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
+							"tests[\"viajes count\"] = data.length >= 2;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],

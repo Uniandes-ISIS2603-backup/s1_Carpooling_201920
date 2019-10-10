@@ -99,6 +99,47 @@ public class ConductorResource {
     }
     
     
+    @Path("{conductoresId: \\d+}/viajes")
+    public Class<ConductorViajesResource> getConductorViajesResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductores/" + conductoresId + " no existe.", 404);
+        }
+        return ConductorViajesResource.class;
+    }
+    
+    @Path("{conductoresId: \\d+}/vehiculos")
+    public Class<VehiculoResource> getVehiculosResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductores/" + conductoresId + " no existe.", 404);
+        }
+        return VehiculoResource.class;
+    }
+    
+     @Path("{conductoresId: \\d+}/calificaciones")
+    public Class<ConductorCalificacionResource> getCalificacionesResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductor/" + conductoresId + " no existe.", 404);
+        }
+        return ConductorCalificacionResource.class;
+    }
+    
+      @Path("{conductoresId: \\d+}/notificaciones")
+    public Class<ConductorNotificacionResource> getNotificacionesResource(@PathParam("notificacionesId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductor/" + conductoresId + " no existe.", 404);
+        }
+        return ConductorNotificacionResource.class;
+    }
+    
+    @Path("{conductoresId: \\d+}/viajesRecurrentes")
+    public Class<ViajeRecurrenteResource> getViajeRecurrenteResource(@PathParam("conductoresId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductor /" + conductoresId + " no existe.", 404);
+        }
+        return ViajeRecurrenteResource.class;
+    }
+    
+    
     private List<ConductorDetailDTO> listEntity2DetailDTO(List<ConductorEntity> entities){
         List<ConductorDetailDTO> list = new ArrayList<ConductorDetailDTO> ();
         for(ConductorEntity entity: entities){

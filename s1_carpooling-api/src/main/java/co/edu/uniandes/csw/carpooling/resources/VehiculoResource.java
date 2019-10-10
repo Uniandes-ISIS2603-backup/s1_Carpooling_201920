@@ -1,12 +1,9 @@
-
-
-
+package co.edu.uniandes.csw.carpooling.resources;
 
 import co.edu.uniandes.csw.carpooling.dtos.VehiculoDTO;
 import co.edu.uniandes.csw.carpooling.ejb.VehiculoLogic;
 import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.carpooling.resources.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,14 +18,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author Juan David Alarcón
  */
-@Path("vehiculos")
-@Produces("application/JSON")
-@Consumes("application/JSON")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class VehiculoResource {
  
     private static final Logger LOGGER = Logger.getLogger(VehiculoResource.class.getName());
@@ -44,11 +41,11 @@ public class VehiculoResource {
     }
     
     @GET
-    public List<VehiculoDTO> getVehiculo(@PathParam("conductoresId") long conductoresId)
+    public List<VehiculoDTO> getVehiculos(@PathParam("conductoresId") long conductoresId)
     {
         LOGGER.log(Level.INFO, "VehiculoResource getVehiculos: input: {0}", conductoresId);
         List<VehiculoDTO> listaDTOs = listEntity2DTO(vehiculoLogic.getVehiculos(conductoresId));
-         LOGGER.log(Level.INFO, "VehiculoResource getVehiculos: output: {0}", listaDTOs);
+        LOGGER.log(Level.INFO, "VehiculoResource getVehiculos: output: {0}", listaDTOs);
         return listaDTOs;
     }
     @GET
@@ -75,7 +72,7 @@ public class VehiculoResource {
     @Path("{vehiculosId: \\d+}")
     public VehiculoDTO updateVehiculo(@PathParam("conductoresId") Long conductoresId, @PathParam("vehiculosId") Long vehiculosId, VehiculoDTO vehiculo) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "VehiculoResource updateVehiculo: input: conductoresId: {0} , vehiculosId: {1} , vehiculo:{2}", new Object[]{conductoresId, vehiculosId, vehiculo});
-        if (vehiculosId.equals(vehiculo.getId())) {
+        if (!vehiculosId.equals(vehiculo.getId())) {
             throw new BusinessLogicException("Los ids del Vehiculo no coinciden.");
         }
         VehiculoEntity entity = vehiculoLogic.getVehiculo(conductoresId, vehiculosId);

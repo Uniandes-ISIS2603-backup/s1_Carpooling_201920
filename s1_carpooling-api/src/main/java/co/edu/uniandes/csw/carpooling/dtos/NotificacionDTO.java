@@ -13,6 +13,30 @@ import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
+ * NotificacionDTO Objeto de transferencia de datos de Notificaciones. Los DTO contienen las
+ * representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": Long,
+ *      "titulo": String,
+ *      "mensaje": String,
+ *      "fecha": Date
+ *   }
+ * </pre> Por ejemplo un viaje se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id":1,
+ *      "titulo": "Cancelacion de servicios",
+ *      "mensaje": "por tener 5 infracciones no podrá usar mas la aplicacion",
+ *      "fecha": "2019-11-03",         
+ *   }
+ *
+ * </pre>
  *
  * @author le.perezl
  */
