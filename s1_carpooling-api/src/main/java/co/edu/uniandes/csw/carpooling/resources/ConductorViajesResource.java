@@ -52,7 +52,7 @@ public class ConductorViajesResource {
     @Path("/vehiculos/{vehiculosId:\\d}")
     public ViajeDetailDTO createViaje(@PathParam("conductoresId") Long conductoresId, 
             @PathParam("vehiculosId") Long vehiculosId, ViajeDTO viaje) throws BusinessLogicException{
-        LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: input: {0} con id de conductor: {1} y id de vehiculo: {3}", new Object[]{viaje, conductoresId, vehiculosId});
+        //LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: input: {0} con id de conductor: {1} y id de vehiculo: {3}", new Object[]{viaje, conductoresId, vehiculosId});
         ViajeEntity viajeEntity =viaje.toEntity();
         VehiculoEntity vehiculoEntity = vehiculoLogic.getVehiculo(conductoresId, vehiculosId);
         if(vehiculoEntity == null){
@@ -62,7 +62,7 @@ public class ConductorViajesResource {
         viajeEntity.setVehiculo(vehiculoEntity);
         viajeEntity = viajeLogic.createViaje(viajeEntity);
         ViajeDetailDTO resultado = new ViajeDetailDTO(viajeEntity);
-        LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: output: {0}", resultado);
+        //LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: output: {0}", resultado);
         return resultado;
     }
     
