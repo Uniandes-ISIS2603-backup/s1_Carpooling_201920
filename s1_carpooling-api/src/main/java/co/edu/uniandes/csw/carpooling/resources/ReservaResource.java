@@ -11,7 +11,7 @@ import co.edu.uniandes.csw.carpooling.ejb.ViajeLogic;
 import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
-import com.sun.istack.internal.logging.Logger;
+import java.util.logging.Logger;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
