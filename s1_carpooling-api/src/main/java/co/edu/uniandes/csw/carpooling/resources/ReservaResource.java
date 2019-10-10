@@ -100,6 +100,8 @@ public class ReservaResource {
         logic.deleteReserva(logic.findReserva(reservasId));
         LOGGER.info("ReservaResource deleteReserva: output: void");
     }
+    
+
        /**
      * Convierte una lista de entidades a DTO.
      *
