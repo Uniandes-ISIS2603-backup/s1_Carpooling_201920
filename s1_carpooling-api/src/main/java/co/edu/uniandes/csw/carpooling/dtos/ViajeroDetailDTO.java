@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
 import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
 import java.io.Serializable;
@@ -18,13 +19,23 @@ import java.util.List;
 public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
     
     private List<ReservaDTO> reservas;
-
+    private List<CalificacionDTO> calificaciones;
      /**
      * Constructor vacio que llama a super
      */
     public ViajeroDetailDTO(){
         super();
     }
+
+    public List<CalificacionDTO> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<CalificacionDTO> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+    
+    
     
     /**
      * Constructor para transformar un Entity a un DTO
@@ -41,6 +52,13 @@ public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
 //                }
 //            }
         }
+        
+        if(viajeroEntity.getCalificaciones() != null){
+            calificaciones = new ArrayList<CalificacionDTO>();
+            for(CalificacionEntity entity: viajeroEntity.getCalificaciones()){
+                calificaciones.add(new CalificacionDTO(entity));
+            }
+        } 
     }
     
     /**    
@@ -57,6 +75,14 @@ public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
                 reservaEntity.add(dtoReserva.toEntity());
             }
             //viajeroEntity.setReservas(reservaEntity);
+        }
+        
+        if(calificaciones!=null){
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
+            for(CalificacionDTO calificacionDTO: calificaciones){
+                calificacionesEntity.add(calificacionDTO.toEntity());
+            }
+            viajeroEntity.setCalificaciones(calificacionesEntity);
         }
         return viajeroEntity;
     }

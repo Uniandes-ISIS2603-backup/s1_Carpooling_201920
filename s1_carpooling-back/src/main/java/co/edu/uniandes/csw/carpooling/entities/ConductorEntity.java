@@ -35,7 +35,7 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     private List<VehiculoEntity> vehiculos;
 
     @PodamExclude
-    @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
     
     @PodamExclude
