@@ -130,10 +130,10 @@ public class ViajeroResource {
         logica.deleteViajero(viajerosId);
         LOGGER.info("ViajeroResource deleteViajero: output: void");
     }
-    @Path("{conductoresId: \\d+}/calificaciones")
-    public Class<ViajeroCalificacionResource> getCalificacionesResource(@PathParam("conductoresId") Long conductoresId) {
-        if (logica.getViajero(conductoresId) == null) {
-            throw new WebApplicationException("El recurso /conductor/" + conductoresId + " no existe.", 404);
+    @Path("{viajerosId: \\d+}/calificaciones")
+    public Class<ViajeroCalificacionResource> getCalificacionesResource(@PathParam("viajerosId") Long viajerosId) {
+        if (logica.getViajero(viajerosId) == null) {
+            throw new WebApplicationException("El recurso /conductor/" + viajerosId + " no existe.", 404);
         }
         return ViajeroCalificacionResource.class;
     }

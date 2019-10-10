@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "7a535d24-f580-41fd-9057-a9da64620586",
-		"name": "Vehiculo Tests",
+		"_postman_id": "d63b81b1-20e4-4fcc-a16a-f9289630e8c6",
+		"name": "ViajeRecurrenteTests",
+		"description": "Viaje recurrente resource tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -54,12 +55,13 @@
 						"conductores",
 						""
 					]
-				}
+				},
+				"description": "Crea un conductor"
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un vehiculo",
+			"name": "Crear un viaje Recurrente",
 			"event": [
 				{
 					"listen": "test",
@@ -67,7 +69,7 @@
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_vehiculo1\",data.id);",
+							"postman.setGlobalVariable(\"new_id_viajeRecurrente1\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -87,7 +89,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"MDS 546\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"raw": "{\"fechInicio\":\"2020-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2020-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,7 +97,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -106,14 +108,15 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos"
+						"viajesRecurrentes"
 					]
-				}
+				},
+				"description": "crear un viajeRecurrente"
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un vehiculo 2",
+			"name": "Crear un viaje Recurrente 2",
 			"event": [
 				{
 					"listen": "test",
@@ -121,7 +124,7 @@
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_vehiculo2\",data.id);",
+							"postman.setGlobalVariable(\"new_id_viajeRecurrente2\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -141,7 +144,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"soat\": \"AANFJ143779837\",\n\t\"placa\": \"FFO 006\",\n\t\"aseguradora\": \"MAPHRE\",\n\t\"vigenciaSoat\": \"20/09/2020\",\n\t\"modelo\": \"Chevrolet Aveo\",\n\t\"sillas\": 5\n}",
+					"raw": "{\"fechInicio\":\"2020-10-10T15:20:20Z[UTC]\",\"fechaFin\":\"2020-11-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,3,7\",\"id\":1,\"viajes\":[]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -149,7 +152,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -160,22 +163,23 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos"
+						"viajesRecurrentes"
 					]
-				}
+				},
+				"description": "Crear un viaje recurrente 2"
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un vehiculo con placa invalida",
+			"name": "Crear viaje recurrente con fecha invalida 1",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
-							"tests[\"No crea con placa invalidad\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La placa tiene que tener 7 caracteres (incluyendo el espacio en la mitad\");"
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha final no puede ser menor a la fecha inicial\");"
 						],
 						"type": "text/javascript"
 					}
@@ -193,7 +197,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"MDS\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"raw": "{\"fechInicio\":\"2020-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2019-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -201,7 +205,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -212,22 +216,23 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos"
+						"viajesRecurrentes"
 					]
-				}
+				},
+				"description": "Prueba que se lance un error al crear un viaje recurrente en que la fecha final sea menor a la inicial"
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un vehiculo con placa invalida 2",
+			"name": "Crear viaje recurrente con fecha invalida 2",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
-							"tests[\"No crea con placa invalidad\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La placa tiene que tener el formato 'XXX 123'\");"
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de inicio no puede ser menor a la actual\");"
 						],
 						"type": "text/javascript"
 					}
@@ -245,7 +250,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"2A3 XG2\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"raw": "{\"fechInicio\":\"2018-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2019-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -253,7 +258,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -264,22 +269,23 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos"
+						"viajesRecurrentes"
 					]
-				}
+				},
+				"description": "Prueba que lance error al crear un viaje recurrente con una fecha inicial menor a la actual"
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un vehiculo con sillas invalidas",
+			"name": "Crear un viaje recurrente con fecha invalida 3",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
-							"tests[\"No crea con placa invalidad\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La placa tiene que tener el formato 'XXX 123'\");"
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha final no puede ser menor a la actual\");"
 						],
 						"type": "text/javascript"
 					}
@@ -297,7 +303,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"2A3 XG2\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"raw": "{\"fechInicio\":\"2020-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2018-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -305,7 +311,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -316,14 +322,15 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos"
+						"viajesRecurrentes"
 					]
-				}
+				},
+				"description": "Verifica que se lanza un error al intentar crear un viaje recurrente con una fecha final menor a la actual"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener vehiculos de un conductor",
+			"name": "Obtener Viajes Recurrentes de un conductor",
 			"event": [
 				{
 					"listen": "test",
@@ -332,7 +339,7 @@
 						"exec": [
 							"var data= JSON.parse(responseBody);",
 							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
-							"tests[\"vehiculos count\"] = data.length > 1;"
+							"tests[\"viajesRecurrentes count\"] = data.length > 1;"
 						],
 						"type": "text/javascript"
 					}
@@ -349,7 +356,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -360,14 +367,14 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos"
+						"viajesRecurrentes"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener un vehiculo de un conductor",
+			"name": "Obtener un viaje Recurrente de un conductor",
 			"event": [
 				{
 					"listen": "test",
@@ -393,7 +400,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -404,23 +411,23 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos",
-						"{{new_id_vehiculo1}}"
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener un vehiculo de un conductor inexistente",
+			"name": "obtener viaje recurrente de un conductor inexistente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductor /0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -437,7 +444,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/0/vehiculos/{{new_id_vehiculo1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/0/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -448,23 +455,23 @@
 						"api",
 						"conductores",
 						"0",
-						"vehiculos",
-						"{{new_id_vehiculo1}}"
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener un vehiculo inexistente de un conductor",
+			"name": "Obtener un viaje Inexistente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"/viajesRecurrentes/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -481,7 +488,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -492,7 +499,7 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos",
+						"viajesRecurrentes",
 						"0"
 					]
 				}
@@ -500,7 +507,7 @@
 			"response": []
 		},
 		{
-			"name": "Editar un vehiculo",
+			"name": "Editar un viajeRecurrente",
 			"event": [
 				{
 					"listen": "test",
@@ -521,13 +528,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":\"{{new_id_vehiculo2}}\",\n\t\"soat\": \"AANFJ143779837\",\n\t\"placa\": \"FFO 006\",\n\t\"aseguradora\": \"SERRANOSEGUROS\",\n\t\"vigenciaSoat\": \"20/09/2020\",\n\t\"modelo\": \"Chevrolet Aveo\",\n\t\"sillas\": 5\n}",
+					"raw": "{\n\t\n\t\"fechInicio\": \"2020-11-10T15:20:20Z[UTC]\",\n    \"fechaFin\": \"2020-12-11T15:20:20Z[UTC]\",\n    \"frecuencia\": \"1,3,6\",\n    \"id\":\"{{new_id_viajeRecurrente1}}\",\n    \"viajes\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -535,7 +542,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo2}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -546,23 +553,23 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos",
-						"{{new_id_vehiculo2}}"
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Editar un vehiculo inexistente",
+			"name": "Editar un viajeRecurrente Inexistente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "c5ce2f2f-b592-4c8e-ae7e-8ba30d8230d3",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"/viajesRecurrentes/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -580,7 +587,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":0,\n\t\"soat\": \"AANFJ143779837\",\n\t\"placa\": \"FFO 006\",\n\t\"aseguradora\": \"SERRANOSEGUROS\",\n\t\"vigenciaSoat\": \"20/09/2020\",\n\t\"modelo\": \"Chevrolet Aveo\",\n\t\"sillas\": 5\n}",
+					"raw": "{\n\t\n\t\"fechInicio\": \"2020-11-10T15:20:20Z[UTC]\",\n    \"fechaFin\": \"2020-12-11T15:20:20Z[UTC]\",\n    \"frecuencia\": \"1,3,6\",\n    \"id\":\"0\",\n    \"viajes\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -588,7 +595,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -599,7 +606,7 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos",
+						"viajesRecurrentes",
 						"0"
 					]
 				}
@@ -607,7 +614,7 @@
 			"response": []
 		},
 		{
-			"name": "Borrar un vehiculo",
+			"name": "Borrar un viajeRecurrente",
 			"event": [
 				{
 					"listen": "test",
@@ -624,7 +631,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -635,15 +642,15 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos",
-						"{{new_id_vehiculo1}}"
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar un vehiculo 2",
+			"name": "Borrar un viaje Recurrente",
 			"event": [
 				{
 					"listen": "test",
@@ -660,7 +667,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo2}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente2}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -671,23 +678,23 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos",
-						"{{new_id_vehiculo2}}"
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente2}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar un vehiculo inexistente",
+			"name": "Borrar un viajeRecurrente Inexistente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"/viajesRecurrentes/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -697,7 +704,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -708,42 +715,8 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"vehiculos",
+						"viajesRecurrentes",
 						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar un conductor",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"conductores",
-						"{{new_id_conductor}}"
 					]
 				}
 			},
