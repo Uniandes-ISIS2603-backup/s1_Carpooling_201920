@@ -34,6 +34,14 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     @ManyToOne
     private UsuarioEntity usuario;
     
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity viajero;
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity conductor;
+    
     
     /**
      * @return the mensaje

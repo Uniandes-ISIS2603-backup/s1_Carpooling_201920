@@ -21,6 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class ConductorEntity extends UsuarioEntity implements Serializable{
+
     
     @PodamExclude
     @OneToMany(
@@ -35,13 +36,32 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     private List<VehiculoEntity> vehiculos;
 
     @PodamExclude
-    @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<NotificacionEntity> notificaciones = new ArrayList<NotificacionEntity>();
     
     @PodamExclude
     @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY)
     private List<ViajeRecurrenteEntity> viajesRecurrentes = new ArrayList<ViajeRecurrenteEntity>();
 
+    
+    /**
+     * @return the notificaciones
+     */
+    public List<NotificacionEntity> getNotificaciones() {
+        return notificaciones;
+    }
+
+    /**
+     * @param notificaciones the notificaciones to set
+     */
+    public void setNotificaciones(List<NotificacionEntity> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
+    
     public List<ViajeRecurrenteEntity> getViajesRecurrentes() {
         return viajesRecurrentes;
     }

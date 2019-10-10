@@ -58,6 +58,11 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     @PodamFloatValue(minValue = (float) .0001)
     private Float costoViaje;
     
+    @PodamExclude
+    @ManyToOne
+    private VehiculoEntity vehiculo;
+
+    
     private ESTADO_DE_VIAJE estadoViaje;
    
     
@@ -77,10 +82,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
             cascade = CascadeType.PERSIST)
     private List<ReservaEntity> reservas;
     
-    @PodamExclude
-    @ManyToOne
-    private VehiculoEntity vehiculo;
-    
+        
     @PodamExclude
     @ManyToOne
     private ConductorEntity conductor;
