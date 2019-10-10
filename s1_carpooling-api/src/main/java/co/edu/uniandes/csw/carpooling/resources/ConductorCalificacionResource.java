@@ -74,7 +74,7 @@ public class ConductorCalificacionResource {
         LOGGER.log(Level.INFO, "CalificacionResource getCalificacion: output: {0}", calificacionDTO);
         return calificacionDTO;
     }
-                
+    /*            
     @PUT
     @Path("{calificacionesId: \\d+}")
     public CalificacionDTO updateCalificacionByConductor(@PathParam("conductoresId") Long conductoresId, @PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion) throws BusinessLogicException {
@@ -91,7 +91,8 @@ public class ConductorCalificacionResource {
         LOGGER.log(Level.INFO, "CalificacionResource updateCalificacion: output:{0}", calificacionDTO);
         return calificacionDTO;
     }
-    
+    */
+    /**
     @DELETE
     @Path("{calificacionesId: \\d+}")
     public void deleteCalificacionByConductor(@PathParam("conductoresId") Long conductoresId, @PathParam("calificacionesId") Long calificacionesId) throws BusinessLogicException {
@@ -101,5 +102,5 @@ public class ConductorCalificacionResource {
         }
         calificacionLogic.deleteCalificacionByConductor(conductoresId, calificacionesId);
     }
-  
+  */
 }   

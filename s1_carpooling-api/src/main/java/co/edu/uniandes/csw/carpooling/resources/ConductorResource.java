@@ -123,6 +123,14 @@ public class ConductorResource {
         return ConductorCalificacionResource.class;
     }
     
+      @Path("{conductoresId: \\d+}/notificaciones")
+    public Class<ConductorNotificacionResource> getNotificacionesResource(@PathParam("notificacionesId") Long conductoresId) {
+        if (logica.getConductor(conductoresId) == null) {
+            throw new WebApplicationException("El recurso /conductor/" + conductoresId + " no existe.", 404);
+        }
+        return ConductorNotificacionResource.class;
+    }
+    
     @Path("{conductoresId: \\d+}/viajesRecurrentes")
     public Class<ViajeRecurrenteResource> getViajeRecurrenteResource(@PathParam("conductoresId") Long conductoresId) {
         if (logica.getConductor(conductoresId) == null) {
