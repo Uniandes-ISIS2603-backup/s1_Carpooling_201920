@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7df8fd1f-cc8f-4560-9551-53735bab1cc8",
+		"_postman_id": "e2eb65c8-1ce8-4336-b8de-f47d06e40442",
 		"name": "Viaje Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -86,7 +86,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"MDS 546\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"MDS 546\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5,\n\t\"conductor\":\n\t{\n\t\t\"nombre\": \"Juan David Mendez\",\n\t\t\"telefono\": \"3102409786\",\n\t\t\"correo\": \"jmendez@universidad.com\",\n\t\t\"numDocumento\": \"10001394020\",\n\t\t\"contrasenha\": \"kdskdiajnci\",\n\t\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\t\"tipoDocumento\":\"PASAPORTE\"\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -150,7 +150,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-11-03T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"estadoViaje\": \"PUBLICADO\",\n\t\"vehiculo\":\n\t{\n\t\t\"soat\": \"RWSNFJ12395837\",\n\t\t\"placa\": \"MDS 546\",\n\t\t\"aseguradora\": \"SURA\",\n\t\t\"vigenciaSoat\": \"11/10/2020\",\n\t\t\"modelo\": \"Chevrolet Spark\",\n\t\t\"sillas\": 5,\n\t\t\"conductor\":\n\t\t{\n\t\t\t\"nombre\": \"Juan David Mendez\",\n\t\t\t\"telefono\": \"3102409786\",\n\t\t\t\"correo\": \"jmendez@universidad.com\",\n\t\t\t\"numDocumento\": \"10001394020\",\n\t\t\t\"contrasenha\": \"kdskdiajnci\",\n\t\t\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\t\t\"tipoDocumento\":\"PASAPORTE\"\n\t\t}\n\t}\t\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -216,7 +216,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"estadoViaje\": \"PUBLICADO\",\n\t\"vehiculo\":\n\t{\n\t\t\"soat\": \"RWSNFJ12395837\",\n\t\t\"placa\": \"MDS 546\",\n\t\t\"aseguradora\": \"SURA\",\n\t\t\"vigenciaSoat\": \"11/10/2020\",\n\t\t\"modelo\": \"Chevrolet Spark\",\n\t\t\"sillas\": 5,\n\t\t\"conductor\":\n\t\t{\n\t\t\t\"nombre\": \"Juan David Mendez\",\n\t\t\t\"telefono\": \"3102409786\",\n\t\t\t\"correo\": \"jmendez@universidad.com\",\n\t\t\t\"numDocumento\": \"10001394020\",\n\t\t\t\"contrasenha\": \"kdskdiajnci\",\n\t\t\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\t\t\"tipoDocumento\":\"PASAPORTE\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -270,7 +270,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-11-03T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"estadoViaje\": \"PUBLICADO\",\n\t\"vehiculo\":\n\t{\n\t\t\"soat\": \"RWSNFJ12395837\",\n\t\t\"placa\": \"MDS 546\",\n\t\t\"aseguradora\": \"SURA\",\n\t\t\"vigenciaSoat\": \"11/10/2020\",\n\t\t\"modelo\": \"Chevrolet Spark\",\n\t\t\"sillas\": 5,\n\t\t\"conductor\":\n\t\t{\n\t\t\t\"nombre\": \"Juan David Mendez\",\n\t\t\t\"telefono\": \"3102409786\",\n\t\t\t\"correo\": \"jmendez@universidad.com\",\n\t\t\t\"numDocumento\": \"10001394020\",\n\t\t\t\"contrasenha\": \"kdskdiajnci\",\n\t\t\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\t\t\"tipoDocumento\":\"PASAPORTE\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,7 +278,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/vehiculos/{{new_id_vehiculo}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -287,7 +287,11 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes"
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"vehiculos",
+						"{{new_id_vehiculo}}"
 					]
 				},
 				"description": "Crea un viaje no valido\n"
@@ -322,7 +326,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"estadoViaje\": \"PUBLICADO\",\n\t\"vehiculo\":\n\t{\n\t\t\"soat\": \"RWSNFJ12395837\",\n\t\t\"placa\": \"MDS 546\",\n\t\t\"aseguradora\": \"SURA\",\n\t\t\"vigenciaSoat\": \"11/10/2020\",\n\t\t\"modelo\": \"Chevrolet Spark\",\n\t\t\"sillas\": 5,\n\t\t\"conductor\":\n\t\t{\n\t\t\t\"nombre\": \"Juan David Mendez\",\n\t\t\t\"telefono\": \"3102409786\",\n\t\t\t\"correo\": \"jmendez@universidad.com\",\n\t\t\t\"numDocumento\": \"10001394020\",\n\t\t\t\"contrasenha\": \"kdskdiajnci\",\n\t\t\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\t\t\"tipoDocumento\":\"PASAPORTE\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -373,7 +377,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"estadoViaje\": \"PUBLICADO\",\n\t\"vehiculo\":\n\t{\n\t\t\"soat\": \"RWSNFJ12395837\",\n\t\t\"placa\": \"MDS 546\",\n\t\t\"aseguradora\": \"SURA\",\n\t\t\"vigenciaSoat\": \"11/10/2020\",\n\t\t\"modelo\": \"Chevrolet Spark\",\n\t\t\"sillas\": 5,\n\t\t\"conductor\":\n\t\t{\n\t\t\t\"nombre\": \"Juan David Mendez\",\n\t\t\t\"telefono\": \"3102409786\",\n\t\t\t\"correo\": \"jmendez@universidad.com\",\n\t\t\t\"numDocumento\": \"10001394020\",\n\t\t\t\"contrasenha\": \"kdskdiajnci\",\n\t\t\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\t\t\"tipoDocumento\":\"PASAPORTE\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"

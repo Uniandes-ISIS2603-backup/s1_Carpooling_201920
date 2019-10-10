@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.carpooling.ejb;
 
 import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.PublicidadPersistence;
+import co.edu.uniandes.csw.carpooling.persistence.PublicistaPersistence;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -22,6 +24,8 @@ public class PublicidadLogic {
      @Inject
     private PublicidadPersistence persistence;
     
+     @Inject
+     private PublicistaPersistence publicista;
     
     public PublicidadEntity createPublicidad(PublicidadEntity publicidadEntity) throws BusinessLogicException{
         if(!validarPublicidad(publicidadEntity)){
@@ -39,6 +43,27 @@ public class PublicidadLogic {
         else if(!validarFechas(publicidadEntity.getFechaDeInicio(), publicidadEntity.getFechaDeSalida())){
             throw new BusinessLogicException("Las fechas son invalidas");
         }
+        PublicidadEntity retorno = persistence.create(publicidadEntity);
+        return retorno;
+    }
+    public PublicidadEntity createPublicidad(Long publicistaId, PublicidadEntity publicidadEntity) throws BusinessLogicException{
+        if(!validarPublicidad(publicidadEntity)){
+            throw new BusinessLogicException("Ya hay una publicidad con ese nombre en ese rango de fechas");
+        }
+        else if(!validarNombre(publicidadEntity.getNombre())){
+            throw new BusinessLogicException("El nombre es invalido");
+        }
+        else if(!validarMensaje(publicidadEntity.getMensaje())){
+            throw new BusinessLogicException("El mensaje es invalido");
+        }
+        else if(!validarCosto(publicidadEntity.getCosto())){
+            throw new BusinessLogicException("El costo es invalido");
+        }
+        else if(!validarFechas(publicidadEntity.getFechaDeInicio(), publicidadEntity.getFechaDeSalida())){
+            throw new BusinessLogicException("Las fechas son invalidas");
+        }
+        PublicistaEntity publi = publicista.find(publicistaId);
+        publicidadEntity.setPublicista(publi);
         PublicidadEntity retorno = persistence.create(publicidadEntity);
         return retorno;
     }

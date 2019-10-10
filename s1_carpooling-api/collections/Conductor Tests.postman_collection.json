@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "38d55c72-d8f9-423f-8818-5711c94db43b",
+		"_postman_id": "a7131e17-2fe0-4f38-bb95-3abab89d12c5",
 		"name": "Conductor Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -86,7 +86,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"nsddkaoaoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"nsddkaoaoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,7 +136,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Felipe Mendez\",\n\t\"telefono\": \"2439331930\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"n1345kjfok\",\n\t\"fechaDeNacimiento\": \"1965-03-20\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Felipe Mendez\",\n\t\"telefono\": \"2439331930\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"n1345kjfok\",\n\t\"fechaDeNacimiento\": \"1965-03-20T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -187,7 +187,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -238,7 +238,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -317,7 +317,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -327,7 +327,7 @@
 						"s1_carpooling-api",
 						"api",
 						"conductores",
-						"{{new_id_conductor}}"
+						"{{new_id_conductor1}}"
 					]
 				}
 			},

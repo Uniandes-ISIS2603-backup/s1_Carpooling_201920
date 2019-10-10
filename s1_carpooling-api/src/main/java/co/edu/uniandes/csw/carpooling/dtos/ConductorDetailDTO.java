@@ -29,7 +29,7 @@ public class ConductorDetailDTO extends ConductorDTO{
     
     private List<CalificacionDTO> calificaciones;
     
-    private ConductorDetailDTO(){
+    public ConductorDetailDTO(){
         super();
     }
     

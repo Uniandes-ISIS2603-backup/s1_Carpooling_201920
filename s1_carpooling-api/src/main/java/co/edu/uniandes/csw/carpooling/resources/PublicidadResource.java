@@ -42,9 +42,9 @@ public class PublicidadResource {
     private PublicidadLogic logica;
     
     @POST
-    public PublicidadDTO createPublicidad(PublicidadDTO publicidad)throws BusinessLogicException{
+    public PublicidadDTO createPublicidad(@PathParam("publicistasId") long publicistasId,PublicidadDTO publicidad)throws BusinessLogicException{
         PublicidadEntity publicidadEntity = publicidad.toEntity();
-        publicidadEntity = logica.createPublicidad(publicidadEntity);
+        publicidadEntity = logica.createPublicidad(publicistasId,publicidadEntity);
         return new PublicidadDTO(publicidadEntity);
     }
     
