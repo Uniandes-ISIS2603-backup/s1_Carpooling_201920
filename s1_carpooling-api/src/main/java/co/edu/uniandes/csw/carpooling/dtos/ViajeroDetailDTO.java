@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.entities.CalificacionEntity;
+import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
 import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
 import java.io.Serializable;
@@ -17,9 +18,13 @@ import java.util.List;
  * @author Santiago Ballesteros
  */
 public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
+
+   
     
     private List<ReservaDTO> reservas;
     private List<CalificacionDTO> calificaciones;
+    
+    private List<NotificacionDTO> notificaciones;
      /**
      * Constructor vacio que llama a super
      */
@@ -84,7 +89,28 @@ public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
             }
             viajeroEntity.setCalificaciones(calificacionesEntity);
         }
+        
+         if(notificaciones!=null){
+            List<NotificacionEntity> notificacionesEntity = new ArrayList<NotificacionEntity>();
+            for(NotificacionDTO notificacionDTO: notificaciones){
+                notificacionesEntity.add(notificacionDTO.toEntity());
+            }
+            viajeroEntity.setNotificaciones(notificacionesEntity);
+        }
         return viajeroEntity;
+    }
+     /**
+     * @return the notificaciones
+     */
+    public List<NotificacionDTO> getNotificaciones() {
+        return notificaciones;
+    }
+
+    /**
+     * @param notificaciones the notificaciones to set
+     */
+    public void setNotificaciones(List<NotificacionDTO> notificaciones) {
+        this.notificaciones = notificaciones;
     }
     
 }

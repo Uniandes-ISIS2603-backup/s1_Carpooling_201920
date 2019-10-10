@@ -160,6 +160,13 @@ public class ViajeroResource {
      //   return ViajeroReservaResource.class;
   //  }
 
+     @Path("{viajerosId: \\d+}/notificaciones")
+    public Class<ViajeroNotificacionResource> getNotificacionesResource(@PathParam("viajerosId") Long viajerosId) {
+        if (logica.getViajero(viajerosId) == null) {
+            throw new WebApplicationException("El recurso /viajero/" + viajerosId + " no existe.", 404);
+        }
+        return ViajeroNotificacionResource.class;
+    }
     /**
      * Convierte una lista de entidades a DTO.
      *
