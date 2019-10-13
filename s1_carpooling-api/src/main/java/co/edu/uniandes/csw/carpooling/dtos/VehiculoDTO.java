@@ -62,7 +62,7 @@ public class VehiculoDTO implements Serializable{
     private String vigenciaSoat;
     private String modelo;
     private Integer sillas;
-   
+    
     private ConductorDTO conductor;
             
     public VehiculoDTO()
@@ -80,6 +80,7 @@ public class VehiculoDTO implements Serializable{
             this.aseguradora = vehiculoEntity.getAseguradora();
             this.modelo = vehiculoEntity.getModelo();
             this.sillas = vehiculoEntity.getSillas();
+            this.vigenciaSoat = vehiculoEntity.getVigenciaSoat();
             /*
             if(vehiculoEntity.getConductor() != null)
                 this.conductor = new ConductorDTO(vehiculoEntity.getConductor());
@@ -98,7 +99,7 @@ public class VehiculoDTO implements Serializable{
         vehiculoEntity.setAseguradora(this.aseguradora);
         vehiculoEntity.setModelo(this.modelo);
         vehiculoEntity.setSillas(this.sillas);
-       
+        vehiculoEntity.setVigenciaSoat(this.vigenciaSoat);
        // if(conductor != null)
          //   vehiculoEntity.setConductor(conductor.toEntity());
         
