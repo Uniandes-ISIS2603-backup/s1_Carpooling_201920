@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeRecurrenteEntity;
 import co.edu.uniandes.csw.carpooling.persistence.ViajeRecurrentePersistence;
 import java.util.ArrayList;
@@ -55,7 +56,8 @@ public class ViajeRecurrentePersistanceTest {
     UserTransaction utx;
   
     private List<ViajeRecurrenteEntity> data = new ArrayList<ViajeRecurrenteEntity>();
-
+    private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
+    
     @Before
     public void setUp() {
         try {
@@ -76,13 +78,23 @@ public class ViajeRecurrentePersistanceTest {
 
     private void clearData() {
         em.createQuery("delete from ViajeRecurrenteEntity").executeUpdate();
+        em.createQuery("delete from ConductorEntity").executeUpdate();
     }
 
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
+        
+        for (int i = 0; i < 3; i++) {
+            ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
+            em.persist(entity);
+            dataConductor.add(entity);
+        }
         for (int i = 0; i < 3; i++) {
             ViajeRecurrenteEntity entity = factory.manufacturePojo(ViajeRecurrenteEntity.class);
-
+            if(i==0)
+            {
+                entity.setConductor(dataConductor.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
@@ -105,7 +117,21 @@ public class ViajeRecurrentePersistanceTest {
         Assert.assertEquals(viajeRecurrente.getFechaInicio(), entity.getFechaInicio());
     }
     
-         @Test
+    @Test
+    public void getViajeRecurrenteByConductorTest() {
+        ViajeRecurrenteEntity entity = data.get(0);
+        Long idCalificacion = entity.getId();
+        ConductorEntity conductor = dataConductor.get(0);
+        Long idConductor = conductor.getId();
+        ViajeRecurrenteEntity newEntity = cp.find(idConductor, idCalificacion );
+        Assert.assertNotNull(newEntity);
+        
+        Assert.assertEquals(entity.getFrecuencia(), newEntity.getFrecuencia());
+        Assert.assertEquals(entity.getFechaFin(), newEntity.getFechaFin());
+        Assert.assertEquals(entity.getFechaInicio(), newEntity.getFechaInicio());
+    }
+    
+    @Test
     public void getViajesRecurrentesTest() {
         List<ViajeRecurrenteEntity> list = cp.findAll();
         Assert.assertEquals(data.size(), list.size());

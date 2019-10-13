@@ -137,7 +137,7 @@ public class VehiculoPersistanceTest {
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }
     
-        @Test
+    @Test
     public void getVehiculoByConductorTest() {
         VehiculoEntity entity = data.get(0);
         Long idCalificacion = entity.getId();
