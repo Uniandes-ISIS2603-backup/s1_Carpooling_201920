@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.carpooling.entities;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -46,7 +47,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     private Date fechaDeSalida;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private PublicistaEntity publicista;
 
     /**

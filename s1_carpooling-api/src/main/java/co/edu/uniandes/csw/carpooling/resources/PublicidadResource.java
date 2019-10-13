@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -30,7 +31,6 @@ import javax.ws.rs.core.MediaType;
  * @author Nicolas Fajardo
  */
 
-@Path("/publicidades")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
@@ -41,11 +41,24 @@ public class PublicidadResource {
     @Inject
     private PublicidadLogic logica;
     
+        /**
+     * Crea una nueva reseña con la informacion que se recibe en el cuerpo de la
+     * petición y se regresa un objeto identico con un id auto-generado por la
+     * base de datos.
+     *
+     * @param publicistasId El ID del publicista del cual se le agrega la reseña
+     * @param publicidad {@link PublicidadDTO} - La publicidad que se desea guardar.
+     * @return JSON {@link PublicidadDTO} - La publicidad guardada con el atributo id
+     * autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando ya existe la reseña.
+     */
     @POST
-    public PublicidadDTO createPublicidad(PublicidadDTO publicidad)throws BusinessLogicException{
-        PublicidadEntity publicidadEntity = publicidad.toEntity();
-        publicidadEntity = logica.createPublicidad(publicidadEntity);
-        return new PublicidadDTO(publicidadEntity);
+    public PublicidadDTO createPublicidad(@PathParam("publicistasId") Long publicistasId, PublicidadDTO publicidad) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "PublicidadResource createPublicidad: input: {0}", publicidad);
+        PublicidadDTO nuevaPublicidadDTO = new PublicidadDTO(logica.createPublicidad(publicistasId,publicidad.toEntity()));
+        LOGGER.log(Level.INFO, "ReviewResource createPublicidad: output: {0}", nuevaPublicidadDTO);
+        return nuevaPublicidadDTO;
     }
     
     @GET
@@ -59,7 +72,7 @@ public class PublicidadResource {
     public PublicidadDTO getViaje(@PathParam("publicidadesId") Long publicidadesId){
         PublicidadEntity publicidadEntity = logica.getPublicidad(publicidadesId);
         if(publicidadEntity == null){
-            throw new WebApplicationException("El recurso /publiccidades/"+publicidadesId+ " no existe",404 );
+            throw new WebApplicationException("El recurso /publicidades/"+publicidadesId+ " no existe",404 );
         }
         PublicidadDTO dto = new PublicidadDTO(publicidadEntity);
         return dto;

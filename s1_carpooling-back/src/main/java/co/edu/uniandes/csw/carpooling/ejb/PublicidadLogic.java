@@ -6,10 +6,14 @@
 package co.edu.uniandes.csw.carpooling.ejb;
 
 import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.PublicidadPersistence;
+import co.edu.uniandes.csw.carpooling.persistence.PublicistaPersistence;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -19,11 +23,19 @@ import javax.inject.Inject;
  */
 @Stateless
 public class PublicidadLogic {
+    
      @Inject
     private PublicidadPersistence persistence;
     
+    @Inject
+    private PublicistaPersistence publicistaPersistence;
     
-    public PublicidadEntity createPublicidad(PublicidadEntity publicidadEntity) throws BusinessLogicException{
+    private static final Logger LOGGER = Logger.getLogger(PublicidadLogic.class.getName());
+        
+    public PublicidadEntity createPublicidad(Long publicistaId,PublicidadEntity publicidadEntity) throws BusinessLogicException{
+      
+        LOGGER.log(Level.INFO, "Inicia proceso de crear publicidad");
+       
         if(!validarPublicidad(publicidadEntity)){
             throw new BusinessLogicException("Ya hay una publicidad con ese nombre en ese rango de fechas");
         }
@@ -39,8 +51,13 @@ public class PublicidadLogic {
         else if(!validarFechas(publicidadEntity.getFechaDeInicio(), publicidadEntity.getFechaDeSalida())){
             throw new BusinessLogicException("Las fechas son invalidas");
         }
-        PublicidadEntity retorno = persistence.create(publicidadEntity);
-        return retorno;
+        
+        PublicistaEntity publicista = publicistaPersistence.find(publicistaId);
+        publicidadEntity.setPublicista(publicista);
+        
+        LOGGER.log(Level.INFO, "Termina proceso de creación del publicidad");
+        
+        return persistence.create(publicidadEntity);
     }
     
     public List<PublicidadEntity> getPublicidades(){
