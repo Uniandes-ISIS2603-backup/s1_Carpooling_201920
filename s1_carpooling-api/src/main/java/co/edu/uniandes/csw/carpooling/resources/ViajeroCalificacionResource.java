@@ -67,7 +67,8 @@ public class ViajeroCalificacionResource {
         }
         return list;
     }
-        
+    
+        /**
     @PUT
     @Path("{calificacionesId: \\d+}")
     public CalificacionDTO updateCalificacionByViajero(@PathParam("viajerosId") Long viajerosId, @PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion) throws BusinessLogicException {
@@ -94,6 +95,6 @@ public class ViajeroCalificacionResource {
         }
         calificacionLogic.deleteCalificacionByViajero(viajerosId, calificacionesId);
     }
-    
+  */  
     
 }   

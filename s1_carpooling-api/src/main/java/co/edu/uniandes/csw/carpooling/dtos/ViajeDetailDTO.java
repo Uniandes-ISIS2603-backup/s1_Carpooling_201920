@@ -70,6 +70,8 @@ public class ViajeDetailDTO extends ViajeDTO implements Serializable{
     
     private List<CalificacionDTO> calificaciones;
     
+   
+    
     private List<ReservaDTO> reservas;
     
     

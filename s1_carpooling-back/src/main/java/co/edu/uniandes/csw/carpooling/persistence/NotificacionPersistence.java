@@ -86,4 +86,56 @@ public class NotificacionPersistence {
         em.remove(entity);
         LOGGER.log(Level.INFO, "Saliendo de borrar la notificacion con id = {0}", notificacionId);
     }
+    
+    public List<NotificacionEntity> findAllByViajero(Long viajeroId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntity p where (p.viajero.id = :viajeroid)", NotificacionEntity.class);
+        q.setParameter("viajeroid", viajeroId);
+        List<NotificacionEntity> results = q.getResultList();
+        return results;
+    }
+
+    public List<NotificacionEntity> findAllByConductor(Long conductorId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntityEntity p where (p.conductor.id = :conductorid)", NotificacionEntity.class);
+        q.setParameter("conductorid", conductorId);
+        List<NotificacionEntity> results = q.getResultList();
+        return results;
+    }
+
+    public NotificacionEntity findByConductor(Long conductorId, Long notificacionId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.conductor.id = :conductorid) and (p.id = :calificacionId)", NotificacionEntity.class);
+
+        q.setParameter("conductorid", conductorId);
+  
+        q.setParameter("calificacionId", notificacionId);
+
+        
+        List<NotificacionEntity> results = q.getResultList();
+        NotificacionEntity notificacion = null;
+        if (results == null) {
+            notificacion = null;
+        } else if (results.isEmpty()) {
+            notificacion = null;
+        } else if (results.size() >= 1) {
+            notificacion = results.get(0);
+        }
+    
+        return notificacion;
+    }
+
+    public NotificacionEntity findByViajero(Long viajeroId, Long notificacionId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntity p where (p.viajero.id = :viajeroid) and (p.id = :notificacionId)", NotificacionEntity.class);
+        q.setParameter("viajeroid", viajeroId);
+        q.setParameter("notificacionId", notificacionId);
+        List<NotificacionEntity> results = q.getResultList();
+        NotificacionEntity notificacion = null;
+        if (results == null) {
+            notificacion = null;
+        } else if (results.isEmpty()) {
+            notificacion = null;
+        } else if (results.size() >= 1) {
+            notificacion = results.get(0);
+        }
+    
+        return notificacion;
+    }
 }
