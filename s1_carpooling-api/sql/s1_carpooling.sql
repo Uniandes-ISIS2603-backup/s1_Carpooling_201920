@@ -1,12 +1,15 @@
-delete from PublicistaEntity;
-delete from VehiculoEntity;
-delete from ViajeEntity;
 delete from TrayectoEntity;
-
-delete from calificacionEntity;
-delete from viajeRecurrenteEntity;
+delete from ReservaEntity;
+delete from CalificacionEntity;
+delete from NotificacionEntity;
+delete from ViajeEntity;
+delete from VehiculoEntity;
+delete from PublicidadEntity;
+delete from PublicistaEntity;
+delete from ViajeRecurrenteEntity;
 delete from ConductorEntity;
 delete from ViajeroEntity;
+
 
 
 insert into ConductorEntity(id, contrasenha, correo, fechaDeNacimiento, nombre, numDocumento, tipoDocumento, telefono)

@@ -3,7 +3,19 @@
   <persistence-unit name="carpoolingPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
-    
+    <class>co.edu.uniandes.csw.carpooling.entities.BaseEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.CalificacionEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.ConductorEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.NotificacionEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.PublicidadEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.PublicistaEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.ReservaEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.TrayectoEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.UsuarioEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.VehiculoEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.ViajeEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.ViajeRecurrenteEntity</class>
+    <class>co.edu.uniandes.csw.carpooling.entities.ViajeroEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
  <shared-cache-mode>NONE</shared-cache-mode>
     <properties>

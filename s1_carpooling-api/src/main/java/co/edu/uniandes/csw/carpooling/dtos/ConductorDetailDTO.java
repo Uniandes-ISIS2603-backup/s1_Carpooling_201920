@@ -10,7 +10,6 @@ import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
 import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,37 +35,37 @@ public class ConductorDetailDTO extends ConductorDTO{
     public ConductorDetailDTO(ConductorEntity conductor){
         super(conductor);
         if(conductor.getViajes() != null){
-            viajes = new ArrayList<ViajeDTO>();
+            viajes = new ArrayList<>();
             for(ViajeEntity entity: conductor.getViajes()){
                 viajes.add(new ViajeDTO(entity));
             }
         }
         if(conductor.getCalificaciones() != null){
-            calificaciones = new ArrayList<CalificacionDTO>();
+            calificaciones = new ArrayList<>();
             for(CalificacionEntity entity: conductor.getCalificaciones()){
                 calificaciones.add(new CalificacionDTO(entity));
             }
         } 
         if(conductor.getNotificaciones() != null){
-            notificaciones = new ArrayList<NotificacionDTO>();
+            notificaciones = new ArrayList<>();
             for(NotificacionEntity entity: conductor.getNotificaciones()){
                 notificaciones.add(new NotificacionDTO(entity));
             }
         }
         
         if(conductor.getVehiculos() != null){
-            vehiculos = new ArrayList<VehiculoDTO>();
+            vehiculos = new ArrayList<>();
             for(VehiculoEntity entity: conductor.getVehiculos()){
                 vehiculos.add(new VehiculoDTO(entity));
             }
         }
     }
     
-    
+    @Override
     public ConductorEntity toEntity(){
         ConductorEntity entity = super.toEntity();
         if(viajes!=null){
-            List<ViajeEntity> viajesEntity = new ArrayList<ViajeEntity>();
+            List<ViajeEntity> viajesEntity = new ArrayList<>();
             for(ViajeDTO viajeDTO: viajes){
                 viajesEntity.add(viajeDTO.toEntity());
             }
@@ -74,14 +73,14 @@ public class ConductorDetailDTO extends ConductorDTO{
         
         }
         if(calificaciones!=null){
-            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
             for(CalificacionDTO calificacionDTO: calificaciones){
                 calificacionesEntity.add(calificacionDTO.toEntity());
             }
             entity.setCalificaciones(calificacionesEntity);
         }
         if(notificaciones!=null){
-            List<NotificacionEntity> notificacionesEntity = new ArrayList<NotificacionEntity>();
+            List<NotificacionEntity> notificacionesEntity = new ArrayList<>();
             for(NotificacionDTO notificacionDTO: notificaciones){
                 notificacionesEntity.add(notificacionDTO.toEntity());
             }
@@ -89,7 +88,7 @@ public class ConductorDetailDTO extends ConductorDTO{
         }
         
         if(vehiculos !=null){
-            List<VehiculoEntity> vehiculosEntity = new ArrayList<VehiculoEntity>();
+            List<VehiculoEntity> vehiculosEntity = new ArrayList<>();
             for(VehiculoDTO vehiculoDTO:vehiculos){
                 vehiculosEntity.add(vehiculoDTO.toEntity());
             }

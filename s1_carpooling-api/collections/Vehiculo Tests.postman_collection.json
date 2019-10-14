@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7a535d24-f580-41fd-9057-a9da64620586",
+		"_postman_id": "1ebec7eb-bd65-4729-85ab-db4de0b1dc15",
 		"name": "Vehiculo Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -279,7 +279,7 @@
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
 							"tests[\"No crea con placa invalidad\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La placa tiene que tener el formato 'XXX 123'\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El vehiculo tienen que tener entre 1 y 10 sillas\");"
 						],
 						"type": "text/javascript"
 					}
@@ -297,7 +297,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"2A3 XG2\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"XSQ 999\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": -1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -419,7 +419,7 @@
 					"script": {
 						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
 							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/0 no existe.\");"
 						],
 						"type": "text/javascript"
@@ -463,8 +463,7 @@
 					"script": {
 						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;"
 						],
 						"type": "text/javascript"
 					}
@@ -561,8 +560,7 @@
 					"script": {
 						"id": "c5ce2f2f-b592-4c8e-ae7e-8ba30d8230d3",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;"
 						],
 						"type": "text/javascript"
 					}
@@ -686,8 +684,7 @@
 					"script": {
 						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
 						"exec": [
-							"tests[\"No existe el recurso\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/{{new_id_conductor}}/vehiculos/0 no existe.\");"
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;"
 						],
 						"type": "text/javascript"
 					}
