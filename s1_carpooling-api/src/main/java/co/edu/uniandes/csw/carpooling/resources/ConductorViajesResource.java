@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.carpooling.dtos.ViajeDetailDTO;
 import co.edu.uniandes.csw.carpooling.ejb.ConductorLogic;
 import co.edu.uniandes.csw.carpooling.ejb.VehiculoLogic;
 import co.edu.uniandes.csw.carpooling.ejb.ViajeLogic;
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
@@ -49,20 +50,23 @@ public class ConductorViajesResource {
     private VehiculoLogic vehiculoLogic;
     
     @POST
-    @Path("/vehiculos/{vehiculosId:\\d}")
-    public ViajeDetailDTO createViaje(@PathParam("conductoresId") Long conductoresId, 
-            @PathParam("vehiculosId") Long vehiculosId, ViajeDTO viaje) throws BusinessLogicException{
-        //LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: input: {0} con id de conductor: {1} y id de vehiculo: {3}", new Object[]{viaje, conductoresId, vehiculosId});
+    @Path("{vehiculosId: \\d+}")
+    public ViajeDetailDTO createViaje(@PathParam("conductoresId") Long conductoresId, @PathParam("vehiculosId") Long vehiculosId, ViajeDTO viaje) throws BusinessLogicException{
+        LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: input: {0} con id de conductor: {1} y id de vehiculo: {2}", new Object[]{viaje, conductoresId, vehiculosId});
         ViajeEntity viajeEntity =viaje.toEntity();
+        ConductorEntity conductorEntity = conductorLogic.getConductor(conductoresId);
+        if(conductorEntity == null){
+            throw new WebApplicationException("El recurso /conductorres/" + conductoresId + " no existe.", 404);
+        }
         VehiculoEntity vehiculoEntity = vehiculoLogic.getVehiculo(conductoresId, vehiculosId);
         if(vehiculoEntity == null){
             throw new WebApplicationException("El recurso /vehiculos/" + vehiculosId + " no existe.", 404);
         }
-        viajeEntity.setConductor(conductorLogic.getConductor(conductoresId));
+        viajeEntity.setConductor(conductorEntity);
         viajeEntity.setVehiculo(vehiculoEntity);
         viajeEntity = viajeLogic.createViaje(viajeEntity);
         ViajeDetailDTO resultado = new ViajeDetailDTO(viajeEntity);
-        //LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: output: {0}", resultado);
+        LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: output: {0}", resultado);
         return resultado;
     }
     
@@ -100,7 +104,15 @@ public class ConductorViajesResource {
         if (entity == null) {
             throw new WebApplicationException("El recurso /conductores/" + conductoresId + "/viajes/" + viajesId + " no existe.", 404);
         }
-        ViajeDetailDTO detailDTO = new ViajeDetailDTO(viajeLogic.updateViaje(viajesId, viaje.toEntity()));
+        VehiculoEntity entity2 = vehiculoLogic.getVehiculo(conductoresId, viaje.getVehiculo().getId());
+        if(entity2 == null){
+            throw new WebApplicationException("El recurso /conductores/" + conductoresId + "/vehiculos/" + viaje.getVehiculo().getId() + " no existe.", 404);
+        }
+        
+        ViajeEntity viajeEntity = viaje.toEntity();
+        viajeEntity.setConductor(conductorLogic.getConductor(conductoresId));
+        
+        ViajeDetailDTO detailDTO = new ViajeDetailDTO(viajeLogic.updateViaje(viajesId, viajeEntity));
         LOGGER.log(Level.INFO, "ConductorViajesResource updateViaje: output: {0}", detailDTO);
         return detailDTO;
     }
