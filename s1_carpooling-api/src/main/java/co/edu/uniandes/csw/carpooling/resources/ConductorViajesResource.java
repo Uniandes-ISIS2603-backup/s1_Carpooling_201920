@@ -112,7 +112,7 @@ public class ConductorViajesResource {
         ViajeEntity viajeEntity = viaje.toEntity();
         viajeEntity.setConductor(conductorLogic.getConductor(conductoresId));
         
-        ViajeDetailDTO detailDTO = new ViajeDetailDTO(viajeLogic.updateViaje(viajesId, viajeEntity));
+        ViajeDetailDTO detailDTO = new ViajeDetailDTO(viajeLogic.updateViaje(viajeEntity));
         LOGGER.log(Level.INFO, "ConductorViajesResource updateViaje: output: {0}", detailDTO);
         return detailDTO;
     }

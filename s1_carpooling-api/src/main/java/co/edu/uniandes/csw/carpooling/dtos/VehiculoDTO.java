@@ -67,7 +67,6 @@ public class VehiculoDTO implements Serializable{
             
     public VehiculoDTO()
     {
-        //Vacio
     }
    
     public VehiculoDTO(VehiculoEntity vehiculoEntity)
@@ -81,12 +80,6 @@ public class VehiculoDTO implements Serializable{
             this.modelo = vehiculoEntity.getModelo();
             this.sillas = vehiculoEntity.getSillas();
             this.vigenciaSoat = vehiculoEntity.getVigenciaSoat();
-            /*
-            if(vehiculoEntity.getConductor() != null)
-                this.conductor = new ConductorDTO(vehiculoEntity.getConductor());
-            else
-                vehiculoEntity.setConductor(null);
-*/
         }
     }
     

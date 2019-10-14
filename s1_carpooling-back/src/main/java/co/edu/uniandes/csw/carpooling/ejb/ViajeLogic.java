@@ -71,7 +71,7 @@ public class ViajeLogic {
         return persistence.findAll(conductorId);
     }
     
-    public ViajeEntity updateViaje(Long viajeId, ViajeEntity viaje) throws BusinessLogicException{
+    public ViajeEntity updateViaje(ViajeEntity viaje) throws BusinessLogicException{
         if ( !validateDestino(viaje.getDestino()) || !validateOrigen(viaje.getOrigen()))// || viaje.getDestino().equals(viaje.getOrigen()))
             throw new BusinessLogicException("El destino u origen son incorrectos");
         else if (!validateCupos(viaje.getCupos()))
@@ -94,8 +94,8 @@ public class ViajeLogic {
     }
     
     
-    private boolean validateDestino(String Destino){
-        return !(Destino == null || Destino.isEmpty());
+    private boolean validateDestino(String destino){
+        return !(destino == null || destino.isEmpty());
     }
     
     private boolean validateFechaDeSalida(Date fechaDeSalida){

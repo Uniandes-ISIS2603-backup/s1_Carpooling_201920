@@ -81,48 +81,48 @@ public class ViajeDetailDTO extends ViajeDTO implements Serializable{
     
     public ViajeDetailDTO(ViajeEntity viajeEntity){
         super(viajeEntity);
-        if(viajeEntity != null){
-            if(viajeEntity.getTrayectos() != null){
-                trayectos = new ArrayList<TrayectoDTO>();
+        if(viajeEntity.getTrayectos() != null){
+                trayectos = new ArrayList<>();
                 for(TrayectoEntity trayectoEntity: viajeEntity.getTrayectos()){
                     trayectos.add(new TrayectoDTO(trayectoEntity));
                 }
             }
             
             if(viajeEntity.getCalificaciones()!=null){
-                calificaciones = new ArrayList<CalificacionDTO>();
+                calificaciones = new ArrayList<>();
                 for(CalificacionEntity calificacionEntity: viajeEntity.getCalificaciones()){
                     calificaciones.add(new CalificacionDTO(calificacionEntity));
                 }
             }
             
             if(viajeEntity.getReservas()!=null){
-                reservas = new ArrayList<ReservaDTO>();
+                reservas = new ArrayList<>();
                 for(ReservaEntity reservaEntity: viajeEntity.getReservas()){
                     reservas.add(new ReservaDTO(reservaEntity));
                 }
             }
-        }
     }
     
+    
+    @Override
     public ViajeEntity toEntity(){
         ViajeEntity entidad = super.toEntity();
         if(trayectos != null){
-            List<TrayectoEntity> trayectosEntity = new ArrayList<TrayectoEntity>();
+            List<TrayectoEntity> trayectosEntity = new ArrayList<>();
             for(TrayectoDTO trayectoDTO: trayectos){
                 trayectosEntity.add(trayectoDTO.toEntity());
             }
             entidad.setTrayectos(trayectosEntity);
         }
         if(calificaciones != null){
-            List<CalificacionEntity> calificacionesEntity = new ArrayList<CalificacionEntity>();
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
             for(CalificacionDTO calificacionDTO: calificaciones){
                 calificacionesEntity.add(calificacionDTO.toEntity());
             }
             entidad.setCalificaciones(calificacionesEntity);
         }
         if(reservas != null){
-            List<ReservaEntity> reservasEntity = new ArrayList<ReservaEntity>();
+            List<ReservaEntity> reservasEntity = new ArrayList<>();
             for(ReservaDTO reservaDTO: reservas){
                 reservasEntity.add(reservaDTO.toEntity());
             }

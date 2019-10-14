@@ -13,7 +13,6 @@ import co.edu.uniandes.csw.carpooling.persistence.ViajePersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -24,13 +23,13 @@ import javax.inject.Inject;
 @Stateless
 public class TrayectoLogic {
     
+    private static final Logger LOGGER = Logger.getLogger(TrayectoLogic.class.getName());
+    
     @Inject
     private TrayectoPersistence persistence;
     
     @Inject
     private ViajePersistence viajePersistence;
-    
-    private static final Logger LOGGER = Logger.getLogger(TrayectoLogic.class.getName());
     
     public TrayectoEntity createTrayecto (Long viajesId, TrayectoEntity trayecto) throws BusinessLogicException 
     {
@@ -51,7 +50,7 @@ public class TrayectoLogic {
     }
     
     public List<TrayectoEntity> getTrayectos(Long viajesId){
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar los trayectos asociados al viaje con id = {0}", viajesId);
+        LOGGER.log(Level.INFO,"Inicia proceso de consultar los trayectos asociados al viaje con id = {0}", viajesId);
         ViajeEntity viajeEntity = viajePersistence.find(viajesId);
         LOGGER.log(Level.INFO, "Termina proceso de consultar los trayectos asociados al viaje con id = {0}", viajesId);
         return viajeEntity.getTrayectos();
@@ -71,21 +70,21 @@ public class TrayectoLogic {
             throw new BusinessLogicException("Costo de combustible erroneo");
         else if(!validateOrigen(trayecto.getOrigen()) || !validateDestino(trayecto.getDestino()))// || trayecto.getDestino().equals(trayecto.getOrigen()))
             throw new BusinessLogicException("Origen o destinos erroneos");
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el trayecto con id = {0} del viaje con id = " + viajesId, trayecto.getId());
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el trayecto con id = {0} del viaje con id = {1}", new Object[]{trayecto.getId(), viajesId});
         ViajeEntity viajeEntity = viajePersistence.find(viajesId);
         trayecto.setViaje(viajeEntity);
         TrayectoEntity nuevo = persistence.update(trayecto);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el trayecto con id = {0} del viaje con id = " + viajesId, trayecto.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el trayecto con id = {0} del viaje con id = {1}" , new Object[]{trayecto.getId(), viajesId});
         return nuevo;
     }
     
     public void deleteTrayecto(Long trayectoId, Long viajesId) throws BusinessLogicException{
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el trayecto con id = {0} del viaje con id = " + viajesId, trayectoId);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar el trayecto con id = {0} del viaje con id = {1}", new Object[]{trayectoId, viajesId});
         TrayectoEntity trayecto = getTrayecto(trayectoId, viajesId);
         if(trayecto == null)
             throw new BusinessLogicException("El trayecto con id = "+trayectoId+"no esta asociado con el viaje con id ="+viajesId);
         persistence.delete(trayectoId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el trayecto con id = {0} del viaje con id = " + viajesId, trayectoId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el trayecto con id = {0} del viaje con id = {1}", new Object[]{trayectoId, viajesId,});
     }
     
     
