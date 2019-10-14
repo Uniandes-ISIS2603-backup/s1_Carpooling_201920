@@ -34,7 +34,7 @@ public class ViajePersistence {
     }
     
     public ViajeEntity find(Long conductorId, Long viajeId){
-        TypedQuery <ViajeEntity> query = em.createQuery("select u from ViajeEntity u where (u.conductor.id = :conductorId) and (u.id = : viajeId)", ViajeEntity.class);
+        TypedQuery <ViajeEntity> query = em.createQuery("select u from ViajeEntity u where (u.conductor.id = :conductorId) and (u.id = :viajeId)", ViajeEntity.class);
         query.setParameter("viajeId", viajeId);
         query.setParameter("conductorId", conductorId);
         List<ViajeEntity> resultados = query.getResultList();
