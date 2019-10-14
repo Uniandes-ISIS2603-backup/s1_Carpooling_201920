@@ -42,14 +42,6 @@ public class ViajeResource {
     @Inject
     private ViajeLogic logic;
     
-    @POST
-    public ViajeDTO createViaje(ViajeDetailDTO viaje) throws BusinessLogicException{
-        LOGGER.log(Level.INFO, "ViajeResource createViaje: input: {0}", viaje);
-        ViajeEntity viajeEntity =viaje.toEntity();
-        viajeEntity = logic.createViaje(viajeEntity);
-        return new ViajeDTO(viajeEntity);
-    }
-    
     
     @GET
     public List<ViajeDetailDTO> getViajes(){
@@ -87,19 +79,6 @@ public class ViajeResource {
         return detailDTO;
     }
     
-    
-    @DELETE
-    @Path("{viajesId: \\d+}")
-    public void deleteViaje(@PathParam("viajesId") Long viajesId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "ViajeResource deleteViaje: input: {0}", viajesId);
-        if (logic.getViaje(viajesId) == null) {
-            throw new WebApplicationException("El recurso /viajes/" + viajesId + " no existe.", 404);
-        }
-        logic.deleteViaje(viajesId);
-        LOGGER.info("ViajeResource deleteViaje: output: void");
-    }
-    
-    
     @Path("{viajesId: \\d+}/trayectos")
     public Class<TrayectoResource> getTrayectoResource(@PathParam("viajesId") Long viajesId) {
         if (logic.getViaje(viajesId) == null) {
@@ -107,10 +86,6 @@ public class ViajeResource {
         }
         return TrayectoResource.class;
     }
-    
-    
-    
-    
     
     private List<ViajeDetailDTO> listViajesEntityToDTO(List<ViajeEntity> viajes){
         List<ViajeDetailDTO> viajesDTO = new ArrayList<ViajeDetailDTO>();
