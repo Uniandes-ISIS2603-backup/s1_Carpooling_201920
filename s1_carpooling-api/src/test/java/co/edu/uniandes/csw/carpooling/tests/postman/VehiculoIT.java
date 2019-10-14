@@ -40,13 +40,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- *  Pruebas de integracion de la cascara.
- * @author ISIS2603
+ *  .
+ * @author Juan David Serrano
  */
 @RunWith(Arquillian.class)
-public class CascaraIT {
+public class VehiculoIT {
 
-    private static final String COLLECTION = "Cascara-Tests.postman_collection";
+    private static final String COLLECTION = "Vehiculo Tests.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
