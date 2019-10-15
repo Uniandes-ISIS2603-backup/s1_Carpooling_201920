@@ -221,7 +221,7 @@ public class ViajeLogicTest {
         entity2.setId(entity0.getId());
         entity2.setConductor(conductor);
         entity2.setVehiculo(vehiculo);
-        viajeLogic.updateViaje(entity0.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
         ViajeEntity entity1 = em.find(ViajeEntity.class, entity0.getId());
         Assert.assertNotNull(entity2);
         Assert.assertEquals(entity1.getCostoViaje(), entity2.getCostoViaje());
@@ -239,7 +239,7 @@ public class ViajeLogicTest {
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setDestino("");
         entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -248,7 +248,7 @@ public class ViajeLogicTest {
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setOrigen(null);
         entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -257,7 +257,7 @@ public class ViajeLogicTest {
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setFechaDeSalida(null);
         entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -266,7 +266,7 @@ public class ViajeLogicTest {
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setFechaDeLlegada(null);
         entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -275,7 +275,7 @@ public class ViajeLogicTest {
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setCupos(-1);
         entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -284,7 +284,7 @@ public class ViajeLogicTest {
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setCostoViaje((float)-1);
         entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     
@@ -294,7 +294,7 @@ public class ViajeLogicTest {
         ViajeEntity entity2 = factory.manufacturePojo(ViajeEntity.class);
         entity2.setEstadoViaje(null);
         entity2.setId(entity1.getId());
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -304,7 +304,7 @@ public class ViajeLogicTest {
         entity2.setId(entity1.getId());
         entity2.setConductor(conductor);
         entity2.setVehiculo(null);
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -314,7 +314,7 @@ public class ViajeLogicTest {
         entity2.setId(entity1.getId());
         entity2.setConductor(null);
         entity2.setVehiculo(vehiculo);
-        viajeLogic.updateViaje(entity1.getId(), entity2);
+        viajeLogic.updateViaje(entity2);
     }
     
     @Test

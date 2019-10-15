@@ -104,6 +104,7 @@ public class ConductorResource {
         if (logica.getConductor(conductoresId) == null) {
             throw new WebApplicationException("El recurso /conductores/" + conductoresId + " no existe.", 404);
         }
+        LOGGER.log(Level.INFO, "Se retorna la clase ConductorViajesResource");
         return ConductorViajesResource.class;
     }
     

@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "daa45ba6-6fe0-4f54-8bec-f8708b968b0f",
-		"name": "Trayecto Tests",
+		"_postman_id": "2470eba9-59f4-4b5f-9480-910c00723ce7",
+		"name": "ConductorViajes Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -177,15 +177,25 @@
 			"response": []
 		},
 		{
-			"name": "Crear un trayecto",
+			"name": "Crear un viaje 2",
 			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "877c0454-28cc-4419-9ffd-a05abbb27893",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
 				{
 					"listen": "test",
 					"script": {
-						"id": "c17361e4-e39d-40ba-a510-8e89f76a6b96",
+						"id": "843db071-9bea-42cb-9dfd-4a74cdc6b799",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_trayecto\",data.id);",
+							"postman.setGlobalVariable(\"new_id2_viaje\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -205,7 +215,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"numPeajes\": 4,\n\t\"duracion\": 360,\n\t\"costoCombustible\": 60000.0,\n\t\"origen\": \"Calle 40 #127-51\",\n\t\"destino\": \"Carrera 2 #39-68\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -213,7 +223,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id_vehiculo}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -222,78 +232,25 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
+						"conductores",
+						"{{new_id_conductor}}",
 						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos"
+						"{{new_id_vehiculo}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Crear un trayecto 2",
+			"name": "Crear un viaje con origen vacio",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "0742c2aa-cc01-4951-af50-460807d18e07",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_trayecto2\",data.id);",
-							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"numPeajes\": 3,\n\t\"duracion\": 300,\n\t\"costoCombustible\": 70000.0,\n\t\"origen\": \"Calle 35 #129-60\",\n\t\"destino\": \"Carrera 1 #47-70\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear un trayecto con origen vacio",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "a809c719-152f-4e2f-bcd9-0dcfd3ce17da",
+						"id": "074ef74d-36aa-424c-92b2-78468e5c7389",
 						"exec": [
 							"tests[\"El origen no puede ser vacio\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Origen o destinos erroneos\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El destino u origen son incorrectos\");"
 						],
 						"type": "text/javascript"
 					}
@@ -311,7 +268,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"numPeajes\": 5,\n\t\"duracion\": 400,\n\t\"costoCombustible\": 20000.0,\n\t\"origen\": \"\",\n\t\"destino\": \"Carrera 2 #39-68\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -319,7 +276,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id_vehiculo}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -328,62 +285,134 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
+						"conductores",
+						"{{new_id_conductor}}",
 						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos"
+						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea un viaje no valido\n"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener los trayectos de un viaje",
+			"name": "Editar un viaje",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "c39e663f-5ca1-46ae-ad1f-2b11196e7b1f",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
-							"tests[\"reviews count\"] = data.length >= 2;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un trayecto de un viaje",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "bce2750b-b8a7-43e1-8063-44e52d4bb4cc",
+						"id": "075f9be1-a7d6-4e80-bb08-7ae58a6e4c7e",
 						"exec": [
 							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
-							"tests[\"no genera error en el Get\"] = responseCode.code === 200;"
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fechaDeSalida\": \"2019-12-15\",\n    \"fechaDeLlegada\": \"2019-12-16\",\n    \"costoViaje\": 40000.0,\n    \"cupos\": 2,\n    \"destino\": \"Cali\",\n    \"estadoViaje\": \"PUBLICADO\",\n    \"origen\": \"Medellin\",\n    \"vehiculo\": {\n        \"aseguradora\": \"SURA\",\n        \"id\": \"{{new_id_vehiculo}}\",\n        \"modelo\": \"Chevrolet Spark\",\n        \"placa\": \"MDS 546\",\n        \"sillas\": 5,\n        \"soat\": \"RWSNFJ12395837\",\n        \"vigenciaSoat\": \"11/10/2020\"\n    },\n    \"calificaciones\": [],\n    \"reservas\": [],\n    \"trayectos\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id2_viaje}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"{{new_id2_viaje}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un viaje que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ab60547-3c2c-4623-b309-cb199dbf1ed8",
+						"exec": [
+							"tests[\"Consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los viajes de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c6f19c79-ffe4-407a-97e4-d49c472297fc",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
+							"tests[\"viajes count\"] = data.length >= 2;"
 						],
 						"type": "text/javascript"
 					}
@@ -393,7 +422,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos/{{new_id_trayecto}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -402,92 +431,35 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
-						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos",
-						"{{new_id_trayecto}}"
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Editar un trayecto de un viaje",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id\":\"{{new_id_trayecto}}\",\n\t\"numPeajes\": 2,\n\t\"duracion\": 360,\n\t\"costoCombustible\": 60000.0,\n\t\"origen\": \"Calle 40 #127-51\",\n\t\"destino\": \"Carrera 2 #39-68\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos/{{new_id_trayecto}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos",
-						"{{new_id_trayecto}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar un trayecto que no existe",
+			"name": "Obtener un viaje de un conductor",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "2331601b-1b95-4028-bc23-b915f882348b",
+						"id": "18bf86eb-f77f-4680-8104-0a4a4ecc0cec",
 						"exec": [
-							"tests[\"No se puede editar un review que no existe.\"] = responseCode.code === 404;",
-							"let id = pm.variables.get(\"new_id_viaje\");",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/\"+id+\"/trayectos/0 no existe.\");"
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id\":0,\n\t\"numPeajes\": 1,\n\t\"duracion\": 360,\n\t\"costoCombustible\": 60000.0,\n\t\"origen\": \"Calle 40 #127-51\",\n\t\"destino\": \"Carrera 2 #39-68\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id_viaje}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -496,210 +468,47 @@
 					"path": [
 						"s1_carpooling-api",
 						"api",
+						"conductores",
+						"{{new_id_conductor}}",
 						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos",
+						"{{new_id_viaje}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una viaje que no existe de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "024b21fd-5fba-4206-8536-5870ec20a551",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
 						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar un trayecto de un viaje que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1e0f64ca-11f7-49a9-b49e-ab6810791ce5",
-						"exec": [
-							"tests[\"No se puede editar un trayecto sobre un viaje que no existe.\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0/trayectos no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id\":\"{{new_id_trayecto}}\",\n\t\"numPeajes\": 1,\n\t\"duracion\": 360,\n\t\"costoCombustible\": 60000.0,\n\t\"origen\": \"Calle 40 #127-51\",\n\t\"destino\": \"Carrera 2 #39-68\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/0/trayectos/{{new_id_trayecto}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"0",
-						"trayectos",
-						"{{new_id_trayecto}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar un trayecto a un viaje",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "6f6fdd6b-ff86-4d1f-b874-7bb06173705d",
-						"exec": [
-							"tests[\"no genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos/{{new_id_trayecto}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos",
-						"{{new_id_trayecto}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar un trayecto de un viaje 2",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "207fb56d-75d0-4ff5-8fa3-eda8135d2187",
-						"exec": [
-							"tests[\"no genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos/{{new_id_trayecto2}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos",
-						"{{new_id_trayecto2}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar un trayecto que no existe de un viaje",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "969a5c56-ec07-411f-9222-3ecb75410c7f",
-						"exec": [
-							"tests[\"No se puede borrar un trayecto que no existe.\"] = responseCode.code === 404;",
-							"let id = pm.variables.get(\"new_id_viaje\");",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/\"+id+\"/trayectos/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}/trayectos/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"{{new_id_viaje}}",
-						"trayectos",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar un trayecto de un viaje que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "da0811c1-122f-4948-a0cd-78503a776bfd",
-						"exec": [
-							"tests[\"No se puede borrar un trayecto de un viaje que no existe.\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0/trayectos no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/0/trayectos/{{new_id_trayecto}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"viajes",
-						"0",
-						"trayectos",
-						"{{new_id_trayecto}}"
 					]
 				}
 			},
@@ -736,6 +545,79 @@
 						"{{new_id_conductor}}",
 						"viajes",
 						"{{new_id_viaje}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viaje 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "10162458-3996-49fa-8255-f5ea62b0c862",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id2_viaje}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"{{new_id2_viaje}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viaje que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c5526a9-3b80-4bba-9c00-cbca0819c3ed",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"0"
 					]
 				}
 			},
