@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import co.edu.uniandes.csw.carpooling.persistence.PublicidadPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +34,16 @@ public class PublicidadPersistenceTest {
 
     @Inject
     PublicidadPersistence pp;
+    
     @PersistenceContext
-    EntityManager entMan;
+    EntityManager em;
+    
     @Inject
     UserTransaction utx;
 
     private List<PublicidadEntity> data = new ArrayList<PublicidadEntity>();
+    
+    private List<PublicistaEntity> dataPublicista = new ArrayList<PublicistaEntity>();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -53,7 +58,7 @@ public class PublicidadPersistenceTest {
     public void configTest() {
         try {
             utx.begin();
-            entMan.joinTransaction();
+            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -68,15 +73,27 @@ public class PublicidadPersistenceTest {
     }
 
     private void clearData() {
-        entMan.createQuery("delete from PublicidadEntity").executeUpdate();
+        em.createQuery("delete from PublicidadEntity").executeUpdate();
+        em.createQuery("delete from PublicistaEntity").executeUpdate();
     }
 
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
+            PublicistaEntity entity = factory.manufacturePojo(PublicistaEntity.class);
+            em.persist(entity);
+            dataPublicista.add(entity);
+        }
+        for (int i = 0; i < 3; i++) {
             PublicidadEntity entity = factory.manufacturePojo(PublicidadEntity.class);
-
-            entMan.persist(entity);
+            if (i == 0) {
+                entity.setPublicista(dataPublicista.get(0));
+            }
+            em.persist(entity);
             data.add(entity);
         }
     }
@@ -85,22 +102,15 @@ public class PublicidadPersistenceTest {
     public void createTest() {
 
         PodamFactory factory = new PodamFactoryImpl();
-        PublicidadEntity newentity = factory.manufacturePojo(PublicidadEntity.class);
+        PublicidadEntity newEntity = factory.manufacturePojo(PublicidadEntity.class);
 
-        PublicidadEntity pe = pp.create(newentity);
+        PublicidadEntity pe = pp.create(newEntity);
 
         Assert.assertNotNull(pe);
 
-        PublicidadEntity entity = entMan.find(PublicidadEntity.class, pe.getId());
+        PublicidadEntity entity = em.find(PublicidadEntity.class, pe.getId());
 
-        Assert.assertEquals(newentity.getNombre(), entity.getNombre());
-    }
 
-    @Test
-    public void findTest() {
-        PublicidadEntity entity = data.get(0);
-        PublicidadEntity newEntity = pp.find(entity.getId());
-        Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
         Assert.assertEquals(entity.getMensaje(), newEntity.getMensaje());
         Assert.assertEquals(entity.getFechaDeSalida(), newEntity.getFechaDeSalida());
@@ -108,19 +118,19 @@ public class PublicidadPersistenceTest {
         Assert.assertEquals(entity.getCosto(), newEntity.getCosto(), 0);
     }
 
+        /**
+     * Prueba para consultar un Review.
+     */
     @Test
-    public void findAllTest() {
-        List<PublicidadEntity> list = pp.findAll();
-        Assert.assertEquals(data.size(), list.size());
-        for (PublicidadEntity ent : list) {
-            boolean found = false;
-            for (PublicidadEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
+    public void findTest() {
+        PublicidadEntity entity = data.get(0);
+        PublicidadEntity newEntity = pp.find(dataPublicista.get(0).getId(), entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getMensaje(), newEntity.getMensaje());
+        Assert.assertEquals(entity.getFechaDeSalida(), newEntity.getFechaDeSalida());
+        Assert.assertEquals(entity.getFechaDeInicio(), newEntity.getFechaDeInicio());
+        Assert.assertEquals(entity.getCosto(), newEntity.getCosto(), 0);
     }
 
     @Test
@@ -133,7 +143,7 @@ public class PublicidadPersistenceTest {
 
         pp.update(newEntity);
 
-        PublicidadEntity resp = entMan.find(PublicidadEntity.class, entity.getId());
+        PublicidadEntity resp = em.find(PublicidadEntity.class, entity.getId());
 
         Assert.assertEquals(resp.getNombre(), newEntity.getNombre());
         Assert.assertEquals(resp.getMensaje(), newEntity.getMensaje());
@@ -146,7 +156,7 @@ public class PublicidadPersistenceTest {
     public void deleteTest() {
         PublicidadEntity entity = data.get(0);
         pp.delete(entity.getId());
-        PublicidadEntity deleted = entMan.find(PublicidadEntity.class, entity.getId());
+        PublicidadEntity deleted = em.find(PublicidadEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 

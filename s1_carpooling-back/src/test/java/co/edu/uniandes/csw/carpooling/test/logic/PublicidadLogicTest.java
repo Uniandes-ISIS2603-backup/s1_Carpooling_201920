@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.carpooling.test.logic;
 
 import co.edu.uniandes.csw.carpooling.ejb.PublicidadLogic;
 import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.PublicidadPersistence;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class PublicidadLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
@@ -45,6 +47,8 @@ public class PublicidadLogicTest {
     private UserTransaction utx;
     
     private List<PublicidadEntity> data = new ArrayList<PublicidadEntity>();
+    
+    private List<PublicistaEntity> dataPublicista = new ArrayList<PublicistaEntity>();
     
     @Deployment
     public static JavaArchive createDeployment(){
@@ -80,8 +84,15 @@ public class PublicidadLogicTest {
     }
     
     private void insertData(){
-        for(int i =0;i<3;i++){
+       for (int i = 0; i < 3; i++) {
+            PublicistaEntity entity = factory.manufacturePojo(PublicistaEntity.class);
+            em.persist(entity);
+           dataPublicista.add(entity);
+        }
+
+        for (int i = 0; i < 3; i++) {
             PublicidadEntity entity = factory.manufacturePojo(PublicidadEntity.class);
+            entity.setPublicista(dataPublicista.get(1));
             em.persist(entity);
             data.add(entity);
         }
@@ -89,7 +100,9 @@ public class PublicidadLogicTest {
     
     @Test
     public void createPublicidadTest() throws BusinessLogicException{
+        
         PublicidadEntity newEntity = factory.manufacturePojo(PublicidadEntity.class);
+        
         Date fechaI = new Date();
         try{
             Thread.sleep(2000);
@@ -100,8 +113,11 @@ public class PublicidadLogicTest {
         newEntity.setFechaDeInicio(fechaI);
         newEntity.setFechaDeSalida(fechaS);
         newEntity.setCosto(32);
-        PublicidadEntity result = publicidadLogic.createPublicidad(newEntity);
+        
+        newEntity.setPublicista(dataPublicista.get(1));
+        PublicidadEntity result = publicidadLogic.createPublicidad(dataPublicista.get(1).getId(), newEntity);
         Assert.assertNotNull(result);
+        
         PublicidadEntity entity = em.find(PublicidadEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(),entity.getId());
         Assert.assertEquals(newEntity.getCosto(),entity.getCosto(),0);
@@ -110,8 +126,8 @@ public class PublicidadLogicTest {
     }
     
     @Test
-    public void getPublicidadesTest(){
-        List<PublicidadEntity> list = publicidadLogic.getPublicidades();
+    public void getPublicidadesTest()throws BusinessLogicException{
+        List<PublicidadEntity> list = publicidadLogic.getPublicidades(dataPublicista.get(1).getId());
         Assert.assertEquals(data.size(),list.size());
         for(PublicidadEntity entity : list){
             boolean found = false;
@@ -127,7 +143,7 @@ public class PublicidadLogicTest {
     @Test
     public void getPublicidadTest(){
         PublicidadEntity entity = data.get(0);
-        PublicidadEntity result = publicidadLogic.getPublicidad(entity.getId());
+        PublicidadEntity result = publicidadLogic.getPublicidad(dataPublicista.get(1).getId(), entity.getId());
         Assert.assertNotNull(result);
         Assert.assertEquals(result.getId(),entity.getId());
         Assert.assertEquals(result.getCosto(),entity.getCosto(),0);
@@ -152,8 +168,10 @@ public class PublicidadLogicTest {
         pojoEntity.setFechaDeSalida(fechaS);
         pojoEntity.setCosto(32);
         pojoEntity.setId(entity.getId());
-        publicidadLogic.updatePublicidad(pojoEntity);
+        
+        publicidadLogic.updatePublicidad(dataPublicista.get(1).getId(), pojoEntity);
         PublicidadEntity result = em.find(PublicidadEntity.class,pojoEntity.getId());
+        
         Assert.assertEquals(result.getId(),pojoEntity.getId());
         Assert.assertEquals(result.getCosto(),pojoEntity.getCosto(),0);
         Assert.assertEquals(result.getMensaje(),pojoEntity.getMensaje());
@@ -163,7 +181,7 @@ public class PublicidadLogicTest {
     @Test
     public void deletePublicidadTest() throws BusinessLogicException{
         PublicidadEntity entity = data.get(0);
-        publicidadLogic.deletePublicidad(entity.getId());
+        publicidadLogic.deletePublicidad(dataPublicista.get(1).getId(), entity.getId());
         PublicidadEntity deleted = em.find(PublicidadEntity.class,entity.getId());
         Assert.assertNull(deleted);
     }

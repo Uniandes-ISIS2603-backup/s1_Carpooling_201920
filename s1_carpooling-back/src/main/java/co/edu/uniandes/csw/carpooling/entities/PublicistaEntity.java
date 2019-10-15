@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.carpooling.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -35,7 +36,7 @@ public class PublicistaEntity extends BaseEntity {
     private TIPO_PUBLICISTA tipoPublicista;
     
     @PodamExclude
-    @OneToMany(mappedBy = "publicista", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "publicista", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<PublicidadEntity> publicidades = new ArrayList<PublicidadEntity>();
 
     /**
@@ -44,7 +45,7 @@ public class PublicistaEntity extends BaseEntity {
     public PublicistaEntity(){
     
     }
-    
+
     /**
      * @return the nombre
      */
@@ -58,7 +59,7 @@ public class PublicistaEntity extends BaseEntity {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     /**
      * @return the apellido
      */
@@ -71,6 +72,20 @@ public class PublicistaEntity extends BaseEntity {
      */
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    /**
+     * @return the contrasenha
+     */
+    public String getContrasenha() {
+        return contrasenha;
+    }
+
+    /**
+     * @param contrasenha the contrasenha to set
+     */
+    public void setContrasenha(String contrasenha) {
+        this.contrasenha = contrasenha;
     }
 
     /**
@@ -170,20 +185,6 @@ public class PublicistaEntity extends BaseEntity {
     public void setPublicidades(List<PublicidadEntity> publicidades) {
         this.publicidades = publicidades;
     }
-
-    /**
-     * @return the contrasenha
-     */
-    public String getContrasenha() {
-        return contrasenha;
-    }
-
-    /**
-     * @param contrasenha the contrasenha to set
-     */
-    public void setContrasenha(String contrasenha) {
-        this.contrasenha = contrasenha;
-    }
-
-
+    
+    
 }

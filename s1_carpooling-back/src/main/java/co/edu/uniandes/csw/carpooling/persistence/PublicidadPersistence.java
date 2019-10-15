@@ -27,13 +27,31 @@ public class PublicidadPersistence {
         return publicidadEntity;
     }
 
-    public PublicidadEntity find(Long publicidadId) {
-        return em.find((PublicidadEntity.class), publicidadId);
-    }
-
-    public List<PublicidadEntity> findAll() {
-        TypedQuery<PublicidadEntity> query = em.createQuery("select u from PublicidadEntity u", PublicidadEntity.class);
-        return query.getResultList();
+    /**
+     * Buscar una reseña
+     *
+     * Busca si hay alguna reseña asociada a un libro y con un ID específico
+     *
+     * @param publicistasId El ID del libro con respecto al cual se busca
+     * @param publicidadesId El ID de la reseña buscada
+     * @return La reseña encontrada o null. Nota: Si existe una o más reseñas
+     * devuelve siempre la primera que encuentra
+     */
+    public PublicidadEntity find(Long publicistasId, Long publicidadesId) {
+        
+        TypedQuery<PublicidadEntity> q = em.createQuery("select p from PublicidadEntity p where (p.publicista.id = :publicistaId) and (p.id = :publicidadesId)", PublicidadEntity.class);
+        q.setParameter("publicistaId", publicistasId);
+        q.setParameter("publicidadesId", publicidadesId);
+        List<PublicidadEntity> results = q.getResultList();
+        PublicidadEntity publicidad = null;
+        if (results == null||results.isEmpty()) {
+            publicidad = null;
+        } 
+        else if (results.size() >= 1) {
+            publicidad = results.get(0);
+        }
+        
+        return publicidad;
     }
 
     public PublicidadEntity update(PublicidadEntity publicidadEntity) {
