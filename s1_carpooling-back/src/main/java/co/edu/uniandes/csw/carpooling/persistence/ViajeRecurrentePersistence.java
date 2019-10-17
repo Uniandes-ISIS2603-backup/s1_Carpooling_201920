@@ -16,42 +16,38 @@ import javax.persistence.TypedQuery;
  *
  * @author Juan David Alarcón
  */
-
 @Stateless
 public class ViajeRecurrentePersistence {
-    
-    @PersistenceContext(unitName= "carpoolingPU")
+
+    @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
-    
-    
-    public ViajeRecurrenteEntity create(ViajeRecurrenteEntity viajeRecurrente)
-    {
-       em.persist(viajeRecurrente);
-       return viajeRecurrente;
+
+    public ViajeRecurrenteEntity create(ViajeRecurrenteEntity viajeRecurrente) {
+        em.persist(viajeRecurrente);
+        return viajeRecurrente;
     }
-    
-     public ViajeRecurrenteEntity find(Long conductorId) {
- 
+
+    public ViajeRecurrenteEntity find(Long conductorId) {
+
         return em.find(ViajeRecurrenteEntity.class, conductorId);
     }
-     
-     public ViajeRecurrenteEntity update(ViajeRecurrenteEntity viajeRecurrenteEntity)
-     {
-         return em.merge(viajeRecurrenteEntity);
-     }
-     
-         public void delete(Long viajeRecurrenteId) {
-        
+
+    public ViajeRecurrenteEntity update(ViajeRecurrenteEntity viajeRecurrenteEntity) {
+        return em.merge(viajeRecurrenteEntity);
+    }
+
+    public void delete(Long viajeRecurrenteId) {
+
         ViajeRecurrenteEntity viajeRecurrenteEntity = em.find(ViajeRecurrenteEntity.class, viajeRecurrenteId);
         em.remove(viajeRecurrenteEntity);
     }
-        public List<ViajeRecurrenteEntity> findAll() {
+
+    public List<ViajeRecurrenteEntity> findAll() {
         TypedQuery<ViajeRecurrenteEntity> query = em.createQuery("select u from ViajeRecurrenteEntity u", ViajeRecurrenteEntity.class);
         return query.getResultList();
     }
-        
-        public ViajeRecurrenteEntity find(Long conductoresId, Long viajesRecurrentesId) {
+
+    public ViajeRecurrenteEntity find(Long conductoresId, Long viajesRecurrentesId) {
 
         TypedQuery<ViajeRecurrenteEntity> q = em.createQuery("select p from ViajeRecurrenteEntity p where (p.conductor.id = :conductorid) and (p.id = :viajesRecurrentesId)", ViajeRecurrenteEntity.class);
         q.setParameter("conductorid", conductoresId);

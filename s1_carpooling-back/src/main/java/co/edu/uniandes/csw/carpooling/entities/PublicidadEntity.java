@@ -22,7 +22,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class PublicidadEntity extends BaseEntity implements Serializable {
-   
+
     public enum DISPONIBILIDAD {
         UNA_SEMANA,
         TRES_SEMANAS
@@ -35,7 +35,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     private String mensaje;
 
     private double costo;
-    
+
     private DISPONIBILIDAD disponibilidadPublicidad;
 
     @Temporal(TemporalType.DATE)
@@ -45,7 +45,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
-    
+
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private PublicistaEntity publicista;
@@ -133,8 +133,8 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     public void setDisponibilidadPublicidad(DISPONIBILIDAD disponibilidadPublicidad) {
         this.disponibilidadPublicidad = disponibilidadPublicidad;
     }
-    
-        /**
+
+    /**
      * @return the publicista
      */
     public PublicistaEntity getPublicista() {

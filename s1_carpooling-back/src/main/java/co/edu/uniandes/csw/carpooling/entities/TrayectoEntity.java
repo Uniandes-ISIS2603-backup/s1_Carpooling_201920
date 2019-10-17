@@ -17,24 +17,24 @@ import uk.co.jemos.podam.common.PodamIntValue;
  * @author Juan David Serrano
  */
 @Entity
-public class TrayectoEntity extends BaseEntity implements Serializable{
+public class TrayectoEntity extends BaseEntity implements Serializable {
+
     @PodamIntValue(minValue = 0)
     private Integer numPeajes;
-    
+
     @PodamIntValue(minValue = 1)
     private Integer duracion;
-    
+
     @PodamDoubleValue(minValue = 0)
     private Double costoCombustible;
-    
+
     private String origen;
-    
+
     private String destino;
-    
+
     @PodamExclude
     @ManyToOne//cascade = CascadeType.PERSIST)
     private ViajeEntity viaje;
-    
 
     /**
      * @return the numPeajes
@@ -119,5 +119,5 @@ public class TrayectoEntity extends BaseEntity implements Serializable{
     public void setViaje(ViajeEntity viaje) {
         this.viaje = viaje;
     }
-    
+
 }

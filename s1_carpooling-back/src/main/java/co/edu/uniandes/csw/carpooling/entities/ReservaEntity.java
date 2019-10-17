@@ -20,35 +20,34 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  * @author le.perezl
  */
 @Entity
-public class ReservaEntity  extends BaseEntity implements Serializable {
-    
+public class ReservaEntity extends BaseEntity implements Serializable {
+
     /**
      * Enumeraciones
      */
-    public static final Integer POR_CONFIRMAR=0;
-    public static final Integer TERMINADA=1;
-    public static final Integer CONFIRMADA=2;
-    public static final Integer DENEGADA=3;
-    public static final Integer CANCELADA=4;
-    public static final Integer CANCELADA_CON_SANCION=5;
-    
+    public static final Integer POR_CONFIRMAR = 0;
+    public static final Integer TERMINADA = 1;
+    public static final Integer CONFIRMADA = 2;
+    public static final Integer DENEGADA = 3;
+    public static final Integer CANCELADA = 4;
+    public static final Integer CANCELADA_CON_SANCION = 5;
+
     private String numeroDeReserva;
     private String confirmacion;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     private String estado;
-    
+
     @PodamExclude
     @ManyToOne
     private ViajeEntity viaje;
-    
-        
+
     @PodamExclude
     @ManyToOne
     private ViajeroEntity viajero;
-    
+
     /**
      * @return the numeroDeReserva
      */
@@ -132,6 +131,5 @@ public class ReservaEntity  extends BaseEntity implements Serializable {
     public void setViajero(ViajeroEntity viajero) {
         this.viajero = viajero;
     }
-
 
 }

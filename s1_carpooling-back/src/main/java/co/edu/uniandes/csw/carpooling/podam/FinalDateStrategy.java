@@ -38,7 +38,7 @@ import uk.co.jemos.podam.common.AttributeStrategy;
 public class FinalDateStrategy implements AttributeStrategy<Date> {
 
     Random r = new Random();
-    
+
     @Override
     public Date getValue() {
         Calendar c = Calendar.getInstance();

@@ -61,30 +61,30 @@ public class PublicidadLogic {
     }
     
         /**
-     * Obtiene la lista de los registros de Review que pertenecen a un Book.
+     * Obtiene la lista de los registros de Review que pertenecen a un Publicista.
      *
-     * @param publicistasId id del Book el cual es padre de los Reviews.
+     * @param publicistasId id del Publicista el cual es padre de los Reviews.
      * @return Colección de objetos de ReviewEntity.
      */
     public List<PublicidadEntity> getPublicidades(Long publicistasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar los reviews asociados al book con id = {0}", publicistasId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar los publicidades asociados al publicista con id = {0}", publicistasId);
         PublicistaEntity publicidadEntity = publicistaPersistence.find(publicistasId);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar los reviews asociados al book con id = {0}", publicistasId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar los publicidades asociados al publicista con id = {0}", publicistasId);
         return publicidadEntity.getPublicidades();
     }
     
     
     /**
      * Obtiene los datos de una instancia de Review a partir de su ID. La
-     * existencia del elemento padre Book se debe garantizar.
+     * existencia del elemento padre Publicista se debe garantizar.
      *
      * @param publicistasId El id del Libro buscado
-     * @param publicidadesId Identificador de la Reseña a consultar
+     * @param publicidadesId Identificador de la Publicidad a consultar
      * @return Instancia de ReviewEntity con los datos del Review consultado.
      *
      */
     public PublicidadEntity getPublicidad(Long publicistasId, Long publicidadesId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el review con id = {0} del libro con id = " + publicistasId, publicidadesId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el publicidad con id = {0} del publicista con id = " + publicistasId, publicidadesId);
         return persistence.find(publicistasId, publicidadesId);
     }
     
@@ -106,22 +106,21 @@ public class PublicidadLogic {
         }
         PublicistaEntity publicistaEntity = publicistaPersistence.find(publicistasId);
         publicidadEntity.setPublicista(publicistaEntity);
-        PublicidadEntity result = persistence.update(publicidadEntity);
-        return result;
+        return persistence.update(publicidadEntity);
     }
     
         /**
      * Elimina una instancia de Review de la base de datos.
      *
-     * @param reviewsId Identificador de la instancia a eliminar.
-     * @param booksId id del Book el cual es padre del Review.
-     * @throws BusinessLogicException Si la reseña no esta asociada al libro.
+     * @param publicidadesId Identificador de la instancia a eliminar.
+     * @param publicistasId id del Publicista el cual es padre del Review.
+     * @throws BusinessLogicException Si la publicidad no esta asociada al publicista.
      *
      */
     public void deletePublicidad(Long publicistasId, Long publicidadesId) throws BusinessLogicException {
         PublicidadEntity old = getPublicidad(publicistasId, publicidadesId);
         if (old == null) {
-            throw new BusinessLogicException("El review con id = " + publicidadesId + " no esta asociado a el libro con id = " + publicistasId);
+            throw new BusinessLogicException("El publicidad con id = " + publicidadesId + " no esta asociado a el publicista con id = " + publicistasId);
         }
         persistence.delete(old.getId());
     }
@@ -134,7 +133,7 @@ public class PublicidadLogic {
         return !(mensaje == null|| mensaje.isEmpty());
     }
     private boolean validarCosto(double costo){
-        return !(costo<0);
+        return (costo>=0);
     }
     private boolean validarFechas(Date fechaInicio, Date fechaSalida){
         return !(fechaInicio==null||fechaSalida==null||fechaInicio.compareTo(fechaSalida)>0);
@@ -143,8 +142,7 @@ public class PublicidadLogic {
         String nombre = entidad.getNombre();
         boolean retorno = true;
         PublicidadEntity entidad2 = persistence.findByName(nombre);
-        if(entidad2 != null){
-            if((entidad.getFechaDeInicio().compareTo(entidad2.getFechaDeInicio())>0 && entidad.getFechaDeInicio().compareTo(entidad2.getFechaDeSalida())<0) || entidad.getFechaDeSalida().compareTo(entidad2.getFechaDeInicio())>0 && entidad.getFechaDeSalida().compareTo(entidad2.getFechaDeSalida())<0)
+        if((entidad2 != null)&&((entidad.getFechaDeInicio().compareTo(entidad2.getFechaDeInicio())>0 && entidad.getFechaDeInicio().compareTo(entidad2.getFechaDeSalida())<0) || entidad.getFechaDeSalida().compareTo(entidad2.getFechaDeInicio())>0 && entidad.getFechaDeSalida().compareTo(entidad2.getFechaDeSalida())<0)){
                     retorno = false;
                 }
     
