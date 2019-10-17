@@ -34,15 +34,15 @@ public class PublicidadPersistenceTest {
 
     @Inject
     PublicidadPersistence pp;
-    
+
     @PersistenceContext
     EntityManager em;
-    
+
     @Inject
     UserTransaction utx;
 
     private List<PublicidadEntity> data = new ArrayList<PublicidadEntity>();
-    
+
     private List<PublicistaEntity> dataPublicista = new ArrayList<PublicistaEntity>();
 
     @Deployment
@@ -110,7 +110,6 @@ public class PublicidadPersistenceTest {
 
         PublicidadEntity entity = em.find(PublicidadEntity.class, pe.getId());
 
-
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
         Assert.assertEquals(entity.getMensaje(), newEntity.getMensaje());
         Assert.assertEquals(entity.getFechaDeSalida(), newEntity.getFechaDeSalida());
@@ -118,7 +117,7 @@ public class PublicidadPersistenceTest {
         Assert.assertEquals(entity.getCosto(), newEntity.getCosto(), 0);
     }
 
-        /**
+    /**
      * Prueba para consultar un Review.
      */
     @Test

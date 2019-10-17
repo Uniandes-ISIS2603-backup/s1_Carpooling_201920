@@ -77,7 +77,7 @@ public class ConductorPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
-            
+
             entMan.persist(entity);
             data.add(entity);
         }
@@ -87,7 +87,7 @@ public class ConductorPersistenceTest {
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
         ConductorEntity conductor = factory.manufacturePojo(ConductorEntity.class);
-       
+
         ConductorEntity result = cp.create(conductor);
         Assert.assertNotNull(result);
 
@@ -165,6 +165,5 @@ public class ConductorPersistenceTest {
         newEntity = cp.findByCorreo(null);
         Assert.assertNull(newEntity);
     }
-    
-   
+
 }

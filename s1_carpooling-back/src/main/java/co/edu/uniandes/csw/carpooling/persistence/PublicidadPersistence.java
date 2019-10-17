@@ -38,19 +38,18 @@ public class PublicidadPersistence {
      * devuelve siempre la primera que encuentra
      */
     public PublicidadEntity find(Long publicistasId, Long publicidadesId) {
-        
+
         TypedQuery<PublicidadEntity> q = em.createQuery("select p from PublicidadEntity p where (p.publicista.id = :publicistaId) and (p.id = :publicidadesId)", PublicidadEntity.class);
         q.setParameter("publicistaId", publicistasId);
         q.setParameter("publicidadesId", publicidadesId);
         List<PublicidadEntity> results = q.getResultList();
         PublicidadEntity publicidad = null;
-        if (results == null||results.isEmpty()) {
+        if (results == null || results.isEmpty()) {
             publicidad = null;
-        } 
-        else if (results.size() >= 1) {
+        } else if (results.size() >= 1) {
             publicidad = results.get(0);
         }
-        
+
         return publicidad;
     }
 

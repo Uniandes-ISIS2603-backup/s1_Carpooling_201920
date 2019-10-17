@@ -11,7 +11,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -20,34 +19,32 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Nicolas Fajardo
  */
 @Entity
-public class ConductorEntity extends UsuarioEntity implements Serializable{
+public class ConductorEntity extends UsuarioEntity implements Serializable {
 
-    
     @PodamExclude
     @OneToMany(
             mappedBy = "conductor",
-            fetch = FetchType.LAZY, 
+            fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     private List<ViajeEntity> viajes;
-    
+
     @OneToMany(mappedBy = "conductor",
-            fetch = FetchType.LAZY, 
+            fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     private List<VehiculoEntity> vehiculos;
 
     @PodamExclude
     @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
-    
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
+
     @PodamExclude
     @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<NotificacionEntity> notificaciones = new ArrayList<NotificacionEntity>();
-    
+    private List<NotificacionEntity> notificaciones = new ArrayList<>();
+
     @PodamExclude
     @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY)
-    private List<ViajeRecurrenteEntity> viajesRecurrentes = new ArrayList<ViajeRecurrenteEntity>();
+    private List<ViajeRecurrenteEntity> viajesRecurrentes = new ArrayList<>();
 
-    
     /**
      * @return the notificaciones
      */
@@ -61,7 +58,7 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     public void setNotificaciones(List<NotificacionEntity> notificaciones) {
         this.notificaciones = notificaciones;
     }
-    
+
     public List<ViajeRecurrenteEntity> getViajesRecurrentes() {
         return viajesRecurrentes;
     }
@@ -69,8 +66,6 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     public void setViajesRecurrentes(List<ViajeRecurrenteEntity> viajesRecurrentes) {
         this.viajesRecurrentes = viajesRecurrentes;
     }
-    
-    
 
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
@@ -79,7 +74,7 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    
+
     public List<VehiculoEntity> getVehiculos() {
         return vehiculos;
     }
@@ -87,7 +82,6 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     public void setVehiculos(List<VehiculoEntity> vehiculos) {
         this.vehiculos = vehiculos;
     }
-    
 
     /**
      * @return the viajes
@@ -102,14 +96,5 @@ public class ConductorEntity extends UsuarioEntity implements Serializable{
     public void setViajes(List<ViajeEntity> viajes) {
         this.viajes = viajes;
     }
-    
-    
-    
-    
 
-    
-    
-    
-  
-    
 }

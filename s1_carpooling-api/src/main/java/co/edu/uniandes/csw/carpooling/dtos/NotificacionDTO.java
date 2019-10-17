@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.carpooling.dtos;
 
 import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,7 +41,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  *
  * @author le.perezl
  */
-public class NotificacionDTO {
+public class NotificacionDTO implements Serializable{
 
  
 
