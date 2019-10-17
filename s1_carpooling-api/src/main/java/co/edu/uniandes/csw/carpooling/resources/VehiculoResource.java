@@ -61,7 +61,7 @@ public class VehiculoResource {
         return vehiculoDTO;
     }
         private List<VehiculoDTO> listEntity2DTO(List<VehiculoEntity> entityList) {
-        List<VehiculoDTO> list = new ArrayList<VehiculoDTO>();
+        List<VehiculoDTO> list = new ArrayList<>();
         for (VehiculoEntity entity : entityList) {
             list.add(new VehiculoDTO(entity));
         }

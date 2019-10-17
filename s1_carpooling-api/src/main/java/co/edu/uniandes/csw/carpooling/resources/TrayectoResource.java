@@ -98,7 +98,7 @@ public class TrayectoResource {
     
     
     private List<TrayectoDTO> listEntity2DTO(List<TrayectoEntity> entityList) {
-        List<TrayectoDTO> list = new ArrayList<TrayectoDTO>();
+        List<TrayectoDTO> list = new ArrayList<>();
         for (TrayectoEntity entity : entityList) {
             list.add(new TrayectoDTO(entity));
         }

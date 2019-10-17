@@ -100,8 +100,7 @@ public class NotificacionPersistence {
     public List<NotificacionEntity> findAllByConductor(Long conductorId) {
         TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntityEntity p where (p.conductor.id = :conductorid)", NotificacionEntity.class);
         q.setParameter("conductorid", conductorId);
-        List<NotificacionEntity> results = q.getResultList();
-        return results;
+        return q.getResultList();
     }
 
     public NotificacionEntity findByConductor(Long conductorId, Long notificacionId) {
@@ -113,10 +112,8 @@ public class NotificacionPersistence {
 
         List<NotificacionEntity> results = q.getResultList();
         NotificacionEntity notificacion = null;
-        if (results == null) {
-            notificacion = null;
-        } else if (results.isEmpty()) {
-            notificacion = null;
+        if (results == null||results.isEmpty()) {
+            // Esto es equivalente a que notificacion siga siendo null
         } else if (results.size() >= 1) {
             notificacion = results.get(0);
         }
@@ -130,10 +127,8 @@ public class NotificacionPersistence {
         q.setParameter("notificacionId", notificacionId);
         List<NotificacionEntity> results = q.getResultList();
         NotificacionEntity notificacion = null;
-        if (results == null) {
-            notificacion = null;
-        } else if (results.isEmpty()) {
-            notificacion = null;
+        if (results == null||results.isEmpty()) {
+            // Esto es equivalente a que notificacion siga siendo null
         } else if (results.size() >= 1) {
             notificacion = results.get(0);
         }

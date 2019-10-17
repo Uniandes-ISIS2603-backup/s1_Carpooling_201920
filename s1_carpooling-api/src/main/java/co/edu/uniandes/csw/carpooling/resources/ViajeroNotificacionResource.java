@@ -45,7 +45,7 @@ public class ViajeroNotificacionResource {
     }
     
        private List<NotificacionDTO> listEntity2DTO(List<NotificacionEntity> entityList) {
-        List<NotificacionDTO> list = new ArrayList<NotificacionDTO>();
+        List<NotificacionDTO> list = new ArrayList<>();
         for (NotificacionEntity entity : entityList) {
             list.add(new NotificacionDTO(entity));
         }
