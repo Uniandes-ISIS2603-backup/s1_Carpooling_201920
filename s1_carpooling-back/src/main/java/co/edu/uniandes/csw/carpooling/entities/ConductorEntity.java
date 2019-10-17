@@ -48,6 +48,7 @@ public class ConductorEntity extends UsuarioEntity implements Serializable {
     /**
      * @return the notificaciones
      */
+    @Override
     public List<NotificacionEntity> getNotificaciones() {
         return notificaciones;
     }
@@ -55,6 +56,7 @@ public class ConductorEntity extends UsuarioEntity implements Serializable {
     /**
      * @param notificaciones the notificaciones to set
      */
+    @Override
     public void setNotificaciones(List<NotificacionEntity> notificaciones) {
         this.notificaciones = notificaciones;
     }
@@ -67,10 +69,12 @@ public class ConductorEntity extends UsuarioEntity implements Serializable {
         this.viajesRecurrentes = viajesRecurrentes;
     }
 
+    @Override
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
 
+    @Override
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
