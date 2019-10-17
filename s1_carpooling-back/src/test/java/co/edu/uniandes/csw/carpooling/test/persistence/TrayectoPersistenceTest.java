@@ -29,29 +29,30 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 /**
  *
  * @author Estudiante
- */@RunWith(Arquillian.class)
+ */
+@RunWith(Arquillian.class)
 public class TrayectoPersistenceTest {
-     
+
     @Inject
     private TrayectoPersistence tp;
-    
+
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
+
     @Inject
     UserTransaction utx;
-    
+
     private List<TrayectoEntity> data = new ArrayList<TrayectoEntity>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
-            return ShrinkWrap.create(JavaArchive.class)
-                    .addPackage(TrayectoEntity.class.getPackage())
-                    .addPackage(TrayectoPersistence.class.getPackage()) 
-                    .addAsManifestResource("META-INF/persistence.xml", "persistence.xml") 
-                    .addAsManifestResource("META-INF/beans.xml", "beans.xml" ); 
+        return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(TrayectoEntity.class.getPackage())
+                .addPackage(TrayectoPersistence.class.getPackage())
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     @Before
     public void configTest() {
         try {
@@ -69,11 +70,11 @@ public class TrayectoPersistenceTest {
             }
         }
     }
-    
+
     private void clearData() {
         em.createQuery("delete from TrayectoEntity").executeUpdate();
     }
-    
+
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -83,9 +84,9 @@ public class TrayectoPersistenceTest {
             data.add(entity);
         }
     }
-    
+
     @Test
-    public void createTest(){
+    public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
         TrayectoEntity trayecto = factory.manufacturePojo(TrayectoEntity.class);
         TrayectoEntity result = tp.create(trayecto);
@@ -96,43 +97,43 @@ public class TrayectoPersistenceTest {
         Assert.assertEquals(result.getOrigen(), trayecto.getOrigen());
         Assert.assertEquals(result.getDestino(), trayecto.getDestino());
     }
-    
+
     @Test
-    public void getTrayectoTest(){
+    public void getTrayectoTest() {
         TrayectoEntity trayecto = data.get(0);
         TrayectoEntity newTrayecto = tp.find(trayecto.getId());
         Assert.assertNotNull(newTrayecto);
         Assert.assertEquals(trayecto, newTrayecto);
     }
-    
+
     @Test
-    public void getTrayectosTest(){
+    public void getTrayectosTest() {
         List<TrayectoEntity> newTrayectos = tp.findAll();
         Assert.assertEquals(newTrayectos.size(), data.size());
-        for(TrayectoEntity trayecto: data){
+        for (TrayectoEntity trayecto : data) {
             boolean found = false;
-            for(TrayectoEntity newTrayecto: newTrayectos){
-                if(newTrayecto.equals(trayecto)){
+            for (TrayectoEntity newTrayecto : newTrayectos) {
+                if (newTrayecto.equals(trayecto)) {
                     found = true;
                 }
             }
             Assert.assertTrue(found);
         }
     }
-    
+
     @Test
-    public void updateTrayectoTest(){
+    public void updateTrayectoTest() {
         TrayectoEntity trayecto = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         TrayectoEntity newTrayecto = factory.manufacturePojo(TrayectoEntity.class);
         newTrayecto.setId(trayecto.getId());
         tp.update(newTrayecto);
-        TrayectoEntity resp = em.find(TrayectoEntity.class,trayecto.getId());
+        TrayectoEntity resp = em.find(TrayectoEntity.class, trayecto.getId());
         Assert.assertEquals(resp, newTrayecto);
     }
-    
+
     @Test
-    public void deleteTrayectoTest(){
+    public void deleteTrayectoTest() {
         TrayectoEntity trayecto = data.get(0);
         tp.delete(trayecto.getId());
         TrayectoEntity borrado = em.find(TrayectoEntity.class, trayecto.getId());

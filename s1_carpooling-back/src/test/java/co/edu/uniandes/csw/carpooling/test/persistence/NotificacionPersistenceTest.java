@@ -33,31 +33,32 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 //preg si los test van con otro nombre o el del metodo
 @RunWith(Arquillian.class)
 public class NotificacionPersistenceTest {
-    
+
     private NotificacionPersistence NotificacionPersistence;
     private NotificacionEntity NotificacionEntity;
-    
+
     private List<NotificacionEntity> data = new ArrayList<NotificacionEntity>();
-         
+
     @Inject
     UserTransaction utx;
-    
+
     @Inject
     NotificacionPersistence np;
-    
+
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
+
     @Deployment
-    public static JavaArchive createDeployment(){
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-        .addPackage(NotificacionEntity.class.getPackage())
-        .addPackage(NotificacionPersistence.class.getPackage())
-        .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
-        .addAsManifestResource("META-INF/beans.xml", "beans.xml");
+                .addPackage(NotificacionEntity.class.getPackage())
+                .addPackage(NotificacionPersistence.class.getPackage())
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
+
     //DA ERROR EL CONFIG
-        /**
+    /**
      * Configuración inicial de la prueba.
      */
     @Before
@@ -77,7 +78,8 @@ public class NotificacionPersistenceTest {
             }
         }
     }
-        /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
@@ -99,23 +101,22 @@ public class NotificacionPersistenceTest {
             data.add(entity);
         }
     }
-    
 
-      
-      @Test
-      public void createTest(){
-         // Falta crear notif
-          PodamFactory factory = new PodamFactoryImpl();
-          NotificacionEntity notificacion = factory.manufacturePojo(NotificacionEntity.class);
-          NotificacionEntity result= np.create(notificacion);
-          Assert.assertNotNull(result);
-          
-          NotificacionEntity entity= em.find(NotificacionEntity.class, result.getId());
-          
-          Assert.assertEquals(notificacion.getMensaje(),entity.getMensaje());
-          Assert.assertEquals(notificacion.getFecha(),entity.getFecha());
-      }
-      /**
+    @Test
+    public void createTest() {
+        // Falta crear notif
+        PodamFactory factory = new PodamFactoryImpl();
+        NotificacionEntity notificacion = factory.manufacturePojo(NotificacionEntity.class);
+        NotificacionEntity result = np.create(notificacion);
+        Assert.assertNotNull(result);
+
+        NotificacionEntity entity = em.find(NotificacionEntity.class, result.getId());
+
+        Assert.assertEquals(notificacion.getMensaje(), entity.getMensaje());
+        Assert.assertEquals(notificacion.getFecha(), entity.getFecha());
+    }
+
+    /**
      * Prueba para consultar la lista de Notificaciones.
      */
     @Test
@@ -132,13 +133,14 @@ public class NotificacionPersistenceTest {
             Assert.assertTrue(found);
         }
     }
-      /**
+
+    /**
      * Prueba para consultar una Notificacion.
      */
-     @Test
+    @Test
     public void findTest() {
         NotificacionEntity entity = data.get(0);
-        NotificacionEntity newEntity =np.find(entity.getId());
+        NotificacionEntity newEntity = np.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getMensaje(), newEntity.getMensaje());
     }
@@ -153,6 +155,7 @@ public class NotificacionPersistenceTest {
         NotificacionEntity deleted = em.find(NotificacionEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+
     /**
      * Prueba para actualizar una Notificacion.
      */
@@ -171,6 +174,5 @@ public class NotificacionPersistenceTest {
         Assert.assertEquals(newEntity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
     }
-
 
 }

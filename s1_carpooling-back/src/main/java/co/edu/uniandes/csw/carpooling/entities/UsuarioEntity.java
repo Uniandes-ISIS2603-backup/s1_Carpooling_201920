@@ -13,16 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Length;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
-import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -31,8 +27,8 @@ import uk.co.jemos.podam.common.PodamStringValue;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class UsuarioEntity extends BaseEntity{
-    
+public abstract class UsuarioEntity extends BaseEntity {
+
     public enum TIPO_DE_DOCUMENTO {
         CEDULA_DE_CIUDADANA,
         TARJETA_DE_IDENTIDAD,
@@ -42,33 +38,30 @@ public abstract class UsuarioEntity extends BaseEntity{
 
     /*
     *   Atributos
-    */
+     */
     private String nombre;
     private String telefono;
     private String correo;
     private String numDocumento;
-       
+
     @Size(min = 5)
     private String contrasenha;
 
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeNacimiento;
-    
 
     @PodamExclude
     @OneToMany(mappedBy = "usuario",
-            fetch = FetchType.LAZY, 
+            fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     private List<NotificacionEntity> notificaciones;
-    
+
     @PodamExclude
     @OneToMany(mappedBy = "usuario",
-            fetch = FetchType.LAZY, 
+            fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     private List<CalificacionEntity> calificaciones;
-    
-    
 
     private TIPO_DE_DOCUMENTO tipoDocumento;
 

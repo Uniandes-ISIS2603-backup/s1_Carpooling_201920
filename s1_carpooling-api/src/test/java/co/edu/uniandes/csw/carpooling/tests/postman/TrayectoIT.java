@@ -40,11 +40,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- *  Pruebas de integracion de la cascara.
- * @author ISIS2603
+ *  .
+ * @author Juan David Serrano
  */
 @RunWith(Arquillian.class)
 public class TrayectoIT {
+
     private static final String COLLECTION = "Trayecto Tests.postman_collection";
 
     @Deployment(testable = true)

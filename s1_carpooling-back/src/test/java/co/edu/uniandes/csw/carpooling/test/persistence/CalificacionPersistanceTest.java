@@ -36,31 +36,27 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class CalificacionPersistanceTest {
 
-    
     @Inject
-    private CalificacionPersistence  cp;
+    private CalificacionPersistence cp;
 
-     @PersistenceContext
-     protected EntityManager em;
-     
-     @Inject
+    @PersistenceContext
+    protected EntityManager em;
+
+    @Inject
     UserTransaction utx;
-  
+
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
     private List<ViajeroEntity> dataViajero = new ArrayList<ViajeroEntity>();
     private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
-    
+
     @Deployment
-    public static JavaArchive createDeployment()
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(CalificacionEntity.class.getPackage())
                 .addPackage(CalificacionPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
-   }
-    
-
+    }
 
     @Before
     public void setUp() {
@@ -98,16 +94,14 @@ public class CalificacionPersistanceTest {
             em.persist(entity);
             dataConductor.add(entity);
         }
-        
+
         for (int i = 0; i < 3; i++) {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
-            if(i==0)
-            {
+            if (i == 0) {
                 entity.setConductor(dataConductor.get(0));
                 entity.setViajero(null);
             }
-            if(i==1)
-            {
+            if (i == 1) {
                 entity.setViajero(dataViajero.get(0));
                 entity.setConductor(null);
             }
@@ -116,22 +110,20 @@ public class CalificacionPersistanceTest {
         }
     }
 
-     
     @Test
-    public void  createTest()
-    {
-        
+    public void createTest() {
+
         PodamFactory factory = new PodamFactoryImpl();
-          
+
         CalificacionEntity calificacion = factory.manufacturePojo(CalificacionEntity.class);
         CalificacionEntity result = cp.create(calificacion);
         Assert.assertNotNull(result);
-        
+
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         Assert.assertEquals(calificacion.getPuntuacion(), entity.getPuntuacion());
         Assert.assertEquals(calificacion.getComentarios(), entity.getComentarios());
     }
-    
+
     @Test
     public void getCalificacionesTest() {
         List<CalificacionEntity> list = cp.findAll();
@@ -146,7 +138,7 @@ public class CalificacionPersistanceTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     @Test
     public void getCalificacionesByViajeroTest() {
         List<CalificacionEntity> list = cp.findAllByViajero(data.get(1).getViajero().getId());
@@ -160,7 +152,7 @@ public class CalificacionPersistanceTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     @Test
     public void getCalificacionesByConductorTest() {
         List<CalificacionEntity> list = cp.findAllByConductor(data.get(0).getConductor().getId());
@@ -174,18 +166,17 @@ public class CalificacionPersistanceTest {
             Assert.assertTrue(found);
         }
     }
-    
-    
+
     @Test
     public void getCalificacionByViajeroTest() {
         CalificacionEntity entity = data.get(1);
         CalificacionEntity newEntity = cp.findByViajero(dataViajero.get(0).getId(), entity.getId());
         Assert.assertNotNull(newEntity);
-        
+
         Assert.assertEquals(entity.getPuntuacion(), newEntity.getPuntuacion());
         Assert.assertEquals(entity.getComentarios(), newEntity.getComentarios());
     }
-    
+
     @Test
     public void getCalificacionByConductorTest() {
         CalificacionEntity entity = data.get(0);
@@ -193,13 +184,13 @@ public class CalificacionPersistanceTest {
         ConductorEntity conductor = dataConductor.get(0);
         Long idConductor = conductor.getId();
         System.out.println("llego 1");
-        CalificacionEntity newEntity = cp.findByConductor(idConductor, idCalificacion );
+        CalificacionEntity newEntity = cp.findByConductor(idConductor, idCalificacion);
         Assert.assertNotNull(newEntity);
-        
+
         Assert.assertEquals(entity.getPuntuacion(), newEntity.getPuntuacion());
         Assert.assertEquals(entity.getComentarios(), newEntity.getComentarios());
     }
-    
+
     @Test
     public void getCalificacionTest() {
         CalificacionEntity entity = data.get(0);
@@ -207,8 +198,8 @@ public class CalificacionPersistanceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }
-    
-     @Test
+
+    @Test
     public void updateCalificacionTest() {
         CalificacionEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
@@ -222,8 +213,8 @@ public class CalificacionPersistanceTest {
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
-    
-     @Test
+
+    @Test
     public void deleteCalificacionTest() {
         CalificacionEntity entity = data.get(0);
         cp.delete(entity.getId());
@@ -231,5 +222,4 @@ public class CalificacionPersistanceTest {
         Assert.assertNull(deleted);
     }
 
-    
 }

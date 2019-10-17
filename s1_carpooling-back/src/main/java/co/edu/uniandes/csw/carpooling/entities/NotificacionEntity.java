@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.carpooling.entities;
+
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
+
 /**
  *
  * @author le.perezl
@@ -20,21 +22,24 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class NotificacionEntity extends BaseEntity implements Serializable {
 
-
-
-
-    
     private String mensaje;
     private String titulo;
     @Temporal(TemporalType.TIMESTAMP)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
-    
+
     @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
-    
-    
+
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity viajero;
+
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity conductor;
+
     /**
      * @return the mensaje
      */
@@ -48,8 +53,8 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
-        /**
+
+    /**
      * @return the titulo
      */
     public String getTitulo() {
@@ -63,7 +68,7 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
         this.titulo = titulo;
     }
 
-        /**
+    /**
      * @return the fecha
      */
     public Date getFecha() {
@@ -91,6 +96,31 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
         this.usuario = usuario;
     }
 
+    /**
+     * @return the viajero
+     */
+    public UsuarioEntity getViajero() {
+        return viajero;
+    }
 
+    /**
+     * @param viajero the viajero to set
+     */
+    public void setViajero(UsuarioEntity viajero) {
+        this.viajero = viajero;
+    }
 
+    /**
+     * @return the conductor
+     */
+    public UsuarioEntity getConductor() {
+        return conductor;
+    }
+
+    /**
+     * @param conductor the conductor to set
+     */
+    public void setConductor(UsuarioEntity conductor) {
+        this.conductor = conductor;
+    }
 }

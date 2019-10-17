@@ -1,0 +1,549 @@
+{
+	"info": {
+		"_postman_id": "3f4e2e23-b7fe-4ab6-a374-470a394a8033",
+		"name": "Publicistas Tests",
+		"description": "Registrar un viajero por primera vez.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un publicista persona natural",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p_natural\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"apellido\": \"Ballesteros\",\r\n        \"cedula\": \"1123456780\",\r\n        \"contrasenha\": \"password\",\r\n        \"correo\": \"s.ballesteros@uniandes.edu.co\",\r\n        \"nombre\": \"Santiago\",\r\n        \"rut\": \"qdbkhfebjhk\",\r\n        \"telefono\": \"3123456784\",\r\n        \"tipoPublicista\": \"PERSONA_NATURAL_CON_EMPRESA\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas"
+					]
+				},
+				"description": "Este publicista debe tener los siguiente atributos de estos tipos:\n{\n \t\"nombre\":\"String\",\n \t\"apellido\":\"String\",\n \t\"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\n \t\"telefono\" : \"String\",\n \t\"correo\" : \"String\",\n    \"contrasenha\" : \"String\",\n \t\"cedula\" : \"String\",\n \t\"rut\" : \"String\"\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un publicista empresa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p_empresa\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n \t\"nombre\":\"CARPOOLTRIPS PUBLICIDADES\",\r\n \t\"tipoPublicista\":\"EMPRESA\",\r\n \t\"telefono\" : \"4561873\",\r\n \t\"correo\" : \"carpooltrips@gmail.com\",\r\n    \"contrasenha\" : \"publicidades entre ciudades\",\r\n \t\"nit\" : \"222.444.666.-7\"\r\n  \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas"
+					]
+				},
+				"description": "Este publicista debe tener los siguiente atributos de estos tipos:\n{\n \t\"nombre\":\"String\",\n \t\"tipoPublicista\":\"EMPRESA\",\n \t\"telefono\" : \"String\",\n \t\"correo\" : \"String\",\n       \"contrasenha\" : \"String\",\n \t\"nit\" : \"String\"\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un publicista con correo duplicado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"tests[\"El correo ya esta ocupado por otro publicista\"] = responseCode.code === 412;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"apellido\": \"Ballesteros\",\r\n        \"cedula\": \"11234356780\",\r\n        \"contrasenha\": \"passw44ord\",\r\n        \"correo\": \"s.ballesteros@uniandes.edu.co\",\r\n        \"nombre\": \"Santiago\",\r\n        \"rut\": \"ewdqwefd\",\r\n        \"telefono\": \"31234356784\",\r\n        \"tipoPublicista\": \"PERSONA_NATURAL_CON_EMPRESA\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un publicista persona natural",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89d2e15e-1154-4e96-a120-155cbb609b29",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"apellido\": \"Ballesteros\",\r\n        \"cedula\": \"1123456780\",\r\n        \"contrasenha\": \"pazzword\",\r\n        \"correo\": \"s.ballesteros@uniandes.edu.co\",\r\n        \"nombre\": \"Santiago\",\r\n        \"rut\": \"qdbkhfebjhk\",\r\n        \"telefono\": \"3123456784\",\r\n        \"tipoPublicista\": \"PERSONA_NATURAL_CON_EMPRESA\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/{{new_id_p_natural}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"{{new_id_p_natural}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un publicista empresa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89d2e15e-1154-4e96-a120-155cbb609b29",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n \t\"nombre\":\"CARPOOLTRIPS PUBLICIDADES\",\r\n \t\"tipoPublicista\":\"EMPRESA\",\r\n \t\"telefono\" : \"3116670982\",\r\n \t\"correo\" : \"carpooltrips@gmail.com\",\r\n    \"contrasenha\" : \"publicidades entre ciudades\",\r\n \t\"nit\" : \"222.444.666.-7\"\r\n  \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/{{new_id_p_empresa}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"{{new_id_p_empresa}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un publicista que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cceec303-b72d-42f7-b31e-2af5d0a75203",
+						"exec": [
+							"tests[\"Consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /publicistas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n \t\"nombre\":\"CARPOO PUBLICIDADES\",\r\n \t\"tipoPublicista\":\"EMPRESA\",\r\n \t\"telefono\" : \"4561873\",\r\n \t\"correo\" : \"carooltrips@gmail.com\",\r\n    \"contrasenha\" : \"licidades entre ciudades\",\r\n \t\"nit\" : \"222.444.623.-7\"\r\n  \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los publicistas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a27ec227-9d5b-4014-bd2e-810c2c372a0a",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
+							"tests[\"cuenta de publicistas\"] = data.length >= 2;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un publicista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bf341a5d-3a97-4bd5-8c73-0b98737da651",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/{{new_id_p_empresa}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"{{new_id_p_empresa}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un publicista que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4ccf387-7239-40eb-aec5-438a5170c4b9",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /publicistas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un publicista persona natural",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No se genero error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/{{new_id_p_natural}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"{{new_id_p_natural}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un publicista empresa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/{{new_id_p_empresa}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"{{new_id_p_empresa}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un publicista que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No se puede borrar el publicista dado que no existe el id indicado\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicista/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicista",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "251930f4-bbdb-40a7-b192-ae0ccf14c35a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6e770617-8b4a-4cf0-bab3-5bbd3e95cf3b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

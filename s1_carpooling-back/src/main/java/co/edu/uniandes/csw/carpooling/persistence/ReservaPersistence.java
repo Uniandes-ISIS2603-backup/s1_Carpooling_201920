@@ -19,23 +19,21 @@ import javax.persistence.TypedQuery;
  *
  * @author le.perezl
  */
-
-
 @Stateless
 public class ReservaPersistence {
 
     private static final Logger LOGGER = Logger.getLogger(NotificacionPersistence.class.getName());
-    
-    @PersistenceContext (unitName= "carpoolingPU")
+
+    @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
 
-    public ReservaEntity create (ReservaEntity reserva){
+    public ReservaEntity create(ReservaEntity reserva) {
 
         em.persist(reserva);
         return reserva;
     }
 
-        /**
+    /**
      * Busca si hay alguna reserva con el id que se envía de argumento
      *
      * @param reservaId: id correspondiente a la notificacion buscada.
@@ -44,25 +42,25 @@ public class ReservaPersistence {
     public ReservaEntity find(Long reservaId) {
         return em.find(ReservaEntity.class, reservaId);
     }
-    
+
     /**
      * Devuelve todas las reservas de la base de datos.
      *
-     * @return una lista con todas las notificaciones que encuentre en la base de
-     * datos, "select u from NotificacionEntity u" es como un "select * from
+     * @return una lista con todas las notificaciones que encuentre en la base
+     * de datos, "select u from NotificacionEntity u" es como un "select * from
      * NotificacionEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<ReservaEntity> findAll() {
         TypedQuery<ReservaEntity> query = em.createQuery("select u from ReservaEntity u", ReservaEntity.class);
         return query.getResultList();
     }
-    
-     /**
+
+    /**
      * Actualiza una reserva.
      *
      * @param reservaEntity: la notifiacion que viene con los nuevos cambios.
-     * Por ejemplo la descripcion pudo cambiar. En ese caso, se haria uso del método
-     * update.
+     * Por ejemplo la descripcion pudo cambiar. En ese caso, se haria uso del
+     * método update.
      * @return una reserva con los cambios aplicados.
      */
     public ReservaEntity update(ReservaEntity reservaEntity) {
@@ -74,10 +72,11 @@ public class ReservaPersistence {
         LOGGER.log(Level.INFO, "Saliendo de actualizar la reserva con id = {0}", reservaEntity.getId());
         return em.merge(reservaEntity);
     }
+
     /**
      *
-     * Borra una reserva de la base de datos recibiendo como argumento el id
-     * de la reserva
+     * Borra una reserva de la base de datos recibiendo como argumento el id de
+     * la reserva
      *
      * @param reservaId: id correspondiente a la reserva a borrar.
      */
@@ -91,8 +90,8 @@ public class ReservaPersistence {
         em.remove(entity);
         LOGGER.log(Level.INFO, "Saliendo de borrar la reserva con id = {0}", reservaId);
     }
-    
-       /**
+
+    /**
      * Busca si hay alguna editorial con el nombre que se envía de argumento
      *
      * @param name: Nombre de la editorial que se está buscando
@@ -118,5 +117,4 @@ public class ReservaPersistence {
 //        LOGGER.log(Level.INFO, "Saliendo de consultar reserva por numero ", num);
 //        return result;
 //    }
-   
 }
