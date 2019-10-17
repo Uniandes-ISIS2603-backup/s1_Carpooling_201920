@@ -58,7 +58,7 @@ public class CalificacionPersistence {
         CalificacionEntity calificacion = null;
         if (results == null||results.isEmpty()) {
             calificacion = null;
-        } else if (results.size() >= 1) {
+        } else{
             calificacion = results.get(0);
         }
         return calificacion;
@@ -73,7 +73,7 @@ public class CalificacionPersistence {
         if (results == null||results.isEmpty()) {
             // Esto equivale a dejar calificacion como null
         }
-        else if (results.size() >= 1) {
+        else{
             calificacion = results.get(0);
         }
 

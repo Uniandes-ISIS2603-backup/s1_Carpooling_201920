@@ -56,7 +56,7 @@ public class VehiculoPersistence {
         VehiculoEntity vehiculo = null;
         if (results == null||results.isEmpty()) {
             // Esto es equivalente a que vehiculo siga siendo null
-        } else if (results.size() >= 1) {
+        } else {
             vehiculo = results.get(0);
         }
 

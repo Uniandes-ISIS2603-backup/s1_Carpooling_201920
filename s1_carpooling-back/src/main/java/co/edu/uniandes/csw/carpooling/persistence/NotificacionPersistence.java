@@ -93,8 +93,7 @@ public class NotificacionPersistence {
     public List<NotificacionEntity> findAllByViajero(Long viajeroId) {
         TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntity p where (p.viajero.id = :viajeroid)", NotificacionEntity.class);
         q.setParameter("viajeroid", viajeroId);
-        List<NotificacionEntity> results = q.getResultList();
-        return results;
+        return q.getResultList();
     }
 
     public List<NotificacionEntity> findAllByConductor(Long conductorId) {
@@ -114,7 +113,7 @@ public class NotificacionPersistence {
         NotificacionEntity notificacion = null;
         if (results == null||results.isEmpty()) {
             // Esto es equivalente a que notificacion siga siendo null
-        } else if (results.size() >= 1) {
+        } else {
             notificacion = results.get(0);
         }
 
@@ -129,7 +128,7 @@ public class NotificacionPersistence {
         NotificacionEntity notificacion = null;
         if (results == null||results.isEmpty()) {
             // Esto es equivalente a que notificacion siga siendo null
-        } else if (results.size() >= 1) {
+        } else {
             notificacion = results.get(0);
         }
 

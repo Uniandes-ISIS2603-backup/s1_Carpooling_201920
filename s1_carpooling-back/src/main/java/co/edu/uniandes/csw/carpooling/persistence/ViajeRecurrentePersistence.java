@@ -56,7 +56,7 @@ public class ViajeRecurrentePersistence {
         ViajeRecurrenteEntity viajeRecurrente = null;
         if (results == null||results.isEmpty()) {
             // Esto es equivalente a que viaje recurrente siga siendo null
-        } else if (results.size() >= 1) {
+        } else {
             viajeRecurrente = results.get(0);
         }
 
