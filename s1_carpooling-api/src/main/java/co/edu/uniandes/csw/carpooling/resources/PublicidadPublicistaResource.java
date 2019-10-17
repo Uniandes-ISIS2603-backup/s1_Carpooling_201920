@@ -9,6 +9,6 @@ package co.edu.uniandes.csw.carpooling.resources;
  *
  * @author Santiago Ballesteros
  */
-public class PublicistaPublicidadResource {
+public class PublicidadPublicistaResource {
     
 }

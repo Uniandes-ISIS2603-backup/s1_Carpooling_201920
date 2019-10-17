@@ -21,22 +21,22 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ViajeroEntity extends UsuarioEntity implements Serializable {
 
- 
     @PodamExclude
     @OneToMany(mappedBy = "viajero", fetch = FetchType.LAZY)
-    private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
+    private List<ReservaEntity> reservas = new ArrayList<>();
 
     @PodamExclude
     @OneToMany(mappedBy = "viajero", fetch = FetchType.LAZY)
-    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
-    
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
+
     @PodamExclude
     @OneToMany(mappedBy = "conductor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<NotificacionEntity> notificaciones = new ArrayList<NotificacionEntity>();
+    private List<NotificacionEntity> notificaciones = new ArrayList<>();
 
-       /**
+    /**
      * @return the notificaciones
      */
+    @Override
     public List<NotificacionEntity> getNotificaciones() {
         return notificaciones;
     }
@@ -44,19 +44,21 @@ public class ViajeroEntity extends UsuarioEntity implements Serializable {
     /**
      * @param notificaciones the notificaciones to set
      */
+    @Override
     public void setNotificaciones(List<NotificacionEntity> notificaciones) {
         this.notificaciones = notificaciones;
     }
-    
+
+    @Override
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
-    
-    
 
+    @Override
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
+
     /**
      * @return the reservas
      */

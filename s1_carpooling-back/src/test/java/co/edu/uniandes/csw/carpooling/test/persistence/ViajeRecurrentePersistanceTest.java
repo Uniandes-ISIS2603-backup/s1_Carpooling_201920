@@ -31,33 +31,28 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ViajeRecurrentePersistanceTest {
-    
+
     @Deployment
-    public static JavaArchive createDeployment()
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ViajeRecurrenteEntity.class.getPackage())
                 .addPackage(ViajeRecurrentePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
-   }
-    
-    
-    @Inject
-    private ViajeRecurrentePersistence  cp;
+    }
 
-     @PersistenceContext(unitName= "carpoolingPU")
-     protected EntityManager em;
-     
-     
-     
-        
+    @Inject
+    private ViajeRecurrentePersistence cp;
+
+    @PersistenceContext(unitName = "carpoolingPU")
+    protected EntityManager em;
+
     @Inject
     UserTransaction utx;
-  
+
     private List<ViajeRecurrenteEntity> data = new ArrayList<ViajeRecurrenteEntity>();
     private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
-    
+
     @Before
     public void setUp() {
         try {
@@ -83,7 +78,7 @@ public class ViajeRecurrentePersistanceTest {
 
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        
+
         for (int i = 0; i < 3; i++) {
             ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
             em.persist(entity);
@@ -91,8 +86,7 @@ public class ViajeRecurrentePersistanceTest {
         }
         for (int i = 0; i < 3; i++) {
             ViajeRecurrenteEntity entity = factory.manufacturePojo(ViajeRecurrenteEntity.class);
-            if(i==0)
-            {
+            if (i == 0) {
                 entity.setConductor(dataConductor.get(0));
             }
             em.persist(entity);
@@ -101,36 +95,34 @@ public class ViajeRecurrentePersistanceTest {
     }
 
     @Test
-    public void  createTest()
-    {
-        
+    public void createTest() {
+
         PodamFactory factory = new PodamFactoryImpl();
-       
-        
+
         ViajeRecurrenteEntity viajeRecurrente = factory.manufacturePojo(ViajeRecurrenteEntity.class);
         ViajeRecurrenteEntity result = cp.create(viajeRecurrente);
         Assert.assertNotNull(result);
-        
+
         ViajeRecurrenteEntity entity = em.find(ViajeRecurrenteEntity.class, result.getId());
         Assert.assertEquals(viajeRecurrente.getFrecuencia(), entity.getFrecuencia());
         Assert.assertEquals(viajeRecurrente.getFechaFin(), entity.getFechaFin());
         Assert.assertEquals(viajeRecurrente.getFechaInicio(), entity.getFechaInicio());
     }
-    
+
     @Test
     public void getViajeRecurrenteByConductorTest() {
         ViajeRecurrenteEntity entity = data.get(0);
         Long idCalificacion = entity.getId();
         ConductorEntity conductor = dataConductor.get(0);
         Long idConductor = conductor.getId();
-        ViajeRecurrenteEntity newEntity = cp.find(idConductor, idCalificacion );
+        ViajeRecurrenteEntity newEntity = cp.find(idConductor, idCalificacion);
         Assert.assertNotNull(newEntity);
-        
+
         Assert.assertEquals(entity.getFrecuencia(), newEntity.getFrecuencia());
         Assert.assertEquals(entity.getFechaFin(), newEntity.getFechaFin());
         Assert.assertEquals(entity.getFechaInicio(), newEntity.getFechaInicio());
     }
-    
+
     @Test
     public void getViajesRecurrentesTest() {
         List<ViajeRecurrenteEntity> list = cp.findAll();
@@ -145,8 +137,7 @@ public class ViajeRecurrentePersistanceTest {
             Assert.assertTrue(found);
         }
     }
-    
-    
+
     @Test
     public void getViajeRecurrenteTest() {
         ViajeRecurrenteEntity entity = data.get(0);
@@ -154,8 +145,8 @@ public class ViajeRecurrentePersistanceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }
-    
-     @Test
+
+    @Test
     public void updateViajeRecurrenteTest() {
         ViajeRecurrenteEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
@@ -169,13 +160,13 @@ public class ViajeRecurrentePersistanceTest {
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
-    
-     @Test
+
+    @Test
     public void deleteViajeRecurrenteTest() {
         ViajeRecurrenteEntity entity = data.get(0);
         cp.delete(entity.getId());
         ViajeRecurrenteEntity deleted = em.find(ViajeRecurrenteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
+
 }

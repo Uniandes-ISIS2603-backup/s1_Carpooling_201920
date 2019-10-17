@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
 import co.edu.uniandes.csw.carpooling.persistence.VehiculoPersistence;
 import java.util.List;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 

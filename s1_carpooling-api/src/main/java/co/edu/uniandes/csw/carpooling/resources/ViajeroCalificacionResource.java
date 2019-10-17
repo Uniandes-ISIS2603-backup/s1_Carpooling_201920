@@ -61,7 +61,7 @@ public class ViajeroCalificacionResource {
         return calificacionDTO;
     }
         private List<CalificacionDTO> listEntity2DTO(List<CalificacionEntity> entityList) {
-        List<CalificacionDTO> list = new ArrayList<CalificacionDTO>();
+        List<CalificacionDTO> list = new ArrayList<>();
         for (CalificacionEntity entity : entityList) {
             list.add(new CalificacionDTO(entity));
         }

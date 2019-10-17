@@ -25,66 +25,66 @@ import javax.inject.Inject;
  */
 @Stateless
 public class NotificacionLogic {
-    
+
     private static final Logger LOGGER = Logger.getLogger(NotificacionLogic.class.getName());
-    
+
     @Inject
-     private NotificacionPersistence persistence;
+    private NotificacionPersistence persistence;
     @Inject
     private ViajeroPersistence viajeroPersistence;
     @Inject
     private ConductorPersistence conductorPersistence;
-    
-    public NotificacionEntity createNotificacion(NotificacionEntity notificacion) throws BusinessLogicException{
-        if(notificacion.getFecha()==(null)){
+
+    public NotificacionEntity createNotificacion(NotificacionEntity notificacion) throws BusinessLogicException {
+        if (notificacion.getFecha() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene una fecha");
         }
-        if(notificacion.getFecha().compareTo(Calendar.getInstance().getTime())<0){
+        if (notificacion.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
             throw new BusinessLogicException("La notificacion tiene una fecha menor a la actual");
         }
-        if(notificacion.getMensaje()==(null)){
+        if (notificacion.getMensaje() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene un mensaje");
         }
-         if(notificacion.getTitulo()==(null)){
+        if (notificacion.getTitulo() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene un mensaje");
         }
-      notificacion = persistence.create(notificacion);
+        notificacion = persistence.create(notificacion);
         return notificacion;
-}
-    
-    public NotificacionEntity deleteNotificacion(NotificacionEntity notificacion){
-        
+    }
+
+    public NotificacionEntity deleteNotificacion(NotificacionEntity notificacion) {
+
         persistence.delete(notificacion.getId());
         return notificacion;
-        
+
     }
-    
-    public NotificacionEntity updateNotificacion(Long notificacioId, NotificacionEntity notificacion) throws BusinessLogicException{
-        if(notificacion.getFecha()==(null)){
+
+    public NotificacionEntity updateNotificacion(Long notificacioId, NotificacionEntity notificacion) throws BusinessLogicException {
+        if (notificacion.getFecha() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene una fecha");
         }
-        if(notificacion.getFecha().compareTo(Calendar.getInstance().getTime())<0){
+        if (notificacion.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
             throw new BusinessLogicException("La notificacion tiene una fecha menor a la actual");
         }
-        if(notificacion.getMensaje()==(null)){
+        if (notificacion.getMensaje() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene un mensaje");
         }
-        if(notificacion.getTitulo()==(null)){
+        if (notificacion.getTitulo() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene un mensaje");
         }
         notificacion = persistence.update(notificacion);
         return notificacion;
     }
-    
-    public NotificacionEntity findNotificacion(Long notificacionId)throws BusinessLogicException{
+
+    public NotificacionEntity findNotificacion(Long notificacionId) throws BusinessLogicException {
         NotificacionEntity notificacionEntity = persistence.find(notificacionId);
         if (notificacionEntity == null) {
             throw new BusinessLogicException("La notificacion no existe");
         }
         return notificacionEntity;
     }
-    
-       /**
+
+    /**
      * Devuelve todos los libros que hay en la base de datos.
      *
      * @return Lista de entidades de tipo libro.
@@ -95,69 +95,64 @@ public class NotificacionLogic {
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los libros");
         return notificacions;
     }
-    
+
     ///////////////////////////////////////fix
-    
-        public NotificacionEntity createCalificacionForViajero(Long viajeroId,NotificacionEntity notificacion ) throws BusinessLogicException
-    {
-        if(notificacion.getMensaje().length()> 500)
-        {
+    public NotificacionEntity createCalificacionForViajero(Long viajeroId, NotificacionEntity notificacion) throws BusinessLogicException {
+        if (notificacion.getMensaje().length() > 500) {
             throw new BusinessLogicException("El comentario no puede ser mayor a 500 caracteres");
         }
-        
-     
+
         ViajeroEntity viajero = viajeroPersistence.find(viajeroId);
         notificacion.setViajero(viajero);
         notificacion.setConductor(null);
         notificacion = persistence.create(notificacion);
         return notificacion;
     }
-    
-    public NotificacionEntity createNotificacionForConductor(Long conductorId,NotificacionEntity notificacion ) throws BusinessLogicException
-    {
-        if(notificacion.getMensaje().length()> 500)
-        {
+
+    public NotificacionEntity createNotificacionForConductor(Long conductorId, NotificacionEntity notificacion) throws BusinessLogicException {
+        if (notificacion.getMensaje().length() > 500) {
             throw new BusinessLogicException("El comentario no puede ser mayor a 500 caracteres");
         }
-     
+
         ConductorEntity conductor = conductorPersistence.find(conductorId);
         notificacion.setConductor(conductor);
         notificacion.setViajero(null);
         notificacion = persistence.create(notificacion);
         return notificacion;
     }
-    
+
     public List<NotificacionEntity> getNotificacionesByViajero(Long viajerosId) {
         ViajeroEntity viajeroEntity = viajeroPersistence.find(viajerosId);
         return viajeroEntity.getNotificaciones();
     }
+
     public List<NotificacionEntity> getNotificacionesByConductor(Long conductoresId) {
         ConductorEntity conductorEntity = conductorPersistence.find(conductoresId);
         return conductorEntity.getNotificaciones();
     }
-    
+
     public NotificacionEntity getNotificacionByViajero(Long viajerosId, Long calificacionesId) {
         return persistence.findByViajero(viajerosId, calificacionesId);
     }
-    
+
     public NotificacionEntity getNotificacionByConductor(Long conductoresId, Long notificacionId) {
         return persistence.findByConductor(conductoresId, notificacionId);
     }
-    
+
     public NotificacionEntity updateNotificacionByViajero(Long viajerosId, NotificacionEntity notificacionEntity) {
         ViajeroEntity viajeroEntity = viajeroPersistence.find(viajerosId);
         notificacionEntity.setViajero(viajeroEntity);
         persistence.update(notificacionEntity);
         return notificacionEntity;
     }
-    
+
     public NotificacionEntity updateNotificacionByConductor(Long conductoresId, NotificacionEntity notificacionEntity) {
         ConductorEntity conductorEntity = conductorPersistence.find(conductoresId);
         notificacionEntity.setConductor(conductorEntity);
         persistence.update(notificacionEntity);
         return notificacionEntity;
     }
-        
+
     public void deleteNotificacionByViajero(Long viajerosId, Long notificacionesId) throws BusinessLogicException {
         NotificacionEntity old = getNotificacionByViajero(viajerosId, notificacionesId);
         if (old == null) {
@@ -165,7 +160,7 @@ public class NotificacionLogic {
         }
         persistence.delete(old.getId());
     }
-    
+
     public void deleteNotificacionByConductor(Long conductoresId, Long notificacionesId) throws BusinessLogicException {
         NotificacionEntity old = getNotificacionByConductor(conductoresId, notificacionesId);
         if (old == null) {

@@ -10,17 +10,9 @@ import co.edu.uniandes.csw.carpooling.ejb.ReservaLogic;
 import co.edu.uniandes.csw.carpooling.ejb.ViajeLogic;
 import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
-import java.util.logging.Logger;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,7 +23,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *

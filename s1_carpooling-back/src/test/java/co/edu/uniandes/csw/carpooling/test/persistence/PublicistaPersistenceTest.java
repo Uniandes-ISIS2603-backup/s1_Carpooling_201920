@@ -180,7 +180,7 @@ public class PublicistaPersistenceTest {
         PublicistaEntity deleted = em.find(PublicistaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
+
     /**
      * Prueba para consultar una Publicista por correo.
      */
@@ -194,7 +194,7 @@ public class PublicistaPersistenceTest {
         newEntity = pp.findByCorreo(null);
         Assert.assertNull(newEntity);
     }
-    
+
     /**
      * Prueba para consultar una Publicista por Rut.
      */
@@ -208,7 +208,7 @@ public class PublicistaPersistenceTest {
         newEntity = pp.findByRut(null);
         Assert.assertNull(newEntity);
     }
-    
+
     /**
      * Prueba para consultar una Publicista por Nit.
      */

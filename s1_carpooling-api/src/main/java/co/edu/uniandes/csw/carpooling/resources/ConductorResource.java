@@ -142,7 +142,7 @@ public class ConductorResource {
     
     
     private List<ConductorDetailDTO> listEntity2DetailDTO(List<ConductorEntity> entities){
-        List<ConductorDetailDTO> list = new ArrayList<ConductorDetailDTO> ();
+        List<ConductorDetailDTO> list = new ArrayList<> ();
         for(ConductorEntity entity: entities){
             list.add(new ConductorDetailDTO(entity));
         }
