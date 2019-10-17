@@ -6,10 +6,14 @@
 package co.edu.uniandes.csw.carpooling.ejb;
 
 import co.edu.uniandes.csw.carpooling.entities.PublicidadEntity;
+import co.edu.uniandes.csw.carpooling.entities.PublicistaEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.PublicidadPersistence;
+import co.edu.uniandes.csw.carpooling.persistence.PublicistaPersistence;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -19,11 +23,19 @@ import javax.inject.Inject;
  */
 @Stateless
 public class PublicidadLogic {
+    
      @Inject
     private PublicidadPersistence persistence;
     
+    @Inject
+    private PublicistaPersistence publicistaPersistence;
     
-    public PublicidadEntity createPublicidad(PublicidadEntity publicidadEntity) throws BusinessLogicException{
+    private static final Logger LOGGER = Logger.getLogger(PublicidadLogic.class.getName());
+        
+    public PublicidadEntity createPublicidad(Long publicistaId,PublicidadEntity publicidadEntity) throws BusinessLogicException{
+      
+        LOGGER.log(Level.INFO, "Inicia proceso de crear publicidad");
+       
         if(!validarPublicidad(publicidadEntity)){
             throw new BusinessLogicException("Ya hay una publicidad con ese nombre en ese rango de fechas");
         }
@@ -39,21 +51,44 @@ public class PublicidadLogic {
         else if(!validarFechas(publicidadEntity.getFechaDeInicio(), publicidadEntity.getFechaDeSalida())){
             throw new BusinessLogicException("Las fechas son invalidas");
         }
-        PublicidadEntity retorno = persistence.create(publicidadEntity);
-        return retorno;
+        
+        PublicistaEntity publicista = publicistaPersistence.find(publicistaId);
+        publicidadEntity.setPublicista(publicista);
+        
+        LOGGER.log(Level.INFO, "Termina proceso de creación del publicidad");
+        
+        return persistence.create(publicidadEntity);
     }
     
-    public List<PublicidadEntity> getPublicidades(){
-        List<PublicidadEntity> publicidades = persistence.findAll();
-        return publicidades;
+        /**
+     * Obtiene la lista de los registros de Review que pertenecen a un Book.
+     *
+     * @param publicistasId id del Book el cual es padre de los Reviews.
+     * @return Colección de objetos de ReviewEntity.
+     */
+    public List<PublicidadEntity> getPublicidades(Long publicistasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar los reviews asociados al book con id = {0}", publicistasId);
+        PublicistaEntity publicidadEntity = publicistaPersistence.find(publicistasId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar los reviews asociados al book con id = {0}", publicistasId);
+        return publicidadEntity.getPublicidades();
     }
     
-    public PublicidadEntity getPublicidad(Long publicidadId){
-        PublicidadEntity publicidadEntity = persistence.find(publicidadId);
-        return publicidadEntity;
+    
+    /**
+     * Obtiene los datos de una instancia de Review a partir de su ID. La
+     * existencia del elemento padre Book se debe garantizar.
+     *
+     * @param publicistasId El id del Libro buscado
+     * @param publicidadesId Identificador de la Reseña a consultar
+     * @return Instancia de ReviewEntity con los datos del Review consultado.
+     *
+     */
+    public PublicidadEntity getPublicidad(Long publicistasId, Long publicidadesId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el review con id = {0} del libro con id = " + publicistasId, publicidadesId);
+        return persistence.find(publicistasId, publicidadesId);
     }
     
-    public PublicidadEntity updatePublicidad(PublicidadEntity publicidadEntity)throws BusinessLogicException{
+    public PublicidadEntity updatePublicidad(Long publicistasId,PublicidadEntity publicidadEntity)throws BusinessLogicException{
         if(!validarPublicidad(publicidadEntity)){
             throw new BusinessLogicException("Ya hay una publicidad con ese nombre en ese rango de fechas");
         }
@@ -69,14 +104,27 @@ public class PublicidadLogic {
         else if(!validarFechas(publicidadEntity.getFechaDeInicio(), publicidadEntity.getFechaDeSalida())){
             throw new BusinessLogicException("Las fechas son invalidas");
         }
+        PublicistaEntity publicistaEntity = publicistaPersistence.find(publicistasId);
+        publicidadEntity.setPublicista(publicistaEntity);
         PublicidadEntity result = persistence.update(publicidadEntity);
         return result;
     }
     
-    public void deletePublicidad(Long publicidadId) {
-        persistence.delete(publicidadId);
+        /**
+     * Elimina una instancia de Review de la base de datos.
+     *
+     * @param reviewsId Identificador de la instancia a eliminar.
+     * @param booksId id del Book el cual es padre del Review.
+     * @throws BusinessLogicException Si la reseña no esta asociada al libro.
+     *
+     */
+    public void deletePublicidad(Long publicistasId, Long publicidadesId) throws BusinessLogicException {
+        PublicidadEntity old = getPublicidad(publicistasId, publicidadesId);
+        if (old == null) {
+            throw new BusinessLogicException("El review con id = " + publicidadesId + " no esta asociado a el libro con id = " + publicistasId);
+        }
+        persistence.delete(old.getId());
     }
-    
     
     
     private boolean validarNombre(String nombre){
