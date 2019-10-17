@@ -46,7 +46,7 @@ public class PublicidadPersistence {
         PublicidadEntity publicidad = null;
         if (results == null || results.isEmpty()) {
             // Esto es equivalente a que publicidad siga siendo null
-        } else if (results.size() >= 1) {
+        } else {
             publicidad = results.get(0);
         }
 
