@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.carpooling.persistence;
 
 import co.edu.uniandes.csw.carpooling.entities.VehiculoEntity;
 import java.util.List;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -55,10 +54,8 @@ public class VehiculoPersistence {
         q.setParameter("vehiculosId", vehiculosId);
         List<VehiculoEntity> results = q.getResultList();
         VehiculoEntity vehiculo = null;
-        if (results == null) {
-            vehiculo = null;
-        } else if (results.isEmpty()) {
-            vehiculo = null;
+        if (results == null||results.isEmpty()) {
+            // Esto es equivalente a que vehiculo siga siendo null
         } else if (results.size() >= 1) {
             vehiculo = results.get(0);
         }

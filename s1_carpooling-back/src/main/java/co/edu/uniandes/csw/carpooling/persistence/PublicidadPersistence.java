@@ -45,7 +45,7 @@ public class PublicidadPersistence {
         List<PublicidadEntity> results = q.getResultList();
         PublicidadEntity publicidad = null;
         if (results == null || results.isEmpty()) {
-            publicidad = null;
+            // Esto es equivalente a que publicidad siga siendo null
         } else if (results.size() >= 1) {
             publicidad = results.get(0);
         }

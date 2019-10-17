@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.carpooling.persistence;
 
-import co.edu.uniandes.csw.carpooling.entities.TrayectoEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import java.util.List;
 import javax.ejb.Stateless;

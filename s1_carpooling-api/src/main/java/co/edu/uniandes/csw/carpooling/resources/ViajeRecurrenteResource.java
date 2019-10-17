@@ -121,7 +121,7 @@ public class ViajeRecurrenteResource {
         return viajesRecurrenteDTO;
     }
         private List<ViajeRecurrenteDetailDTO> listEntity2DTO(List<ViajeRecurrenteEntity> entityList) {
-        List<ViajeRecurrenteDetailDTO> list = new ArrayList<ViajeRecurrenteDetailDTO>();
+        List<ViajeRecurrenteDetailDTO> list = new ArrayList<>();
         for (ViajeRecurrenteEntity entity : entityList) {
             list.add(new ViajeRecurrenteDetailDTO(entity));
         }

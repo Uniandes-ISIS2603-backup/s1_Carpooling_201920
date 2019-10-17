@@ -54,10 +54,8 @@ public class ViajeRecurrentePersistence {
         q.setParameter("viajesRecurrentesId", viajesRecurrentesId);
         List<ViajeRecurrenteEntity> results = q.getResultList();
         ViajeRecurrenteEntity viajeRecurrente = null;
-        if (results == null) {
-            viajeRecurrente = null;
-        } else if (results.isEmpty()) {
-            viajeRecurrente = null;
+        if (results == null||results.isEmpty()) {
+            // Esto es equivalente a que viaje recurrente siga siendo null
         } else if (results.size() >= 1) {
             viajeRecurrente = results.get(0);
         }

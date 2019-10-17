@@ -130,7 +130,7 @@ public class ConductorViajesResource {
      
   
      private List<ViajeDetailDTO> listViajesEntityToDTO(List<ViajeEntity> viajes){
-        List<ViajeDetailDTO> viajesDTO = new ArrayList<ViajeDetailDTO>();
+        List<ViajeDetailDTO> viajesDTO = new ArrayList<>();
         for(ViajeEntity viaje: viajes){
             viajesDTO.add(new ViajeDetailDTO(viaje));
         }

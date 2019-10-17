@@ -71,8 +71,9 @@ public class CalificacionPersistence {
         List<CalificacionEntity> results = q.getResultList();
         CalificacionEntity calificacion = null;
         if (results == null||results.isEmpty()) {
-            calificacion = null;
-        } else if (results.size() >= 1) {
+            // Esto equivale a dejar calificacion como null
+        }
+        else if (results.size() >= 1) {
             calificacion = results.get(0);
         }
 
