@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a05560b3-a368-43e2-9720-980cbf83ec26",
+		"_postman_id": "082b4083-901c-4bab-8da6-ff55c138c8fe",
 		"name": "ConductorCalificacionTests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -67,7 +67,7 @@
 						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_viajeRecurrente1\",data.id);",
+							"postman.setGlobalVariable(\"new_id_calificacion1\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -87,7 +87,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"fechInicio\":\"2020-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2020-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
+					"raw": "{\"comentarios\":\"OK\",\"puntuacion\":4}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,7 +95,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/calificaciones",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -106,7 +106,7 @@
 						"api",
 						"conductores",
 						"{{new_id_conductor}}",
-						"viajesRecurrentes"
+						"calificaciones"
 					]
 				}
 			},
@@ -141,7 +141,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"comentarios\":\"OKMAKEY\",\"conductor\":{},\"puntuacion\":3}",
+					"raw": "{\"comentarios\":\"OKMAKEY\",\"puntuacion\":3}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -309,6 +309,140 @@
 						"0",
 						"calificaciones",
 						"{{new_id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener calificacion de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/calificaciones/{{new_id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"calificaciones",
+						"{{new_id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener calificacion de un conductor Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/calificaciones/{{new_id_calificacion2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"calificaciones",
+						"{{new_id_calificacion2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Calificaciones de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"viajesRecurrentes count\"] = data.length > 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"calificaciones"
 					]
 				}
 			},
