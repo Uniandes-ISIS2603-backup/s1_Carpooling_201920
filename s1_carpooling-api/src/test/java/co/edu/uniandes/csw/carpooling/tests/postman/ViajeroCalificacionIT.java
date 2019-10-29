@@ -23,8 +23,7 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.carpooling.tests.postman;
 
-
-import co.edu.uniandes.csw.carpooling.dtos.ViajeRecurrenteDTO;
+import co.edu.uniandes.csw.carpooling.dtos.CalificacionDTO;
 import co.edu.uniandes.csw.carpooling.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.carpooling.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
@@ -45,9 +44,9 @@ import org.junit.runner.RunWith;
  * @author Juan David Serrano
  */
 @RunWith(Arquillian.class)
-public class VehiculoIT {
+public class ViajeroCalificacionIT {
 
-    private static final String COLLECTION = "ViajeRecurrenteTests.postman_collection";
+    private static final String COLLECTION = "ViajeroCalificacionTests.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
@@ -58,7 +57,7 @@ public class VehiculoIT {
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
                 .addPackage(RestConfig.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
-                .addPackage(ViajeRecurrenteDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
+                .addPackage(CalificacionDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
