@@ -186,6 +186,7 @@ public class ViajeroPersistenceTest {
         ViajeroEntity deleted = em.find(ViajeroEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+
     /**
      * Prueba para consultar una Publicista por correo.
      */

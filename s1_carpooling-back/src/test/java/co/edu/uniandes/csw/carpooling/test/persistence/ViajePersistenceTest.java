@@ -30,27 +30,27 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ViajePersistenceTest {
-    
+
     @Inject
     private ViajePersistence vp;
-    
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     UserTransaction utx;
-    
+
     private List<ViajeEntity> data = new ArrayList<ViajeEntity>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
-            return ShrinkWrap.create(JavaArchive.class)
-                    .addPackage(ViajeEntity.class.getPackage())
-                    .addPackage(ViajePersistence.class.getPackage()) 
-                    .addAsManifestResource("META-INF/persistence.xml", "persistence.xml") 
-                    .addAsManifestResource("META-INF/beans.xml", "beans.xml" ); 
+        return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(ViajeEntity.class.getPackage())
+                .addPackage(ViajePersistence.class.getPackage())
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     @Before
     public void configTest() {
         try {
@@ -68,11 +68,11 @@ public class ViajePersistenceTest {
             }
         }
     }
-    
+
     private void clearData() {
         em.createQuery("delete from ViajeEntity").executeUpdate();
     }
-    
+
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -82,8 +82,7 @@ public class ViajePersistenceTest {
             data.add(entity);
         }
     }
-    
-    
+
     @Test
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -98,43 +97,44 @@ public class ViajePersistenceTest {
         Assert.assertEquals(viaje.getFechaDeLlegada(), entity.getFechaDeLlegada());
         Assert.assertEquals(viaje.getFechaDeSalida(), entity.getFechaDeSalida());
         Assert.assertEquals(viaje.getOrigen(), entity.getOrigen());
-    } 
-    
+    }
+
     @Test
-    public void getViajeTest(){
+    public void getViajeTest() {
         ViajeEntity viaje = data.get(0);
         ViajeEntity newViaje = vp.find(viaje.getId());
         Assert.assertNotNull(newViaje);
         Assert.assertEquals(viaje, newViaje);
     }
-    
+
     @Test
-    public void getViajesTest(){
+    public void getViajesTest() {
         List<ViajeEntity> newViajes = vp.findAll();
         Assert.assertEquals(newViajes.size(), data.size());
-        for(ViajeEntity viaje: data){
+        for (ViajeEntity viaje : data) {
             boolean found = false;
-            for(ViajeEntity newViaje: newViajes){
-                if(newViaje.equals(viaje))
+            for (ViajeEntity newViaje : newViajes) {
+                if (newViaje.equals(viaje)) {
                     found = true;
+                }
             }
             Assert.assertTrue(found);
         }
     }
-    
+
     @Test
-    public void updateViajeTest(){
+    public void updateViajeTest() {
         ViajeEntity viaje = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         ViajeEntity newViaje = factory.manufacturePojo(ViajeEntity.class);
         newViaje.setId(viaje.getId());
         vp.update(newViaje);
-        ViajeEntity resp = em.find(ViajeEntity.class,viaje.getId());
+        ViajeEntity resp = em.find(ViajeEntity.class, viaje.getId());
         Assert.assertEquals(resp, newViaje);
     }
-    
+
     @Test
-    public void deleteViajeTest(){
+    public void deleteViajeTest() {
         ViajeEntity viaje = data.get(0);
         vp.delete(viaje.getId());
         ViajeEntity borrado = em.find(ViajeEntity.class, viaje.getId());

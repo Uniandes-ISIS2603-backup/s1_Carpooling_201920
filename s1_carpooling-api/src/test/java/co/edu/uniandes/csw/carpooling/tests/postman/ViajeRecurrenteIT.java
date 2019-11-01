@@ -23,8 +23,8 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.carpooling.tests.postman;
 
-import co.edu.uniandes.csw.carpooling.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.carpooling.dtos.ViajeDTO;
+import co.edu.uniandes.csw.carpooling.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.carpooling.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;
@@ -44,9 +44,9 @@ import org.junit.runner.RunWith;
  * @author Juan David Serrano
  */
 @RunWith(Arquillian.class)
-public class TrayectoIT {
+public class ViajeRecurrenteIT {
 
-    private static final String COLLECTION = "Trayecto Tests.postman_collection";
+    private static final String COLLECTION = "Vehiculo Tests.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {

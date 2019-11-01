@@ -19,20 +19,19 @@ import javax.inject.Inject;
  */
 @Stateless
 public class ConductorViajesLogic {
-    
+
     private static final Logger LOGGER = Logger.getLogger(ConductorViajesLogic.class.getName());
-     
+
     @Inject
     private ConductorPersistence conductorPersistence;
-    
+
     @Inject
     private ViajePersistence viajePersistence;
-    
-    public ViajeEntity getViaje(Long conductoresId, Long viajesId){
+
+    public ViajeEntity getViaje(Long conductoresId, Long viajesId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un viajes al condcutor con id = {0}", conductoresId);
         return null;
-        
+
     }
 
-    
 }

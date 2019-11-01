@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d63b81b1-20e4-4fcc-a16a-f9289630e8c6",
+		"_postman_id": "468de6e9-1636-4664-92b8-815fcadf3b56",
 		"name": "ViajeRecurrenteTests",
 		"description": "Viaje recurrente resource tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"nndoe@gmail.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

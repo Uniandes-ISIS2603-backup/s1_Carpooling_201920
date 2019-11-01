@@ -66,12 +66,13 @@ public class ConductorPersistence {
         }
         return result;
     }
+
     public ConductorEntity findByName(String nombre) {
         TypedQuery<ConductorEntity> query = em.createQuery("Select e From ConductorEntity e where e.nombre = :nombre", ConductorEntity.class);
         query = query.setParameter("nombre", nombre);
         List<ConductorEntity> mismoNombre = query.getResultList();
         ConductorEntity result = null;
-         if (!(mismoNombre == null || mismoNombre.isEmpty())) {
+        if (!(mismoNombre == null || mismoNombre.isEmpty())) {
             result = mismoNombre.get(0);
         }
         return result;
