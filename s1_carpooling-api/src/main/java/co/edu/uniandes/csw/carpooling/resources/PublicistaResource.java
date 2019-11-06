@@ -146,13 +146,13 @@ public class PublicistaResource {
      * Error de lógica que se genera cuando no se encuentra la publicista.
     */ 
     @Path("{publicistasId: \\d+}/publicidades")
-    public Class<PublicistaPublicidadResource> getPublicistaPublicidadResource(@PathParam("publicistasId") Long publicistasId) {
+    public Class<PublicidadResource> getPublicistaPublicidadResource(@PathParam("publicistasId") Long publicistasId) {
         if (logica.getPublicista(publicistasId) == null) {
-            throw new WebApplicationException("El recurso /publicistas/" + publicistasId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /publicistas/" + publicistasId + "/publicidades no existe.", 404);
         }
-        return PublicistaPublicidadResource.class;
+        return PublicidadResource.class;
     }
-
+    
     /**
      * Convierte una lista de entidades a DTO.
      *

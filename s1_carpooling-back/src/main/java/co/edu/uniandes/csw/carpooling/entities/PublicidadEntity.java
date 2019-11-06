@@ -36,7 +36,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
 
     private double costo;
 
-    private DISPONIBILIDAD disponibilidadPublicidad;
+    private DISPONIBILIDAD disponibilidad;
 
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
@@ -123,15 +123,15 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     /**
      * @return the disponibilidadPublicidad
      */
-    public DISPONIBILIDAD getDisponibilidadPublicidad() {
-        return disponibilidadPublicidad;
+    public DISPONIBILIDAD getDisponibilidad() {
+        return disponibilidad;
     }
 
     /**
      * @param disponibilidadPublicidad the disponibilidadPublicidad to set
      */
-    public void setDisponibilidadPublicidad(DISPONIBILIDAD disponibilidadPublicidad) {
-        this.disponibilidadPublicidad = disponibilidadPublicidad;
+    public void setDisponibilidad(DISPONIBILIDAD disponibilidadPublicidad) {
+        this.disponibilidad = disponibilidadPublicidad;
     }
 
     /**

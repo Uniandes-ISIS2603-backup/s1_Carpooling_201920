@@ -33,7 +33,6 @@ import javax.ws.rs.core.MediaType;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@RequestScoped
 public class PublicidadResource {
     
     private static final Logger LOGGER = Logger.getLogger(PublicidadResource.class.getName());
