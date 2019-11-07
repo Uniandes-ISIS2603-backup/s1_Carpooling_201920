@@ -39,7 +39,7 @@ public class NotificacionLogic {
         if (notificacion.getFecha() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene una fecha");
         }
-        if (notificacion.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
+        if (notificacion.getFecha().compareTo(Calendar.getInstance().getTime()) == 0) {
             throw new BusinessLogicException("La notificacion tiene una fecha menor a la actual");
         }
         if (notificacion.getMensaje() == (null)) {
@@ -97,7 +97,7 @@ public class NotificacionLogic {
     }
 
     ///////////////////////////////////////fix
-    public NotificacionEntity createCalificacionForViajero(Long viajeroId, NotificacionEntity notificacion) throws BusinessLogicException {
+    public NotificacionEntity createNotificacionForViajero(Long viajeroId, NotificacionEntity notificacion) throws BusinessLogicException {
         if (notificacion.getMensaje().length() > 500) {
             throw new BusinessLogicException("El comentario no puede ser mayor a 500 caracteres");
         }
