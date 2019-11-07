@@ -46,3 +46,11 @@ insert into ViajeEntity (id, destino, origen,
 fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
 estadoViaje) values (300, 'Medellin', 'Cali', '10/8/2019', '10/8/2019' , 4, 30000, 0);
 
+insert into PUBLICISTAENTITY (id, nombre, apellido, cedula, contrasenha, correo, rut, telefono, tipoPublicista) values (1, 'Bran', 'Usmar', '1492945854', 'GoXVn3xpanFc', 'busmar0@elpais.com', '3204987833', '+86 436 385 4341', 0);
+insert into PUBLICISTAENTITY (id, nombre, apellido, cedula, contrasenha, correo, rut, telefono, tipoPublicista) values (2, 'Ham', 'Pickthorn', '2843867126', '6T5v8j59', 'hpickthorn1@ebay.com', '1626030723', '+1 415 328 4315',  0);
+insert into PUBLICISTAENTITY (id, nombre, apellido, cedula, contrasenha, correo, rut, telefono, tipoPublicista) values (3, 'Marlie', 'Windmill', '3375486170', 'dhhQv7', 'mwindmill2@discovery.com', '0324424078', '+86 276 668 7184',  0);
+
+insert into PUBLICIDADENTITY (id, nombre, costo, fechaDeInicio, fechaDeSalida, mensaje, disponibilidad, publicista_id) values (1, 'Jamie', 21.56, '11/10/2019', '5/1/2019', 'eOl16vt7+9vR3lclkCOc7GPsuykEw', 0, 1);
+insert into PUBLICIDADENTITY (id, nombre, costo, fechaDeInicio, fechaDeSalida, mensaje, disponibilidad, publicista_id) values (2, 'Angelo', 23.2, '11/10/2019', '8/6/2019', 'data:image/png;base64,iVBORw0', 0, 2);
+insert into PUBLICIDADENTITY (id, nombre, costo, fechaDeInicio, fechaDeSalida, mensaje, disponibilidad, publicista_id) values (3, 'Bobette', 3.66, '11/10/2019', '7/13/2019', 'data:image/png;base64,iVBOR', 0, 3);
+
