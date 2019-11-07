@@ -9,6 +9,8 @@ delete from PublicistaEntity;
 delete from ViajeRecurrenteEntity;
 delete from ConductorEntity;
 delete from ViajeroEntity;
+delete from PublicidadEntity;
+
 
 
 

@@ -59,6 +59,27 @@ public class PublicidadLogic {
         
         return persistence.create(publicidadEntity);
     }
+    public PublicidadEntity createPublicidad(Long publicistaId, PublicidadEntity publicidadEntity) throws BusinessLogicException{
+        if(!validarPublicidad(publicidadEntity)){
+            throw new BusinessLogicException("Ya hay una publicidad con ese nombre en ese rango de fechas");
+        }
+        else if(!validarNombre(publicidadEntity.getNombre())){
+            throw new BusinessLogicException("El nombre es invalido");
+        }
+        else if(!validarMensaje(publicidadEntity.getMensaje())){
+            throw new BusinessLogicException("El mensaje es invalido");
+        }
+        else if(!validarCosto(publicidadEntity.getCosto())){
+            throw new BusinessLogicException("El costo es invalido");
+        }
+        else if(!validarFechas(publicidadEntity.getFechaDeInicio(), publicidadEntity.getFechaDeSalida())){
+            throw new BusinessLogicException("Las fechas son invalidas");
+        }
+        PublicistaEntity publi = publicista.find(publicistaId);
+        publicidadEntity.setPublicista(publi);
+        PublicidadEntity retorno = persistence.create(publicidadEntity);
+        return retorno;
+    }
     
         /**
      * Obtiene la lista de los registros de Review que pertenecen a un Publicista.
