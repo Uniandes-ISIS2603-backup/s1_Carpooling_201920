@@ -26,15 +26,15 @@ public class ConductorLogic {
     public ConductorEntity createConductor(ConductorEntity conductor) throws BusinessLogicException {
         if (!validarCorreo(conductor.getCorreo())) {
             throw new BusinessLogicException("El correo del conductor es inválido");
-        } else if (persistence.findByCorreo(conductor.getCorreo()) != null) {
+        } if (persistence.findByCorreo(conductor.getCorreo()) != null) {
             throw new BusinessLogicException("Ya hay un conductor con ese correo");
-        } else if (!validarNombre(conductor.getNombre())) {
+        }  if (!validarNombre(conductor.getNombre())) {
             throw new BusinessLogicException("El nombre es inválido");
-        } else if (!validarTelefono(conductor.getTelefono())) {
+        }  if (!validarTelefono(conductor.getTelefono())) {
             throw new BusinessLogicException("El número de teléfono es inválido");
-        } else if (!validarNumeroDocumento(conductor.getNumDocumento())) {
+        }  if (!validarNumeroDocumento(conductor.getNumDocumento())) {
             throw new BusinessLogicException("El número de documento es inválido");
-        } else if (!validarFechaNacimiento(conductor.getFechaDeNacimiento())) {
+        }  if (!validarFechaNacimiento(conductor.getFechaDeNacimiento())) {
             throw new BusinessLogicException("La fecha de nacimiento es inválida");
         }
         conductor = persistence.create(conductor);
@@ -52,13 +52,13 @@ public class ConductorLogic {
     public ConductorEntity actualizarConductor(ConductorEntity conductorEntity) throws BusinessLogicException {
         if (!validarCorreo(conductorEntity.getCorreo())) {
             throw new BusinessLogicException("El correo del conductor es invalido");
-        } else if (!validarNombre(conductorEntity.getNombre())) {
+        }  if (!validarNombre(conductorEntity.getNombre())) {
             throw new BusinessLogicException("El nombre es inválido");
-        } else if (!validarTelefono(conductorEntity.getTelefono())) {
+        }  if (!validarTelefono(conductorEntity.getTelefono())) {
             throw new BusinessLogicException("El número de teléfono es inválido");
-        } else if (!validarNumeroDocumento(conductorEntity.getNumDocumento())) {
+        }  if (!validarNumeroDocumento(conductorEntity.getNumDocumento())) {
             throw new BusinessLogicException("El número de documento es inválido");
-        } else if (!validarFechaNacimiento(conductorEntity.getFechaDeNacimiento())) {
+        }  if (!validarFechaNacimiento(conductorEntity.getFechaDeNacimiento())) {
             throw new BusinessLogicException("La fecha de nacimiento es inválida");
         }
         return persistence.update(conductorEntity);
@@ -73,23 +73,11 @@ public class ConductorLogic {
     }
 
     private boolean validarTelefono(String telefono) {
-        boolean retorno = !(telefono == null || telefono.isEmpty());
-        /*try{
-            long tel = Long.parseLong(telefono);
-        }catch(Exception e){
-            retorno = false;
-        }*/
-        return retorno;
+        return !(telefono == null || telefono.isEmpty());
     }
 
     private boolean validarNumeroDocumento(String numeroDocumento) {
-        boolean retorno = !(numeroDocumento == null || numeroDocumento.isEmpty());
-        /* try{
-            long numDoc = Long.parseLong(numeroDocumento);
-        }catch(Exception e){
-            retorno = false;
-        }*/
-        return retorno;
+        return !(numeroDocumento == null || numeroDocumento.isEmpty());
     }
 
     private boolean validarFechaNacimiento(Date fechaNacimiento) {
