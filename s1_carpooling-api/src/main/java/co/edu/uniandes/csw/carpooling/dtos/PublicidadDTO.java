@@ -13,42 +13,48 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
- * @author Nicolas Fajardo
+ * @author Santiago Ballesteros
  */
 public class PublicidadDTO implements Serializable{
     
-    /*
-        ATRIBUTOS
-     */
     private Long id;
     
     private String nombre;
-    
-    private PublicistaDTO publicista;
 
     private String mensaje;
 
-    private double costo;
+    private Double costo;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeInicio;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeSalida;
+    
+    protected PublicidadEntity.DISPONIBILIDAD disponibilidad;
+    
+    protected PublicistaDTO publicista;
 
     public PublicidadDTO(){
     
     }
     
         public PublicidadDTO(PublicidadEntity entidad){
+        if(entidad!=null){
         setId(entidad.getId());
         setNombre(entidad.getNombre());
         setMensaje(entidad.getMensaje());
         setCosto(entidad.getCosto());
         setFechaDeInicio(entidad.getFechaDeInicio());
         setFechaDeSalida(entidad.getFechaDeSalida());
-    
-    }
+        setDisponibilidad(entidad.getDisponibilidad());
+        if (entidad.getPublicista() != null) {
+                this.publicista = new PublicistaDTO(entidad.getPublicista());
+            } else {
+                this.publicista = null;
+            }
+        }
+        }
     
     public PublicidadEntity toEntity(){
         PublicidadEntity entidad = new PublicidadEntity();
@@ -58,6 +64,10 @@ public class PublicidadDTO implements Serializable{
         entidad.setCosto(this.getCosto());
         entidad.setFechaDeInicio(this.getFechaDeInicio());
         entidad.setFechaDeSalida(this.getFechaDeSalida());
+        entidad.setDisponibilidad(this.getDisponibilidad());
+        if (this.getPublicista() != null) {
+            entidad.setPublicista(this.getPublicista().toEntity());
+        }
         return entidad;
     }
     
@@ -145,5 +155,34 @@ public class PublicidadDTO implements Serializable{
         this.id = id;
     }
 
+    /**
+     * @return the disponibilidad
+     */
+    public PublicidadEntity.DISPONIBILIDAD getDisponibilidad() {
+        return disponibilidad;
+    }
 
+    /**
+     * @param disponibilidad the disponibilidad to set
+     */
+    public void setDisponibilidad(PublicidadEntity.DISPONIBILIDAD disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    /**
+     * @return the publicista
+     */
+    public PublicistaDTO getPublicista() {
+        return publicista;
+    }
+
+    /**
+     * @param publicista the publicista to set
+     */
+    public void setPublicista(PublicistaDTO publicista) {
+        this.publicista = publicista;
+    }
+
+    
+    
 }

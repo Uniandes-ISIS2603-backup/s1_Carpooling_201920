@@ -49,14 +49,14 @@ public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
     */ 
     public ViajeroDetailDTO(ViajeroEntity viajeroEntity){
         super(viajeroEntity);
- //       if(viajeroEntity != null){
+      if(viajeroEntity != null){
 //            if(viajeroEntity.getReservas()!=null){
 //                reservas = new ArrayList<>();
 //                for (ReservaEntity entityReserva : viajeroEntity.getReservas()){
 //                    reservas.add(new ReservaDTO(entityReserva));
 //                }
 //            }
-//        }
+//       }
         
         if(viajeroEntity.getCalificaciones() != null){
             calificaciones = new ArrayList<>();
@@ -64,6 +64,7 @@ public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
                 calificaciones.add(new CalificacionDTO(entity));
             }
         } 
+      }
     }
     
     /**    
