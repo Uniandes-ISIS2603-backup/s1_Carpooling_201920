@@ -68,18 +68,18 @@ public class ReservaResource {
         return reservasDTO;
     }
    
-    @GET
-    @Path("{reservasId: \\d+}")
-    public ReservaDTO getReserva(@PathParam("reservasId") Long reservasId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "ReservaResource getReserva: input: {0}", reservasId);
-        ReservaEntity reservaEntity = logic.findReserva(reservasId);
-        if (reservaEntity == null) {
-            throw new WebApplicationException("El recurso /reserva/" + reservasId + " no existe.", 404);
-        }
-        ReservaDTO detailDTO = new ReservaDTO(reservaEntity);
-        LOGGER.log(Level.INFO, "ReservaResource getReserva: output: {0}", detailDTO);
-        return detailDTO;
-    }
+//    @GET
+//    @Path("{reservasId: \\d+}")
+//    public ReservaDTO getReserva(@PathParam("reservasId") Long reservasId) throws BusinessLogicException {
+//        LOGGER.log(Level.INFO, "ReservaResource getReserva: input: {0}", reservasId);
+//        ReservaEntity reservaEntity = logic.findReserva(reservasId);
+//        if (reservaEntity == null) {
+//            throw new WebApplicationException("El recurso /reserva/" + reservasId + " no existe.", 404);
+//        }
+//        ReservaDTO detailDTO = new ReservaDTO(reservaEntity);
+//        LOGGER.log(Level.INFO, "ReservaResource getReserva: output: {0}", detailDTO);
+//        return detailDTO;
+//    }
     
     @PUT
     @Path("{reservasId: \\d+}")
