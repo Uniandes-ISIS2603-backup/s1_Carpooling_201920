@@ -102,14 +102,14 @@ public class CalificacionDTO implements Serializable{
         if(calificacionEntity.getViajero() != null)
         {
             this.viajero = new ViajeroDTO(calificacionEntity.getViajero());
-            calificacionEntity.getUsuario().setId(calificacionEntity.getViajero().getId());
+            
         }
              
             
         if(calificacionEntity.getConductor() != null)
         {
             this.conductor = new ConductorDTO(calificacionEntity.getConductor());
-            calificacionEntity.getUsuario().setId(calificacionEntity.getConductor().getId());
+            
         }
         if(viaje != null)
             calificacionEntity.setViaje(viaje.toEntity());

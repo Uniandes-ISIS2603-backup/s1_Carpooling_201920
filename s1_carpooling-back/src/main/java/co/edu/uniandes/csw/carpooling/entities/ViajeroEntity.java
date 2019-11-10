@@ -49,12 +49,12 @@ public class ViajeroEntity extends UsuarioEntity implements Serializable {
         this.notificaciones = notificaciones;
     }
 
-    @Override
+    
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
 
-    @Override
+   
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }

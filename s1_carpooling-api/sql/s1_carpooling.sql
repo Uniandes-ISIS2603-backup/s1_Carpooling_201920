@@ -15,8 +15,8 @@ delete from ViajeroEntity;
 insert into ConductorEntity(id, contrasenha, correo, fechaDeNacimiento, nombre, numDocumento, tipoDocumento, telefono)
 values (1, 'abcd', 'jd@patito.com', '11/10/2012', 'oniichan', '1032799133', 1 , '3214845777');
 
-insert into CalificacionEntity(id, puntuacion, comentarios,USUARIO_ID,CONDUCTOR_ID)
-values (1, 4, 'OK',1,1);
+insert into CalificacionEntity(id, puntuacion, comentarios,CONDUCTOR_ID)
+values (1, 4, 'OK',1);
 
 insert into VehiculoEntity(id, soat, placa, aseguradora, vigenciaSoat, modelo, sillas, CONDUCTOR_ID)
 values( 1,'esteSoat','ABC 123','estaAseguradora','estaVigencia','esteModelo',5,1);
@@ -31,8 +31,8 @@ insert into VIAJEROENTITY (id, contrasenha, correo, fechaDeNacimiento, nombre, n
 insert into VIAJEROENTITY (id, contrasenha, correo, fechaDeNacimiento, nombre, numDocumento, telefono, tipoDocumento) values (2, 'lCnL3q', 'ddeighton1@disqus.com', '12/26/1995', 'Dom', '1346078573', '213123121',0);
 insert into VIAJEROENTITY (id, contrasenha, correo, fechaDeNacimiento, nombre, numDocumento, telefono, tipoDocumento) values (3, 'kas7qE', 'nlaugharne2@tiny.cc', '11/20/1957', 'Neda', '8089319231','32131223' ,0);
 
-insert into CalificacionEntity(id, puntuacion, comentarios, USUARIO_ID, VIAJERO_ID)
-values (3, 4, 'OKEY',3,3);
+insert into CalificacionEntity(id, puntuacion, comentarios, VIAJERO_ID)
+values (3, 4, 'OKEY',3);
 
 insert into ViajeEntity (id, destino, origen, 
 fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
