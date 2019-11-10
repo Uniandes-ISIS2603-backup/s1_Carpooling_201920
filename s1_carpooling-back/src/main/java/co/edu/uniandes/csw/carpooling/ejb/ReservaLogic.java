@@ -85,7 +85,7 @@ public class ReservaLogic {
     
     public ReservaEntity findReservaByViaje(Long reservaId, Long viajeId) throws BusinessLogicException {
         ReservaEntity reservaEntity = persistence.findByViaje(reservaId, viajeId);
-        if (reservaEntity.equals(null)) {
+        if (reservaEntity==null) {
             throw new BusinessLogicException("La reserva no existe");
         }
         return reservaEntity;
