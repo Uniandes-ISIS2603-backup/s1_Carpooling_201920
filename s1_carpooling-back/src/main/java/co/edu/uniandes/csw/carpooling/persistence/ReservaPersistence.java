@@ -42,6 +42,20 @@ public class ReservaPersistence {
     public ReservaEntity find(Long reservaId) {
         return em.find(ReservaEntity.class, reservaId);
     }
+    
+     public ReservaEntity findByViaje(Long reservaId, Long viajeId) {
+        LOGGER.log(Level.INFO, "Consultando el reserva con id = {0} del viaje con id = " + reservaId, viajeId);
+        TypedQuery<ReservaEntity> q = em.createQuery("select p from ReservaEntity p where (p.viaje.id = :viajesid) and (p.id = :reservaId)", ReservaEntity.class);
+        q.setParameter("viajesid", viajeId);
+        q.setParameter("reservaId", reservaId);
+        List<ReservaEntity> resultados = q.getResultList();
+       ReservaEntity reserva = null;
+        if (resultados != null && !resultados.isEmpty()) {
+            reserva = resultados.get(0);
+        }
+        return reserva;
+    }
+
 
     /**
      * Devuelve todas las reservas de la base de datos.
