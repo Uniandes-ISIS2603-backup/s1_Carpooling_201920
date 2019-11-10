@@ -57,11 +57,7 @@ public abstract class UsuarioEntity extends BaseEntity {
             cascade = CascadeType.PERSIST)
     private List<NotificacionEntity> notificaciones;
 
-    @PodamExclude
-    @OneToMany(mappedBy = "usuario",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
-    private List<CalificacionEntity> calificaciones;
+    
 
     private TIPO_DE_DOCUMENTO tipoDocumento;
 
@@ -177,18 +173,6 @@ public abstract class UsuarioEntity extends BaseEntity {
         this.notificaciones = notificaciones;
     }
 
-    /**
-     * @return the calificaciones
-     */
-    public List<CalificacionEntity> getCalificaciones() {
-        return calificaciones;
-    }
-
-    /**
-     * @param calificaciones the calificaciones to set
-     */
-    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
+   
 
 }
