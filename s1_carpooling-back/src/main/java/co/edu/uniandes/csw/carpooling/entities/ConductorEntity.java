@@ -69,12 +69,12 @@ public class ConductorEntity extends UsuarioEntity implements Serializable {
         this.viajesRecurrentes = viajesRecurrentes;
     }
 
-    @Override
+    
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
 
-    @Override
+    
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
