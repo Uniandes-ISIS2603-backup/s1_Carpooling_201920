@@ -23,7 +23,7 @@ public class PublicidadDTO implements Serializable{
 
     private String mensaje;
 
-    private double costo;
+    private Double costo;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeInicio;
@@ -40,7 +40,7 @@ public class PublicidadDTO implements Serializable{
     }
     
         public PublicidadDTO(PublicidadEntity entidad){
-        
+        if(entidad!=null){
         setId(entidad.getId());
         setNombre(entidad.getNombre());
         setMensaje(entidad.getMensaje());
@@ -53,7 +53,8 @@ public class PublicidadDTO implements Serializable{
             } else {
                 this.publicista = null;
             }
-    }
+        }
+        }
     
     public PublicidadEntity toEntity(){
         PublicidadEntity entidad = new PublicidadEntity();

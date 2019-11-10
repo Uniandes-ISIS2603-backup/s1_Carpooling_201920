@@ -33,6 +33,7 @@ public abstract class UsuarioDTO implements Serializable{
     }
     
     public UsuarioDTO(UsuarioEntity entity){
+        if(entity!=null){
         this.id = entity.getId();
         this.nombre = entity.getNombre();
         this.telefono = entity.getTelefono();
@@ -41,7 +42,8 @@ public abstract class UsuarioDTO implements Serializable{
         this.contrasenha = entity.getContrasenha();
         this.fechaDeNacimiento = entity.getFechaDeNacimiento();
         this.tipoDocumento = entity.getTipoDocumento();
-    }
+        }
+        }
 
     /**
      * @return the id
