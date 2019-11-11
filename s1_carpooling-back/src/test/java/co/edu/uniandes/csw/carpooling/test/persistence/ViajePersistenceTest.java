@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
+import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
 import co.edu.uniandes.csw.carpooling.persistence.ViajePersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,9 @@ public class ViajePersistenceTest {
     UserTransaction utx;
 
     private List<ViajeEntity> data = new ArrayList<ViajeEntity>();
+    
+    
+    private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -75,9 +80,14 @@ public class ViajePersistenceTest {
 
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i< 3 ; i++){
+            ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
+            em.persist(entity);
+            dataConductor.add(entity);
+        }
         for (int i = 0; i < 3; i++) {
             ViajeEntity entity = factory.manufacturePojo(ViajeEntity.class);
-
+            entity.setConductor(dataConductor.get(i));
             em.persist(entity);
             data.add(entity);
         }
@@ -140,4 +150,24 @@ public class ViajePersistenceTest {
         ViajeEntity borrado = em.find(ViajeEntity.class, viaje.getId());
         Assert.assertNull(borrado);
     }
+    
+    @Test 
+    public void getViajesByConductorTest(){
+        for(int i = 0; i < 3; i++){
+            List<ViajeEntity> entities = vp.findAll(dataConductor.get(i).getId());
+            Assert.assertNotNull(entities);
+            Assert.assertEquals(1, entities.size());
+            Assert.assertEquals(entities.get(0), data.get(i));
+        }
+    }
+    
+    @Test
+    public void getViajeByConductorTest(){
+        for(int i = 0; i < 3; i++){
+            ViajeEntity entity = vp.find(dataConductor.get(i).getId(), data.get(i).getId());
+            Assert.assertNotNull(entity);
+            Assert.assertEquals(entity, data.get(i));
+        }
+    }
+    
 }
