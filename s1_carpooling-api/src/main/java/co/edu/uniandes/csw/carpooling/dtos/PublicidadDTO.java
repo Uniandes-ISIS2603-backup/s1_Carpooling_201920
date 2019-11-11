@@ -102,14 +102,14 @@ public class PublicidadDTO implements Serializable{
     /**
      * @return the costo
      */
-    public double getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
     /**
      * @param costo the costo to set
      */
-    public void setCosto(double costo) {
+    public void setCosto(Double costo) {
         this.costo = costo;
     }
 
