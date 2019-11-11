@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "09c0e383-df6d-487c-83a5-2cc8fc6329b1",
+		"_postman_id": "2aab34d9-bfb3-4ba3-a8f4-3947e4dca6d4",
 		"name": "Publicistas Tests",
-		"description": "Registrar un viajero por primera vez.",
+		"description": "Colección de pruebas sobre el recurso Publicistas. Con dos publicistas uno de tipo persona natural y otro de tipo empresa. se hacen los request de POST, PUT, GET, DEL, y tambien hay pruebas que esperan error.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -54,7 +54,7 @@
 						"publicistas"
 					]
 				},
-				"description": "Este publicista debe tener los siguiente atributos de estos tipos:\n{\n \t\"nombre\":\"String\",\n \t\"apellido\":\"String\",\n \t\"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\n \t\"telefono\" : \"String\",\n \t\"correo\" : \"String\",\n    \"contrasenha\" : \"String\",\n \t\"cedula\" : \"String\",\n \t\"rut\" : \"String\"\n    }"
+				"description": "Este publicista debe tener los siguiente atributos de estos tipos:\n{\n \t\"nombre\":\"String\",\n \t\"apellido\":\"String\",\n \t\"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\n \t\"telefono\" : \"String\",\n \t\"correo\" : \"String\",\n    \"contrasenha\" : \"String\",\n \t\"cedula\" : \"String\",\n \t\"rut\" : \"String\"\n    }\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -106,7 +106,7 @@
 						"publicistas"
 					]
 				},
-				"description": "Este publicista debe tener los siguiente atributos de estos tipos:\n{\n \t\"nombre\":\"String\",\n \t\"tipoPublicista\":\"EMPRESA\",\n \t\"telefono\" : \"String\",\n \t\"correo\" : \"String\",\n       \"contrasenha\" : \"String\",\n \t\"nit\" : \"String\"\n    }"
+				"description": "Este publicista debe tener los siguiente atributos de estos tipos:\n{\n \t\"nombre\":\"String\",\n \t\"tipoPublicista\":\"EMPRESA\",\n \t\"telefono\" : \"String\",\n \t\"correo\" : \"String\",\n       \"contrasenha\" : \"String\",\n \t\"nit\" : \"String\"\n    }\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -155,7 +155,8 @@
 						"api",
 						"publicistas"
 					]
-				}
+				},
+				"description": "Intenta crear un publicista en la base de datos con un correo ya existente violando una de las reglas de negocio, y usa. \r\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -207,7 +208,8 @@
 						"publicistas",
 						"{{new_id_p_natural}}"
 					]
-				}
+				},
+				"description": "Actualiza un publicista persona natural existente. El recurso a modificar se consigue a traves del envio de el Id en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -259,7 +261,8 @@
 						"publicistas",
 						"{{new_id_p_empresa}}"
 					]
-				}
+				},
+				"description": "Actualiza un publicista tipo empresa existente. El recurso a modificar se consigue a traves del envio de el Id en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -310,7 +313,8 @@
 						"publicistas",
 						"0"
 					]
-				}
+				},
+				"description": "Actualiza un publicista que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /publicistas/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
 			},
 			"response": []
 		},
@@ -345,7 +349,8 @@
 						"api",
 						"publicistas"
 					]
-				}
+				},
+				"description": "Consulta todos los publicistas de la aplicación. \r\nLa petición no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de publicistas en la respuesta tenga mas de una.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -381,7 +386,8 @@
 						"publicistas",
 						"{{new_id_p_empresa}}"
 					]
-				}
+				},
+				"description": "Consulta un publicista de la aplicación.  \r\nLa petición no tiene cuerpo.\r\nSe envía el id de el publicista deseado por la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -416,7 +422,8 @@
 						"publicistas",
 						"0"
 					]
-				}
+				},
+				"description": "Consulta un publicista que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /publicistas/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
@@ -450,7 +457,8 @@
 						"publicistas",
 						"{{new_id_p_natural}}"
 					]
-				}
+				},
+				"description": "Borra un publicista persona natural. Se envía el id del viajero creado anteriormente.\n\n**Código HTTP esperado: 204**"
 			},
 			"response": []
 		},
@@ -484,7 +492,8 @@
 						"publicistas",
 						"{{new_id_p_empresa}}"
 					]
-				}
+				},
+				"description": "Borra un publicista. Se envía el id del publicista creado anteriormente.\n\n**Código HTTP esperado: 204**"
 			},
 			"response": []
 		},
@@ -518,7 +527,8 @@
 						"publicista",
 						"0"
 					]
-				}
+				},
+				"description": "Borra un publicista que no existe en la aplicación.  \r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /publicistas/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
 			},
 			"response": []
 		}
