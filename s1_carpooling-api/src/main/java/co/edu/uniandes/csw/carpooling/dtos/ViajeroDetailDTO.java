@@ -113,5 +113,19 @@ public class ViajeroDetailDTO extends ViajeroDTO implements Serializable{
     public void setNotificaciones(List<NotificacionDTO> notificaciones) {
         this.notificaciones = notificaciones;
     }
+
+    /**
+     * @return the reservas
+     */
+    public List<ReservaDTO> getReservas() {
+        return reservas;
+    }
+
+    /**
+     * @param reservas the reservas to set
+     */
+    public void setReservas(List<ReservaDTO> reservas) {
+        this.reservas = reservas;
+    }
     
 }
