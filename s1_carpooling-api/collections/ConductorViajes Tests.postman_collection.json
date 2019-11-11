@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "2470eba9-59f4-4b5f-9480-910c00723ce7",
+		"_postman_id": "b7a7372d-d0af-4832-be01-1bbe6c33b871",
 		"name": "ConductorViajes Tests",
+		"description": "Prueba el recuros ConductorViajes que se encarga de manejar al asociacion entre conductor y sus viajes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -53,7 +54,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea un condcutor  **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -107,7 +109,8 @@
 						"{{new_id_conductor}}",
 						"vehiculos"
 					]
-				}
+				},
+				"description": "Crea un vehiculo  **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -172,7 +175,8 @@
 						"viajes",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -237,7 +241,8 @@
 						"viajes",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -291,7 +296,7 @@
 						"{{new_id_vehiculo}}"
 					]
 				},
-				"description": "Crea un viaje no valido\n"
+				"description": "Crea un viaje no valido **Codigo http esperado:412**"
 			},
 			"response": []
 		},
@@ -345,7 +350,8 @@
 						"viajes",
 						"{{new_id2_viaje}}"
 					]
-				}
+				},
+				"description": "Edita un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -398,7 +404,8 @@
 						"viajes",
 						"0"
 					]
-				}
+				},
+				"description": "Intenta editar un viaje que no existe **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -435,7 +442,8 @@
 						"{{new_id_conductor}}",
 						"viajes"
 					]
-				}
+				},
+				"description": "Obtiene todos los viajes de un conductor **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -473,7 +481,8 @@
 						"viajes",
 						"{{new_id_viaje}}"
 					]
-				}
+				},
+				"description": "Obtiene un viaje de un condcutor **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -510,7 +519,8 @@
 						"viajes",
 						"0"
 					]
-				}
+				},
+				"description": "Solicita un viaje que no existe de un conductor **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -546,7 +556,8 @@
 						"viajes",
 						"{{new_id_viaje}}"
 					]
-				}
+				},
+				"description": "Borra un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -582,7 +593,8 @@
 						"viajes",
 						"{{new_id2_viaje}}"
 					]
-				}
+				},
+				"description": "Borra un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -619,7 +631,8 @@
 						"viajes",
 						"0"
 					]
-				}
+				},
+				"description": "Borra un viaje que no existe **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -655,7 +668,8 @@
 						"vehiculos",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Borra un vehiculo del conductor**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -689,7 +703,8 @@
 						"conductores",
 						"{{new_id_conductor}}"
 					]
-				}
+				},
+				"description": "Borra al condcutor de la base de datos **Codigo http esperado:200**"
 			},
 			"response": []
 		}

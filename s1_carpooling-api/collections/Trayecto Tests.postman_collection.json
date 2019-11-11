@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "daa45ba6-6fe0-4f54-8bec-f8708b968b0f",
+		"_postman_id": "b0f3b9a4-304d-4d73-95cc-74a1fd822c54",
 		"name": "Trayecto Tests",
+		"description": "Prueba el recurso de los trayectos: POST, PUT, DELETE, GET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -53,7 +54,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea el conductor para las pruebas **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -107,7 +109,8 @@
 						"{{new_id_conductor}}",
 						"vehiculos"
 					]
-				}
+				},
+				"description": "Crea el vehiculo para las pruebas **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -172,7 +175,8 @@
 						"viajes",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea el Viaje para las pruebas **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -226,7 +230,8 @@
 						"{{new_id_viaje}}",
 						"trayectos"
 					]
-				}
+				},
+				"description": "Crea un trayecto **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -280,7 +285,8 @@
 						"{{new_id_viaje}}",
 						"trayectos"
 					]
-				}
+				},
+				"description": "Crea un segundo trayecto **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -332,7 +338,8 @@
 						"{{new_id_viaje}}",
 						"trayectos"
 					]
-				}
+				},
+				"description": "Crea un trayecto con el origen vacaio para ello no puede ser creado **Codigo http esperado:412**"
 			},
 			"response": []
 		},
@@ -369,7 +376,8 @@
 						"{{new_id_viaje}}",
 						"trayectos"
 					]
-				}
+				},
+				"description": "Obtiene los trayectos creados del viaje creado**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -407,7 +415,8 @@
 						"trayectos",
 						"{{new_id_trayecto}}"
 					]
-				}
+				},
+				"description": "Obtiene un trayecto del viaje creado **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -447,7 +456,8 @@
 						"trayectos",
 						"{{new_id_trayecto}}"
 					]
-				}
+				},
+				"description": "Se modifico un trayecto de un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -501,7 +511,8 @@
 						"trayectos",
 						"0"
 					]
-				}
+				},
+				"description": "Intenta editar un trayecto que no existe **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -554,7 +565,8 @@
 						"trayectos",
 						"{{new_id_trayecto}}"
 					]
-				}
+				},
+				"description": "Intentar editar un trayecto de un viaje que no existe**Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -590,7 +602,8 @@
 						"trayectos",
 						"{{new_id_trayecto}}"
 					]
-				}
+				},
+				"description": "Borra un trayecto **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -626,7 +639,8 @@
 						"trayectos",
 						"{{new_id_trayecto2}}"
 					]
-				}
+				},
+				"description": "Borra un trayecto **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -664,7 +678,8 @@
 						"trayectos",
 						"0"
 					]
-				}
+				},
+				"description": "Intenta borrar un trayecto que no existe **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -701,7 +716,8 @@
 						"trayectos",
 						"{{new_id_trayecto}}"
 					]
-				}
+				},
+				"description": "Intenta borrar el trayecto de un viaje que no existe **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -737,7 +753,8 @@
 						"viajes",
 						"{{new_id_viaje}}"
 					]
-				}
+				},
+				"description": "Borra un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -773,7 +790,8 @@
 						"vehiculos",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Borra un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -807,7 +825,8 @@
 						"conductores",
 						"{{new_id_conductor}}"
 					]
-				}
+				},
+				"description": "Borra un conductor **Codigo http esperado:200**"
 			},
 			"response": []
 		}
