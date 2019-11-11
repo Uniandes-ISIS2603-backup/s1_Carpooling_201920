@@ -48,8 +48,6 @@ public class ReservaLogic {
         if (reserva.getViaje().getCupos() <= 0) {
             throw new BusinessLogicException("La reserva ya existe");
         }
-        reserva = persistence.create(reserva);
-        viajePersistence.find(viajeId).getReservas().add(reserva);
         return reserva;
     }
 
