@@ -34,17 +34,29 @@ insert into VIAJEROENTITY (id, contrasenha, correo, fechaDeNacimiento, nombre, n
 insert into CalificacionEntity(id, puntuacion, comentarios, VIAJERO_ID)
 values (3, 4, 'OKEY',3);
 
-insert into ViajeEntity (id, destino, origen, 
-fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
-estadoViaje) values (100, 'Bogota', 'Bucaramanga', '11/2/2019', '11/12/2019' , 4, 30000, 0);
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '112', 'Reserva Aprovaba','11/15/2019','A tiempo' );
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '113', 'Reserva Aprovaba','11/16/2019','A tiempo' );
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '114', 'Reserva Aprovaba','11/17/2019','A tiempo' );
 
 insert into ViajeEntity (id, destino, origen, 
 fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
-estadoViaje) values (200, 'Chia', 'Santa Marta', '12/5/2019', '12/6/2019' , 4, 30000, 0);
+estadoViaje, conductor_id, vehiculo_id) values (100, 'Bogota', 'Bucaramanga', '11/2/2019', '11/12/2019' , 4, 30000, 0, 1, 1);
 
 insert into ViajeEntity (id, destino, origen, 
 fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
-estadoViaje) values (300, 'Medellin', 'Cali', '10/8/2019', '10/8/2019' , 4, 30000, 0);
+estadoViaje, conductor_id, vehiculo_id) values (200, 'Chia', 'Santa Marta', '12/5/2019', '12/6/2019' , 4, 30000, 0, 1, 1);
+
+insert into ViajeEntity (id, destino, origen, 
+fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
+estadoViaje, conductor_id, vehiculo_id) values (300, 'Medellin', 'Cali', '10/8/2019', '10/8/2019' , 4, 30000, 0, 1, 1);
+
+insert into TrayectoEntity (id, costoCombustible, destino, duracion, numpeajes, origen, viaje_id ) values (100, 60000, 'Calle 40 #120-3', 700, 14, 'Calle 40 #120-3', 100);
+
+insert into TrayectoEntity (id, costoCombustible, destino, duracion, numpeajes, origen, viaje_id ) values (200, 80000, 'Calle 40 #120-3', 700, 14, 'Calle 40 #120-3', 100);
+
+insert into TrayectoEntity (id, costoCombustible, destino, duracion, numpeajes, origen, viaje_id ) values (300, 90000, 'Calle 40 #120-3', 700, 14, 'Calle 40 #120-3', 200);
+
+insert into TrayectoEntity (id, costoCombustible, destino, duracion, numpeajes, origen, viaje_id ) values (400, 50000, 'Calle 40 #120-3', 700, 14, 'Calle 40 #120-3', 300);
 
 insert into PUBLICISTAENTITY (id, nombre, apellido, cedula, contrasenha, correo, rut, telefono, tipoPublicista) values (1, 'Bran', 'Usmar', '1492945854', 'GoXVn3xpanFc', 'busmar0@elpais.com', '3204987833', '+86 436 385 4341', 0);
 insert into PUBLICISTAENTITY (id, nombre, apellido, cedula, contrasenha, correo, rut, telefono, tipoPublicista) values (2, 'Ham', 'Pickthorn', '2843867126', '6T5v8j59', 'hpickthorn1@ebay.com', '1626030723', '+1 415 328 4315',  0);

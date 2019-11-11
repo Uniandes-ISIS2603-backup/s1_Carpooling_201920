@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "ed1ac34a-6881-4f41-9989-9412ad0c55e1",
+		"_postman_id": "c5e3f15d-cdc6-4188-9b70-600d8c03ac26",
 		"name": "ViajeroCalificacionTests",
+		"description": "Conjunto de pruebas para el recurso viajeroCalificacion, que implementa los servicios post y get.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -34,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"nombre\": \"John Doe\",\r\n\t\"telefono\": \"3014356984\",\r\n\t\"correo\": \"johndoe@duck.com\",\r\n\t\"numDocumento\": \"1275309870\",\r\n\t\"contrasenha\": \"postmantest\",\r\n\t\"fechaDeNacimiento\": \"1999-11-15T00:00:00-05:00\",\r\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\r\n}",
+					"raw": "{\r\n\t\"nombre\": \" Doe\",\r\n\t\"telefono\": \"3107702909\",\r\n\t\"correo\": \"doe@duck.com\",\r\n\t\"numDocumento\": \"1032488533\",\r\n\t\"contrasenha\": \"postmantest\",\r\n\t\"fechaDeNacimiento\": \"1999-11-15T00:00:00-05:00\",\r\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +55,8 @@
 						"viajeros",
 						""
 					]
-				}
+				},
+				"description": "Crea un viajero y lo almacena en la base de datos, se almacena el id para el manejo de las pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -87,7 +89,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"comentarios\":\"OK\",\"conductor\":{},\"puntuacion\":4}",
+					"raw": "{\"comentarios\":\"OK\",\"puntuacion\":4}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -108,7 +110,8 @@
 						"{{new_id_viajero}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Crea una calificacion y la almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id de la calificacion para el uso en pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -141,7 +144,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"comentarios\":\"OKMAKEY\",\"conductor\":{},\"puntuacion\":3}",
+					"raw": "{\"comentarios\":\"OKMAKEY\",\"puntuacion\":3}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -162,7 +165,8 @@
 						"{{new_id_viajero}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Crea una calificacion y la almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id de la calificacion para el uso en pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -214,7 +218,8 @@
 						"{{new_id_viajero}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio sobre el tamaño máximo de un comentario. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -266,12 +271,13 @@
 						"{{new_id_viajero}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio el valor minimo o máximo de una puntuacion. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
 		{
-			"name": "obtener calificacion de un conductor inexistente",
+			"name": "obtener calificacion de un viajero inexistente",
 			"event": [
 				{
 					"listen": "test",
@@ -310,7 +316,8 @@
 						"calificaciones",
 						"{{new_id_viajero1}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el caso en que se intenta obtener una calificación de un viajero inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
@@ -355,7 +362,8 @@
 						"calificaciones",
 						"{{new_id_calificacion1}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente una calificacion de un viajero. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -400,7 +408,8 @@
 						"calificaciones",
 						"{{new_id_calificacion2}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente una calificacion de un viajero. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -444,7 +453,8 @@
 						"{{new_id_viajero}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente todas calificacion de un viajero. El test se pasa cuando el mensaje correcto es recibido y recibe mas de una calificacion. \n\n**Código http esperado: 200**"
 			},
 			"response": []
 		}
