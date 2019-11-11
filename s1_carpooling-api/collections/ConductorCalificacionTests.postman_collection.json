@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "082b4083-901c-4bab-8da6-ff55c138c8fe",
+		"_postman_id": "4a641845-9bb6-4f46-a764-7bc39fa5981d",
 		"name": "ConductorCalificacionTests",
+		"description": "Conjunto de pruebas para el recurso conductorCalificacion, que implementa los servicios post y get.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -54,7 +55,8 @@
 						"conductores",
 						""
 					]
-				}
+				},
+				"description": "Crea un conductor y lo almacena en la base de datos, se almacena el id para el manejo de las pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -108,7 +110,8 @@
 						"{{new_id_conductor}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Crea una calificacion y la almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id de la calificacion para el uso en pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -162,7 +165,8 @@
 						"{{new_id_conductor}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Crea una calificacion y la almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id de la calificacion para el uso en pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -214,7 +218,8 @@
 						"{{new_id_conductor}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio sobre el tamaño máximo de un comentario. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -266,7 +271,8 @@
 						"{{new_id_conductor}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio el valor minimo o máximo de una puntuacion. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -310,7 +316,8 @@
 						"calificaciones",
 						"{{new_id_calificacion1}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el caso en que se intenta obtener una calificación de un conductor inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
@@ -355,12 +362,13 @@
 						"calificaciones",
 						"{{new_id_calificacion1}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente una calificacion de un conductor. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "obtener calificacion de un conductor Copy",
+			"name": "obtener calificacion de un conductor 2",
 			"event": [
 				{
 					"listen": "test",
@@ -400,7 +408,8 @@
 						"calificaciones",
 						"{{new_id_calificacion2}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente una calificacion de un conductor. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -444,53 +453,32 @@
 						"{{new_id_conductor}}",
 						"calificaciones"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente todas calificacion de un conductor. El test se pasa cuando el mensaje correcto es recibido y recibe mas de una calificacion. \n\n**Código http esperado: 200**"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9b1603ec-3097-4a83-b12b-23e82481a9ad",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Obtener Calificaciones de un conductor Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
-							"tests[\"viajesRecurrentes count\"] = data.length > 1;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/calificaciones",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_carpooling-api",
-						"api",
-						"conductores",
-						"{{new_id_conductor}}",
-						"calificaciones"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"id": "cce9ef9a-591d-4008-b8cf-55149d35d1d2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

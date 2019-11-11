@@ -34,6 +34,10 @@ insert into VIAJEROENTITY (id, contrasenha, correo, fechaDeNacimiento, nombre, n
 insert into CalificacionEntity(id, puntuacion, comentarios, VIAJERO_ID)
 values (3, 4, 'OKEY',3);
 
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '112', 'Reserva Aprovaba','11/15/2019','A tiempo' );
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '113', 'Reserva Aprovaba','11/16/2019','A tiempo' );
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '114', 'Reserva Aprovaba','11/17/2019','A tiempo' );
+
 insert into ViajeEntity (id, destino, origen, 
 fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
 estadoViaje) values (100, 'Bogota', 'Bucaramanga', '11/2/2019', '11/12/2019' , 4, 30000, 0);
