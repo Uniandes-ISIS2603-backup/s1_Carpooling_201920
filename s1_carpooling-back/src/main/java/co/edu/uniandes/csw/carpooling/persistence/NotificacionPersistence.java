@@ -103,11 +103,11 @@ public class NotificacionPersistence {
     }
 
     public NotificacionEntity findByConductor(Long conductorId, Long notificacionId) {
-        TypedQuery<NotificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.conductor.id = :conductorid) and (p.id = :calificacionId)", NotificacionEntity.class);
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntity p where (p.conductor.id = :conductorid) and (p.id = :notificacionId)", NotificacionEntity.class);
 
         q.setParameter("conductorid", conductorId);
 
-        q.setParameter("calificacionId", notificacionId);
+        q.setParameter("notificacionId", notificacionId);
 
         List<NotificacionEntity> results = q.getResultList();
         NotificacionEntity notificacion = null;
