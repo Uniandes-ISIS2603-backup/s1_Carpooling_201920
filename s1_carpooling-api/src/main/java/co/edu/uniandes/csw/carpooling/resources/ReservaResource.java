@@ -56,7 +56,7 @@ public class ReservaResource {
     public List<ReservaDTO> getReservas(){
         LOGGER.info("ReservaResource getReservas: input: void");
         List<ReservaDTO> reserva = listReservasEntityToDTO(logic.findReservas());
-        LOGGER.log(Level.INFO, "ReservaResource getReservas: output: {0}", reserva);
+        LOGGER.log(Level.INFO, "ReservaResource getReservas: output: {0}", reserva);     
         return reserva;
     } 
     
@@ -68,69 +68,36 @@ public class ReservaResource {
         return reservasDTO;
     }
    
-//    @GET
-//    @Path("{reservasId: \\d+}")
-//    public ReservaDTO getReserva(@PathParam("reservasId") Long reservasId) throws BusinessLogicException {
-//        LOGGER.log(Level.INFO, "ReservaResource getReserva: input: {0}", reservasId);
-//        ReservaEntity reservaEntity = logic.findReserva(reservasId);
-//        if (reservaEntity == null) {
-//            throw new WebApplicationException("El recurso /reserva/" + reservasId + " no existe.", 404);
-//        }
-//        ReservaDTO detailDTO = new ReservaDTO(reservaEntity);
-//        LOGGER.log(Level.INFO, "ReservaResource getReserva: output: {0}", detailDTO);
-//        return detailDTO;
-//    }
-    
-    @PUT
+    @GET
     @Path("{reservasId: \\d+}")
-    public ReservaDTO updateReserva(@PathParam("reservasId") Long reservasId, ReservaDTO reserva) throws BusinessLogicException{
-        LOGGER.log(Level.INFO, "ReservaResource updatReserva: input: reservasId: {0} , author: {1}", new Object[]{reservasId, reserva});
-        reserva.setId(reservasId);
-        if (logic.findReserva(reservasId) == null) {
+    public ReservaDTO getReserva(@PathParam("reservasId") Long reservasId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ViajeResource getViaje: input: {0}", reservasId);
+        ReservaEntity reservaEntity = logic.findReserva(reservasId);
+        if (reservaEntity == null) {
             throw new WebApplicationException("El recurso /reservas/" + reservasId + " no existe.", 404);
         }
-        ReservaDTO detailDTO = new ReservaDTO(logic.updateReserva(reservasId, reserva.toEntity()));
-        LOGGER.log(Level.INFO, "ReservaResource updateReserva: output: {0}", detailDTO);
-        return detailDTO;
-    }
-    
-    @DELETE
-    @Path("{reservasId: \\d+}")
-    public void deleteReserva(@PathParam("reservasId") Long reservasId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "ReservaResource deleteReserva: input: {0}", reservasId);
-        if (logic.findReserva(reservasId) == null) {
-            throw new WebApplicationException("El recurso /reservas/" + reservasId + " no existe.", 404);
-        }
-        logic.deleteReserva(logic.findReserva(reservasId));
-        LOGGER.info("ReservaResource deleteReserva: output: void");
-    }
-    
-    @Path("{viajesId: \\d+}/reservas")
-    public Class<ReservaViajeResource> getReservaResource(@PathParam("viajesId") Long viajesId) {
-        
-        if (logicViaje.getViaje(viajesId) == null) {
-            throw new WebApplicationException("El recurso /viajes/" + viajesId + "/trayectos no existe.", 404);
-        }
-        return ReservaViajeResource.class;
+        ReservaDTO reservaDTO = new ReservaDTO(reservaEntity);
+        LOGGER.log(Level.INFO, "ReservaResource getReserva: output: {0}", reservaDTO);
+        return reservaDTO;
     }
 
-       /**
+    
+     /**
      * Convierte una lista de entidades a DTO.
      *
      * Este método convierte una lista de objetos BookEntity a una lista de
-     * objetos BookDetailDTO (json)
+     * objetos ReservaDTO (json)
      *
      * @param entityList corresponde a la lista de libros de tipo Entity que
      * vamos a convertir a DTO.
      * @return la lista de libros en forma DTO (json)
      */
-//    private List<ReservaDTO> listEntity2DetailDTO(List<ReservaDTO> entityList) {
-//        List<ReservaDTO> list = new ArrayList<ReservaDTO>();
-//        for (ReservaEntity reserva : entityList) {
-//            list.add(new ReservaDTO(reserva));
-//        }
-//        return list;
-//        
-//    }   
+    private List<ReservaDTO> listEntity2DTO(List<ReservaEntity> entityList) {
+        List<ReservaDTO> list = new ArrayList<>();
+        for (ReservaEntity entity : entityList) {
+            list.add(new ReservaDTO(entity));
+        }
+        return list;
+    } 
     
 }

@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "7805fdb2-6dc5-4a0c-89c5-23789d4833cb",
+		"_postman_id": "05d8d6a6-7e4f-42b4-a1a2-5cfd5c3bcc68",
 		"name": "Viajero Tests",
-		"description": "Registrar un viajero por primera vez.",
+		"description": "Colección de pruebas sobre el recurso Viajeros.\nCon dos viajeros se hacen los request de POST, PUT, GET, DEL, y tambien hay pruebas que esperan error.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -53,7 +53,8 @@
 						"api",
 						"viajeros"
 					]
-				}
+				},
+				"description": "Crea un nuevo viajero. El recurso tiene los atributos \"nombre\",\"telefono\"(que debe ser único), \"correo\"(que debe ser único), \"numDocumento\"(que debe ser único), \"contrasenha\"(que debe tener minimo 5 caracteres), \"fechaDeNacimiento\", \"tipoDocumento\"(que toma uno de los siguientes valores:\"CEDULA_DE_CIUDADANA\", \"TARJETA_DE_IDENTIDAD\", \"PASAPORTE\", \"CEDULA_DE_EXTRANJERIA\"). El Id es inicializado por la BD y se debe ver en la respuesta.\r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -104,7 +105,8 @@
 						"api",
 						"viajeros"
 					]
-				}
+				},
+				"description": "Crea un segundo nuevo viajero. El recurso tiene los atributos \"nombre\",\"telefono\"(que debe ser único), \"correo\"(que debe ser único), \"numDocumento\"(que debe ser único), \"contrasenha\"(que debe tener minimo 5 caracteres), \"fechaDeNacimiento\", \"tipoDocumento\"(que toma uno de los siguientes valores:\"CEDULA_DE_CIUDADANA\", \"TARJETA_DE_IDENTIDAD\", \"PASAPORTE\", \"CEDULA_DE_EXTRANJERIA\"). El Id es inicializado por la BD y se debe ver en la respuesta.\r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -153,7 +155,8 @@
 						"api",
 						"viajeros"
 					]
-				}
+				},
+				"description": "Intenta crear un viajero en la base de datos con un correo ya existente violando una de las reglas de negocio, y usa .\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -205,7 +208,8 @@
 						"viajeros",
 						"{{new_id_viajero2}}"
 					]
-				}
+				},
+				"description": "Actualiza un viajero existente. El recurso a modificar se consigue a traves del envio de el Id en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -256,7 +260,8 @@
 						"viajeros",
 						"0"
 					]
-				}
+				},
+				"description": "Actualiza un viajero que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /viajeros/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
 			},
 			"response": []
 		},
@@ -291,7 +296,8 @@
 						"api",
 						"viajeros"
 					]
-				}
+				},
+				"description": "Consulta todos los viajeros de la aplicación. \r\nLa petición no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de viajeros en la respuesta tenga mas de una.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -327,12 +333,13 @@
 						"viajeros",
 						"{{new_id_viajero1}}"
 					]
-				}
+				},
+				"description": "Consulta un viajero de la aplicación.  \r\nLa petición no tiene cuerpo.\r\nSe envía el id de el viajero deseado por la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener un viajeroque no existe",
+			"name": "Obtener un viajero que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -362,7 +369,8 @@
 						"viajeros",
 						"0"
 					]
-				}
+				},
+				"description": "Consulta un viajero que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /viajeros/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
@@ -396,7 +404,8 @@
 						"viajeros",
 						"{{new_id_viajero1}}"
 					]
-				}
+				},
+				"description": "Borra un viajero. Se envía el id del viajero creado anteriormente.\n\n**Código HTTP esperado: 204**"
 			},
 			"response": []
 		},
@@ -430,7 +439,8 @@
 						"viajeros",
 						"{{new_id_viajero2}}"
 					]
-				}
+				},
+				"description": "Borra el segundo viajer creado. Se envía el id del viajero creado anteriormente.\n\n**Código HTTP esperado: 204**"
 			},
 			"response": []
 		},
@@ -464,7 +474,8 @@
 						"viajero",
 						"0"
 					]
-				}
+				},
+				"description": "Borra un viajero que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /viajeros/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
 			},
 			"response": []
 		}
