@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "9bde0d93-c4b0-4965-932c-c9e8809b0019",
+		"_postman_id": "17712100-52e7-4a37-84aa-6ce0599a0ec8",
 		"name": "Viaje Tests",
+		"description": "Test del recurso viajes: GET, GET ALL",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -53,7 +54,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea un condcutor para poder crear viajes de prubea **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -107,7 +109,8 @@
 						"{{new_id_conductor}}",
 						"vehiculos"
 					]
-				}
+				},
+				"description": "Crea un vehiculo para crear los viajes **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -172,7 +175,8 @@
 						"viajes",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea un primer viaje de prueba\n**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -237,7 +241,8 @@
 						"viajes",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea un segundo viaje de prueba\n**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -272,7 +277,8 @@
 						"api",
 						"viajes"
 					]
-				}
+				},
+				"description": "Obtener todos los viajes de prueba\n**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -308,7 +314,8 @@
 						"viajes",
 						"{{new_id_viaje}}"
 					]
-				}
+				},
+				"description": "Obtener un viaje de los creados\n**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -343,7 +350,8 @@
 						"viajes",
 						"0"
 					]
-				}
+				},
+				"description": "Probar que se genere error al solicitar un viaje que no existe\n**Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -379,7 +387,8 @@
 						"viajes",
 						"{{new_id_viaje}}"
 					]
-				}
+				},
+				"description": "Borra el primer viaje creado de la base de datos\n**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -415,7 +424,8 @@
 						"viajes",
 						"{{new_id2_viaje}}"
 					]
-				}
+				},
+				"description": "Borra el segundo viaje creado de la base de datos **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -451,7 +461,8 @@
 						"vehiculos",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Borra el vehiculo creado de la base de datos **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -485,7 +496,8 @@
 						"conductores",
 						"{{new_id_conductor}}"
 					]
-				}
+				},
+				"description": "Borra el conductor creado de la base de datos **Codigo http esperado:200**"
 			},
 			"response": []
 		}
