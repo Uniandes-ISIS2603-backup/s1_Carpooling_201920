@@ -34,34 +34,35 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class NotificacionLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
     @PersistenceContext
     protected EntityManager em;
-    
+
     @Inject
     private NotificacionLogic notificacionLogic;
-        
+
     @Inject
     private UserTransaction utx;
-    
+
     private List<NotificacionEntity> data = new ArrayList<NotificacionEntity>();
     private List<ViajeroEntity> dataViajero = new ArrayList<ViajeroEntity>();
     private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
+
     @Deployment
-    public static JavaArchive createDeployment()
-    {
-       
+    public static JavaArchive createDeployment() {
+
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(NotificacionEntity.class.getPackage())
                 .addPackage(NotificacionLogic.class.getPackage())
                 .addPackage(NotificacionPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
-                .addAsManifestResource("META-INF/beans.xml","beans.xml");
-                
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
+
     }
-    
-      /**
+
+    /**
      * Configuración inicial de la prueba.
      */
     @Before
@@ -80,15 +81,15 @@ public class NotificacionLogicTest {
             }
         }
     }
-    
-        private void clearData() {
+
+    private void clearData() {
         em.createQuery("delete from NotificacionEntity").executeUpdate();
         em.createQuery("delete from ViajeroEntity").executeUpdate();
         em.createQuery("delete from ConductorEntity").executeUpdate();
     }
 
     private void insertData() {
-                
+
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             ViajeroEntity entity = factory.manufacturePojo(ViajeroEntity.class);
@@ -97,25 +98,18 @@ public class NotificacionLogicTest {
         }
         for (int i = 0; i < 3; i++) {
             ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
-            NotificacionEntity notif = factory.manufacturePojo(NotificacionEntity.class);
-            ArrayList notifs = new ArrayList();
-            notifs.add(notif);
-            entity.setNotificaciones(notifs);
             em.persist(entity);
             dataConductor.add(entity);
-           
-            
+
         }
-        
+
         for (int i = 0; i < 3; i++) {
             NotificacionEntity entity = factory.manufacturePojo(NotificacionEntity.class);
-            if(i==0)
-            {
+            if (i == 0) {
                 entity.setConductor(dataConductor.get(0));
                 entity.setViajero(null);
             }
-            if(i==1)
-            {
+            if (i == 1) {
                 entity.setViajero(dataViajero.get(0));
                 entity.setConductor(null);
             }
@@ -123,19 +117,69 @@ public class NotificacionLogicTest {
             data.add(entity);
         }
     }
-    @Test 
-    public void createNotificacionTest() throws BusinessLogicException{
+
+    @Test
+    public void createNotificacionTest() throws BusinessLogicException {
         NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
         NotificacionEntity result = notificacionLogic.createNotificacion(newEntity);
         Assert.assertNotNull(result);
-        
+
         NotificacionEntity entity = em.find(NotificacionEntity.class, result.getId());
         Assert.assertEquals(entity.getMensaje(), result.getMensaje());
         Assert.assertEquals(entity.getTitulo(), result.getTitulo());
         Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
+
+    @Test(expected = BusinessLogicException.class)
+    public void createNotificacionFechaNula() throws BusinessLogicException {
+        NotificacionEntity entity = factory.manufacturePojo(NotificacionEntity.class);
+        entity.setFecha(null);
+        notificacionLogic.createNotificacion(entity);
+    }
+
+    @Test(expected = BusinessLogicException.class)
+    public void createNotificacionMensajeNulo() throws BusinessLogicException {
+        NotificacionEntity entity = factory.manufacturePojo(NotificacionEntity.class);
+        entity.setMensaje(null);
+        notificacionLogic.createNotificacion(entity);
+    }
+
+    @Test(expected = BusinessLogicException.class)
+    public void createNotificacionTituloNulo() throws BusinessLogicException {
+        NotificacionEntity entity = factory.manufacturePojo(NotificacionEntity.class);
+        entity.setTitulo(null);
+        notificacionLogic.createNotificacion(entity);
+    }
     
-        @Test
+    @Test
+    public void getNotificacionTest() throws BusinessLogicException{
+        NotificacionEntity entity = notificacionLogic.findNotificacion(data.get(0).getId());
+        Assert.assertNotNull(entity);
+        Assert.assertEquals(data.get(0), entity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void getNotificacionInexistente() throws BusinessLogicException{
+        notificacionLogic.findNotificacion(Long.MIN_VALUE);
+    }
+    
+    
+    @Test
+    public void getNotificacionesTest() throws BusinessLogicException{
+        List<NotificacionEntity> listaLogic = notificacionLogic.findNotificacions();
+        Assert.assertEquals(data.size(), listaLogic.size());
+        for(NotificacionEntity entity1: data){
+            boolean encontrada = false;
+            for(NotificacionEntity entity2: listaLogic){
+                if(entity1.equals(entity2)){
+                    encontrada = true;
+                }
+            }
+            Assert.assertTrue(encontrada);
+        }
+    }
+
+    @Test
     public void createNotificacionForConductorTest() throws BusinessLogicException {
         NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
         newEntity.setTitulo("test");
@@ -148,7 +192,7 @@ public class NotificacionLogicTest {
         Assert.assertEquals(entity.getTitulo(), result.getTitulo());
         Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
-    
+
     @Test
     public void createNotificacionForViajeroTest() throws BusinessLogicException {
         NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
@@ -162,7 +206,8 @@ public class NotificacionLogicTest {
         Assert.assertEquals(entity.getTitulo(), result.getTitulo());
         Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
-         @Test
+
+    @Test
     public void getNotificacionesByConductorTest() throws BusinessLogicException {
         List<NotificacionEntity> list = notificacionLogic.getNotificacionesByConductor(dataConductor.get(0).getId());
         for (NotificacionEntity entity : list) {
@@ -175,7 +220,7 @@ public class NotificacionLogicTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     @Test
     public void getNotificacionesByViajeroTest() throws BusinessLogicException {
         List<NotificacionEntity> list = notificacionLogic.getNotificacionesByViajero(dataViajero.get(0).getId());
@@ -189,17 +234,18 @@ public class NotificacionLogicTest {
             Assert.assertTrue(found);
         }
     }
-//       @Test
-//    public void getNotificacionByConductorTest() {
-//        NotificacionEntity entity = data.get(0);
-//        NotificacionEntity resultEntity = notificacionLogic.getNotificacionByConductor(dataConductor.get(0).getId(), entity.getId());
-//        Assert.assertNotNull(resultEntity);
-//        Assert.assertEquals(entity.getId(), resultEntity.getId());
-//        Assert.assertEquals(entity.getTitulo(), resultEntity.getTitulo());
-//        Assert.assertEquals(entity.getMensaje(), resultEntity.getMensaje());
-//        Assert.assertEquals(entity.getFecha(), resultEntity.getFecha());
-//    }
-    
+
+    @Test
+    public void getNotificacionByConductorTest() {
+        NotificacionEntity entity = data.get(0);
+        NotificacionEntity resultEntity = notificacionLogic.getNotificacionByConductor(dataConductor.get(0).getId(), entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getTitulo(), resultEntity.getTitulo());
+        Assert.assertEquals(entity.getMensaje(), resultEntity.getMensaje());
+        Assert.assertEquals(entity.getFecha(), resultEntity.getFecha());
+    }
+
     @Test
     public void getNotificacionByViajeroTest() {
         NotificacionEntity entity = data.get(1);
@@ -210,7 +256,8 @@ public class NotificacionLogicTest {
         Assert.assertEquals(entity.getMensaje(), resultEntity.getMensaje());
         Assert.assertEquals(entity.getFecha(), resultEntity.getFecha());
     }
-     @Test
+
+    @Test
     public void updateNotificacionByConductorTest() {
         NotificacionEntity entity = data.get(0);
         NotificacionEntity pojoEntity = factory.manufacturePojo(NotificacionEntity.class);
@@ -226,7 +273,7 @@ public class NotificacionLogicTest {
         Assert.assertEquals(pojoEntity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(pojoEntity.getFecha(), resp.getFecha());
     }
-    
+
     @Test
     public void updateNotificacionByViajeroTest() {
         NotificacionEntity entity = data.get(1);
@@ -242,6 +289,31 @@ public class NotificacionLogicTest {
         Assert.assertEquals(pojoEntity.getTitulo(), resp.getTitulo());
         Assert.assertEquals(pojoEntity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(pojoEntity.getFecha(), resp.getFecha());
-}
+    }
     
+    @Test
+    public void deleteNotificacionTest() throws BusinessLogicException{
+        notificacionLogic.deleteNotificacion(data.get(0));
+    }
+    
+    @Test
+    public void deleteNotificacionByConductorTest() throws BusinessLogicException{
+        notificacionLogic.deleteNotificacionByConductor(dataConductor.get(0).getId(), data.get(0).getId());
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void deleteNotificacionByConductorInexistente() throws BusinessLogicException{
+        notificacionLogic.deleteNotificacionByConductor(dataConductor.get(0).getId(), data.get(1).getId());
+    }
+    
+    @Test
+    public void deleteNotificacionByViajeroTest() throws BusinessLogicException{
+        notificacionLogic.deleteNotificacionByViajero(dataViajero.get(0).getId(), data.get(1).getId());
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void deleteNotificacionByViajeroInexistente() throws BusinessLogicException{
+        notificacionLogic.deleteNotificacionByViajero(dataViajero.get(0).getId(), data.get(0).getId());
+    }
+
 }
