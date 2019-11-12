@@ -29,7 +29,7 @@ public class ViajeroDTO extends UsuarioDTO implements Serializable {
         this.contrasenha = entity.getContrasenha();
         this.fechaDeNacimiento = entity.getFechaDeNacimiento();
         this.tipoDocumento = entity.getTipoDocumento();
-        }  
+        } 
     }
     
     public ViajeroEntity toEntity(){

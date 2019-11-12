@@ -114,7 +114,7 @@ public class ViajeLogic {
      * @return Colección de objetos de ViajeEntity.
      */
     public List<ViajeEntity> getViajes(Long conductorId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los viajes del conductor con id={1}", conductorId);
+        //LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los viajes del conductor con id={1}", conductorId);
         return persistence.findAll(conductorId);
     }
 
