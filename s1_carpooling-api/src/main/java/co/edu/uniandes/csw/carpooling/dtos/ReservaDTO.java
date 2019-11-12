@@ -5,12 +5,14 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
 import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -45,16 +47,43 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 public class ReservaDTO implements Serializable{
 
- 
-    
+    /**
+     * @return the viajero
+     */
+    public ViajeroDTO getViajero() {
+        return viajero;
+    }
+
+    /**
+     * @param viajero the viajero to set
+     */
+    public void setViajero(ViajeroDTO viajero) {
+        this.viajero = viajero;
+    }
+
+    /**
+     * @return the viaje
+     */
+    public ViajeDTO getViaje() {
+        return viaje;
+    }
+
+    /**
+     * @param viaje the viaje to set
+     */
+    public void setViaje(ViajeDTO viaje) {
+        this.viaje = viaje;
+    }
+
     private Long id;
     private String numeroDeReserva;
     private String confirmacion;
     
-    @Temporal(TemporalType.TIMESTAMP)
-    @PodamStrategyValue(DateStrategy.class)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fecha;
     private String estado;
+    private ViajeDTO viaje;
+    private ViajeroDTO viajero;
     
     public ReservaDTO(){
         

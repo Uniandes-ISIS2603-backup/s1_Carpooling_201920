@@ -24,7 +24,7 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
 
     private String mensaje;
     private String titulo;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
 

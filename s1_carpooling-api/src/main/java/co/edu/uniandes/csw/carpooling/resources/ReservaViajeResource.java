@@ -52,18 +52,13 @@ public class ReservaViajeResource {
     
       @POST
     @Path("{viajesId: \\d+}")
-    public ReservaDTO createReserva(@PathParam("viajeroId") Long viajeroId, @PathParam("viajesId") Long viajeId, ReservaDTO reserva) throws BusinessLogicException{
-        LOGGER.log(Level.INFO, "ReservaViajeResource createReserva: input: {0} con id de viajero: {1} y id de viaje: {2}", new Object[]{reserva, viajeroId, viajeId});
+    public ReservaDTO createReserva( @PathParam("viajesId") Long viajeId, ReservaDTO reserva) throws BusinessLogicException{
+        LOGGER.log(Level.INFO, "ReservaViajeResource createReserva: input: {0} con id de viajero: {1} y id de viaje: {2}", new Object[]{reserva, viajeId});
         ReservaEntity reservaEntity =reserva.toEntity();
-        ViajeroEntity viajeroEntity = viajeroLogic.getViajero(viajeroId);
-        if(viajeroEntity == null){
-            throw new WebApplicationException("El recurso /viajero/" + viajeroId + " no existe.", 404);
-        }
         ViajeEntity viajeEntity = viajeLogic.getViaje(viajeId);
         if(viajeEntity == null){
             throw new WebApplicationException("El recurso /viaje/" + viajeId + " no existe.", 404);
         }
-        reservaEntity.setViajero(viajeroEntity);
         reservaEntity.setViaje(viajeEntity);
         reservaEntity = reservaLogic.createReserva(viajeId, reservaEntity);
         ReservaDTO resultado = new ReservaDTO(reservaEntity);
