@@ -1,16 +1,10 @@
 package co.edu.uniandes.csw.carpooling.resources;
 
-import co.edu.uniandes.csw.carpooling.dtos.ViajeDTO;
 import co.edu.uniandes.csw.carpooling.dtos.ViajeRecurrenteDetailDTO;
 import co.edu.uniandes.csw.carpooling.ejb.ViajeRecurrenteLogic;
-import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeRecurrenteEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

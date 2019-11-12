@@ -79,7 +79,7 @@ public class ViajeroLogic {
         return newEntity;
     }
 
-    public void deleteViajero(Long viajerosId) throws BusinessLogicException {
+    public void deleteViajero(Long viajerosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar viajero con id = {0}", viajerosId);
         // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia.
         pp.delete(viajerosId);
