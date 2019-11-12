@@ -81,7 +81,7 @@ public class ViajeLogic {
      * @return Colección de objetos de ViajeEntity.
      */
     public List<ViajeEntity> getViajes() {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los viajes");
+       // LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los viajes");
         return persistence.findAll();
     }
 
