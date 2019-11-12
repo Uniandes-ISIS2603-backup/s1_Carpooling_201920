@@ -1,0 +1,736 @@
+{
+	"info": {
+		"_postman_id": "d02aa2c0-1242-4e7d-bd2b-6236c8b60aea",
+		"name": "ViajeRecurrenteTests",
+		"description": "Tests de los recursos de viaje recurrente: post, get, put y delete.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_conductor\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"nndoe@gmail.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						""
+					]
+				},
+				"description": "Crea un conductor y lo almacena en la base de datos, se almacena el id para el manejo de las pruebas siguientes.\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un viaje Recurrente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_viajeRecurrente1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fechInicio\":\"2020-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2020-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes"
+					]
+				},
+				"description": "Crea un viaje recurrente y lo almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id del viaje recurrente para el uso en pruebas siguientes.\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un viaje Recurrente 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_viajeRecurrente2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fechInicio\":\"2020-10-10T15:20:20Z[UTC]\",\"fechaFin\":\"2020-11-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,3,7\",\"id\":1,\"viajes\":[]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes"
+					]
+				},
+				"description": "Crea un viaje recurrente y lo almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id del viaje recurrente para el uso en pruebas siguientes.\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear viaje recurrente con fecha invalida 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha final no puede ser menor a la fecha inicial\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fechInicio\":\"2020-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2019-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes"
+					]
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio que dice que la fecha de inicio no puede ser menor a la actual. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear viaje recurrente con fecha invalida 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de inicio no puede ser menor a la actual\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fechInicio\":\"2018-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2019-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes"
+					]
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio que dice que la fecha de fin no puede ser menor a la actual. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un viaje recurrente con fecha invalida 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha final no puede ser menor a la actual\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fechInicio\":\"2020-11-10T15:20:20Z[UTC]\",\"fechaFin\":\"2018-12-11T15:20:20Z[UTC]\",\"frecuencia\":\"1,2,4\",\"id\":1,\"viajes\":[]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes"
+					]
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio que dice que la fecha de fin no puede ser menor a la inicial. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Viajes Recurrentes de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"viajesRecurrentes count\"] = data.length > 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente todos los viajes recurrentes de un conductor. El test se pasa cuando el mensaje correcto es recibido y recibe mas de una calificacion. \n\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un viaje Recurrente de un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente un viaje recurrente de un conductor. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "obtener viaje recurrente de un conductor inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductor /0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/0/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"0",
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el caso en que se intenta obtener un viaje recurrente de un conductor inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un viaje Inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"/viajesRecurrentes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes",
+						"0"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el caso en que se intenta obtener un viaje recurrente inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un viajeRecurrente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5ce2f2f-b592-4c8e-ae7e-8ba30d8230d3",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"fechInicio\": \"2020-11-10T15:20:20Z[UTC]\",\n    \"fechaFin\": \"2020-12-11T15:20:20Z[UTC]\",\n    \"frecuencia\": \"1,3,6\",\n    \"id\":\"{{new_id_viajeRecurrente1}}\",\n    \"viajes\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
+					]
+				},
+				"description": "Modifica un viaje recurrente existente y el cambio se guarda en la base de datos. Es la prueba de un caso valido para el servicio put del recurso. \n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un viajeRecurrente Inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5ce2f2f-b592-4c8e-ae7e-8ba30d8230d3",
+						"exec": [
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"/viajesRecurrentes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"fechInicio\": \"2020-11-10T15:20:20Z[UTC]\",\n    \"fechaFin\": \"2020-12-11T15:20:20Z[UTC]\",\n    \"frecuencia\": \"1,3,6\",\n    \"id\":\"0\",\n    \"viajes\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes",
+						"0"
+					]
+				},
+				"description": "Es la prueba del servicio put para el recurso en el caso en que se intenta modificar un viaje recurrente inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viajeRecurrente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente1}}"
+					]
+				},
+				"description": "Elimina un viaje recurrente existente y el cambio se guarda en la base de datos. Es la prueba de un caso valido para el servicio delete del recurso. \n**Código http esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viaje Recurrente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/{{new_id_viajeRecurrente2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes",
+						"{{new_id_viajeRecurrente2}}"
+					]
+				},
+				"description": "Elimina un viaje recurrente existente y el cambio se guarda en la base de datos. Es la prueba de un caso valido para el servicio delete del recurso. \n**Código http esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viajeRecurrente Inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"/viajesRecurrentes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajesRecurrentes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajesRecurrentes",
+						"0"
+					]
+				},
+				"description": "Es la prueba del servicio put para el recurso en el caso en que se intenta eilimar un viaje recurrente inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

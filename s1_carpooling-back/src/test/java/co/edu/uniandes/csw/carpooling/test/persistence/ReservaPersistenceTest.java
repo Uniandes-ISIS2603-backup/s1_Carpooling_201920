@@ -38,7 +38,6 @@ import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
-
 /**
  *
  * @author le.perezl
@@ -46,28 +45,29 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 
 public class ReservaPersistenceTest {
-    @PersistenceContext (unitName= "carpoolingPU")
+
+    @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
+
     private List<ReservaEntity> data = new ArrayList<ReservaEntity>();
-         
+
     @Inject
     UserTransaction utx;
-    
+
     @Inject
     ReservaPersistence rp;
-    
+
     @Deployment
-    public static JavaArchive createDeployment(){
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(ReservaEntity.class)
-                .addClass(ReservaPersistence.class)
+                .addPackage(ReservaEntity.class.getPackage())
+                .addPackage(ReservaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     //DA ERROR EL CONFIG
-        /**
+    /**
      * Configuración inicial de la prueba.
      */
     @Before
@@ -87,7 +87,8 @@ public class ReservaPersistenceTest {
             }
         }
     }
-        /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
@@ -109,27 +110,23 @@ public class ReservaPersistenceTest {
             data.add(entity);
         }
     }
-    
-  
-    
-    
-    
+
     @Test
-    public void createTest(){
+    public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
         ReservaEntity reserva = factory.manufacturePojo(ReservaEntity.class);
         ReservaEntity result = rp.create(reserva);
-    
-    Assert.assertNotNull(result);
-    
-    ReservaEntity entity = em.find(ReservaEntity.class, result.getId());
-    
-    Assert.assertEquals(reserva.getConfirmacion(), entity.getConfirmacion());
-    Assert.assertEquals(reserva.getNumeroDeReserva(), entity.getNumeroDeReserva());
-    Assert.assertEquals(reserva.getFecha(), entity.getFecha());
-    Assert.assertEquals(reserva.getEstado(), entity.getEstado());
+
+        Assert.assertNotNull(result);
+
+        ReservaEntity entity = em.find(ReservaEntity.class, result.getId());
+
+        Assert.assertEquals(reserva.getConfirmacion(), entity.getConfirmacion());
+        Assert.assertEquals(reserva.getNumeroDeReserva(), entity.getNumeroDeReserva());
+        Assert.assertEquals(reserva.getFecha(), entity.getFecha());
+        Assert.assertEquals(reserva.getEstado(), entity.getEstado());
     }
-    
+
 //    public void createNotificacionTest(){
 //         // Falta crear notif
 //          PodamFactory factory = new PodamFactoryImpl();
@@ -141,7 +138,7 @@ public class ReservaPersistenceTest {
 //          
 //          Assert.assertEquals(notificacion.getMensaje(),entity.getMensaje());
 //      }
-     /**
+    /**
      * Prueba para consultar la lista de Reservas.
      */
     @Test
@@ -158,13 +155,14 @@ public class ReservaPersistenceTest {
             Assert.assertTrue(found);
         }
     }
-      /**
+
+    /**
      * Prueba para consultar una Reservas.
      */
-     @Test
+    @Test
     public void findTest() {
         ReservaEntity entity = data.get(0);
-        ReservaEntity newEntity =rp.find(entity.getId());
+        ReservaEntity newEntity = rp.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNumeroDeReserva(), newEntity.getNumeroDeReserva());
     }
@@ -179,6 +177,7 @@ public class ReservaPersistenceTest {
         ReservaEntity deleted = em.find(ReservaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+
     /**
      * Prueba para actualizar una Reservas.
      */
@@ -197,7 +196,20 @@ public class ReservaPersistenceTest {
         Assert.assertEquals(newEntity.getNumeroDeReserva(), resp.getNumeroDeReserva());
         Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
         Assert.assertEquals(newEntity.getEstado(), resp.getEstado());
-         Assert.assertEquals(newEntity.getConfirmacion(), resp.getConfirmacion());
+        Assert.assertEquals(newEntity.getConfirmacion(), resp.getConfirmacion());
     }
-    
+
+    /**
+     * Prueba para consultar una Editorial por nombre.
+     */
+//    @Test
+//    public void findReservaByNumeroDeReserva() {
+//        ReservaEntity entity = data.get(0);
+//        ReservaEntity newEntity = rp.findByNumeroDeReserva(entity.getNumeroDeReserva());
+//        Assert.assertNotNull(newEntity);
+//        Assert.assertEquals(entity.getNumeroDeReserva(), newEntity.getNumeroDeReserva());
+//
+//        newEntity = rp.findByNumeroDeReserva(null);
+//        Assert.assertNull(newEntity);
+//    }
 }

@@ -32,15 +32,14 @@ public class PublicistaDetailDTO extends PublicistaDTO {
      */
     public PublicistaDetailDTO(PublicistaEntity publicistaEntity){
         super(publicistaEntity);
-        if(publicistaEntity != null){
-            if(publicistaEntity.getPublicidades()!=null){
+        if(publicistaEntity != null&&publicistaEntity.getPublicidades()!=null){
                 publicidades = new ArrayList<>();
                 for (PublicidadEntity entityPublicidad : publicistaEntity.getPublicidades()){
                     publicidades.add(new PublicidadDTO(entityPublicidad));
                 }
             }
         }
-    }
+    
     
         /**
      * Transformar un DTO a un Entity

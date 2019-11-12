@@ -38,13 +38,13 @@ import uk.co.jemos.podam.common.AttributeStrategy;
 public class InitialDateStrategy implements AttributeStrategy<Date> {
 
     Random r = new Random();
-    
+
     @Override
     public Date getValue() {
         Calendar c = Calendar.getInstance();
         int maxYear = 5;
         int thisYear = Year.now().getValue();
-        c.set(Calendar.YEAR, r.nextInt(5) + 1
+        c.set(Calendar.YEAR, r.nextInt(maxYear) + 1
                 + thisYear);
         c.set(Calendar.DAY_OF_YEAR, r.nextInt(
                 c.getActualMaximum(Calendar.DAY_OF_YEAR) - c.getActualMinimum(Calendar.DAY_OF_YEAR) + 1)

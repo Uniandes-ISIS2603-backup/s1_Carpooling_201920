@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.carpooling.entities;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -22,21 +23,6 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class PublicidadEntity extends BaseEntity implements Serializable {
 
-    /**
-     * @return the publicista
-     */
-    public PublicistaEntity getPublicista() {
-        return publicista;
-    }
-
-    /**
-     * @param publicista the publicista to set
-     */
-    public void setPublicista(PublicistaEntity publicista) {
-        this.publicista = publicista;
-    }
-
-    
     public enum DISPONIBILIDAD {
         UNA_SEMANA,
         TRES_SEMANAS
@@ -49,8 +35,8 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     private String mensaje;
 
     private double costo;
-    
-    private DISPONIBILIDAD disponibilidadPublicidad;
+
+    private DISPONIBILIDAD disponibilidad;
 
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
@@ -59,9 +45,9 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
-    
+
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private PublicistaEntity publicista;
 
     /**
@@ -137,14 +123,29 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     /**
      * @return the disponibilidadPublicidad
      */
-    public DISPONIBILIDAD getDisponibilidadPublicidad() {
-        return disponibilidadPublicidad;
+    public DISPONIBILIDAD getDisponibilidad() {
+        return disponibilidad;
     }
 
     /**
      * @param disponibilidadPublicidad the disponibilidadPublicidad to set
      */
-    public void setDisponibilidadPublicidad(DISPONIBILIDAD disponibilidadPublicidad) {
-        this.disponibilidadPublicidad = disponibilidadPublicidad;
+    public void setDisponibilidad(DISPONIBILIDAD disponibilidadPublicidad) {
+        this.disponibilidad = disponibilidadPublicidad;
     }
+
+    /**
+     * @return the publicista
+     */
+    public PublicistaEntity getPublicista() {
+        return publicista;
+    }
+
+    /**
+     * @param publicista the publicista to set
+     */
+    public void setPublicista(PublicistaEntity publicista) {
+        this.publicista = publicista;
+    }
+
 }

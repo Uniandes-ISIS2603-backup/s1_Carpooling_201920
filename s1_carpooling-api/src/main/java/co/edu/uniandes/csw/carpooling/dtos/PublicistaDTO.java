@@ -14,7 +14,7 @@ import java.io.Serializable;
  * representaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
  *
- * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * Al serializarse como JSON esta clase implementa el siguiente modelo para publicistas que sean persona natural con empresa: <br>
  * <pre>
  *   {
  *	"nombre":"String",
@@ -31,6 +31,30 @@ import java.io.Serializable;
  * <pre>
  *
  * {
+ *	"nombre":"CARPOOLTRIPS PUBLICIDADES",
+ *	"tipoPublicista":"EMPRESA",
+ *	"telefono" : "4561873",
+ *	"correo" : "carpooltrips@gmail.com",
+ *      "contrasenha" : "publicidades entre ciudades",
+ *	"nit" : "222.444.666.-7"
+ * 
+ * }
+ *  * </pre>
+ *  * Al serializarse como JSON esta clase implementa el siguiente modelo para publicistas que sean empresas: <br>
+ * <pre>
+ *   {
+ *	"nombre":"String",
+ *	"tipoPublicista":"EMPRESA",
+ *	"telefono" : "String",
+ *	"correo" : "String",
+ *      "contrasenha" : "String",
+ *	"nit" : "String"
+ *   }
+ * </pre> Por ejemplo un autor se representa asi:<br>
+ *
+ * <pre>
+ *
+ * {
  *	"nombre":"Santiago",
  *	"apellido":"Ballesteros",
  *	"tipoPublicista":"PERSONA_NATURAL_CON_EMPRESA",
@@ -40,7 +64,6 @@ import java.io.Serializable;
  *	"cedula" : "1123456780",
  *	"rut" : "qdbkhfebjhk"
  * }
- *
  *  * </pre>
  * @author Santiago Ballesteros
  */
@@ -70,17 +93,18 @@ public class PublicistaDTO implements Serializable{
     }
     
     public PublicistaDTO(PublicistaEntity entidad){
-        setId(entidad.getId());
-        setApellido(entidad.getApellido());
-        setCedula(entidad.getCedula());
-        setCorreo(entidad.getCorreo());
-        setContrasenha(entidad.getContrasenha());
-        setNit(entidad.getNit());
-        setNombre(entidad.getNombre());
-        setRut(entidad.getRut());
-        setTelefono(entidad.getTelefono());
-        setTipoPublicista(entidad.getTipoPublicista());
-    
+        if(entidad!=null){
+        this.id = entidad.getId();
+        this.apellido = entidad.getApellido();
+        this.cedula = entidad.getCedula();
+        this.correo = entidad.getCorreo();
+        this.contrasenha = entidad.getContrasenha();
+        this.nit = entidad.getNit();
+        this.nombre = entidad.getNombre();
+        this.rut = entidad.getRut();
+        this.telefono = entidad.getTelefono();
+        this.tipoPublicista = entidad.getTipoPublicista();
+        }
     }
     
     public PublicistaEntity toEntity(){

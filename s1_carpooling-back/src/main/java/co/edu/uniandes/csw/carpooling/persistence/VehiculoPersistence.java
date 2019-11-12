@@ -16,38 +16,50 @@ import javax.persistence.TypedQuery;
  *
  * @author Juan David Alarcón
  */
-
 @Stateless
 public class VehiculoPersistence {
-    
-    @PersistenceContext(unitName= "carpoolingPU")
+
+    @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
-    
-    
-    public VehiculoEntity create(VehiculoEntity vehiculo)
-    {
-       em.persist(vehiculo);
-       return vehiculo;
+
+    public VehiculoEntity create(VehiculoEntity vehiculo) {
+        em.persist(vehiculo);
+        return vehiculo;
     }
-    
-         public VehiculoEntity find(Long viajeroId) {
- 
+
+    public VehiculoEntity find(Long viajeroId) {
+
         return em.find(VehiculoEntity.class, viajeroId);
     }
-     
-     public VehiculoEntity update(VehiculoEntity vehiculoEntity)
-     {
-         return em.merge(vehiculoEntity);
-     }
-     
-         public void delete(Long vehiculoId) {
-        
+
+    public VehiculoEntity update(VehiculoEntity vehiculoEntity) {
+        return em.merge(vehiculoEntity);
+    }
+
+    public void delete(Long vehiculoId) {
+
         VehiculoEntity viajeroEntity = em.find(VehiculoEntity.class, vehiculoId);
         em.remove(viajeroEntity);
     }
-     public List<VehiculoEntity> findAll() {
+
+    public List<VehiculoEntity> findAll() {
         TypedQuery<VehiculoEntity> query = em.createQuery("select u from VehiculoEntity u", VehiculoEntity.class);
         return query.getResultList();
+    }
+
+    public VehiculoEntity find(Long conductoresId, Long vehiculosId) {
+
+        TypedQuery<VehiculoEntity> q = em.createQuery("select p from VehiculoEntity p where (p.conductor.id = :conductorid) and (p.id = :vehiculosId)", VehiculoEntity.class);
+        q.setParameter("conductorid", conductoresId);
+        q.setParameter("vehiculosId", vehiculosId);
+        List<VehiculoEntity> results = q.getResultList();
+        VehiculoEntity vehiculo = null;
+        if (results == null||results.isEmpty()) {
+            // Esto es equivalente a que vehiculo siga siendo null
+        } else {
+            vehiculo = results.get(0);
+        }
+
+        return vehiculo;
     }
 }

@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "17712100-52e7-4a37-84aa-6ce0599a0ec8",
+		"name": "Viaje Tests",
+		"description": "Test del recurso viajes: GET, GET ALL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_conductor\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores"
+					]
+				},
+				"description": "Crea un condcutor para poder crear viajes de prubea **Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un vehiculo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_vehiculo\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"soat\": \"RWSNFJ12395837\",\n\t\"placa\": \"MDS 546\",\n\t\"aseguradora\": \"SURA\",\n\t\"vigenciaSoat\": \"11/10/2020\",\n\t\"modelo\": \"Chevrolet Spark\",\n\t\"sillas\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos"
+					]
+				},
+				"description": "Crea un vehiculo para crear los viajes **Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un viaje",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "877c0454-28cc-4419-9ffd-a05abbb27893",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "843db071-9bea-42cb-9dfd-4a74cdc6b799",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_viaje\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id_vehiculo}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"{{new_id_vehiculo}}"
+					]
+				},
+				"description": "Crea un primer viaje de prueba\n**Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un viaje 2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "877c0454-28cc-4419-9ffd-a05abbb27893",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "843db071-9bea-42cb-9dfd-4a74cdc6b799",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id2_viaje\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id_vehiculo}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"{{new_id_vehiculo}}"
+					]
+				},
+				"description": "Crea un segundo viaje de prueba\n**Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los viajes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c6f19c79-ffe4-407a-97e4-d49c472297fc",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
+							"tests[\"viajes count\"] = data.length >= 2;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajes"
+					]
+				},
+				"description": "Obtener todos los viajes de prueba\n**Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un viaje",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18bf86eb-f77f-4680-8104-0a4a4ecc0cec",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/{{new_id_viaje}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajes",
+						"{{new_id_viaje}}"
+					]
+				},
+				"description": "Obtener un viaje de los creados\n**Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una viaje que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "024b21fd-5fba-4206-8536-5870ec20a551",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajes",
+						"0"
+					]
+				},
+				"description": "Probar que se genere error al solicitar un viaje que no existe\n**Codigo http esperado:404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viaje",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f10913bc-ea93-4749-9d28-60e197a0db11",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id_viaje}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"{{new_id_viaje}}"
+					]
+				},
+				"description": "Borra el primer viaje creado de la base de datos\n**Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viaje 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "10162458-3996-49fa-8255-f5ea62b0c862",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/viajes/{{new_id2_viaje}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"viajes",
+						"{{new_id2_viaje}}"
+					]
+				},
+				"description": "Borra el segundo viaje creado de la base de datos **Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un vehiculo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c5526a9-3b80-4bba-9c00-cbca0819c3ed",
+						"exec": [
+							"tests[\"no genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}/vehiculos/{{new_id_vehiculo}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}",
+						"vehiculos",
+						"{{new_id_vehiculo}}"
+					]
+				},
+				"description": "Borra el vehiculo creado de la base de datos **Codigo http esperado:200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar conductor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c5526a9-3b80-4bba-9c00-cbca0819c3ed",
+						"exec": [
+							"tests[\"no genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor}}"
+					]
+				},
+				"description": "Borra el conductor creado de la base de datos **Codigo http esperado:200**"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

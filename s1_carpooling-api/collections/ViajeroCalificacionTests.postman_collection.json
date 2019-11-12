@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "c5e3f15d-cdc6-4188-9b70-600d8c03ac26",
+		"name": "ViajeroCalificacionTests",
+		"description": "Conjunto de pruebas para el recurso viajeroCalificacion, que implementa los servicios post y get.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un viajero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_viajero\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \" Doe\",\r\n\t\"telefono\": \"3107702909\",\r\n\t\"correo\": \"doe@duck.com\",\r\n\t\"numDocumento\": \"1032488533\",\r\n\t\"contrasenha\": \"postmantest\",\r\n\t\"fechaDeNacimiento\": \"1999-11-15T00:00:00-05:00\",\r\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						""
+					]
+				},
+				"description": "Crea un viajero y lo almacena en la base de datos, se almacena el id para el manejo de las pruebas siguientes.\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una calificacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_calificacion1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"comentarios\":\"OK\",\"puntuacion\":4}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero}}/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero}}",
+						"calificaciones"
+					]
+				},
+				"description": "Crea una calificacion y la almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id de la calificacion para el uso en pruebas siguientes.\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una calificacion2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_calificacion2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"comentarios\":\"OKMAKEY\",\"puntuacion\":3}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero}}/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero}}",
+						"calificaciones"
+					]
+				},
+				"description": "Crea una calificacion y la almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id de la calificacion para el uso en pruebas siguientes.\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear calificacion con cometario invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El comentario no puede ser mayor a 500 caracteres\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"comentarios\":\"11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111\",\"conductor\":{},\"puntuacion\":4}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero}}/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero}}",
+						"calificaciones"
+					]
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio sobre el tamaño máximo de un comentario. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 412**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear calificacion con puntuacion invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cec34a34-e095-45c1-bc9e-96b9749aa93b",
+						"exec": [
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La puntuacion no puede ser menor a cero o mayor a 5\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"comentarios\":\"OK\",\"conductor\":{},\"puntuacion\":100}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero}}/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero}}",
+						"calificaciones"
+					]
+				},
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio el valor minimo o máximo de una puntuacion. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
+			},
+			"response": []
+		},
+		{
+			"name": "obtener calificacion de un viajero inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"tests[\"No existe el recurso\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductor/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/0/calificaciones/{{new_id_viajero1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"0",
+						"calificaciones",
+						"{{new_id_viajero1}}"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el caso en que se intenta obtener una calificación de un viajero inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "obtener calificacion de un viajero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero}}/calificaciones/{{new_id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero}}",
+						"calificaciones",
+						"{{new_id_calificacion1}}"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente una calificacion de un viajero. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "obtener calificacion de un viajero 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero}}/calificaciones/{{new_id_calificacion2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero}}",
+						"calificaciones",
+						"{{new_id_calificacion2}}"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente una calificacion de un viajero. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Calificaciones de un viajero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3f62c2-12eb-4e93-94c9-1608acc05a8d",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"viajesRecurrentes count\"] = data.length > 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero}}/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero}}",
+						"calificaciones"
+					]
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente todas calificacion de un viajero. El test se pasa cuando el mensaje correcto es recibido y recibe mas de una calificacion. \n\n**Código http esperado: 200**"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

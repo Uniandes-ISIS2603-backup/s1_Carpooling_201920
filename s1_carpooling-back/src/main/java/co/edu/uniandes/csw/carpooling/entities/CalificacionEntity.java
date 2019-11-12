@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.carpooling.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -18,13 +17,48 @@ import uk.co.jemos.podam.common.PodamExclude;
 //La anotación le indica a JPA que esta clase corresponderá a una tabla
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable {
-    
+
     private Integer puntuacion;
     private String comentarios;
 
     @PodamExclude
     @ManyToOne
     private ViajeEntity viaje;
+
+    
+
+    @PodamExclude
+    @ManyToOne
+    private ViajeroEntity viajero;
+
+    @PodamExclude
+    @ManyToOne
+    private ConductorEntity conductor;
+
+    public ViajeroEntity getViajero() {
+        return viajero;
+    }
+
+    public void setViajero(ViajeroEntity viajero) {
+        this.viajero = viajero;
+    }
+
+    public ConductorEntity getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(ConductorEntity conductor) {
+        this.conductor = conductor;
+    }
+
+    public ViajeEntity getViaje() {
+        return viaje;
+    }
+
+    public void setViaje(ViajeEntity viaje) {
+        this.viaje = viaje;
+    }
+
     /**
      * @return the puntuacion
      */
@@ -52,7 +86,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
     }
-    
-    
-    
+
+  
+
 }

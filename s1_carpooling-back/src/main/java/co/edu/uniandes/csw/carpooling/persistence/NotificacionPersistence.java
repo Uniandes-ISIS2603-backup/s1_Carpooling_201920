@@ -20,17 +20,18 @@ import java.util.logging.Logger;
  */
 @Stateless
 public class NotificacionPersistence {
-    
+
     private static final Logger LOGGER = Logger.getLogger(NotificacionPersistence.class.getName());
-    
+
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
-    
-    public NotificacionEntity create(NotificacionEntity notificacion){
+
+    public NotificacionEntity create(NotificacionEntity notificacion) {
         em.persist(notificacion);
-        
+
         return notificacion;
     }
+
     /**
      * Busca si hay alguna notificacion con el id que se envía de argumento
      *
@@ -40,24 +41,25 @@ public class NotificacionPersistence {
     public NotificacionEntity find(Long notificacionId) {
         return em.find(NotificacionEntity.class, notificacionId);
     }
+
     /**
      * Devuelve todas las notificaciones de la base de datos.
      *
-     * @return una lista con todas las notificaciones que encuentre en la base de
-     * datos, "select u from NotificacionEntity u" es como un "select * from
+     * @return una lista con todas las notificaciones que encuentre en la base
+     * de datos, "select u from NotificacionEntity u" es como un "select * from
      * NotificacionEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<NotificacionEntity> findAll() {
         TypedQuery<NotificacionEntity> query = em.createQuery("select u from NotificacionEntity u", NotificacionEntity.class);
         return query.getResultList();
     }
-    
-     /**
+
+    /**
      * Actualiza una notificacion.
      *
-     * @param notificacionEntity: la notifiacion que viene con los nuevos cambios.
-     * Por ejemplo la descripcion pudo cambiar. En ese caso, se haria uso del método
-     * update.
+     * @param notificacionEntity: la notifiacion que viene con los nuevos
+     * cambios. Por ejemplo la descripcion pudo cambiar. En ese caso, se haria
+     * uso del método update.
      * @return una notificacion con los cambios aplicados.
      */
     public NotificacionEntity update(NotificacionEntity notificacionEntity) {
@@ -69,10 +71,11 @@ public class NotificacionPersistence {
         LOGGER.log(Level.INFO, "Saliendo de actualizar la notificacion con id = {0}", notificacionEntity.getId());
         return em.merge(notificacionEntity);
     }
+
     /**
      *
-     * Borra una notificacion de la base de datos recibiendo como argumento el id
-     * de la notificacion
+     * Borra una notificacion de la base de datos recibiendo como argumento el
+     * id de la notificacion
      *
      * @param notificacionId: id correspondiente a la notificacion a borrar.
      */
@@ -85,5 +88,50 @@ public class NotificacionPersistence {
          Es similar a "delete from EditorialEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
         em.remove(entity);
         LOGGER.log(Level.INFO, "Saliendo de borrar la notificacion con id = {0}", notificacionId);
+    }
+
+    public List<NotificacionEntity> findAllByViajero(Long viajeroId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntity p where (p.viajero.id = :viajeroid)", NotificacionEntity.class);
+        q.setParameter("viajeroid", viajeroId);
+        return q.getResultList();
+    }
+
+    public List<NotificacionEntity> findAllByConductor(Long conductorId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntityEntity p where (p.conductor.id = :conductorid)", NotificacionEntity.class);
+        q.setParameter("conductorid", conductorId);
+        return q.getResultList();
+    }
+
+    public NotificacionEntity findByConductor(Long conductorId, Long notificacionId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntity p where (p.conductor.id = :conductorid) and (p.id = :notificacionId)", NotificacionEntity.class);
+
+        q.setParameter("conductorid", conductorId);
+
+        q.setParameter("notificacionId", notificacionId);
+
+        List<NotificacionEntity> results = q.getResultList();
+        NotificacionEntity notificacion = null;
+        if (results == null||results.isEmpty()) {
+            // Esto es equivalente a que notificacion siga siendo null
+        } else {
+            notificacion = results.get(0);
+        }
+
+        return notificacion;
+    }
+
+    public NotificacionEntity findByViajero(Long viajeroId, Long notificacionId) {
+        TypedQuery<NotificacionEntity> q = em.createQuery("select p from NotificacionEntity p where (p.viajero.id = :viajeroid) and (p.id = :notificacionId)", NotificacionEntity.class);
+        q.setParameter("viajeroid", viajeroId);
+        q.setParameter("notificacionId", notificacionId);
+        List<NotificacionEntity> results = q.getResultList();
+        NotificacionEntity notificacion = null;
+        if (results == null||results.isEmpty()) {
+            // Esto es equivalente a que notificacion siga siendo null
+        } else {
+            notificacion = results.get(0);
+        }
+
+        return notificacion;
     }
 }

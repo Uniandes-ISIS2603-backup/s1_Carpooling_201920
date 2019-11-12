@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "05d8d6a6-7e4f-42b4-a1a2-5cfd5c3bcc68",
+		"name": "Viajero Tests",
+		"description": "Colección de pruebas sobre el recurso Viajeros.\nCon dos viajeros se hacen los request de POST, PUT, GET, DEL, y tambien hay pruebas que esperan error.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un viajero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_viajero1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Santiago Ballesteros\",\r\n\t\"telefono\": \"3014356984\",\r\n\t\"correo\": \"s.ballesteros11@uniandes.edu.o\",\r\n\t\"numDocumento\": \"1275309870\",\r\n\t\"contrasenha\": \"jokersito\",\r\n\t\"fechaDeNacimiento\": \"1999-11-15T00:00:00-05:00\",\r\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros"
+					]
+				},
+				"description": "Crea un nuevo viajero. El recurso tiene los atributos \"nombre\",\"telefono\"(que debe ser único), \"correo\"(que debe ser único), \"numDocumento\"(que debe ser único), \"contrasenha\"(que debe tener minimo 5 caracteres), \"fechaDeNacimiento\", \"tipoDocumento\"(que toma uno de los siguientes valores:\"CEDULA_DE_CIUDADANA\", \"TARJETA_DE_IDENTIDAD\", \"PASAPORTE\", \"CEDULA_DE_EXTRANJERIA\"). El Id es inicializado por la BD y se debe ver en la respuesta.\r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un viajero 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_viajero2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Victor Ballesteros\",\n\t\"telefono\": \"1012164098\",\n\t\"correo\": \"v.ballesteros@uniandes.edu.co\",\n\t\"numDocumento\": \"1923174\",\n\t\"contrasenha\": \"halloween\",\n\t\"fechaDeNacimiento\": \"1965-03-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros"
+					]
+				},
+				"description": "Crea un segundo nuevo viajero. El recurso tiene los atributos \"nombre\",\"telefono\"(que debe ser único), \"correo\"(que debe ser único), \"numDocumento\"(que debe ser único), \"contrasenha\"(que debe tener minimo 5 caracteres), \"fechaDeNacimiento\", \"tipoDocumento\"(que toma uno de los siguientes valores:\"CEDULA_DE_CIUDADANA\", \"TARJETA_DE_IDENTIDAD\", \"PASAPORTE\", \"CEDULA_DE_EXTRANJERIA\"). El Id es inicializado por la BD y se debe ver en la respuesta.\r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un viajero con correo duplicado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
+						"exec": [
+							"tests[\"El correo ya esta ocupado por otro usuario\"] = responseCode.code === 412;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Otro Ballesteros\",\r\n\t\"telefono\": \"3268749826\",\r\n\t\"correo\": \"v.ballesteros@uniandes.edu.co\",\r\n\t\"numDocumento\": \"1624359640\",\r\n\t\"contrasenha\": \"spaceOd1se7\",\r\n\t\"fechaDeNacimiento\": \"1923-01-14T00:00:00-05:00\",\r\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros"
+					]
+				},
+				"description": "Intenta crear un viajero en la base de datos con un correo ya existente violando una de las reglas de negocio, y usa .\n**Código http esperado: 412**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un viajero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89d2e15e-1154-4e96-a120-155cbb609b29",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Victor Ballesteros\",\n\t\"telefono\": \"3175980254\",\n\t\"correo\": \"v.ballesteros@uniandes.edu.co\",\n\t\"numDocumento\": \"1923174\",\n\t\"contrasenha\": \"navidad\",\n\t\"fechaDeNacimiento\": \"1965-03-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero2}}"
+					]
+				},
+				"description": "Actualiza un viajero existente. El recurso a modificar se consigue a traves del envio de el Id en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un viajero que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cceec303-b72d-42f7-b31e-2af5d0a75203",
+						"exec": [
+							"tests[\"Consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajeros/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Joaquin Ballesteros\",\n\t\"telefono\": \"3298567234\",\n\t\"correo\": \"j.ballesteros@uniandes.edu.co\",\n\t\"numDocumento\": \"56734523\",\n\t\"contrasenha\": \"omnipresente\",\n\t\"fechaDeNacimiento\": \"1983-08-23T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"0"
+					]
+				},
+				"description": "Actualiza un viajero que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /viajeros/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los viajeros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a27ec227-9d5b-4014-bd2e-810c2c372a0a",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
+							"tests[\"cuenta de viajeros\"] = data.length >= 2;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros"
+					]
+				},
+				"description": "Consulta todos los viajeros de la aplicación. \r\nLa petición no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de viajeros en la respuesta tenga mas de una.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un viajero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bf341a5d-3a97-4bd5-8c73-0b98737da651",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero1}}"
+					]
+				},
+				"description": "Consulta un viajero de la aplicación.  \r\nLa petición no tiene cuerpo.\r\nSe envía el id de el viajero deseado por la URL de la petición.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un viajero que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4ccf387-7239-40eb-aec5-438a5170c4b9",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /viajeros/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"0"
+					]
+				},
+				"description": "Consulta un viajero que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /viajeros/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viajero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No se genero error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero1}}"
+					]
+				},
+				"description": "Borra un viajero. Se envía el id del viajero creado anteriormente.\n\n**Código HTTP esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viajero2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajeros/{{new_id_viajero2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajeros",
+						"{{new_id_viajero2}}"
+					]
+				},
+				"description": "Borra el segundo viajer creado. Se envía el id del viajero creado anteriormente.\n\n**Código HTTP esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un viajero que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "444c66cc-7bb8-4680-8d9c-05cec471bee1",
+						"exec": [
+							"tests[\"No se puede borrar el viajero dado que no existe el id indicado\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/viajero/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"viajero",
+						"0"
+					]
+				},
+				"description": "Borra un viajero que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /viajeros/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "251930f4-bbdb-40a7-b192-ae0ccf14c35a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6e770617-8b4a-4cf0-bab3-5bbd3e95cf3b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

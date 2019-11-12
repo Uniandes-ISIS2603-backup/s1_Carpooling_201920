@@ -39,8 +39,8 @@ public class ViajeroPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(ViajeroEntity.class)
-                .addClass(ViajeroPersistence.class)
+                .addPackage(ViajeroEntity.class.getPackage())
+                .addPackage(ViajeroPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -186,6 +186,7 @@ public class ViajeroPersistenceTest {
         ViajeroEntity deleted = em.find(ViajeroEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+
     /**
      * Prueba para consultar una Publicista por correo.
      */
