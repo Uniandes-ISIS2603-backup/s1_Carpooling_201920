@@ -153,6 +153,11 @@ public class ViajeLogic {
         return persistence.update(viaje);
     }
 
+    /**
+     * Elimina una instancia de Viaje de la base de datos.
+     *
+     * @param viajeId Identificador de la instancia a eliminar.
+     */
     public void deleteViaje(Long viajeId) {
         persistence.delete(viajeId);
     }

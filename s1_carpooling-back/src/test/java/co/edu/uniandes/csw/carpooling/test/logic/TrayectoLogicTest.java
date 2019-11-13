@@ -28,7 +28,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *
+ * Pruebas de logica de Trayecto
  * @author Juan David Serrano
  */
 @RunWith(Arquillian.class)
@@ -49,6 +49,9 @@ public class TrayectoLogicTest {
 
     private List<ViajeEntity> viajeData = new ArrayList<ViajeEntity>();
 
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void configTest() {
         try {
@@ -66,11 +69,18 @@ public class TrayectoLogicTest {
         }
     }
 
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
     private void clearData() {
         em.createQuery("delete from TrayectoEntity").executeUpdate();
         em.createQuery("delete from ViajeEntity").executeUpdate();
     }
 
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             ViajeEntity viajeEntity = factory.manufacturePojo(ViajeEntity.class);
@@ -87,6 +97,11 @@ public class TrayectoLogicTest {
 
     }
 
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -97,6 +112,10 @@ public class TrayectoLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * Prueba para crear un trayecto
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createTrayecto() throws BusinessLogicException {
         TrayectoEntity aleatorio = factory.manufacturePojo(TrayectoEntity.class);
@@ -111,6 +130,10 @@ public class TrayectoLogicTest {
         Assert.assertEquals(aleatorio.getCostoCombustible(), buscado.getCostoCombustible());
     }
 
+    /**
+     * Prueba para crear un trayecto con numero de peajes incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createTrayectoNumPeajesIncorrecto() throws BusinessLogicException {
         TrayectoEntity trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
@@ -118,6 +141,10 @@ public class TrayectoLogicTest {
         trayectoLogic.createTrayecto(viajeData.get(0).getId(), trayectoAleatorio);
     }
 
+    /**
+     * Prueba para crear un trayecto con duracion incorrecta
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createTrayectoDuracionIncorrecto() throws BusinessLogicException {
         TrayectoEntity trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
@@ -125,6 +152,10 @@ public class TrayectoLogicTest {
         trayectoLogic.createTrayecto(viajeData.get(0).getId(), trayectoAleatorio);
     }
 
+    /**
+     * Prueba para crear un trayecto con costo de combustible incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createTrayectoCostoCombustibleIncorrecto() throws BusinessLogicException {
         TrayectoEntity trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
@@ -132,6 +163,10 @@ public class TrayectoLogicTest {
         trayectoLogic.createTrayecto(viajeData.get(0).getId(), trayectoAleatorio);
     }
 
+    /**
+     * Prueba para crear un trayecto con origen incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createTrayectoOrigenIncorrecto() throws BusinessLogicException {
         TrayectoEntity trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
@@ -139,6 +174,10 @@ public class TrayectoLogicTest {
         trayectoLogic.createTrayecto(viajeData.get(0).getId(), trayectoAleatorio);
     }
 
+    /**
+     * Prueba para crear un trayecto con destino incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createTrayectoDestinoIncorrecto() throws BusinessLogicException {
         TrayectoEntity trayectoAleatorio = factory.manufacturePojo(TrayectoEntity.class);
@@ -146,6 +185,9 @@ public class TrayectoLogicTest {
         trayectoLogic.createTrayecto(viajeData.get(0).getId(), trayectoAleatorio);
     }
 
+    /**
+     * Prueba para obtener los trayectos
+     */
     @Test
     public void getTrayectosTest() {
         List<TrayectoEntity> lista = trayectoLogic.getTrayectos(viajeData.get(1).getId());
@@ -161,6 +203,9 @@ public class TrayectoLogicTest {
         }
     }
 
+    /**
+     * Prueba para obtener un trayecto
+     */
     @Test
     public void getTrayectoTest() {
         TrayectoEntity entity1 = data.get(0);
@@ -173,6 +218,10 @@ public class TrayectoLogicTest {
         Assert.assertEquals(entity1.getDuracion(), entity2.getDuracion());
     }
 
+    /**
+     * Prueba para actualizar un trayecto
+     * @throws BusinessLogicException 
+     */
     @Test
     public void updateTrayectoTest() throws BusinessLogicException {
         TrayectoEntity entity0 = data.get(0);
@@ -188,6 +237,10 @@ public class TrayectoLogicTest {
         Assert.assertEquals(entity1.getNumPeajes(), entity2.getNumPeajes());
     }
 
+    /**
+     * Prueba para actualizar un trayecto con destino incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateTrayectoDestinoIncorrecto() throws BusinessLogicException {
         TrayectoEntity entity1 = data.get(0);
@@ -197,6 +250,10 @@ public class TrayectoLogicTest {
         trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
 
+    /**
+     * Prueba para actualizar un trayecto con origen incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateTrayectoOrigenIncorrecto() throws BusinessLogicException {
         TrayectoEntity entity1 = data.get(0);
@@ -206,6 +263,10 @@ public class TrayectoLogicTest {
         trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
 
+    /**
+     * Prueba para actualizar un trayecto con numero de peajes incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateTrayectoNumPeajesIncorrecto() throws BusinessLogicException {
         TrayectoEntity entity1 = data.get(0);
@@ -215,6 +276,10 @@ public class TrayectoLogicTest {
         trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
 
+    /**
+     * Prueba para actualizar un trayecto con duracion incorrecta
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateTrayectoDuracionIncorrecto() throws BusinessLogicException {
         TrayectoEntity entity1 = data.get(0);
@@ -224,6 +289,10 @@ public class TrayectoLogicTest {
         trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
 
+    /**
+     * Prueba para actualziar un trayecto con costo de combustible incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateTrayectoCostoCombustibleIncorrecto() throws BusinessLogicException {
         TrayectoEntity entity1 = data.get(0);
@@ -233,6 +302,10 @@ public class TrayectoLogicTest {
         trayectoLogic.updateTrayecto(entity2, viajeData.get(1).getId());
     }
 
+    /**
+     * Prueba para borrar un trayecto
+     * @throws BusinessLogicException 
+     */
     @Test
     public void deleteViajeTest() throws BusinessLogicException {
         TrayectoEntity entity = data.get(0);
