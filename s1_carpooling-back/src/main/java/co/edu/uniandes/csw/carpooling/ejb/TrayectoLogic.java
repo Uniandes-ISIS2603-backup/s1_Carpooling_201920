@@ -17,7 +17,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
- *
+ * Clase que implementa la conexion con la persistencia para la entidad de Trayecto.
  * @author Juan David Serrano
  */
 @Stateless
@@ -31,6 +31,17 @@ public class TrayectoLogic {
     @Inject
     private ViajePersistence viajePersistence;
 
+    /**
+     * Crea una instancia Trayeto de la base de datos de un viaje en especifico
+     *
+     * @param viajesId  Viaje dueño del trayecto a crear
+     * @param trayecto  Trayecto que se desea crear
+     * @return Trayecto creado con id asignado
+     * @throws BusinessLogicException numero de peajes invalido
+     * duracion invalida
+     * costo combustible erroneo
+     * origen o destino invalido
+     */
     public TrayectoEntity createTrayecto(Long viajesId, TrayectoEntity trayecto) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de crear trayecto");
         if (!validateNumPeajes(trayecto.getNumPeajes())) {
@@ -50,6 +61,12 @@ public class TrayectoLogic {
         return trayecto;
     }
 
+    /**
+     * Retorna los trayectos de la base de datos de un viaje en especifico
+     *
+     * @param viajesId  Viaje dueño del trayectos
+     * @return LisTrayecto si existe con esas caracteristicas o null si no existe
+     */
     public List<TrayectoEntity> getTrayectos(Long viajesId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar los trayectos asociados al viaje con id = {0}", viajesId);
         ViajeEntity viajeEntity = viajePersistence.find(viajesId);
@@ -57,11 +74,25 @@ public class TrayectoLogic {
         return viajeEntity.getTrayectos();
     }
 
+    /**
+     * Retorna una instancia de Trayecto de la base de datos de un viaje en especifico
+     *
+     * @param trayectoId Instancia a actualizar
+     * @param viajeId  Viaje dueño del trayecto
+     * @return Trayecto si existe con esas caracteristicas o null si no existe
+     */
     public TrayectoEntity getTrayecto(Long trayectoId, Long viajeId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el trayecto con id = {0}", trayectoId);
         return persistence.find(trayectoId, viajeId);
     }
 
+    /**
+     * Actualiza una instancia de Trayecto de la base de datos de un viaje en especifico
+     *
+     * @param trayecto Instancia a actualizar
+     * @param viajesId  Viaje dueño del trayecto
+     * @throws BusinessLogicException si no exite instancia trayectos con esas caractersiticas.
+     */
     public TrayectoEntity updateTrayecto(TrayectoEntity trayecto, Long viajesId) throws BusinessLogicException {
         if (!validateNumPeajes(trayecto.getNumPeajes())) {
             throw new BusinessLogicException("Numero de peajes erroneo");
@@ -81,6 +112,13 @@ public class TrayectoLogic {
         return nuevo;
     }
 
+    /**
+     * Elimina una instancia de Trayecto de la base de datos de un viaje en especifico
+     *
+     * @param trayectoId Identificador de la instancia a eliminar 
+     * @param viajesId  Viaje dueño del trayecto
+     * @throws BusinessLogicException si no exite instancia trayecto con esas caractersiticas.
+     */
     public void deleteTrayecto(Long trayectoId, Long viajesId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el trayecto con id = {0} del viaje con id = {1}", new Object[]{trayectoId, viajesId});
         TrayectoEntity trayecto = getTrayecto(trayectoId, viajesId);
@@ -91,22 +129,52 @@ public class TrayectoLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar el trayecto con id = {0} del viaje con id = {1}", new Object[]{trayectoId, viajesId,});
     }
 
+    /**
+     * Verifica que el numero de peajes no sea invalido.
+     *
+     * @param numPeajes a verificar
+     * @return true si el numero de peajes es valido.
+     */
     private boolean validateNumPeajes(Integer numPeajes) {
         return numPeajes != null && numPeajes >= 0;
     }
 
+    /**
+     * Verifica que la duracion no sea invalido.
+     *
+     * @param duracion a verificar
+     * @return true si la duracion es valido.
+     */
     private boolean validateDuracion(Integer duracion) {
         return duracion != null && duracion >= 1;
     }
 
+    /**
+     * Verifica que el costo combustible no sea invalido.
+     *
+     * @param costoCombustible a verificar
+     * @return true si el costoCombustible es valido.
+     */
     private boolean validateCostoCombustible(Double costoCombustible) {
         return costoCombustible != null && costoCombustible >= 0;
     }
 
+    /**
+     * Verifica que el origen no sea invalido.
+     *
+     * @param origen a verificar
+     * @return true si el origen es valido.
+     */
     private boolean validateOrigen(String origen) {
         return origen != null && !origen.isEmpty();
     }
 
+    /**
+     * Verifica que el destino no sea invalido.
+     *
+     * @param destino a verificar
+     * @return true si el destino es valido.
+     */
     private boolean validateDestino(String destino) {
         return destino != null && !destino.isEmpty();
     }
