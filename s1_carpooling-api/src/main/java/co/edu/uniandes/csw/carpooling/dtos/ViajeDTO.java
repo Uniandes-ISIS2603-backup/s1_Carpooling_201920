@@ -29,7 +29,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *      "fechaDeLlegada": Date,
  *      "cupos": Integer,
  *      "costoViaje": Double,
- *      "vehiculo": String,
+ *      "vehiculo": VehiculoDTO,
  *      "estadoViaje: ESTADO_DE_VIAJE
  *   }
  * </pre> Por ejemplo un viaje se representa asi:<br>
@@ -44,7 +44,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *      "fechaDeLlegada": "2019-11-03",
  *      "cupos": 2,
  *      "costoViaje": 30000.0,
- *      "vehiculo":"DBS594",
+ *      "vehiculo":{ },
  *      "estadoViaje": "PUBLICADO"          
  *   }
  *
@@ -73,11 +73,18 @@ public class ViajeDTO implements Serializable{
     
     private ESTADO_DE_VIAJE estadoViaje;
     
+    /**
+     * Constructor vacio
+     */
     public ViajeDTO(){
         
     }
     
-    
+    /**
+     * Crea un objeto ViajeDTO a partir de un objeto ViajeEntity.
+     * @param viaje Entidad ViajeEntity desde la cual se va a crear el
+     * nuevo objeto.
+     */
      public ViajeDTO(ViajeEntity viaje){
         if(viaje != null){
             this.id = viaje.getId();
@@ -92,7 +99,12 @@ public class ViajeDTO implements Serializable{
         }  
     }
     
-    
+    /**
+     * Convierte un objeto ViajeDTO a ViajeEntity.
+     *
+     * @return Nueva objeto ViajeEntity.
+     *
+     */
     public ViajeEntity toEntity(){
         ViajeEntity entity = new ViajeEntity();
         entity.setId(this.getId());

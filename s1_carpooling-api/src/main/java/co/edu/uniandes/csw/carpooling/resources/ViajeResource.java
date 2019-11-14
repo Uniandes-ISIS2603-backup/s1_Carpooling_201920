@@ -61,19 +61,6 @@ public class ViajeResource {
     }
     
     
-//    @PUT
-//    @Path("{viajesId: \\d+}")
-//    public ViajeDetailDTO updateViaje(@PathParam("viajesId") Long viajesId, ViajeDetailDTO viaje) throws BusinessLogicException{
-//        LOGGER.log(Level.INFO, "ViajeResource updateViaje: input: viajesId: {0} , author: {1}", new Object[]{viajesId, viaje});
-//        viaje.setId(viajesId);
-//        if (logic.getViaje(viajesId) == null) {
-//            throw new WebApplicationException("El recurso /viajes/" + viajesId + " no existe.", 404);
-//        }
-//        ViajeDetailDTO detailDTO = new ViajeDetailDTO(logic.updateViaje(viajesId, viaje.toEntity()));
-//        LOGGER.log(Level.INFO, "ViajeResource updateViaje: output: {0}", detailDTO);
-//        return detailDTO;
-//    }
-    
     @Path("{viajesId: \\d+}/trayectos")
     public Class<TrayectoResource> getTrayectoResource(@PathParam("viajesId") Long viajesId) {
         if (logic.getViaje(viajesId) == null) {

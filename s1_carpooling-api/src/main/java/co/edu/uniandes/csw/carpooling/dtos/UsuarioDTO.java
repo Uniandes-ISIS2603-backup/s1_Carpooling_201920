@@ -46,20 +46,6 @@ public abstract class UsuarioDTO implements Serializable{
         }
 
     /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
      * @return the nombre
      */
     public String getNombre() {
@@ -72,75 +58,19 @@ public abstract class UsuarioDTO implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     /**
-     * @return the telefono
+     * @return the id
      */
-    public String getTelefono() {
-        return telefono;
+    public Long getId() {
+        return id;
     }
 
     /**
-     * @param telefono the telefono to set
+     * @param id the id to set
      */
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    /**
-     * @return the correo
-     */
-    public String getCorreo() {
-        return correo;
-    }
-
-    /**
-     * @param correo the correo to set
-     */
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    /**
-     * @return the numDocumento
-     */
-    public String getNumDocumento() {
-        return numDocumento;
-    }
-
-    /**
-     * @param numDocumento the numDocumento to set
-     */
-    public void setNumDocumento(String numDocumento) {
-        this.numDocumento = numDocumento;
-    }
-
-    /**
-     * @return the contrasenha
-     */
-    public String getContrasenha() {
-        return contrasenha;
-    }
-
-    /**
-     * @param contrasenha the contrasenha to set
-     */
-    public void setContrasenha(String contrasenha) {
-        this.contrasenha = contrasenha;
-    }
-
-    /**
-     * @return the fechaDeNacimiento
-     */
-    public Date getFechaDeNacimiento() {
-        return fechaDeNacimiento;
-    }
-
-    /**
-     * @param fechaDeNacimiento the fechaDeNacimiento to set
-     */
-    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
-        this.fechaDeNacimiento = fechaDeNacimiento;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -157,5 +87,74 @@ public abstract class UsuarioDTO implements Serializable{
         this.tipoDocumento = tipoDocumento;
     }
     
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+    /**
+     * @return the fechaDeNacimiento
+     */
+    public Date getFechaDeNacimiento() {
+        return fechaDeNacimiento;
+    }
+
+    /**
+     * @param fechaDeNacimiento the fechaDeNacimiento to set
+     */
+    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
+    }
+    
+    /**
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    /**
+     * @return the contrasenha
+     */
+    public String getContrasenha() {
+        return contrasenha;
+    }
+
+    /**
+     * @param contrasenha the contrasenha to set
+     */
+    public void setContrasenha(String contrasenha) {
+        this.contrasenha = contrasenha;
+    }
+    
+    /**
+     * @return the numDocumento
+     */
+    public String getNumDocumento() {
+        return numDocumento;
+    }
+
+    /**
+     * @param numDocumento the numDocumento to set
+     */
+    public void setNumDocumento(String numDocumento) {
+        this.numDocumento = numDocumento;
+    }
     
 }

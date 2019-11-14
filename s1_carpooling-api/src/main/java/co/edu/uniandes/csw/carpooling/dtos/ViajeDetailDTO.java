@@ -31,9 +31,11 @@ import java.util.List;
  *      "costoViaje": Double,
  *      "vehiculo": String,
  *      "estadoViaje: ESTADO_DE_VIAJE,
- *      "trayectos": [{@link TrayectoDTO}]
+ *      "trayectos": [{@link TrayectoDTO}],
+ *      "calificaciones":[{@link CalificacionDTO}],
+ *      "reserva":[{@link ReservaDTO}]
  *   }
- * </pre> Por ejemplo una editorial se representa asi:<br>
+ * </pre> Por ejemplo una viaje se representa asi:<br>
  *
  * <pre>
  *
@@ -56,7 +58,9 @@ import java.util.List;
  *              "origen" : "Calle 113 #40-25",
  *              "destino" : "Transversal 67 #170-15"
  *          }
- *      ]
+ *      ],
+ *      "calificaciones" : [{}],
+ *      "reservas" : [{}]
  *   }
  *
  * </pre>
@@ -65,20 +69,27 @@ import java.util.List;
  */
 public class ViajeDetailDTO extends ViajeDTO implements Serializable{
     
-    
     private List<TrayectoDTO> trayectos;
     
     private List<CalificacionDTO> calificaciones;
     
-   
-    
     private List<ReservaDTO> reservas;
     
-    
+    /**
+     * Constructor vacio
+     */
     public ViajeDetailDTO(){
         super();
     }
-    
+
+    /**
+     * Crea un objeto viajeDetailDTO a partir de un objeto ViajeEntity
+     * incluyendo los atributos de ViajeDTO.
+     *
+     * @param viajeEntity Entidad ViajeEntity desde la cual se va a crear el
+     * nuevo objeto.
+     *
+     */
     public ViajeDetailDTO(ViajeEntity viajeEntity){
         super(viajeEntity);
         if(viajeEntity.getTrayectos() != null){
@@ -104,6 +115,13 @@ public class ViajeDetailDTO extends ViajeDTO implements Serializable{
     }
     
     
+    /**
+     * Convierte un objeto ViajeDetailDTO a ViajeEntity incluyendo los
+     * atributos de ViajeDTO.
+     *
+     * @return Nueva objeto ViajeEntity.
+     *
+     */
     @Override
     public ViajeEntity toEntity(){
         ViajeEntity entidad = super.toEntity();
