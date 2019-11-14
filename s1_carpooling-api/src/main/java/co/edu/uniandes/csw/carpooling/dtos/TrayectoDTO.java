@@ -9,8 +9,36 @@ import co.edu.uniandes.csw.carpooling.entities.TrayectoEntity;
 import java.io.Serializable;
 
 /**
+ * ViajeDTO Objeto de transferencia de datos de Viajes. Los DTO contienen las
+ * representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
  *
- * @author Estudiante
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id":Long,
+ *      "numPeajes": Integer,
+ *      "duracion": Integer,
+ *      "costoCombustible": Double,
+ *      "origen": String,
+ *      "destino": String  
+ *   }
+ * </pre> Por ejemplo un viaje se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id":1,
+ *      "numPeajes": 14,
+ *      "duracion": 145,
+ *      "costoCombustible": 40000,
+ *      "origen": "Calle 113 #7-5",
+ *      "destino": "Carrera 12 # 13-18"        
+ *   }
+ *
+ * </pre>
+ *
+ * @author Juan David Serrano
  */
 public class TrayectoDTO implements Serializable{
     
@@ -26,10 +54,18 @@ public class TrayectoDTO implements Serializable{
     
     private String destino;
     
+    /**
+     * Constructor vacio
+     */
     public TrayectoDTO(){
         
     }
     
+    /**
+     * Crea un objeto TrayectoDTO a partir de un objeto TrayectoEntity.
+     * @param trayecto Entidad TrayectoEntity desde la cual se va a crear el
+     * nuevo objeto.
+     */
     public TrayectoDTO(TrayectoEntity trayecto){
         if(trayecto != null){
             this.id = trayecto.getId();
@@ -41,6 +77,12 @@ public class TrayectoDTO implements Serializable{
         }  
     }
     
+    /**
+     * Convierte un objeto TrayectoDTO a TrayectoEntity.
+     *
+     * @return Nueva objeto TrayectoEntity.
+     *
+     */
     public TrayectoEntity toEntity(){
         TrayectoEntity entity = new TrayectoEntity();
         entity.setId(this.id);
