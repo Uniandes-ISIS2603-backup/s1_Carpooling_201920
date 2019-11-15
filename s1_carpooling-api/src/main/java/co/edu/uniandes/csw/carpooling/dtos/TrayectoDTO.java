@@ -95,34 +95,6 @@ public class TrayectoDTO implements Serializable{
     }
 
     /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the numPeajes
-     */
-    public Integer getNumPeajes() {
-        return numPeajes;
-    }
-
-    /**
-     * @param numPeajes the numPeajes to set
-     */
-    public void setNumPeajes(Integer numPeajes) {
-        this.numPeajes = numPeajes;
-    }
-
-    /**
      * @return the duracion
      */
     public Integer getDuracion() {
@@ -151,20 +123,6 @@ public class TrayectoDTO implements Serializable{
     }
 
     /**
-     * @return the origen
-     */
-    public String getOrigen() {
-        return origen;
-    }
-
-    /**
-     * @param origen the origen to set
-     */
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
-
-    /**
      * @return the destino
      */
     public String getDestino() {
@@ -176,6 +134,49 @@ public class TrayectoDTO implements Serializable{
      */
     public void setDestino(String destino) {
         this.destino = destino;
+    }
+    
+    /**
+     * @return the numPeajes
+     */
+    public Integer getNumPeajes() {
+        return numPeajes;
+    }
+
+    /**
+     * @param numPeajes the numPeajes to set
+     */
+    public void setNumPeajes(Integer numPeajes) {
+        this.numPeajes = numPeajes;
+    }
+
+    
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+        /**
+     * @return the origen
+     */
+    public String getOrigen() {
+        return origen;
+    }
+
+    /**
+     * @param origen the origen to set
+     */
+    public void setOrigen(String origen) {
+        this.origen = origen;
     }
     
     
