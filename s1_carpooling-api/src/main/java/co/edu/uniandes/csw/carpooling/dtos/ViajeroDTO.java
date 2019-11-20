@@ -19,7 +19,17 @@ public class ViajeroDTO extends UsuarioDTO implements Serializable {
     }
    
     public ViajeroDTO(ViajeroEntity entity){
-        super(entity);  
+        super(entity);
+        if(entity!=null){
+        this.id = entity.getId();
+        this.nombre = entity.getNombre();
+        this.telefono = entity.getTelefono();
+        this.correo = entity.getCorreo();
+        this.numDocumento = entity.getNumDocumento();
+        this.contrasenha = entity.getContrasenha();
+        this.fechaDeNacimiento = entity.getFechaDeNacimiento();
+        this.tipoDocumento = entity.getTipoDocumento();
+        } 
     }
     
     public ViajeroEntity toEntity(){

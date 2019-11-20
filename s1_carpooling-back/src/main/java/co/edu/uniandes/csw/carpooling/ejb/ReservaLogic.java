@@ -31,13 +31,14 @@ public class ReservaLogic {
     private ViajePersistence viajePersistence;
 
     public ReservaEntity createReserva(Long viajeId, ReservaEntity reserva) throws BusinessLogicException {
-        if (reserva.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
-            throw new BusinessLogicException("La reserva tiene una fecha menor a la actual");
-        }
+//        if (reserva.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
+//            throw new BusinessLogicException("La reserva tiene una fecha menor a la actual");
+//        }
         // preguntar si existe el viaje (not null) no se como hacerlo, se debe hacer la relacion, manyToOne en el entity con la referencia a viajes?
 
         if (reserva.getEstado() == (null)) {
-            throw new BusinessLogicException("La reserva no tiene estado");
+            throw new BusinessLogicException("El viaje no tiene cupos");
+            
         }
         if (viajePersistence.find(viajeId).getReservas().size()>=viajePersistence.find(viajeId).getCupos()){
             throw new BusinessLogicException("El viaje no tiene cupos");

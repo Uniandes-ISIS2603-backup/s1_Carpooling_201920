@@ -34,10 +34,6 @@ insert into VIAJEROENTITY (id, contrasenha, correo, fechaDeNacimiento, nombre, n
 insert into CalificacionEntity(id, puntuacion, comentarios, VIAJERO_ID)
 values (3, 4, 'OKEY',3);
 
-insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '112', 'Reserva Aprovaba','11/15/2019','A tiempo' );
-insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '113', 'Reserva Aprovaba','11/16/2019','A tiempo' );
-insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado) values (1, '114', 'Reserva Aprovaba','11/17/2019','A tiempo' );
-
 insert into ViajeEntity (id, destino, origen, 
 fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
 estadoViaje, conductor_id, vehiculo_id) values (100, 'Bogota', 'Bucaramanga', '11/2/2019', '11/12/2019' , 4, 30000, 0, 1, 1);
@@ -49,6 +45,13 @@ estadoViaje, conductor_id, vehiculo_id) values (200, 'Chia', 'Santa Marta', '12/
 insert into ViajeEntity (id, destino, origen, 
 fechaDeLlegada, fechaDeSalida, cupos, costoViaje,
 estadoViaje, conductor_id, vehiculo_id) values (300, 'Medellin', 'Cali', '10/8/2019', '10/8/2019' , 4, 30000, 0, 1, 1);
+
+
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado, viaje_id, viajero_id) values (1, '112', 'Reserva Aprovaba','11/15/2019','A tiempo', 100,1 );
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado, viaje_id, viajero_id) values (2, '113', 'Reserva Aprovaba','11/16/2019','A tiempo', 200,2 );
+insert into ReservaEntity(id, numeroDeReserva, confirmacion, fecha, estado, viaje_id, viajero_id) values (3, '114', 'Reserva Aprovaba','11/17/2019','A tiempo', 300,3 );
+
+
 
 insert into TrayectoEntity (id, costoCombustible, destino, duracion, numpeajes, origen, viaje_id ) values (100, 60000, 'Calle 40 #120-3', 700, 14, 'Calle 40 #120-3', 100);
 
