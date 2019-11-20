@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "109031a2-9620-488e-b516-d249a21382ae",
+		"name": "Notificacion Test",
+		"description": "Notificacion Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "952f1d99-6886-4d9f-a53d-65b52c7f3e00",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "aec1bdd3-db3b-4d2e-adc7-de9c2dc850bc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

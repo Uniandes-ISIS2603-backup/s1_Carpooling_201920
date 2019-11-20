@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f508ffb0-280f-49e5-8a37-881ded020a20",
+		"_postman_id": "1ca9a5d5-54a5-4f37-bba2-5f88b491772b",
 		"name": "Vehiculo Tests",
 		"description": "Tests de los recursos de viaje recurrente: post, get, put y delete.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"

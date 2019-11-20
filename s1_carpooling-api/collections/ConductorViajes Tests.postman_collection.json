@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b7a7372d-d0af-4832-be01-1bbe6c33b871",
+		"_postman_id": "42fc2f27-4342-4232-b2c3-9870e56b99c5",
 		"name": "ConductorViajes Tests",
 		"description": "Prueba el recuros ConductorViajes que se encarga de manejar al asociacion entre conductor y sus viajes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -153,7 +153,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-11-03T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -219,7 +219,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -273,7 +273,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-11-03T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -328,7 +328,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"fechaDeSalida\": \"2019-12-15\",\n    \"fechaDeLlegada\": \"2019-12-16\",\n    \"costoViaje\": 40000.0,\n    \"cupos\": 2,\n    \"destino\": \"Cali\",\n    \"estadoViaje\": \"PUBLICADO\",\n    \"origen\": \"Medellin\",\n    \"vehiculo\": {\n        \"aseguradora\": \"SURA\",\n        \"id\": \"{{new_id_vehiculo}}\",\n        \"modelo\": \"Chevrolet Spark\",\n        \"placa\": \"MDS 546\",\n        \"sillas\": 5,\n        \"soat\": \"RWSNFJ12395837\",\n        \"vigenciaSoat\": \"11/10/2020\"\n    },\n    \"calificaciones\": [],\n    \"reservas\": [],\n    \"trayectos\": []\n}",
+					"raw": "{\n    \"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n    \"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n    \"costoViaje\": 40000.0,\n    \"cupos\": 2,\n    \"destino\": \"Cali\",\n    \"estadoViaje\": \"PUBLICADO\",\n    \"origen\": \"Medellin\",\n    \"vehiculo\": {\n        \"aseguradora\": \"SURA\",\n        \"id\": \"{{new_id_vehiculo}}\",\n        \"modelo\": \"Chevrolet Spark\",\n        \"placa\": \"MDS 546\",\n        \"sillas\": 5,\n        \"soat\": \"RWSNFJ12395837\",\n        \"vigenciaSoat\": \"11/10/2020\"\n    },\n    \"calificaciones\": [],\n    \"reservas\": [],\n    \"trayectos\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -382,7 +382,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
