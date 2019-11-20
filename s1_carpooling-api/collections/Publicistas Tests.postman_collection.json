@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2aab34d9-bfb3-4ba3-a8f4-3947e4dca6d4",
+		"_postman_id": "b026ab30-95bd-4892-8b83-97cda832345b",
 		"name": "Publicistas Tests",
 		"description": "Colección de pruebas sobre el recurso Publicistas. Con dos publicistas uno de tipo persona natural y otro de tipo empresa. se hacen los request de POST, PUT, GET, DEL, y tambien hay pruebas que esperan error.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"

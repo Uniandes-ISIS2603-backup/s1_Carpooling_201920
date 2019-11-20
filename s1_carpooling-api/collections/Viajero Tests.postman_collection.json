@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "05d8d6a6-7e4f-42b4-a1a2-5cfd5c3bcc68",
+		"_postman_id": "74cd1364-74eb-445c-a48b-f7109d3ab6b5",
 		"name": "Viajero Tests",
 		"description": "Colección de pruebas sobre el recurso Viajeros.\nCon dos viajeros se hacen los request de POST, PUT, GET, DEL, y tambien hay pruebas que esperan error.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4a641845-9bb6-4f46-a764-7bc39fa5981d",
+		"_postman_id": "26333091-acb3-491e-886f-a4157d390a76",
 		"name": "ConductorCalificacionTests",
 		"description": "Conjunto de pruebas para el recurso conductorCalificacion, que implementa los servicios post y get.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"

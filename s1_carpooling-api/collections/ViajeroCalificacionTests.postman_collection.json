@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c5e3f15d-cdc6-4188-9b70-600d8c03ac26",
+		"_postman_id": "3e0baa57-8bd4-43a5-b605-ffa6696d2afe",
 		"name": "ViajeroCalificacionTests",
 		"description": "Conjunto de pruebas para el recurso viajeroCalificacion, que implementa los servicios post y get.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
