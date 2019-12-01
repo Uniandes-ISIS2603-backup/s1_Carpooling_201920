@@ -32,6 +32,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ConductorPersistenceTest {
 
+    /**
+     * El despliegue
+     *
+     * @return
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -41,16 +46,32 @@ public class ConductorPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * La persistencia del conductor
+     */
     @Inject
     ConductorPersistence cp;
+
+    /**
+     * El entity manager
+     */
     @PersistenceContext
     EntityManager entMan;
 
+    /**
+     * componente de transaccion
+     */
     @Inject
     UserTransaction utx;
 
+    /**
+     * Lista con datos de prueba
+     */
     private List<ConductorEntity> data = new ArrayList<ConductorEntity>();
 
+    /**
+     * Deja la configuracion lista para las pruebas
+     */
     @Before
     public void configTest() {
         try {
@@ -69,10 +90,16 @@ public class ConductorPersistenceTest {
         }
     }
 
+    /**
+     * Borra los datos de la tabla
+     */
     private void clearData() {
         entMan.createQuery("delete from ConductorEntity").executeUpdate();
     }
 
+    /**
+     * Inserta datos en la tabla y los deja en la lista data
+     */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -83,6 +110,10 @@ public class ConductorPersistenceTest {
         }
     }
 
+    /**
+     * Rest de crear una entidad. Verifica que el conductor que se acaba de
+     * crear tiene los mismos datos que el conductor ingresado a crear<A
+     */
     @Test
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -102,6 +133,9 @@ public class ConductorPersistenceTest {
         Assert.assertEquals(conductor.getTipoDocumento(), entity.getTipoDocumento());
     }
 
+    /**
+     * Test del metodo find
+     */
     @Test
     public void findTest() {
         ConductorEntity entity = data.get(0);
@@ -111,6 +145,9 @@ public class ConductorPersistenceTest {
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
     }
 
+    /**
+     * Test del metodo find all
+     */
     @Test
     public void findAllTest() {
         List<ConductorEntity> list = cp.findAll();
@@ -126,6 +163,9 @@ public class ConductorPersistenceTest {
         }
     }
 
+    /**
+     * Test del metodo update
+     */
     @Test
     public void updateTest() {
         ConductorEntity entity = data.get(0);
@@ -147,6 +187,9 @@ public class ConductorPersistenceTest {
         Assert.assertEquals(newEntity.getContrasenha(), resp.getContrasenha());
     }
 
+    /**
+     * Test del metodo delete
+     */
     @Test
     public void deleteTest() {
         ConductorEntity entity = data.get(0);
@@ -155,6 +198,9 @@ public class ConductorPersistenceTest {
         Assert.assertNull(deleted);
     }
 
+    /**
+     * Test del metodo buscar por correo
+     */
     @Test
     public void findByCorreoTest() {
         ConductorEntity entity = data.get(0);
