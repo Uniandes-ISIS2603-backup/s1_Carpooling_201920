@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d02aa2c0-1242-4e7d-bd2b-6236c8b60aea",
+		"_postman_id": "c274786a-4521-4318-bbc5-1de3c1da5425",
 		"name": "ViajeRecurrenteTests",
 		"description": "Tests de los recursos de viaje recurrente: post, get, put y delete.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"

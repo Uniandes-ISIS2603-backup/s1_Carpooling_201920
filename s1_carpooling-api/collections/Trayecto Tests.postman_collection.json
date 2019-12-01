@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "60bf4007-c3e2-4719-95a3-4dd23677ca52",
+		"_postman_id": "881b8891-a309-48ce-acc4-8c3b81e98e22",
 		"name": "Trayecto Tests",
 		"description": "Prueba el recurso de los trayectos: POST, PUT, DELETE, GET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -153,7 +153,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-11-03T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

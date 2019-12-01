@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "81901b7c-16e3-4f8b-a2e8-e4bd9f90b331",
+		"_postman_id": "2e36b60c-3f3c-4fc9-be6c-45bf68d8cb64",
 		"name": "Viaje Tests",
 		"description": "Test del recurso viajes: GET, GET ALL",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"

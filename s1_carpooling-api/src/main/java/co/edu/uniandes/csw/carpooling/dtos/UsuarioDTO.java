@@ -44,6 +44,18 @@ public abstract class UsuarioDTO implements Serializable{
         this.tipoDocumento = entity.getTipoDocumento();
         }
         }
+    
+        public UsuarioEntity toEntity(UsuarioEntity entity){        
+        entity.setId(this.getId());
+        entity.setNombre(this.getNombre());
+        entity.setTelefono(this.getTelefono());
+        entity.setCorreo(this.getCorreo());
+        entity.setNumDocumento(this.getNumDocumento());
+        entity.setContrasenha(this.getContrasenha());
+        entity.setFechaDeNacimiento(this.getFechaDeNacimiento());
+        entity.setTipoDocumento(this.getTipoDocumento());
+        return entity;
+    }
 
     /**
      * @return the nombre
