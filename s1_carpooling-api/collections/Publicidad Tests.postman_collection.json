@@ -1,0 +1,564 @@
+{
+	"info": {
+		"_postman_id": "8e7346f5-b076-49f4-80c7-88a31712cebd",
+		"name": "Publicidad Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Publicista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd24d19a-0406-4008-bc1a-fa50849500b5",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_publicista\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Santiago\",\n\t\"apellido\": \"Ballesteros\",\n\t\"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\n\t\"telefono\" : \"3123456784\",\n\t\"contrasenha\" : \"password\",\n\t\"correo\" : \"s.ballesteros@uniandes.edu.co\",\n\t\"cedula\" : \"1123456780\",\n\t\"rut\" : \"qdbkhfebjhk\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas"
+					]
+				},
+				"description": "Crea un publicista y lo almacena en la base de datos. Este es usado para crear las publicidades para las pruebas.\n**Codigo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Publicidad ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70556bd5-dbff-4f67-a31d-0c2211a267ec",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_publicidad1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nombre\": \"Joker\",\r\n      \"costo\": 150000,\r\n      \"mensaje\": \"Why so serious?\",\r\n      \"fechaDeInicio\": \"2019-10-10T00:00:00-05:00\",\r\n      \"fechaDeSalida\": \"2019-11-10T00:00:00-05:00\",\r\n      \"publicista\":\r\n      {\r\n          \"nombre\":\"Santiago\",\r\n          \"apellido\":\"Ballesteros\",\r\n          \"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\r\n          \"telefono\" : \"3123456784\",\r\n          \"contrasenha\" : \"password\",\r\n          \"correo\" : \"s.ballesteros@uniandes.edu.co\",\r\n          \"cedula\" : \"1123456780\",\r\n          \"rut\" : \"qdbkhfebjhk\"\r\n }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades"
+					]
+				},
+				"description": "Crea una publicidad y la almacena en la base de datos. Su id es guardado localmente para el desarrollo de otras pruebas. \n**Codigo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Publicidad 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f5171cf-e543-4f68-9c98-91bdedd7f1e6",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_publicidad2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nombre\": \"Taco Taco\",\r\n      \"costo\": 150000,\r\n      \"mensaje\": \"Antes de las 12 y despues de las 2 disfruta de las quesadillas a mitad de precio\",\r\n      \"fechaDeInicio\": \"2019-10-10T00:00:00-05:00\",\r\n      \"fechaDeSalida\": \"2019-11-10T00:00:00-05:00\",\r\n      \"publicista\":\r\n      {\r\n          \"nombre\":\"Santiago\",\r\n          \"apellido\":\"Ballesteros\",\r\n          \"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\r\n          \"telefono\" : \"3123456784\",\r\n          \"contrasenha\" : \"password\",\r\n          \"correo\" : \"s.ballesteros@uniandes.edu.co\",\r\n          \"cedula\" : \"1123456780\",\r\n          \"rut\" : \"qdbkhfebjhk\"\r\n }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades"
+					]
+				},
+				"description": "Crea una publicidad y la almacena en la base de datos. Su id es almacenado para hacer otras pruebas.\n**Codigo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear publicidad fechas invalidas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37f60ae0-8ca0-48a4-9993-4379351fc15a",
+						"exec": [
+							"tests[\"El origen no puede ser vacio\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de inicio no puede ser despues que la fecha de salida\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nombre\": \"Rick and Morty\",\r\n      \"costo\": 150000,\r\n      \"mensaje\": \"Cuarta temporada... estreno 2019\",\r\n      \"fechaDeInicio\": \"2019-12-10T00:00:00-05:00\",\r\n      \"fechaDeSalida\": \"2019-11-10T00:00:00-05:00\",\r\n      \"publicista\":\r\n      {\r\n          \"nombre\":\"Santiago\",\r\n          \"apellido\":\"Ballesteros\",\r\n          \"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\r\n          \"telefono\" : \"3123456784\",\r\n          \"contrasenha\" : \"password\",\r\n          \"correo\" : \"s.ballesteros@uniandes.edu.co\",\r\n          \"cedula\" : \"1123456780\",\r\n          \"rut\" : \"qdbkhfebjhk\"\r\n }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades"
+					]
+				},
+				"description": "Falla al intentar crear una publicidad usando fechas invalidas.\n**Codigo http esperado: 412**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Publicidades",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d69b82b8-d63a-4563-b0ac-23f2d0b28fb5",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"no genera error en el Get All\"] = responseCode.code === 200;",
+							"tests[\"conductores count\"] = data.length >= 2;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores"
+					]
+				},
+				"description": "Obtiene todas las publicidades de la base de datos.\n**Codigo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Publicidad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb446ca9-c59c-4184-b4c1-8cb1f0496437",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades/{{new_id_publicidad1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades",
+						"{{new_id_publicidad1}}"
+					]
+				},
+				"description": "Obtiene una publicidad de la base de datos dado su id.\n**Codigo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener publicidad no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "404c0878-4aee-45ef-abdf-379f17508183",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Falla al intentar obtener una publicidad de la base de datos que no existe.\n**Codigo http esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar publicidad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13c0f3bf-9bc6-4a38-9f47-309b3e6db5e0",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nombre\": \"McDonalds\",\r\n      \"costo\": 150000,\r\n      \"mensaje\": \"Disfruta tu combo del dia por 12.900 pesos\",\r\n      \"fechaDeInicio\": \"2019-10-10T00:00:00-05:00\",\r\n      \"fechaDeSalida\": \"2019-11-10T00:00:00-05:00\",\r\n      \"publicista\":\r\n      {\r\n          \"nombre\":\"Santiago\",\r\n          \"apellido\":\"Ballesteros\",\r\n          \"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\r\n          \"telefono\" : \"3123456784\",\r\n          \"contrasenha\" : \"password\",\r\n          \"correo\" : \"s.ballesteros@uniandes.edu.co\",\r\n          \"cedula\" : \"1123456780\",\r\n          \"rut\" : \"qdbkhfebjhk\"\r\n }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/conductores/{{new_id_conductor2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"conductores",
+						"{{new_id_conductor2}}"
+					]
+				},
+				"description": "Actualiza la informaciòn de una publiciad en la base de datos.\n**Codigo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar publicidad no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e39bdd0b-460b-4f1f-9053-407e58562e9d",
+						"exec": [
+							"tests[\"Consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nombre\": \"Bayer\",\r\n      \"costo\": 150000,\r\n      \"mensaje\": \"Si es Bayer, es bueno\",\r\n      \"fechaDeInicio\": \"2019-10-10T00:00:00-05:00\",\r\n      \"fechaDeSalida\": \"2019-11-10T00:00:00-05:00\",\r\n      \"publicista\":\r\n      {\r\n          \"nombre\":\"Santiago\",\r\n          \"apellido\":\"Ballesteros\",\r\n          \"tipoPublicista\":\"PERSONA_NATURAL_CON_EMPRESA\",\r\n          \"telefono\" : \"3123456784\",\r\n          \"contrasenha\" : \"password\",\r\n          \"correo\" : \"s.ballesteros@uniandes.edu.co\",\r\n          \"cedula\" : \"1123456780\",\r\n          \"rut\" : \"qdbkhfebjhk\"\r\n }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades",
+						"0"
+					]
+				},
+				"description": "Falla al intentar actualizar la informaciòn de una publicidad que no existe en la base de datos.\n**Codigo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Publicidad 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e8e8ccfd-5a76-488b-aa55-ae9755dc13f2",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades/{{new_id_publicidad1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades",
+						"{{new_id_publicidad1}}"
+					]
+				},
+				"description": "Elimina una publicidad de la base de datos.\n**Codigo http esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Publicidad 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38a4d438-a37a-4d63-9c2d-b119e7270451",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades/{{new_id_publicidad2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades",
+						"{{new_id_publicidad2}}"
+					]
+				},
+				"description": "Elimina una publicidad de la base de datos.\n**Codigo http esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Publicidad No Existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "891c43aa-6989-4cca-a167-970553e519b8",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /conductores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicidades/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicidades",
+						"0"
+					]
+				},
+				"description": "Falla al intentar eliminar una publicidad que no existe en la base de datos\n**Codigo http esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Publicista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd16e354-9f07-4c03-ab48-080091c3c8bd",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_carpooling-api/api/publicistas/{{new_id_publicista}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_carpooling-api",
+						"api",
+						"publicistas",
+						"{{new_id_publicista}}"
+					]
+				},
+				"description": "Elimina al publicista creado al comienzo de las pruebas.\n**Codigo http esperado: 204**"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

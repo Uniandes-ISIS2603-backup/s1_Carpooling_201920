@@ -32,19 +32,39 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class PublicidadPersistenceTest {
 
+    /**
+     * La persistencia
+     */
     @Inject
     PublicidadPersistence pp;
 
+    /**
+     * El entity manager
+     */
     @PersistenceContext
     EntityManager em;
 
+    /**
+     * La tranasccion del usuario
+     */
     @Inject
     UserTransaction utx;
 
+    /**
+     * Datos base para los test
+     */
     private List<PublicidadEntity> data = new ArrayList<PublicidadEntity>();
 
+    
+    /**
+     * Datos de publicistas
+     */
     private List<PublicistaEntity> dataPublicista = new ArrayList<PublicistaEntity>();
 
+    /**
+     * El deployment
+     * @return el deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -54,6 +74,9 @@ public class PublicidadPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * Configuracion del test
+     */
     @Before
     public void configTest() {
         try {
@@ -72,6 +95,9 @@ public class PublicidadPersistenceTest {
         }
     }
 
+    /**
+     * Limpia los datos de la lista data y datospublicista
+     */
     private void clearData() {
         em.createQuery("delete from PublicidadEntity").executeUpdate();
         em.createQuery("delete from PublicistaEntity").executeUpdate();
@@ -98,6 +124,9 @@ public class PublicidadPersistenceTest {
         }
     }
 
+    /**
+     * Test del metodo create
+     */
     @Test
     public void createTest() {
 
@@ -118,7 +147,7 @@ public class PublicidadPersistenceTest {
     }
 
     /**
-     * Prueba para consultar un Review.
+     * Test del metodo buscar
      */
     @Test
     public void findTest() {
@@ -132,6 +161,9 @@ public class PublicidadPersistenceTest {
         Assert.assertEquals(entity.getCosto(), newEntity.getCosto(), 0);
     }
 
+    /**
+     * Test del metodo actualizar
+     */
     @Test
     public void updateTest() {
         PublicidadEntity entity = data.get(0);
@@ -151,6 +183,9 @@ public class PublicidadPersistenceTest {
         Assert.assertEquals(resp.getCosto(), newEntity.getCosto(), 0);
     }
 
+    /**
+     * test del metodo borrar
+     */
     @Test
     public void deleteTest() {
         PublicidadEntity entity = data.get(0);
@@ -158,7 +193,10 @@ public class PublicidadPersistenceTest {
         PublicidadEntity deleted = em.find(PublicidadEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-
+    
+    /**
+     * Test del metodo buscar por nombre
+     */
     @Test
     public void findByNameTest() {
         PublicidadEntity entity = data.get(0);

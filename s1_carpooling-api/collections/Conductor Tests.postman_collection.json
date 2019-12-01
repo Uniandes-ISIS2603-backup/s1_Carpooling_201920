@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "b6375128-6402-488f-b846-bc56d81b7b0f",
+		"_postman_id": "a7131e17-2fe0-4f38-bb95-3abab89d12c5",
 		"name": "Conductor Tests",
+		"description": "Test de los recursos de conductor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -34,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -53,7 +54,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea un conductor y lo almacena en la base de datos. El id es guardado para las otras pruebas. \n**Codigo http esperado: 200**"
 			},
 			"response": []
 		},
@@ -86,7 +88,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"nsddkaoaoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"nsddkaoaoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -105,7 +107,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea un conductor y lo almacena en la base de datos. El id es almacenado para las otras pruebas.\n**Codigo http esperado: 200**"
 			},
 			"response": []
 		},
@@ -117,7 +120,7 @@
 					"script": {
 						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
 						"exec": [
-							"tests[\"No pueden haber dos conductores con igual correo\"] = responseCode.code === 412;",
+							"tests[\"El origen no puede ser vacio\"] = responseCode.code === 412;",
 							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Ya hay un conductor con ese correo\");"
 						],
 						"type": "text/javascript"
@@ -136,7 +139,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Felipe Mendez\",\n\t\"telefono\": \"2439331930\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"n1345kjfok\",\n\t\"fechaDeNacimiento\": \"1965-03-20\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Felipe Mendez\",\n\t\"telefono\": \"2439331930\",\n\t\"correo\": \"isa1234@javeriana.com\",\n\t\"numDocumento\": \"17593792039\",\n\t\"contrasenha\": \"n1345kjfok\",\n\t\"fechaDeNacimiento\": \"1965-03-20T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -155,7 +158,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Intenta crear un conductor, pero falla al estar usando un correo electrònico que ya está siendo usado por otro usuario.\n**Codigo http esperado: 412**"
 			},
 			"response": []
 		},
@@ -187,7 +191,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -207,7 +211,8 @@
 						"conductores",
 						"{{new_id_conductor2}}"
 					]
-				}
+				},
+				"description": "Actualiza la informaciòn de un conductor. se usa uno de los id almacenados anteriormente. \n**Codigo http esperado: 200**"
 			},
 			"response": []
 		},
@@ -238,7 +243,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
+					"raw": "{\n\t\"nombre\": \"Isabela Gonzalez\",\n\t\"telefono\": \"3309867567\",\n\t\"correo\": \"isacorregido@javeriana.com\",\n\t\"numDocumento\": \"1754958092039\",\n\t\"contrasenha\": \"nsddkajdcknoco\",\n\t\"fechaDeNacimiento\": \"1985-02-01T00:00:00-05:00\",\n\t\"tipoDocumento\":\"CEDULA_DE_CIUDADANA\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -258,7 +263,8 @@
 						"conductores",
 						"0"
 					]
-				}
+				},
+				"description": "Falla al intentar editar un conductor que no existe.\n**Codigo http esperado: 404**"
 			},
 			"response": []
 		},
@@ -293,7 +299,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Obtiene todos los conductores de la base de datos.\n**Codigo http esperado: 200*"
 			},
 			"response": []
 		},
@@ -329,7 +336,8 @@
 						"conductores",
 						"{{new_id_conductor1}}"
 					]
-				}
+				},
+				"description": "Obtiene un conductor dado su id (uno de los almacenados anteriormente) \n**Codigo http esperado: 200*"
 			},
 			"response": []
 		},
@@ -364,7 +372,8 @@
 						"conductores",
 						"0"
 					]
-				}
+				},
+				"description": "Falla al intentar retornar un conductor que no existe.\n\n**Codigo http esperado: 404**"
 			},
 			"response": []
 		},
@@ -398,7 +407,8 @@
 						"conductores",
 						"{{new_id_conductor1}}"
 					]
-				}
+				},
+				"description": "Borra uno de los conductores creados anteriormente de la base de datos. \n**Codigo http esperado: 204**"
 			},
 			"response": []
 		},
@@ -432,7 +442,8 @@
 						"conductores",
 						"{{new_id_conductor2}}"
 					]
-				}
+				},
+				"description": "Borra uno de los conductores creados anteriormente de la base de datos.\n **Codigo http esperado: 204**"
 			},
 			"response": []
 		},
@@ -467,7 +478,8 @@
 						"conductores",
 						"0"
 					]
-				}
+				},
+				"description": "Falla al intentar borrar un conductor que no existe.\n**Codigo http esperado: 404**"
 			},
 			"response": []
 		}

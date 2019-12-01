@@ -23,6 +23,9 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class PublicidadEntity extends BaseEntity implements Serializable {
 
+    /**
+     * Enumeracion con las disponibilidades de la publicidad
+     */
     public enum DISPONIBILIDAD {
         UNA_SEMANA,
         TRES_SEMANAS
@@ -30,22 +33,45 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     /*
         ATRIBUTOS
      */
+    
+    /**
+     * nombre de la publicidad
+     */
     private String nombre;
 
+    /**
+     * El mensaje de la publicidad
+     */
     private String mensaje;
 
+    /**
+     * El costo de la publicidad
+     */
     private double costo;
 
+    /**
+     * La disponibilidad de la publicidad
+     */
     private DISPONIBILIDAD disponibilidadPublicidad;
 
+    
+    /**
+     * Fecha de inicio de la publicidad
+     */
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeInicio;
 
+    /**
+     * Fecha de fin de la publicidad
+     */
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
 
+    /**
+     * Publicista duenho de la publicidad
+     */
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private PublicistaEntity publicista;
@@ -58,6 +84,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * Ajusta el nombre de la publicidad al ingresado por parametro
      * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
@@ -72,6 +99,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * Ajusta el mensaje de la publicidad al mensaje ingresado por parametro
      * @param mensaje the mensaje to set
      */
     public void setMensaje(String mensaje) {
@@ -86,6 +114,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * Ajusta el costo de la publicidad al ingresado por parametro
      * @param costo the costo to set
      */
     public void setCosto(double costo) {
@@ -100,6 +129,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * Ajusta la fecha de inicio de la publicidad con el valor ingresado por parametro
      * @param fechaDeInicio the fechaDeInicio to set
      */
     public void setFechaDeInicio(Date fechaDeInicio) {
@@ -114,6 +144,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * Ajusta la fecha de salida de la publicidad con el valor ingresado por parametro
      * @param fechaDeSalida the fechaDeSalida to set
      */
     public void setFechaDeSalida(Date fechaDeSalida) {
@@ -128,6 +159,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * Ajusta la disponibilidad de la publicidad con el valor ingresado por parametro
      * @param disponibilidadPublicidad the disponibilidadPublicidad to set
      */
     public void setDisponibilidadPublicidad(DISPONIBILIDAD disponibilidadPublicidad) {
@@ -142,6 +174,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * Ajusta el publicista deuenho de la publicidad con el valor ingresado por parametro
      * @param publicista the publicista to set
      */
     public void setPublicista(PublicistaEntity publicista) {
