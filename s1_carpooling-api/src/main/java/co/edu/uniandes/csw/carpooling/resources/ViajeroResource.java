@@ -160,13 +160,31 @@ public class ViajeroResource {
      //   return ViajeroReservaResource.class;
   //  }
 
-     @Path("{viajerosId: \\d+}/notificaciones")
+    @Path("{viajerosId: \\d+}/notificaciones")
     public Class<ViajeroNotificacionResource> getNotificacionesResource(@PathParam("viajerosId") Long viajerosId) {
         if (logica.getViajero(viajerosId) == null) {
             throw new WebApplicationException("El recurso /viajero/" + viajerosId + " no existe.", 404);
         }
         return ViajeroNotificacionResource.class;
     }
+    
+    @Path("{viajerosId: \\d+}/reservas")
+    public Class<ViajeroReservasResource> getViajeroReservasResource(@PathParam("viajerosId") Long viajerosId) {
+        if (logica.getViajero(viajerosId) == null) {
+            throw new WebApplicationException("El recurso /viajeros/" + viajerosId + " no existe.", 404);
+        }
+        LOGGER.log(Level.INFO, "Se retorna la clase ViajeroReservasResource");
+        return ViajeroReservasResource.class;
+    }
+    
+    @Path("{viajerosId: \\d+}/viajes")
+    public Class<ViajeResource> getViajeResource(@PathParam("viajerosId") Long viajerosId) {
+         if (logica.getViajero(viajerosId) == null) {
+            throw new WebApplicationException("El recurso /viajeros/" + viajerosId + " no existe.", 404);
+        }
+        return ViajeResource.class;
+    }
+    
     /**
      * Convierte una lista de entidades a DTO.
      *
