@@ -26,7 +26,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ * Clase que implementa el recurso Trayecto.
+ * 
  * @author Juan David Serrano
  */
 @Produces(MediaType.APPLICATION_JSON)
@@ -48,6 +49,12 @@ public class TrayectoResource {
         return nuevoTrayecto;
     }
     
+    /**
+     * Busca y devuelve todos los trayectos que tiene un viaje
+     * @param viajesId Id del viaje que es dueño de los trayectos
+     * @return JSONArray {@link TrayectoDTO} - Los trayectos encontrados en la
+     * aplicación del viaje. Si no hay ninguno retorna una lista vacía.
+     */
     @GET
     public List<TrayectoDTO> getTrayectos(@PathParam("viajesId") Long viajesId) {
         LOGGER.log(Level.INFO, "TrayectoResource getTrayectos: input: {0}", viajesId);
@@ -56,6 +63,15 @@ public class TrayectoResource {
         return listaDTOs;
     }
     
+    /**
+     * Busca el trayecto con el id asociado recibido en la URL de un viaje en especifico.
+     * 
+     * @param viajesId Identificador del viaje dueño del trayecto. Este debe ser una cadena de dígitos.
+     * @param trayectosId Identificador del trayecto que se esta buscando. Este debe ser una cadena de digitos
+     * @return JSON {@link TrayectoDTO} - El trayectos buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el trayecto.
+     */
     @GET
     @Path("{trayectosId: \\d+}")
     public TrayectoDTO getTrayecto(@PathParam("viajesId") Long viajesId, @PathParam("trayectosId") Long trayectosId) throws BusinessLogicException {
@@ -69,6 +85,20 @@ public class TrayectoResource {
         return trayectoDTO;
     }
     
+    
+    /**
+     * Actualiza el trayecto con el id recibido en la URL con la información que se
+     * recibe en el cuerpo de la petición.
+     *
+     * @param viajesId Identificador del viaje dueño del trayecto
+     * @param trayectosId Identificador de trayecto que se desea actualizar
+     * @param trayecto {@link TrayectoDTO} El trayecto que se desea guardar.
+     * @return JSON {@link TrayectoDTO} - El trayecto guardado.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el trayecto a
+     * actualizar.
+     * @throws BusinessLogicException Cuando el trayecto y el id pasado no coinciden
+     */
     @PUT
     @Path("{trayectosId: \\d+}")
     public TrayectoDTO updateTrayecto(@PathParam("viajesId") Long viajesId, @PathParam("trayectosId") Long trayectosId, TrayectoDTO trayecto) throws BusinessLogicException {
@@ -86,6 +116,15 @@ public class TrayectoResource {
 
     }
     
+    /**
+     * Borra el trayecto con el id asociado recibido en la URL.
+     *
+     * @param viajesId Identificador del viajes dueño del trayecto a borrar. Este debe
+     * ser una cadena de dígitos.
+     * @param trayectosId Id del trayecto que se desea borrar
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
+     * Error de lógica que se genera cuando no se encuentra el trayecto a borrar.
+     */
     @DELETE
     @Path("{trayectosId: \\d+}")
     public void deleteTrayecto(@PathParam("viajesId") Long viajesId, @PathParam("trayectosId") Long trayectosId) throws BusinessLogicException {
@@ -96,7 +135,12 @@ public class TrayectoResource {
         logic.deleteTrayecto(trayectosId, viajesId);
     }
     
-    
+    /**
+     * Convierte una lista de TrayectoEntity a una lista de TrayectoDTO.
+     *
+     * @param entityList Lista de TrayectoEntity a convertir.
+     * @return Lista de TrayectoDTO convertida.
+     */
     private List<TrayectoDTO> listEntity2DTO(List<TrayectoEntity> entityList) {
         List<TrayectoDTO> list = new ArrayList<>();
         for (TrayectoEntity entity : entityList) {

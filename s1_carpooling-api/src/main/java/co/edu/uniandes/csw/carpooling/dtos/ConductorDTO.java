@@ -26,7 +26,17 @@ public class ConductorDTO extends UsuarioDTO implements Serializable{
      * @param entity el conductor a construir
      */
     public ConductorDTO(ConductorEntity entity){
-        super(entity);  
+        super(entity);
+        if(entity!=null){
+        this.id = entity.getId();
+        this.nombre = entity.getNombre();
+        this.telefono = entity.getTelefono();
+        this.correo = entity.getCorreo();
+        this.numDocumento = entity.getNumDocumento();
+        this.contrasenha = entity.getContrasenha();
+        this.fechaDeNacimiento = entity.getFechaDeNacimiento();
+        this.tipoDocumento = entity.getTipoDocumento();
+        }  
     }
     
     /**
@@ -35,14 +45,7 @@ public class ConductorDTO extends UsuarioDTO implements Serializable{
      */
     public ConductorEntity toEntity(){
         ConductorEntity entity = new ConductorEntity();
-        entity.setId(super.getId());
-        entity.setNombre(super.getNombre());
-        entity.setTelefono(super.getTelefono());
-        entity.setCorreo(super.getCorreo());
-        entity.setNumDocumento(super.getNumDocumento());
-        entity.setContrasenha(super.getContrasenha());
-        entity.setFechaDeNacimiento(super.getFechaDeNacimiento());
-        entity.setTipoDocumento(super.getTipoDocumento());
+        super.toEntity(entity);
         return entity;
     }
     

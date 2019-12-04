@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "2470eba9-59f4-4b5f-9480-910c00723ce7",
+		"_postman_id": "42fc2f27-4342-4232-b2c3-9870e56b99c5",
 		"name": "ConductorViajes Tests",
+		"description": "Prueba el recuros ConductorViajes que se encarga de manejar al asociacion entre conductor y sus viajes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -34,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -53,7 +54,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea un condcutor  **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -107,7 +109,8 @@
 						"{{new_id_conductor}}",
 						"vehiculos"
 					]
-				}
+				},
+				"description": "Crea un vehiculo  **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -150,7 +153,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"Bogota\",\n\t\"fechaDeSalida\": \"2019-11-03T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-11-03T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -172,7 +175,8 @@
 						"viajes",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -215,7 +219,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n\t\"cupos\": 4,\n\t\"costoViaje\": 40000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -237,7 +241,8 @@
 						"viajes",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Crea un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -268,7 +273,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03\",\n\t\"fechaDeLlegada\": \"2019-11-03\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":\"DBS594\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Bucaramanga\",\n\t\"origen\": \"\",\n\t\"fechaDeSalida\": \"2019-11-03T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-11-03T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 30000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -291,7 +296,7 @@
 						"{{new_id_vehiculo}}"
 					]
 				},
-				"description": "Crea un viaje no valido\n"
+				"description": "Crea un viaje no valido **Codigo http esperado:412**"
 			},
 			"response": []
 		},
@@ -323,7 +328,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"fechaDeSalida\": \"2019-12-15\",\n    \"fechaDeLlegada\": \"2019-12-16\",\n    \"costoViaje\": 40000.0,\n    \"cupos\": 2,\n    \"destino\": \"Cali\",\n    \"estadoViaje\": \"PUBLICADO\",\n    \"origen\": \"Medellin\",\n    \"vehiculo\": {\n        \"aseguradora\": \"SURA\",\n        \"id\": \"{{new_id_vehiculo}}\",\n        \"modelo\": \"Chevrolet Spark\",\n        \"placa\": \"MDS 546\",\n        \"sillas\": 5,\n        \"soat\": \"RWSNFJ12395837\",\n        \"vigenciaSoat\": \"11/10/2020\"\n    },\n    \"calificaciones\": [],\n    \"reservas\": [],\n    \"trayectos\": []\n}",
+					"raw": "{\n    \"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n    \"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n    \"costoViaje\": 40000.0,\n    \"cupos\": 2,\n    \"destino\": \"Cali\",\n    \"estadoViaje\": \"PUBLICADO\",\n    \"origen\": \"Medellin\",\n    \"vehiculo\": {\n        \"aseguradora\": \"SURA\",\n        \"id\": \"{{new_id_vehiculo}}\",\n        \"modelo\": \"Chevrolet Spark\",\n        \"placa\": \"MDS 546\",\n        \"sillas\": 5,\n        \"soat\": \"RWSNFJ12395837\",\n        \"vigenciaSoat\": \"11/10/2020\"\n    },\n    \"calificaciones\": [],\n    \"reservas\": [],\n    \"trayectos\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -345,7 +350,8 @@
 						"viajes",
 						"{{new_id2_viaje}}"
 					]
-				}
+				},
+				"description": "Edita un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -376,7 +382,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15\",\n\t\"fechaDeLlegada\": \"2019-12-16\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":\"RAX916\",\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
+					"raw": "{\n\t\"destino\": \"Cali\",\n\t\"origen\": \"Medellin\",\n\t\"fechaDeSalida\": \"2019-12-15T00:00:00-05:00\",\n\t\"fechaDeLlegada\": \"2019-12-16T00:00:00-05:00\",\n\t\"cupos\": 2,\n\t\"costoViaje\": 20000.0,\n\t\"vehiculo\":{},\n\t\"estadoViaje\": \"PUBLICADO\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -398,7 +404,8 @@
 						"viajes",
 						"0"
 					]
-				}
+				},
+				"description": "Intenta editar un viaje que no existe **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -435,7 +442,8 @@
 						"{{new_id_conductor}}",
 						"viajes"
 					]
-				}
+				},
+				"description": "Obtiene todos los viajes de un conductor **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -473,7 +481,8 @@
 						"viajes",
 						"{{new_id_viaje}}"
 					]
-				}
+				},
+				"description": "Obtiene un viaje de un condcutor **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -510,7 +519,8 @@
 						"viajes",
 						"0"
 					]
-				}
+				},
+				"description": "Solicita un viaje que no existe de un conductor **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -546,7 +556,8 @@
 						"viajes",
 						"{{new_id_viaje}}"
 					]
-				}
+				},
+				"description": "Borra un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -582,7 +593,8 @@
 						"viajes",
 						"{{new_id2_viaje}}"
 					]
-				}
+				},
+				"description": "Borra un viaje **Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -619,7 +631,8 @@
 						"viajes",
 						"0"
 					]
-				}
+				},
+				"description": "Borra un viaje que no existe **Codigo http esperado:404**"
 			},
 			"response": []
 		},
@@ -655,7 +668,8 @@
 						"vehiculos",
 						"{{new_id_vehiculo}}"
 					]
-				}
+				},
+				"description": "Borra un vehiculo del conductor**Codigo http esperado:200**"
 			},
 			"response": []
 		},
@@ -689,7 +703,8 @@
 						"conductores",
 						"{{new_id_conductor}}"
 					]
-				}
+				},
+				"description": "Borra al condcutor de la base de datos **Codigo http esperado:200**"
 			},
 			"response": []
 		}

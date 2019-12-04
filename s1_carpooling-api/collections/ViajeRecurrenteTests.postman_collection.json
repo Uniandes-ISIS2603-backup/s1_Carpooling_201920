@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "d63b81b1-20e4-4fcc-a16a-f9289630e8c6",
+		"_postman_id": "c274786a-4521-4318-bbc5-1de3c1da5425",
 		"name": "ViajeRecurrenteTests",
-		"description": "Viaje recurrente resource tests",
+		"description": "Tests de los recursos de viaje recurrente: post, get, put y delete.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"jmendez@universidad.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
+					"raw": "{\n\t\"nombre\": \"Juan David Mendez\",\n\t\"telefono\": \"3102409786\",\n\t\"correo\": \"nndoe@gmail.com\",\n\t\"numDocumento\": \"10001394020\",\n\t\"contrasenha\": \"kdskdiajnci\",\n\t\"fechaDeNacimiento\": \"1970-11-03T00:00:00-05:00\",\n\t\"tipoDocumento\":\"PASAPORTE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,7 +56,7 @@
 						""
 					]
 				},
-				"description": "Crea un conductor"
+				"description": "Crea un conductor y lo almacena en la base de datos, se almacena el id para el manejo de las pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -111,7 +111,7 @@
 						"viajesRecurrentes"
 					]
 				},
-				"description": "crear un viajeRecurrente"
+				"description": "Crea un viaje recurrente y lo almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id del viaje recurrente para el uso en pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -166,7 +166,7 @@
 						"viajesRecurrentes"
 					]
 				},
-				"description": "Crear un viaje recurrente 2"
+				"description": "Crea un viaje recurrente y lo almacena en la base de datos. Es la prueba de un caso valido para el servicio post del recurso. Almacena el id del viaje recurrente para el uso en pruebas siguientes.\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -219,7 +219,7 @@
 						"viajesRecurrentes"
 					]
 				},
-				"description": "Prueba que se lance un error al crear un viaje recurrente en que la fecha final sea menor a la inicial"
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio que dice que la fecha de inicio no puede ser menor a la actual. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -272,7 +272,7 @@
 						"viajesRecurrentes"
 					]
 				},
-				"description": "Prueba que lance error al crear un viaje recurrente con una fecha inicial menor a la actual"
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio que dice que la fecha de fin no puede ser menor a la actual. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -325,7 +325,7 @@
 						"viajesRecurrentes"
 					]
 				},
-				"description": "Verifica que se lanza un error al intentar crear un viaje recurrente con una fecha final menor a la actual"
+				"description": "Es la prueba del servicio post para el recurso en el que se infringe la regla de negocio que dice que la fecha de fin no puede ser menor a la inicial. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 412**"
 			},
 			"response": []
 		},
@@ -369,7 +369,8 @@
 						"{{new_id_conductor}}",
 						"viajesRecurrentes"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente todos los viajes recurrentes de un conductor. El test se pasa cuando el mensaje correcto es recibido y recibe mas de una calificacion. \n\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -414,7 +415,8 @@
 						"viajesRecurrentes",
 						"{{new_id_viajeRecurrente1}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el que se recupera exitosamente un viaje recurrente de un conductor. El test se pasa cuando el mensaje correcto es recibido. \n\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -458,7 +460,8 @@
 						"viajesRecurrentes",
 						"{{new_id_viajeRecurrente1}}"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el caso en que se intenta obtener un viaje recurrente de un conductor inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
@@ -502,7 +505,8 @@
 						"viajesRecurrentes",
 						"0"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio get para el recurso en el caso en que se intenta obtener un viaje recurrente inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
@@ -556,7 +560,8 @@
 						"viajesRecurrentes",
 						"{{new_id_viajeRecurrente1}}"
 					]
-				}
+				},
+				"description": "Modifica un viaje recurrente existente y el cambio se guarda en la base de datos. Es la prueba de un caso valido para el servicio put del recurso. \n**Código http esperado: 200**"
 			},
 			"response": []
 		},
@@ -609,7 +614,8 @@
 						"viajesRecurrentes",
 						"0"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio put para el recurso en el caso en que se intenta modificar un viaje recurrente inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
@@ -645,7 +651,8 @@
 						"viajesRecurrentes",
 						"{{new_id_viajeRecurrente1}}"
 					]
-				}
+				},
+				"description": "Elimina un viaje recurrente existente y el cambio se guarda en la base de datos. Es la prueba de un caso valido para el servicio delete del recurso. \n**Código http esperado: 204**"
 			},
 			"response": []
 		},
@@ -681,7 +688,8 @@
 						"viajesRecurrentes",
 						"{{new_id_viajeRecurrente2}}"
 					]
-				}
+				},
+				"description": "Elimina un viaje recurrente existente y el cambio se guarda en la base de datos. Es la prueba de un caso valido para el servicio delete del recurso. \n**Código http esperado: 204**"
 			},
 			"response": []
 		},
@@ -718,7 +726,8 @@
 						"viajesRecurrentes",
 						"0"
 					]
-				}
+				},
+				"description": "Es la prueba del servicio put para el recurso en el caso en que se intenta eilimar un viaje recurrente inexistente. El test se pasa cuando el mensaje de error correcto es recibido. \n\n**Código http esperado: 404**"
 			},
 			"response": []
 		}

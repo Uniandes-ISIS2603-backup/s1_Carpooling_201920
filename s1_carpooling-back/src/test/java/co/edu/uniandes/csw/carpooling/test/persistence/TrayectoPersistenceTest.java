@@ -27,7 +27,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *
+ * Pruebas de perstistencia de Trayecto
  * @author Estudiante
  */
 @RunWith(Arquillian.class)
@@ -44,6 +44,11 @@ public class TrayectoPersistenceTest {
 
     private List<TrayectoEntity> data = new ArrayList<TrayectoEntity>();
 
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -53,6 +58,9 @@ public class TrayectoPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void configTest() {
         try {
@@ -71,10 +79,17 @@ public class TrayectoPersistenceTest {
         }
     }
 
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
     private void clearData() {
         em.createQuery("delete from TrayectoEntity").executeUpdate();
     }
 
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -85,6 +100,9 @@ public class TrayectoPersistenceTest {
         }
     }
 
+    /**
+     * Prueba para crear un Trayecto.
+     */
     @Test
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -98,6 +116,9 @@ public class TrayectoPersistenceTest {
         Assert.assertEquals(result.getDestino(), trayecto.getDestino());
     }
 
+    /**
+     * Prueba para traer un Trayecto.
+     */
     @Test
     public void getTrayectoTest() {
         TrayectoEntity trayecto = data.get(0);
@@ -106,6 +127,9 @@ public class TrayectoPersistenceTest {
         Assert.assertEquals(trayecto, newTrayecto);
     }
 
+    /**
+     * Prueba para traer los trayectos.
+     */
     @Test
     public void getTrayectosTest() {
         List<TrayectoEntity> newTrayectos = tp.findAll();
@@ -121,6 +145,9 @@ public class TrayectoPersistenceTest {
         }
     }
 
+    /**
+     * Prueba para actualizar un Trayecto.
+     */
     @Test
     public void updateTrayectoTest() {
         TrayectoEntity trayecto = data.get(0);
@@ -132,6 +159,9 @@ public class TrayectoPersistenceTest {
         Assert.assertEquals(resp, newTrayecto);
     }
 
+    /**
+     * Prueba para eliminar un Trayecto.
+     */
     @Test
     public void deleteTrayectoTest() {
         TrayectoEntity trayecto = data.get(0);

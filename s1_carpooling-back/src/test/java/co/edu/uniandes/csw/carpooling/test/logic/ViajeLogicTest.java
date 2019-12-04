@@ -29,7 +29,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *
+ * Pruebas de logica de Viaje
  * @author Juan David Serrano
  */
 @RunWith(Arquillian.class)
@@ -52,6 +52,9 @@ public class ViajeLogicTest {
 
     private ConductorEntity conductor;
 
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void configTest() {
         try {
@@ -69,12 +72,19 @@ public class ViajeLogicTest {
         }
     }
 
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
     private void clearData() {
         em.createQuery("delete from ViajeEntity").executeUpdate();
         em.createQuery("delete from VehiculoEntity").executeUpdate();
         em.createQuery("delete from ConductorEntity").executeUpdate();
     }
 
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData() {
         conductor = factory.manufacturePojo(ConductorEntity.class);
         em.persist(conductor);
@@ -89,6 +99,11 @@ public class ViajeLogicTest {
         }
     }
 
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -99,6 +114,10 @@ public class ViajeLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * Prueba para crear un viaje
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createViaje() throws BusinessLogicException {
         ViajeEntity aleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -116,6 +135,10 @@ public class ViajeLogicTest {
         Assert.assertEquals(aleatorio.getEstadoViaje(), buscado.getEstadoViaje());
     }
 
+    /**
+     * Prueba para crear un viaje con el numero de cupos incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeCuposIncorrecto() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -123,6 +146,10 @@ public class ViajeLogicTest {
         ViajeEntity result = viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con destino incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeDestinoIncorrecto() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -130,6 +157,10 @@ public class ViajeLogicTest {
         viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con origen incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeOrigenIncorrecto() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -137,6 +168,10 @@ public class ViajeLogicTest {
         viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con fecha de llegada incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeFechaDeLlegadaIncorrecto() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -144,6 +179,10 @@ public class ViajeLogicTest {
         viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con fecha de salida incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeFechaDeSalidaIncorrecto() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -151,6 +190,10 @@ public class ViajeLogicTest {
         viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con costo incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeCostoViajeIncorrecto() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -158,6 +201,10 @@ public class ViajeLogicTest {
         ViajeEntity result = viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con estado incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeEstadoViajeIncorrecto() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -165,6 +212,10 @@ public class ViajeLogicTest {
         viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con vehiculo incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createViajeVehiculoInexistene() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
@@ -173,14 +224,21 @@ public class ViajeLogicTest {
         viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para crear un viaje con conductor incorrecto 
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
-    public void createViajeCondcutorInexistene() throws BusinessLogicException {
+    public void createViajeConductorInexistene() throws BusinessLogicException {
         ViajeEntity viajeAleatorio = factory.manufacturePojo(ViajeEntity.class);
         viajeAleatorio.setConductor(factory.manufacturePojo(ConductorEntity.class));
         viajeAleatorio.setVehiculo(vehiculo);
         viajeLogic.createViaje(viajeAleatorio);
     }
 
+    /**
+     * Prueba para obtener los viajes
+     */
     @Test
     public void getViajesTest() {
         List<ViajeEntity> lista = viajeLogic.getViajes();
@@ -196,6 +254,9 @@ public class ViajeLogicTest {
         }
     }
 
+    /**
+     * Prueba para obtener un viaje
+     */
     @Test
     public void getViajeTest() {
         ViajeEntity entity1 = data.get(0);
@@ -210,6 +271,10 @@ public class ViajeLogicTest {
         Assert.assertEquals(entity1.getEstadoViaje(), entity2.getEstadoViaje());
     }
 
+    /**
+     * Prueba para actializar un viaje
+     * @throws BusinessLogicException 
+     */
     @Test
     public void updateViajeTest() throws BusinessLogicException {
         ViajeEntity entity0 = data.get(0);
@@ -229,6 +294,10 @@ public class ViajeLogicTest {
         Assert.assertEquals(entity1.getEstadoViaje(), entity2.getEstadoViaje());
     }
 
+    /**
+     * Prueba para actualizar un viaje con destino incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeDestinoIncorrecto() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -238,6 +307,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para actulizar un viaje con origen incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeOrigenIncorrecto() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -246,7 +319,11 @@ public class ViajeLogicTest {
         entity2.setId(entity1.getId());
         viajeLogic.updateViaje(entity2);
     }
-
+    
+    /**
+     * Prueba para actualizar un viaje con fecha de salida incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeFehchaDeSalidaIncorrecto() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -256,6 +333,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para actualizar un viaje con fecha de llegada incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeFehchaDeLlegadaIncorrecto() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -265,6 +346,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para actualizar un viaje con cupos incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeCuposIncorrecto() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -274,6 +359,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para actualizar un viaje con un costo de viaje incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeCostoViajeIncorrecto() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -283,6 +372,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para actualizar un viaje con estado incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeEstadoViajeIncorrecto() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -292,6 +385,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para actualizar un viaje con vehiculo incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeVehiculoInexistente() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -302,6 +399,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para actualizar un viaje con conductor incorrecto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void updateViajeConductorInexistente() throws BusinessLogicException {
         ViajeEntity entity1 = data.get(0);
@@ -312,6 +413,10 @@ public class ViajeLogicTest {
         viajeLogic.updateViaje(entity2);
     }
 
+    /**
+     * Prueba para eliminar un viaje
+     * @throws BusinessLogicException 
+     */
     @Test
     public void deleteViajeTest() throws BusinessLogicException {
         ViajeEntity entity = data.get(0);

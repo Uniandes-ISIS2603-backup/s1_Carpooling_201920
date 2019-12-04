@@ -69,6 +69,9 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaDeSalida;
 
+    
+    
+    private DISPONIBILIDAD disponibilidad;
     /**
      * Publicista duenho de la publicidad
      */
@@ -97,6 +100,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     public String getMensaje() {
         return mensaje;
     }
+    
 
     /**
      * Ajusta el mensaje de la publicidad al mensaje ingresado por parametro
@@ -154,16 +158,16 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     /**
      * @return the disponibilidadPublicidad
      */
-    public DISPONIBILIDAD getDisponibilidadPublicidad() {
-        return disponibilidadPublicidad;
+    public DISPONIBILIDAD getDisponibilidad() {
+        return disponibilidad;
     }
 
     /**
      * Ajusta la disponibilidad de la publicidad con el valor ingresado por parametro
      * @param disponibilidadPublicidad the disponibilidadPublicidad to set
      */
-    public void setDisponibilidadPublicidad(DISPONIBILIDAD disponibilidadPublicidad) {
-        this.disponibilidadPublicidad = disponibilidadPublicidad;
+    public void setDisponibilidad(DISPONIBILIDAD disponibilidadPublicidad) {
+        this.disponibilidad = disponibilidadPublicidad;
     }
 
     /**

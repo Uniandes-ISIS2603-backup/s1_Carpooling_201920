@@ -29,7 +29,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *      "fechaDeLlegada": Date,
  *      "cupos": Integer,
  *      "costoViaje": Double,
- *      "vehiculo": String,
+ *      "vehiculo": VehiculoDTO,
  *      "estadoViaje: ESTADO_DE_VIAJE
  *   }
  * </pre> Por ejemplo un viaje se representa asi:<br>
@@ -44,7 +44,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *      "fechaDeLlegada": "2019-11-03",
  *      "cupos": 2,
  *      "costoViaje": 30000.0,
- *      "vehiculo":"DBS594",
+ *      "vehiculo":{ },
  *      "estadoViaje": "PUBLICADO"          
  *   }
  *
@@ -73,11 +73,18 @@ public class ViajeDTO implements Serializable{
     
     private ESTADO_DE_VIAJE estadoViaje;
     
+    /**
+     * Constructor vacio
+     */
     public ViajeDTO(){
         
     }
     
-    
+    /**
+     * Crea un objeto ViajeDTO a partir de un objeto ViajeEntity.
+     * @param viaje Entidad ViajeEntity desde la cual se va a crear el
+     * nuevo objeto.
+     */
      public ViajeDTO(ViajeEntity viaje){
         if(viaje != null){
             this.id = viaje.getId();
@@ -92,7 +99,12 @@ public class ViajeDTO implements Serializable{
         }  
     }
     
-    
+    /**
+     * Convierte un objeto ViajeDTO a ViajeEntity.
+     *
+     * @return Nueva objeto ViajeEntity.
+     *
+     */
     public ViajeEntity toEntity(){
         ViajeEntity entity = new ViajeEntity();
         entity.setId(this.getId());
@@ -105,76 +117,6 @@ public class ViajeDTO implements Serializable{
         entity.setVehiculo(this.vehiculo.toEntity());
         entity.setEstadoViaje(this.estadoViaje);
         return entity;
-    }
-
-    /**
-     * @return the destino
-     */
-    public String getDestino() {
-        return destino;
-    }
-
-    /**
-     * @param destino the destino to set
-     */
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
-    /**
-     * @return the origen
-     */
-    public String getOrigen() {
-        return origen;
-    }
-
-    /**
-     * @param origen the origen to set
-     */
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
-
-    /**
-     * @return the fechaDeSalida
-     */
-    public Date getFechaDeSalida() {
-        return fechaDeSalida;
-    }
-
-    /**
-     * @param fechaDeSalida the fechaDeSalida to set
-     */
-    public void setFechaDeSalida(Date fechaDeSalida) {
-        this.fechaDeSalida = fechaDeSalida;
-    }
-
-    /**
-     * @return the fechaDeLlegada
-     */
-    public Date getFechaDeLlegada() {
-        return fechaDeLlegada;
-    }
-
-    /**
-     * @param fechaDeLlegada the fechaDeLlegada to set
-     */
-    public void setFechaDeLlegada(Date fechaDeLlegada) {
-        this.fechaDeLlegada = fechaDeLlegada;
-    }
-
-    /**
-     * @return the cupos
-     */
-    public Integer getCupos() {
-        return cupos;
-    }
-
-    /**
-     * @param cupos the cupos to set
-     */
-    public void setCupos(Integer cupos) {
-        this.cupos = cupos;
     }
 
     /**
@@ -236,5 +178,75 @@ public class ViajeDTO implements Serializable{
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+    
+    /**
+     * @return the fechaDeLlegada
+     */
+    public Date getFechaDeLlegada() {
+        return fechaDeLlegada;
+    }
+
+    /**
+     * @param fechaDeLlegada the fechaDeLlegada to set
+     */
+    public void setFechaDeLlegada(Date fechaDeLlegada) {
+        this.fechaDeLlegada = fechaDeLlegada;
+    }
+    
+        /**
+     * @return the fechaDeSalida
+     */
+    public Date getFechaDeSalida() {
+        return fechaDeSalida;
+    }
+
+    /**
+     * @param fechaDeSalida the fechaDeSalida to set
+     */
+    public void setFechaDeSalida(Date fechaDeSalida) {
+        this.fechaDeSalida = fechaDeSalida;
+    }
+    
+    /**
+     * @return the origen
+     */
+    public String getOrigen() {
+        return origen;
+    }
+
+    /**
+     * @param origen the origen to set
+     */
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+    
+    /**
+     * @return the destino
+     */
+    public String getDestino() {
+        return destino;
+    }
+
+    /**
+     * @param destino the destino to set
+     */
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+    
+        /**
+     * @return the cupos
+     */
+    public Integer getCupos() {
+        return cupos;
+    }
+
+    /**
+     * @param cupos the cupos to set
+     */
+    public void setCupos(Integer cupos) {
+        this.cupos = cupos;
     }
 }

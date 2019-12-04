@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.csw.carpooling.test.persistence;
 
+import co.edu.uniandes.csw.carpooling.entities.ConductorEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
+import co.edu.uniandes.csw.carpooling.persistence.ConductorPersistence;
 import co.edu.uniandes.csw.carpooling.persistence.ViajePersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *
+ * Pruebas de persistencia de Viaje
  * @author Juan David Serrano
  */
 @RunWith(Arquillian.class)
@@ -41,7 +43,15 @@ public class ViajePersistenceTest {
     UserTransaction utx;
 
     private List<ViajeEntity> data = new ArrayList<ViajeEntity>();
+    
+    
+    private List<ConductorEntity> dataConductor = new ArrayList<ConductorEntity>();
 
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -51,6 +61,9 @@ public class ViajePersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void configTest() {
         try {
@@ -69,20 +82,36 @@ public class ViajePersistenceTest {
         }
     }
 
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
     private void clearData() {
         em.createQuery("delete from ViajeEntity").executeUpdate();
     }
 
+    
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i< 3 ; i++){
+            ConductorEntity entity = factory.manufacturePojo(ConductorEntity.class);
+            em.persist(entity);
+            dataConductor.add(entity);
+        }
         for (int i = 0; i < 3; i++) {
             ViajeEntity entity = factory.manufacturePojo(ViajeEntity.class);
-
+            entity.setConductor(dataConductor.get(i));
             em.persist(entity);
             data.add(entity);
         }
     }
 
+    /**
+     * Prueba para crear un Viaje.
+     */
     @Test
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -99,6 +128,9 @@ public class ViajePersistenceTest {
         Assert.assertEquals(viaje.getOrigen(), entity.getOrigen());
     }
 
+    /**
+     * Prueba para consultar un Viaje.
+     */
     @Test
     public void getViajeTest() {
         ViajeEntity viaje = data.get(0);
@@ -107,6 +139,9 @@ public class ViajePersistenceTest {
         Assert.assertEquals(viaje, newViaje);
     }
 
+    /**
+     * Prueba para consultar la lista de Viaje.
+     */
     @Test
     public void getViajesTest() {
         List<ViajeEntity> newViajes = vp.findAll();
@@ -122,6 +157,9 @@ public class ViajePersistenceTest {
         }
     }
 
+    /**
+     * Prueba para actualizar un Viaje.
+     */
     @Test
     public void updateViajeTest() {
         ViajeEntity viaje = data.get(0);
@@ -133,6 +171,9 @@ public class ViajePersistenceTest {
         Assert.assertEquals(resp, newViaje);
     }
 
+    /**
+     * Prueba para borrar un Viaje.
+     */
     @Test
     public void deleteViajeTest() {
         ViajeEntity viaje = data.get(0);
@@ -140,4 +181,30 @@ public class ViajePersistenceTest {
         ViajeEntity borrado = em.find(ViajeEntity.class, viaje.getId());
         Assert.assertNull(borrado);
     }
+    
+    /**
+     * Prueba para consultar la lista de Viajes segun Conductor.
+     */
+    @Test 
+    public void getViajesByConductorTest(){
+        for(int i = 0; i < 3; i++){
+            List<ViajeEntity> entities = vp.findAll(dataConductor.get(i).getId());
+            Assert.assertNotNull(entities);
+            Assert.assertEquals(1, entities.size());
+            Assert.assertEquals(entities.get(0), data.get(i));
+        }
+    }
+    
+    /**
+     * Prueba para consultar un Viaje de un Conductor.
+     */
+    @Test
+    public void getViajeByConductorTest(){
+        for(int i = 0; i < 3; i++){
+            ViajeEntity entity = vp.find(dataConductor.get(i).getId(), data.get(i).getId());
+            Assert.assertNotNull(entity);
+            Assert.assertEquals(entity, data.get(i));
+        }
+    }
+    
 }

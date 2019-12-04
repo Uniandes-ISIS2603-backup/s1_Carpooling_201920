@@ -51,7 +51,7 @@ public class ConductorViajesResource {
     
     @POST
     @Path("{vehiculosId: \\d+}")
-    public ViajeDetailDTO createViaje(@PathParam("conductoresId") Long conductoresId, @PathParam("vehiculosId") Long vehiculosId, ViajeDTO viaje) throws BusinessLogicException{
+    public ViajeDTO createViaje(@PathParam("conductoresId") Long conductoresId, @PathParam("vehiculosId") Long vehiculosId, ViajeDTO viaje) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "ConductorViajesResource createViaje: input: {0} con id de conductor: {1} y id de vehiculo: {2}", new Object[]{viaje, conductoresId, vehiculosId});
         ViajeEntity viajeEntity =viaje.toEntity();
         ConductorEntity conductorEntity = conductorLogic.getConductor(conductoresId);

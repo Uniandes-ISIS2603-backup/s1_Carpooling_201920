@@ -13,46 +13,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
- * 
- * AuthorDTO Objeto de transferencia de datos de Autores. Los DTO contienen las
- * representaciones de los JSON que se transfieren entre el cliente y el
- * servidor.
- *
- * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
- * <pre>
- *   {
- *	"nombre":"String",
- *	"costo":"double",
- *	"mensaje":"String",
- *	"fechaDeInicio" : "Date",
- *	"fechaDeSalida" : "Date",
- *      "publicista" : "PublicistaDTO",
- *	
- *   }
- * </pre> Por ejemplo un autor se representa asi:<br>
- *
- * <pre>
- *
- * {
- *      "nombre": "Joker",
- *      "costo": 150000,
- *      "mensaje": "Why so serious?",
- *      "fechaDeInicio": "2019-10-10T00:00:00-05:00",
- *      "fechaDeSalida": "2019-11-10T00:00:00-05:00",
- *      "publicista":
- *      {
- *          "nombre":"Santiago",
- *          "apellido":"Ballesteros",
- *          "tipoPublicista":"PERSONA_NATURAL_CON_EMPRESA",
- *          "telefono" : "3123456784",
- *        "contrasenha" : "password",
- *          "correo" : "s.ballesteros@uniandes.edu.co",
- *          "cedula" : "1123456780",
- *          "rut" : "qdbkhfebjhk"
- *      }
- * }
- *
- * @author Nicolas Fajardo
+ * @author Santiago Ballesteros
  */
 public class PublicidadDTO implements Serializable{
     
@@ -95,6 +56,10 @@ public class PublicidadDTO implements Serializable{
      */
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeSalida;
+    
+    protected PublicidadEntity.DISPONIBILIDAD disponibilidad;
+    
+
 
     /**
      * Constructor vacio
@@ -129,6 +94,10 @@ public class PublicidadDTO implements Serializable{
         entidad.setCosto(this.getCosto());
         entidad.setFechaDeInicio(this.getFechaDeInicio());
         entidad.setFechaDeSalida(this.getFechaDeSalida());
+        entidad.setDisponibilidad(this.getDisponibilidad());
+        if (this.getPublicista() != null) {
+            entidad.setPublicista(this.getPublicista().toEntity());
+        }
         return entidad;
     }
     
@@ -163,14 +132,14 @@ public class PublicidadDTO implements Serializable{
     /**
      * @return the costo
      */
-    public double getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
     /**
      * @param costo the costo to set
      */
-    public void setCosto(double costo) {
+    public void setCosto(Double costo) {
         this.costo = costo;
     }
 
@@ -216,5 +185,34 @@ public class PublicidadDTO implements Serializable{
         this.id = id;
     }
 
+    /**
+     * @return the disponibilidad
+     */
+    public PublicidadEntity.DISPONIBILIDAD getDisponibilidad() {
+        return disponibilidad;
+    }
 
+    /**
+     * @param disponibilidad the disponibilidad to set
+     */
+    public void setDisponibilidad(PublicidadEntity.DISPONIBILIDAD disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    /**
+     * @return the publicista
+     */
+    public PublicistaDTO getPublicista() {
+        return publicista;
+    }
+
+    /**
+     * @param publicista the publicista to set
+     */
+    public void setPublicista(PublicistaDTO publicista) {
+        this.publicista = publicista;
+    }
+
+    
+    
 }

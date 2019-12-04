@@ -5,12 +5,14 @@
  */
 package co.edu.uniandes.csw.carpooling.dtos;
 
+import co.edu.uniandes.csw.carpooling.adapters.DateAdapter;
 import co.edu.uniandes.csw.carpooling.entities.NotificacionEntity;
 import co.edu.uniandes.csw.carpooling.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -48,8 +50,7 @@ public class NotificacionDTO implements Serializable{
     private Long id;
     private String mensaje;
     private String titulo;
-    @Temporal(TemporalType.TIMESTAMP)
-    @PodamStrategyValue(DateStrategy.class)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fecha;
     /**
      * @return the mensaje

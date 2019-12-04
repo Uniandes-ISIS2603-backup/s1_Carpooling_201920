@@ -99,7 +99,7 @@ public class PublicistaLogic {
         return newEntity;
     }
 
-    public void deletePublicista(Long publicistasId) throws BusinessLogicException {
+    public void deletePublicista(Long publicistasId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar publicista con id = {0}", publicistasId);
         // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia.
         pp.delete(publicistasId);

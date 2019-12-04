@@ -76,13 +76,13 @@ public class CalificacionLogic {
     }
 
     public List<CalificacionEntity> getCalificacionesByViajero(Long viajerosId) {
-        ViajeroEntity viajeroEntity = viajeroPersistence.find(viajerosId);
-        return viajeroEntity.getCalificaciones();
+        List<CalificacionEntity> calificaciones = persistence.findAllByViajero(viajerosId);
+        return calificaciones;
     }
 
     public List<CalificacionEntity> getCalificacionesByConductor(Long conductoresId) {
-        ConductorEntity conductorEntity = conductorPersistence.find(conductoresId);
-        return conductorEntity.getCalificaciones();
+        List<CalificacionEntity> calificaciones = persistence.findAllByConductor(conductoresId);
+        return calificaciones;
     }
 
     public CalificacionEntity getCalificacionByViajero(Long viajerosId, Long calificacionesId) {

@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.carpooling.ejb;
 
 import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
+import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.carpooling.persistence.ReservaPersistence;
+import co.edu.uniandes.csw.carpooling.persistence.ViajePersistence;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,15 +28,20 @@ public class ReservaLogic {
 
     @Inject
     private ReservaPersistence persistence;
+    private ViajePersistence viajePersistence;
 
-    public ReservaEntity createReserva(ReservaEntity reserva) throws BusinessLogicException {
-        if (reserva.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
-            throw new BusinessLogicException("La reserva tiene una fecha menor a la actual");
-        }
+    public ReservaEntity createReserva(Long viajeId, ReservaEntity reserva) throws BusinessLogicException {
+//        if (reserva.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
+//            throw new BusinessLogicException("La reserva tiene una fecha menor a la actual");
+//        }
         // preguntar si existe el viaje (not null) no se como hacerlo, se debe hacer la relacion, manyToOne en el entity con la referencia a viajes?
 
         if (reserva.getEstado() == (null)) {
-            throw new BusinessLogicException("La reserva no tiene estado");
+            throw new BusinessLogicException("El viaje no tiene cupos");
+            
+        }
+        if (viajePersistence.find(viajeId).getReservas().size()>=viajePersistence.find(viajeId).getCupos()){
+            throw new BusinessLogicException("El viaje no tiene cupos");
         }
         if (persistence.find(reserva.getId()) != null) {
             throw new BusinessLogicException("La reserva ya existe");
@@ -42,7 +49,6 @@ public class ReservaLogic {
         if (reserva.getViaje().getCupos() <= 0) {
             throw new BusinessLogicException("La reserva ya existe");
         }
-        reserva = persistence.create(reserva);
         return reserva;
     }
 
@@ -75,10 +81,24 @@ public class ReservaLogic {
         }
         return reservaEntity;
     }
+    
+    public ReservaEntity findReservaByViaje(Long reservaId, Long viajeId) throws BusinessLogicException {
+        ReservaEntity reservaEntity = persistence.findByViaje(reservaId, viajeId);
+        if (reservaEntity==null) {
+            throw new BusinessLogicException("La reserva no existe");
+        }
+        return reservaEntity;
+    }
 
 //       public List<ReservaEntity> getReservas(){
 //        return persistence.findAll();
 //       }
+    
+    public List<ReservaEntity> getReservasByViaje(Long viajeId) {
+        ViajeEntity viajeEntity = viajePersistence.find(viajeId);
+        return viajeEntity.getReservas();
+    }
+    
     public List<ReservaEntity> findReservas() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los libros");
         List<ReservaEntity> reservas = persistence.findAll();
