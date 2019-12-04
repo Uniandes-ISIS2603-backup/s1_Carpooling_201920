@@ -95,7 +95,7 @@ public class ConductorEntity extends UsuarioEntity implements Serializable {
     /**
      * @return  la lista de las calificaciones del conductor
      */
-    @Override
+
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
@@ -104,7 +104,7 @@ public class ConductorEntity extends UsuarioEntity implements Serializable {
      * Ajusta la lista de las calificaciones del conductor al valor ingresado por paràmetro
      * @param calificaciones las nuevas calificaciones
      */
-    @Override
+    
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }

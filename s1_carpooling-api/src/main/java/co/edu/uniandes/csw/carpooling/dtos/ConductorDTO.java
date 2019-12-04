@@ -14,10 +14,17 @@ import java.io.Serializable;
  */
 public class ConductorDTO extends UsuarioDTO implements Serializable{
     
+    /**
+     * Constructor vacio
+     */
     public ConductorDTO(){
         
     }
    
+    /**
+     * constructor de la superClase
+     * @param entity el conductor a construir
+     */
     public ConductorDTO(ConductorEntity entity){
         super(entity);
         if(entity!=null){
@@ -32,6 +39,10 @@ public class ConductorDTO extends UsuarioDTO implements Serializable{
         }  
     }
     
+    /**
+     * Retorna una entidad de este elemento
+     * @return este elemento en forma de entidad
+     */
     public ConductorEntity toEntity(){
         ConductorEntity entity = new ConductorEntity();
         super.toEntity(entity);
