@@ -59,7 +59,7 @@ public class PublicidadDTO implements Serializable{
     
     protected PublicidadEntity.DISPONIBILIDAD disponibilidad;
     
-    protected PublicistaDTO publicista;
+
 
     /**
      * Constructor vacio
