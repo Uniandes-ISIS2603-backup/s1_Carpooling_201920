@@ -39,8 +39,8 @@ public class NotificacionLogic {
         if (notificacion.getFecha() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene una fecha");
         }
-        if (notificacion.getFecha().compareTo(Calendar.getInstance().getTime()) < 0) {
-            throw new BusinessLogicException("La notificacion tiene una fecha menor a la actual");
+        if (notificacion.getFecha()==null){//.compareTo(Calendar.getInstance().getTime()) < 0) {
+            throw new BusinessLogicException("La notificacion tiene una fecha menor no valida");
         }
         if (notificacion.getMensaje() == (null)) {
             throw new BusinessLogicException("La notificacion no tiene un mensaje");
