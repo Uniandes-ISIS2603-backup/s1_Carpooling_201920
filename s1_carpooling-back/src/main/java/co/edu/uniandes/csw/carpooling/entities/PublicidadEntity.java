@@ -47,7 +47,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     /**
      * El costo de la publicidad
      */
-    private double costo;
+    private Double costo;
 
     /**
      * La disponibilidad de la publicidad
@@ -113,7 +113,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable {
     /**
      * @return the costo
      */
-    public double getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
