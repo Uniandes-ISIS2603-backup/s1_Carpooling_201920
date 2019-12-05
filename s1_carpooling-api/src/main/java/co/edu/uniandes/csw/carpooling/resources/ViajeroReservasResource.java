@@ -8,8 +8,10 @@ package co.edu.uniandes.csw.carpooling.resources;
 import co.edu.uniandes.csw.carpooling.dtos.ReservaDTO;
 import co.edu.uniandes.csw.carpooling.ejb.ReservaLogic;
 import co.edu.uniandes.csw.carpooling.ejb.ViajeLogic;
+import co.edu.uniandes.csw.carpooling.ejb.ViajeroLogic;
 import co.edu.uniandes.csw.carpooling.entities.ReservaEntity;
 import co.edu.uniandes.csw.carpooling.entities.ViajeEntity;
+import co.edu.uniandes.csw.carpooling.entities.ViajeroEntity;
 import co.edu.uniandes.csw.carpooling.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +33,8 @@ import javax.ws.rs.core.MediaType;
  */
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ReservaViajeResource {
-    
+public class ViajeroReservasResource {
+        
         
     private static final Logger LOGGER = Logger.getLogger(TrayectoResource.class.getName());
     
@@ -42,22 +44,30 @@ public class ReservaViajeResource {
     @Inject
     private ViajeLogic viajeLogic;
     
+    @Inject
+    private ViajeroLogic viajeroLogic;
     
     
     
-      @POST
+    
+    @POST
     @Path("{viajesId: \\d+}")
-    public ReservaDTO createReserva( @PathParam("viajesId") Long viajeId, ReservaDTO reserva) throws BusinessLogicException{
-        //LOGGER.log(Level.INFO, "ReservaViajeResource createReserva: input: {0} con id de viajero: {1} y id de viaje: {2}", new Object[]{reserva, viajeId});
+    public ReservaDTO createReserva(@PathParam("viajerosId") Long viajerosId, @PathParam("viajesId") Long viajeId, ReservaDTO reserva) throws BusinessLogicException{
+        LOGGER.log(Level.INFO, "ReservaViajeResource createReserva: input: {0} con id de viajero: {1} y id de viaje: {2}", new Object[]{ viajerosId, viajeId, reserva});
         ReservaEntity reservaEntity =reserva.toEntity();
+        ViajeroEntity viajeroEntity = viajeroLogic.getViajero(viajerosId);
+        if(viajeroEntity == null){
+            throw new WebApplicationException("El recurso /viajero/" + viajerosId + " no existe.", 404);
+        }
         ViajeEntity viajeEntity = viajeLogic.getViaje(viajeId);
         if(viajeEntity == null){
             throw new WebApplicationException("El recurso /viaje/" + viajeId + " no existe.", 404);
         }
+        reservaEntity.setViajero(viajeroEntity);
         reservaEntity.setViaje(viajeEntity);
         reservaEntity = reservaLogic.createReserva(viajeId, reservaEntity);
         ReservaDTO resultado = new ReservaDTO(reservaEntity);
-       // LOGGER.log(Level.INFO, "ReservaViajeResource createReserva: output: {0}", resultado);
+        LOGGER.log(Level.INFO, "ReservaViajeResource createReserva: output: {0}", resultado);
         return resultado;
     }
     
