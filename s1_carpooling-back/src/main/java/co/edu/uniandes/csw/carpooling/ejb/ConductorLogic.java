@@ -129,7 +129,7 @@ public class ConductorLogic {
      * @return true si la fecha de nacimiento cumple con las reglas de negocio, false de lo contrario
      */
     private boolean validarFechaNacimiento(Date fechaNacimiento) {
-        return !(fechaNacimiento.compareTo(new Date()) >= 0 || fechaNacimiento == null);
+        return !(fechaNacimiento == null);
     }
 
     /**
