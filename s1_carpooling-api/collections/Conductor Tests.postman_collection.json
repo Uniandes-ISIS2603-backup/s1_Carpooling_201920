@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "a5b61805-a4cf-41be-9851-e958c6c3632f",
 		"name": "Conductor Tests",
+		"description": "Test de los recursos de conductor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -53,7 +54,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea un conductor y lo almacena en la base de datos. El id es guardado para las otras pruebas. \n**Codigo http esperado: 200**"
 			},
 			"response": []
 		},
@@ -105,7 +107,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Crea un conductor y lo almacena en la base de datos. El id es almacenado para las otras pruebas.\n**Codigo http esperado: 200**"
 			},
 			"response": []
 		},
@@ -117,7 +120,7 @@
 					"script": {
 						"id": "18d3c454-4bf4-4ccf-8551-c5eb0a91dc7b",
 						"exec": [
-							"tests[\"No pueden haber dos conductores con igual correo\"] = responseCode.code === 412;",
+							"tests[\"El origen no puede ser vacio\"] = responseCode.code === 412;",
 							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Ya hay un conductor con ese correo\");"
 						],
 						"type": "text/javascript"
@@ -155,7 +158,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Intenta crear un conductor, pero falla al estar usando un correo electrònico que ya está siendo usado por otro usuario.\n**Codigo http esperado: 412**"
 			},
 			"response": []
 		},
@@ -207,7 +211,8 @@
 						"conductores",
 						"{{new_id_conductor2}}"
 					]
-				}
+				},
+				"description": "Actualiza la informaciòn de un conductor. se usa uno de los id almacenados anteriormente. \n**Codigo http esperado: 200**"
 			},
 			"response": []
 		},
@@ -258,7 +263,8 @@
 						"conductores",
 						"0"
 					]
-				}
+				},
+				"description": "Falla al intentar editar un conductor que no existe.\n**Codigo http esperado: 404**"
 			},
 			"response": []
 		},
@@ -293,7 +299,8 @@
 						"api",
 						"conductores"
 					]
-				}
+				},
+				"description": "Obtiene todos los conductores de la base de datos.\n**Codigo http esperado: 200*"
 			},
 			"response": []
 		},
@@ -329,7 +336,8 @@
 						"conductores",
 						"{{new_id_conductor1}}"
 					]
-				}
+				},
+				"description": "Obtiene un conductor dado su id (uno de los almacenados anteriormente) \n**Codigo http esperado: 200*"
 			},
 			"response": []
 		},
@@ -364,7 +372,8 @@
 						"conductores",
 						"0"
 					]
-				}
+				},
+				"description": "Falla al intentar retornar un conductor que no existe.\n\n**Codigo http esperado: 404**"
 			},
 			"response": []
 		},
@@ -398,7 +407,8 @@
 						"conductores",
 						"{{new_id_conductor1}}"
 					]
-				}
+				},
+				"description": "Borra uno de los conductores creados anteriormente de la base de datos. \n**Codigo http esperado: 204**"
 			},
 			"response": []
 		},
@@ -432,7 +442,8 @@
 						"conductores",
 						"{{new_id_conductor2}}"
 					]
-				}
+				},
+				"description": "Borra uno de los conductores creados anteriormente de la base de datos.\n **Codigo http esperado: 204**"
 			},
 			"response": []
 		},
@@ -467,7 +478,8 @@
 						"conductores",
 						"0"
 					]
-				}
+				},
+				"description": "Falla al intentar borrar un conductor que no existe.\n**Codigo http esperado: 404**"
 			},
 			"response": []
 		}

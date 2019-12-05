@@ -35,21 +35,42 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class PublicidadLogicTest {
 
+    /**
+     * El podam factory
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * la logica de la publicidad
+     */
     @Inject
     private PublicidadLogic publicidadLogic;
 
+    /**
+     * el entity manager
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * la transaccion
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * la informacion de publicidades para las pruebas
+     */
     private List<PublicidadEntity> data = new ArrayList<PublicidadEntity>();
 
+    /**
+     * la informacion de publicistas para las pruebas
+     */
     private List<PublicistaEntity> dataPublicista = new ArrayList<PublicistaEntity>();
 
+    /**
+     * crea el deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -60,6 +81,9 @@ public class PublicidadLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * configura la informaciòn para las pruebas
+     */
     @Before
     public void configTest() {
         try {
@@ -77,10 +101,16 @@ public class PublicidadLogicTest {
         }
     }
 
+    /**
+     * limpia la tabla de informaciòn de publicidad
+     */
     private void clearData() {
         em.createQuery("delete from PublicidadEntity").executeUpdate();
     }
 
+    /**
+     * agrega informaciòn a las listas de publicista y publicidad para poder hacer las pruebas
+     */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             PublicistaEntity entity = factory.manufacturePojo(PublicistaEntity.class);
@@ -96,17 +126,15 @@ public class PublicidadLogicTest {
         }
     }
 
+    /**
+     * test de crear publicidad
+     */
     @Test
     public void createPublicidadTest() throws BusinessLogicException {
 
         PublicidadEntity newEntity = factory.manufacturePojo(PublicidadEntity.class);
 
         Date fechaI = new Date();
-        try {
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         Date fechaS = new Date();
         newEntity.setFechaDeInicio(fechaI);
         newEntity.setFechaDeSalida(fechaS);
@@ -123,6 +151,10 @@ public class PublicidadLogicTest {
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
 
+    /**
+     * test de dar todas las publicidades
+     * @throws BusinessLogicException 
+     */
     @Test
     public void getPublicidadesTest() throws BusinessLogicException {
         List<PublicidadEntity> list = publicidadLogic.getPublicidades(dataPublicista.get(1).getId());
@@ -138,6 +170,9 @@ public class PublicidadLogicTest {
         }
     }
 
+    /**
+     * test de dar publicidad por id
+     */
     @Test
     public void getPublicidadTest() {
         PublicidadEntity entity = data.get(0);
@@ -151,15 +186,13 @@ public class PublicidadLogicTest {
         Assert.assertEquals(result.getNombre(), entity.getNombre());
     }
 
+    /**
+     * test de actualizar publicidad
+     */
     @Test
     public void updatePublicidadTest() throws BusinessLogicException {
         PublicidadEntity entity = data.get(0);
         Date fechaI = new Date();
-        try {
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         Date fechaS = new Date();
         PublicidadEntity pojoEntity = factory.manufacturePojo(PublicidadEntity.class);
         pojoEntity.setFechaDeInicio(fechaI);
@@ -176,6 +209,10 @@ public class PublicidadLogicTest {
         Assert.assertEquals(result.getNombre(), pojoEntity.getNombre());
     }
 
+    /**
+     * test de borrar publicidad
+     * @throws BusinessLogicException  si al borrar la publicidad se rompe alguna regla de negocio
+     */
     @Test
     public void deletePublicidadTest() throws BusinessLogicException {
         PublicidadEntity entity = data.get(0);

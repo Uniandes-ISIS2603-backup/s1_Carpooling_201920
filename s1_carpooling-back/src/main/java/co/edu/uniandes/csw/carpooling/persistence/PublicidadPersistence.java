@@ -19,23 +19,30 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class PublicidadPersistence {
 
+    /**
+     * El entity manager
+     */
     @PersistenceContext(unitName = "carpoolingPU")
     protected EntityManager em;
 
+    /**
+     * crea una nueva pùblicidad en la base de datos
+     * @param publicidadEntity la publicidad a crear
+     * @return la publicidad creada
+     */
     public PublicidadEntity create(PublicidadEntity publicidadEntity) {
         em.persist(publicidadEntity);
         return publicidadEntity;
     }
 
     /**
-     * Buscar una reseña
+     * Buscar una publicidad dado su id y el del publicista duenho de esta
      *
-     * Busca si hay alguna reseña asociada a un libro y con un ID específico
+     * Busca si hay alguna publicidad asociada al id ingresado por parametro
      *
-     * @param publicistasId El ID del libro con respecto al cual se busca
-     * @param publicidadesId El ID de la reseña buscada
-     * @return La reseña encontrada o null. Nota: Si existe una o más reseñas
-     * devuelve siempre la primera que encuentra
+     * @param publicistasId El id del publicista 
+     * @param publicidadesId El ID de la publicidad buscada
+     * @return La primera publicidad encontrada 
      */
     public PublicidadEntity find(Long publicistasId, Long publicidadesId) {
 
@@ -53,15 +60,29 @@ public class PublicidadPersistence {
         return publicidad;
     }
 
+    /**
+     * Actualiza una publicidad de la base de datos
+     * @param publicidadEntity la publicidad actualizada
+     * @return la publicidad actualizada
+     */
     public PublicidadEntity update(PublicidadEntity publicidadEntity) {
         return em.merge(publicidadEntity);
     }
 
+    /**
+     * borra una publicidad de la base de datos dado su id
+     * @param publicidadId  la publicidad eliminada
+     */
     public void delete(Long publicidadId) {
         PublicidadEntity publicidadEntity = em.find(PublicidadEntity.class, publicidadId);
         em.remove(publicidadEntity);
     }
 
+    /**
+     * Busca una publicidad dado su nombre
+     * @param nombre el nombre de la publicidad a buscar
+     * @return la primera publicidad cuyo nombre sea el ingresado por parametro
+     */
     public PublicidadEntity findByName(String nombre) {
         TypedQuery query = em.createQuery("Select e From PublicidadEntity e where e.nombre = :nombre", PublicidadEntity.class);
         query = query.setParameter("nombre", nombre);

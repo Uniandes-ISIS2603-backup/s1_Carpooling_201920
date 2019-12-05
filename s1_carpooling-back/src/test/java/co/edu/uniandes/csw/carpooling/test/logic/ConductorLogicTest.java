@@ -38,19 +38,37 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ConductorLogicTest {
 
+    /**
+     * la logica del conductor
+     */
     @Inject
     private ConductorLogic conductorLogic;
 
+    /**
+     * el podam factory
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * el entity manager
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * la transaccion
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * lista con datos para pruebas
+     */
     private List<ConductorEntity> data = new ArrayList<ConductorEntity>();
 
+    /**
+     * crea el deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -61,6 +79,9 @@ public class ConductorLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+    /**
+     * configuraciòn de los datos de prueba
+     */
     @Before
     public void ConfigTest() {
         try {
@@ -78,10 +99,16 @@ public class ConductorLogicTest {
         }
     }
 
+    /**
+     * borra los datos de la lista data
+     */
     private void clearData() {
         em.createQuery("delete from ConductorEntity").executeUpdate();
     }
 
+    /**
+     * llena la lista data con conductores para las pruebas
+     */
     private void insertData() {
 
         for (int i = 0; i < 3; i++) {
@@ -92,16 +119,15 @@ public class ConductorLogicTest {
         }
     }
 
+    /**
+     * test de crear conductor
+     * @throws BusinessLogicException 
+     */
     @Test
     public void crearConductorTest() throws BusinessLogicException {
         ConductorEntity newEntity = factory.manufacturePojo(ConductorEntity.class);
         Date date1 = new Date();
         newEntity.setFechaDeNacimiento(date1);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
 
         ConductorEntity result = conductorLogic.createConductor(newEntity);
         Assert.assertNotNull(result);
@@ -115,6 +141,10 @@ public class ConductorLogicTest {
         Assert.assertEquals(newEntity.getTipoDocumento(), entity.getTipoDocumento());
     }
 
+    /**
+     * test de crear un conductor con un correo que ya existe
+     * @throws BusinessLogicException en caso de que se incumpla alguna regla de negocio
+     */
     @Test(expected = BusinessLogicException.class)
     public void crearConductorConCorreoExistente() throws BusinessLogicException {
         ConductorEntity newEntity = factory.manufacturePojo(ConductorEntity.class);
@@ -122,6 +152,9 @@ public class ConductorLogicTest {
         conductorLogic.createConductor(newEntity);
     }
 
+    /**
+     * test de obtener todos los conductores
+     */
     @Test
     public void getConductoresTest() {
         List<ConductorEntity> list = conductorLogic.getConductores();
@@ -137,6 +170,9 @@ public class ConductorLogicTest {
         }
     }
 
+    /**
+     * test de obtener un conductor dado su id
+     */
     @Test
     public void getConductorTest() {
         ConductorEntity entity = data.get(0);
@@ -152,6 +188,10 @@ public class ConductorLogicTest {
         Assert.assertEquals(resultEntity.getTipoDocumento(), entity.getTipoDocumento());
     }
 
+    /**
+     * Test de actualizar un conductor
+     * @throws BusinessLogicException en caso de que al actualizar el conductor se rompa alguna regla de negocio
+     */
     @Test
     public void updateConductorTest() throws BusinessLogicException {
         ConductorEntity entity = data.get(0);
@@ -159,11 +199,6 @@ public class ConductorLogicTest {
         Date date = new Date();
         pojoEntity.setId(entity.getId());
         pojoEntity.setFechaDeNacimiento(date);
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         conductorLogic.actualizarConductor(pojoEntity);
         ConductorEntity resp = em.find(ConductorEntity.class, entity.getId());
         Assert.assertEquals(pojoEntity.getContrasenha(), resp.getContrasenha());
@@ -175,6 +210,10 @@ public class ConductorLogicTest {
         Assert.assertEquals(pojoEntity.getTipoDocumento(), resp.getTipoDocumento());
     }
 
+    /**
+     * Test deactualizar un conductor con un correo invalido 1
+     * @throws BusinessLogicException  en caso de que al actualizar el conductor se rompa alguna regla de negocio
+     */
     @Test(expected = BusinessLogicException.class)
     public void actualizarLibroConCorreoInvalido() throws BusinessLogicException {
         ConductorEntity entity = data.get(0);
@@ -183,6 +222,10 @@ public class ConductorLogicTest {
         conductorLogic.actualizarConductor(pojoEntity);
     }
 
+    /**
+     * Test deactualizar un conductor con un correo invalido 2
+     * @throws BusinessLogicException  en caso de que al actualizar el conductor se rompa alguna regla de negocio
+     */
     @Test(expected = BusinessLogicException.class)
     public void actualizarLibroConCorreoInvalido2() throws BusinessLogicException {
         ConductorEntity entity = data.get(0);
@@ -191,6 +234,10 @@ public class ConductorLogicTest {
         conductorLogic.actualizarConductor(pojoEntity);
     }
 
+    /**
+     * Test de borrar un conductor
+     * @throws BusinessLogicException  en caso de que al borrar al conductor se rompa una regla de negocio
+     */
     @Test
     public void deleteConductorTest() throws BusinessLogicException {
         ConductorEntity entity = data.get(0);

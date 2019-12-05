@@ -166,6 +166,7 @@ public class ReservaPersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNumeroDeReserva(), newEntity.getNumeroDeReserva());
     }
+    
 
     /**
      * Prueba para eliminar una Reservas.

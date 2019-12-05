@@ -17,45 +17,75 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 public class PublicidadDTO implements Serializable{
     
+    /*
+        ATRIBUTOS
+     */
+    /**
+     * Representa el id de la publicidad
+     */
     private Long id;
     
+    /**
+     * Representa el nombre de la publicidad
+     */
     private String nombre;
+    
+    /**
+     * Representa el publicista duenho de esta publicidad
+     */
+    private PublicistaDTO publicista;
 
+    /**
+     * Representa el mensaje de la publicidad
+     */
     private String mensaje;
 
-    private Double costo;
+    /**
+     * Representa el costo de esta publicidad
+     */
+    private double costo;
 
+    /**
+     * Representa la fecha de inicio de la publicidad
+     */
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeInicio;
 
+    /**
+     * Representa la fecha de salida de la publicidad
+     */
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaDeSalida;
     
     protected PublicidadEntity.DISPONIBILIDAD disponibilidad;
     
-    protected PublicistaDTO publicista;
 
-    public PublicidadDTO(){
-    
+
+    /**
+     * Constructor vacio
+     */
+    public PublicidadDTO() {
+
     }
-    
-        public PublicidadDTO(PublicidadEntity entidad){
-        if(entidad!=null){
+
+    /**
+     * Constructor
+     * @param entidad endidad de la que se crea ael DTO
+     */
+    public PublicidadDTO(PublicidadEntity entidad) {
         setId(entidad.getId());
         setNombre(entidad.getNombre());
         setMensaje(entidad.getMensaje());
         setCosto(entidad.getCosto());
         setFechaDeInicio(entidad.getFechaDeInicio());
         setFechaDeSalida(entidad.getFechaDeSalida());
-        setDisponibilidad(entidad.getDisponibilidad());
-        if (entidad.getPublicista() != null) {
-                this.publicista = new PublicistaDTO(entidad.getPublicista());
-            } else {
-                this.publicista = null;
-            }
-        }
-        }
-    
+
+    }
+
+    /**
+     * Pasa esta publicidad a una entidad
+     * @return la publicidad transformada en entidad
+     */
     public PublicidadEntity toEntity(){
         PublicidadEntity entidad = new PublicidadEntity();
         entidad.setId(this.getId());
