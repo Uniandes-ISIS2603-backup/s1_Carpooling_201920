@@ -37,6 +37,7 @@ public class ReservaResource {
     
    @Inject
    private ReservaLogic logic;
+   @Inject
    private ViajeLogic logicViaje;
     
 //   @POST

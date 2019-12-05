@@ -28,6 +28,7 @@ public class ReservaLogic {
 
     @Inject
     private ReservaPersistence persistence;
+    @Inject
     private ViajePersistence viajePersistence;
 
     public ReservaEntity createReserva(Long viajeId, ReservaEntity reserva) throws BusinessLogicException {
